@@ -14,7 +14,6 @@ export function createGame(hostId: string, hostNickname: string, items: Item[], 
     phase: 'waiting',
     hostId,
     players: [host],
-    deck: [],
     wheel: [],
     revealedItem: null,
     currentOpenerIndex: 0,
@@ -81,7 +80,6 @@ export function startGame(state: GameState, playerId: string, items: Item[], rng
   const newState: GameState = {
     ...state,
     phase: 'playing',
-    deck: [],
     wheel,
     currentOpenerIndex: 0
   };
@@ -379,7 +377,6 @@ export function rematch(state: GameState, playerId: string, items: Item[], rng: 
     ...state,
     phase: 'playing',
     players: newPlayers,
-    deck: [],
     wheel,
     revealedItem: null,
     currentOpenerIndex: 0,

@@ -15,8 +15,7 @@ export interface GameState {
   phase: 'waiting' | 'playing' | 'bidding' | 'judging' | 'judge_failed' | 'finished';
   hostId: string;
   players: Player[];
-  deck: Item[];
-  wheel: Item[]; // starts at 6, shrinks
+  wheel: Item[]; // starts with all items of the theme, shrinks by one per spin
   revealedItem: Item | null;
   currentOpenerIndex: number;
   currentHighestBid: number;

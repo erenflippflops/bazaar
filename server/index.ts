@@ -412,7 +412,6 @@ function sanitizeState(state: GameState, playerId: string): unknown {
   return {
     ...state,
     wheel: state.wheel.length, // Only send count, not items
-    deck: state.deck.length,
     players: state.players.map(p => ({
       id: p.id,
       nickname: p.nickname,
@@ -428,7 +427,6 @@ function sanitizeStateForAll(state: GameState): unknown {
   return {
     ...state,
     wheel: state.wheel.length, // Only send count, not items
-    deck: state.deck.length,
     players: state.players.map(p => ({
       id: p.id,
       nickname: p.nickname,

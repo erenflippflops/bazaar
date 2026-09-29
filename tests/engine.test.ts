@@ -82,7 +82,6 @@ describe('Rule 3: Deck and Wheel', () => {
     state = result.state;
 
     expect(state.wheel.length).toBe(40);
-    expect(state.deck.length).toBe(0); // No separate deck
   });
 
   it('each spin removes exactly the revealed item and nothing else', () => {
