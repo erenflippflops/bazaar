@@ -24,7 +24,7 @@ function seededRNG(seed: number): RNG {
 }
 
 describe('Rule 3: Deck and Wheel', () => {
-  it('wheel starts with 6 items and shrinks without refilling', () => {
+  it('wheel starts with all items and shrinks without refilling', () => {
     const rng = seededRNG(42);
     let result = engine.createGame('host', 'Host', mockItems, rng);
     let state = result.state;
@@ -35,13 +35,13 @@ describe('Rule 3: Deck and Wheel', () => {
     result = engine.startGame(state, 'host', mockItems, rng);
     state = result.state;
 
-    expect(state.wheel.length).toBe(6);
+    expect(state.wheel.length).toBe(10); // All items
 
     // Spin and reveal
     result = engine.spinWheel(state, 'host', rng, 1000);
     state = result.state;
 
-    expect(state.wheel.length).toBe(5); // Shrinks to 5
+    expect(state.wheel.length).toBe(9); // Shrinks to 9
     expect(state.revealedItem).not.toBeNull();
 
     // Place bid and resolve
@@ -53,11 +53,122 @@ describe('Rule 3: Deck and Wheel', () => {
 
     expect(state.phase).toBe('playing');
 
-    // Next turn - wheel should still be 5
+    // Next turn - wheel should still be 9
     result = engine.spinWheel(state, state.players[state.currentOpenerIndex].id, rng, 2000);
     state = result.state;
 
-    expect(state.wheel.length).toBe(4); // Shrinks again, no refill
+    expect(state.wheel.length).toBe(8); // Shrinks again, no refill
+  });
+
+  it('wheel holds all 40 items at game start', async () => {
+    // Load real superpowers data
+    const fs = await import('fs');
+    const path = await import('path');
+    const { fileURLToPath } = await import('url');
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const superpowers = JSON.parse(
+      fs.readFileSync(path.join(__dirname, '../server/superpowers.json'), 'utf-8')
+    );
+
+    const rng = seededRNG(42);
+    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let state = result.state;
+
+    result = engine.joinGame(state, 'p2', 'Player2', rng);
+    state = result.state;
+
+    result = engine.startGame(state, 'host', superpowers, rng);
+    state = result.state;
+
+    expect(state.wheel.length).toBe(40);
+    expect(state.deck.length).toBe(0); // No separate deck
+  });
+
+  it('each spin removes exactly the revealed item and nothing else', () => {
+    const rng = seededRNG(42);
+    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let state = result.state;
+
+    result = engine.joinGame(state, 'p2', 'Player2', rng);
+    state = result.state;
+
+    result = engine.startGame(state, 'host', mockItems, rng);
+    state = result.state;
+
+    const initialWheel = [...state.wheel];
+    const initialCount = initialWheel.length;
+
+    result = engine.spinWheel(state, 'host', rng, 1000);
+    state = result.state;
+
+    const revealed = state.revealedItem!;
+
+    // Check wheel is smaller by exactly 1
+    expect(state.wheel.length).toBe(initialCount - 1);
+
+    // Check revealed item is not in wheel anymore
+    expect(state.wheel.find(i => i.name === revealed.name)).toBeUndefined();
+
+    // Check all other items are still there
+    const remainingNames = state.wheel.map(i => i.name).sort();
+    const expectedNames = initialWheel
+      .filter(i => i.name !== revealed.name)
+      .map(i => i.name)
+      .sort();
+    expect(remainingNames).toEqual(expectedNames);
+  });
+
+  it('full 6-player game completes with 22 items remaining', async () => {
+    // Load real superpowers
+    const fs = await import('fs');
+    const path = await import('path');
+    const { fileURLToPath } = await import('url');
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const superpowers = JSON.parse(
+      fs.readFileSync(path.join(__dirname, '../server/superpowers.json'), 'utf-8')
+    );
+
+    const rng = seededRNG(42);
+    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let state = result.state;
+
+    // Add 5 more players (total 6)
+    for (let i = 2; i <= 6; i++) {
+      result = engine.joinGame(state, `p${i}`, `Player${i}`, rng);
+      state = result.state;
+    }
+
+    result = engine.startGame(state, 'host', superpowers, rng);
+    state = result.state;
+
+    expect(state.wheel.length).toBe(40);
+
+    // Play 18 auctions (6 players × 3 slots)
+    let auctionCount = 0;
+    while (state.phase !== 'judging' && auctionCount < 20) {
+      const opener = state.players[state.currentOpenerIndex];
+
+      result = engine.spinWheel(state, opener.id, rng, 1000 * (auctionCount + 1));
+      if (result.error) break;
+      state = result.state;
+
+      result = engine.placeBid(state, opener.id, 1, 1000 * (auctionCount + 1));
+      if (result.error) break;
+      state = result.state;
+
+      result = engine.resolveBid(state);
+      if (result.error) break;
+      state = result.state;
+
+      auctionCount++;
+    }
+
+    expect(auctionCount).toBe(18);
+    expect(state.phase).toBe('judging');
+    expect(state.wheel.length).toBe(22); // 40 - 18 = 22
+    expect(state.players.every(p => p.slots.every(s => s !== null))).toBe(true);
   });
 });
 

@@ -75,15 +75,13 @@ export function startGame(state: GameState, playerId: string, items: Item[], rng
     return { state, events: [], error: 'En az 2 oyuncu gerekli' };
   }
 
-  // Shuffle deck
-  const deck = shuffle([...items], rng);
-  const wheel = deck.slice(0, 6);
-  const remainingDeck = deck.slice(6);
+  // Shuffle all items into wheel
+  const wheel = shuffle([...items], rng);
 
   const newState: GameState = {
     ...state,
     phase: 'playing',
-    deck: remainingDeck,
+    deck: [],
     wheel,
     currentOpenerIndex: 0
   };
@@ -374,16 +372,14 @@ export function rematch(state: GameState, playerId: string, items: Item[], rng: 
     slots: [null, null, null]
   }));
 
-  // Shuffle new deck
-  const deck = shuffle([...items], rng);
-  const wheel = deck.slice(0, 6);
-  const remainingDeck = deck.slice(6);
+  // Shuffle all items into wheel
+  const wheel = shuffle([...items], rng);
 
   const newState: GameState = {
     ...state,
     phase: 'playing',
     players: newPlayers,
-    deck: remainingDeck,
+    deck: [],
     wheel,
     revealedItem: null,
     currentOpenerIndex: 0,

@@ -18,11 +18,10 @@ A party game for 2-6 friends: players take turns opening auctions for hidden ite
 - Every player has 20 gold and 3 empty slots
 
 ### 3. Deck
-- The theme's item list (about 40 superpowers, Turkish names + one short Turkish description each, in a data file) is shuffled per game
-- The wheel always holds the next 6 items of the deck, all HIDDEN
-- Spinning picks one of the 6 at random and reveals it
-- That item leaves the deck, the other 5 stay
-- **The wheel shrinks and does not refill** (6→5→4...)
+- The wheel holds the WHOLE shuffled deck: every item of the theme (40 superpowers, Turkish names + one short Turkish description each, in a data file), all HIDDEN
+- Spinning picks one of the wheel's remaining items at random and reveals it; that item leaves the wheel for good. The wheel shrinks by one with every spin: 40 → 39 → 38...
+- There is no separate "deck" and no "next 6 items": wheel = all remaining items
+- A game uses at most 18 items (6 players × 3 slots), so the wheel can never run out with 40
 
 ### 4. Opening Order
 - Players in join order (P1..Pn), cycling
