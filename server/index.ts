@@ -7,6 +7,7 @@ import { dirname, join } from 'path';
 import * as engine from './engine/game.js';
 import type { GameState, Item } from './engine/types.js';
 import { parseAndValidateJudgeResponse } from './judgeResult.js';
+import * as roomTimers from './roomTimers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,7 +44,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
   interface Room {
     code: string;
     state: GameState;
-    timer: NodeJS.Timeout | null;
+    timers: roomTimers.TimerState;
     judgeAbort: AbortController | null;
   }
 
@@ -96,7 +97,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       const room: Room = {
         code,
         state: result.state,
-        timer: null,
+        timers: roomTimers.createTimerState(),
         judgeAbort: null
       };
 
@@ -126,7 +127,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         if (reconnected.playerId) {
           socketToPlayer.set(socket.id, { roomCode: data.roomCode, playerId: reconnected.playerId });
           socket.join(data.roomCode);
-          ack?.({ success: true, reconnected: true, playerId: reconnected.playerId, token: data.playerToken, state: sanitizeState(room.state, reconnected.playerId) });
+          ack?.({ success: true, reconnected: true, playerId: reconnected.playerId, token: data.playerToken, state: sanitizeState(room.state, reconnected.playerId, room) });
           return;
         }
       }
@@ -144,7 +145,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       socket.join(data.roomCode);
 
       const token = result.events[0]?.token as string;
-      io.to(data.roomCode).emit('state_update', sanitizeStateForAll(room.state));
+      io.to(data.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
       ack?.({ success: true, playerId, token });
     }));
 
@@ -169,7 +170,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
 
       room.state = result.state;
       scheduleOpeningTimer(room);
-      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state));
+      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
       ack?.({ success: true });
     }));
 
@@ -193,7 +194,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       }
 
       room.state = result.state;
-      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state));
+      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
       ack?.({ success: true });
     }));
 
@@ -216,6 +217,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       }
 
       const now = Date.now();
+      const isOpeningBid = room.state.phase === 'opening';
       const result = engine.placeBid(room.state, player.playerId, data.amount, now);
       if (result.error) {
         ack?.({ success: false, error: result.error });
@@ -224,24 +226,20 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
 
       room.state = result.state;
 
-      // Handle timer extension
-      if (room.state.phase === 'bidding' && room.state.turnStartTime) {
-        const elapsed = now - room.state.turnStartTime;
-        const remaining = BIDDING_TIMEOUT - elapsed;
-
-        if (remaining < BID_EXTENSION_THRESHOLD) {
-          // Cancel old timer and start new one
-          if (room.timer) {
-            clearTimeout(room.timer);
-          }
-          scheduleBiddingTimer(room, BID_EXTENSION_THRESHOLD);
+      // Handle auction timer
+      if (room.state.phase === 'bidding') {
+        if (isOpeningBid) {
+          // Opening bid placed - clear opening timer, schedule auction end
+          roomTimers.clearOpeningTimer(room.timers);
+          roomTimers.scheduleAuctionEnd(room.timers, BIDDING_TIMEOUT, () => {
+            handleAuctionEnd(room);
+          });
+        } else {
+          // Regular bid - extend if needed
+          roomTimers.extendAuctionIfNeeded(room.timers, BID_EXTENSION_THRESHOLD, BID_EXTENSION_THRESHOLD, () => {
+            handleAuctionEnd(room);
+          });
         }
-      } else if (room.state.phase === 'bidding') {
-        // First bid, start bidding timer
-        if (room.timer) {
-          clearTimeout(room.timer);
-        }
-        scheduleBiddingTimer(room, BIDDING_TIMEOUT);
       }
 
       io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state));
@@ -294,7 +292,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
 
       room.state = result.state;
       scheduleOpeningTimer(room);
-      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state));
+      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
       ack?.({ success: true });
     }));
 
@@ -304,11 +302,9 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
   });
 
   function scheduleOpeningTimer(room: Room) {
-    if (room.timer) {
-      clearTimeout(room.timer);
-    }
+    roomTimers.clearOpeningTimer(room.timers);
 
-    room.timer = setTimeout(() => {
+    room.timers.openingTimer = setTimeout(() => {
       try {
         if (room.state.phase !== 'playing' && room.state.phase !== 'opening') return;
 
@@ -321,44 +317,40 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         room.state = result.state;
 
         if (room.state.phase === 'bidding') {
-          scheduleBiddingTimer(room, BIDDING_TIMEOUT);
+          roomTimers.scheduleAuctionEnd(room.timers, BIDDING_TIMEOUT, () => {
+            handleAuctionEnd(room);
+          });
         }
 
-        io.to(room.code).emit('state_update', sanitizeStateForAll(room.state));
+        io.to(room.code).emit('state_update', sanitizeStateForAll(room.state, room));
       } catch (error) {
         console.error('Timer error:', error);
       }
     }, OPENING_TIMEOUT);
   }
 
-  function scheduleBiddingTimer(room: Room, delay: number) {
-    if (room.timer) {
-      clearTimeout(room.timer);
-    }
+  function handleAuctionEnd(room: Room) {
+    try {
+      if (room.state.phase !== 'bidding') return;
 
-    room.timer = setTimeout(() => {
-      try {
-        if (room.state.phase !== 'bidding') return;
-
-        const result = engine.resolveBid(room.state);
-        if (result.error) {
-          console.error('Bidding resolve error:', result.error);
-          return;
-        }
-
-        room.state = result.state;
-
-        if (room.state.phase === 'playing') {
-          scheduleOpeningTimer(room);
-        } else if (room.state.phase === 'judging') {
-          startJudging(room);
-        }
-
-        io.to(room.code).emit('state_update', sanitizeStateForAll(room.state));
-      } catch (error) {
-        console.error('Timer error:', error);
+      const result = engine.resolveBid(room.state);
+      if (result.error) {
+        console.error('Bidding resolve error:', result.error);
+        return;
       }
-    }, delay);
+
+      room.state = result.state;
+
+      if (room.state.phase === 'playing') {
+        scheduleOpeningTimer(room);
+      } else if (room.state.phase === 'judging') {
+        startJudging(room);
+      }
+
+      io.to(room.code).emit('state_update', sanitizeStateForAll(room.state));
+    } catch (error) {
+      console.error('Auction end error:', error);
+    }
   }
 
   function startJudging(room: Room) {
@@ -369,9 +361,16 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
     const abort = new AbortController();
     room.judgeAbort = abort;
 
+    let judgeSettled = false;
+
     const timeoutId = setTimeout(() => {
-      if (!abort.signal.aborted) {
+      if (!judgeSettled && !abort.signal.aborted) {
+        judgeSettled = true;
         abort.abort();
+        console.error('Judge timeout');
+        const failResult = engine.setJudgeFailed(room.state);
+        room.state = failResult.state;
+        io.to(room.code).emit('state_update', sanitizeStateForAll(room.state, room));
       }
     }, JUDGE_TIMEOUT);
 
@@ -383,7 +382,8 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
     judge(playersData)
       .then(rawText => {
         clearTimeout(timeoutId);
-        if (abort.signal.aborted) return;
+        if (judgeSettled || abort.signal.aborted) return;
+        judgeSettled = true;
 
         const result = parseAndValidateJudgeResponse(rawText, room.state.players.length);
         const engineResult = engine.setJudgeResult(room.state, result.ranking, result.commentary);
@@ -395,16 +395,17 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
           room.state = engineResult.state;
         }
 
-        io.to(room.code).emit('state_update', sanitizeStateForAll(room.state));
+        io.to(room.code).emit('state_update', sanitizeStateForAll(room.state, room));
       })
       .catch(error => {
         clearTimeout(timeoutId);
-        if (abort.signal.aborted) return;
+        if (judgeSettled || abort.signal.aborted) return;
+        judgeSettled = true;
 
         console.error('Judge error:', error);
         const failResult = engine.setJudgeFailed(room.state);
         room.state = failResult.state;
-        io.to(room.code).emit('state_update', sanitizeStateForAll(room.state));
+        io.to(room.code).emit('state_update', sanitizeStateForAll(room.state, room));
       });
   }
 
@@ -421,7 +422,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
     return Math.random;
   }
 
-  function sanitizeState(state: GameState, playerId: string): unknown {
+  function sanitizeState(state: GameState, playerId: string, room: Room): unknown {
     const player = state.players.find(p => p.id === playerId);
     return {
       ...state,
@@ -433,11 +434,13 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         slots: p.slots,
         isMe: p.id === playerId
       })),
-      myToken: player?.token
+      myToken: player?.token,
+      auctionEndsAt: room.timers.auctionEndTime,
+      openingEndsAt: room.timers.openingTimer ? Date.now() + OPENING_TIMEOUT : null
     };
   }
 
-  function sanitizeStateForAll(state: GameState): unknown {
+  function sanitizeStateForAll(state: GameState, room: Room): unknown {
     return {
       ...state,
       wheel: state.wheel.length,
@@ -446,7 +449,9 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         nickname: p.nickname,
         gold: p.gold,
         slots: p.slots
-      }))
+      })),
+      auctionEndsAt: room.timers.auctionEndTime,
+      openingEndsAt: room.timers.openingTimer ? Date.now() + OPENING_TIMEOUT : null
     };
   }
 
@@ -460,10 +465,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         close: async () => {
           // Clear all room timers and abort controllers
           for (const room of rooms.values()) {
-            if (room.timer) {
-              clearTimeout(room.timer);
-              room.timer = null;
-            }
+            roomTimers.clearAllTimers(room.timers);
             if (room.judgeAbort) {
               room.judgeAbort.abort();
               room.judgeAbort = null;
