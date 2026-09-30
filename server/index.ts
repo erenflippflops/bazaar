@@ -398,17 +398,24 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         if (judgeSettled || abort.signal.aborted) return;
         judgeSettled = true;
 
-        const result = parseAndValidateJudgeResponse(rawText, room.state.players.length);
-        const engineResult = engine.setJudgeResult(room.state, result.ranking, result.commentary);
-        if (engineResult.error) {
-          console.error('Judge result error:', engineResult.error);
+        try {
+          const result = parseAndValidateJudgeResponse(rawText, room.state.players.length);
+          const engineResult = engine.setJudgeResult(room.state, result.ranking, result.commentary);
+          if (engineResult.error) {
+            console.error('Judge result error:', engineResult.error);
+            const failResult = engine.setJudgeFailed(room.state);
+            room.state = failResult.state;
+          } else {
+            room.state = engineResult.state;
+          }
+
+          io.to(room.code).emit('state_update', sanitizeStateForAll(room.state, room));
+        } catch (error) {
+          console.error('Judge validation error:', error);
           const failResult = engine.setJudgeFailed(room.state);
           room.state = failResult.state;
-        } else {
-          room.state = engineResult.state;
+          io.to(room.code).emit('state_update', sanitizeStateForAll(room.state, room));
         }
-
-        io.to(room.code).emit('state_update', sanitizeStateForAll(room.state, room));
       })
       .catch(error => {
         clearTimeout(timeoutId);
