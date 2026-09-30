@@ -113,29 +113,24 @@ Bu dosyayı ana oturum (beyin) her açılışta okur ve her karardan sonra "9. �
 geçtiğini testle doğrula.
 
 ## 9. Şu anki durum (buradan devam et)
-0. Kurulum: Eren bu dosyayı, yeni CLAUDE.md'yi, `.claude/agents/builder.md`, `.claude/agents/auditor.md` ve
-   `.claude/settings.local.json`'u klasöre koydu. İlk iş: `.gitignore`'a `.claude/worktrees/` ekle; CLAUDE.md,
-   docs/STATUS.md, .claude/agents/*, .gitignore'u commit'le ("Switch to manager + parallel agents workflow"), push.
-   settings.local.json commit'lenmez. Alt ajanların model adlarının (claude-fable-5-1, claude-opus-5-5) çalıştığını
-   küçük bir denemeyle doğrula.
-1. Task 03 denetimi yarım kaldı. Main'de Fable'ın 6 commit'i var (775193c timer, f0e242c integer, 77dbfba validate,
-   d2f4d94/931d76b/3d492b9 fix-up). Denetçinin ilk raporu: 63 yeşil / 16 kırmızı. Önceki yönetici test dosyalarını
-   okudu: judge/fullGame/secrecy testleri hâlâ yanlış alan adı kullanıyor (join_room {code} → roomCode;
-   currentItem → revealedItem; `results` alanı yanlış – engine setJudgeResult'taki gerçek adı kullan);
-   secrecy testi zayıf (40 adın tümünü her mesajın JSON'unda aramalı); probe_auction_bug.test.ts silinecek;
-   reconnect testi **gerçek sunucu hatası**: join_room yeniden bağlanmada da nickname istiyor (kural 10'a aykırı).
-   Eski denetçi terminaline bu düzeltmeler gönderilmişti; yeni sistemde bunu auditor alt ajanıyla yeniden yap:
-   test düzeltmeleri + iki koşu + sabotaj a-d (açılış teklifinden sonra mezat sonunu kurmama / tam sayı kontrolünü
-   kaldırma / bir oyuncusu eksik hakem sonucunu kabul etme / hakem zaman aşımını kaldırma) + her kırmızı için
-   SERVER BUG (satır) ya da TEST BUG. Test dosyalarını kendin oku, sonra birleştir.
-2. Task 04 (builder): (a) yeniden bağlanmada nickname zorunluluğunu kaldır; (b) tam sayı kontrolünü motorun
-   placeBid'ine taşı + motor birim testi (auditor); (c) 1. adımdan çıkan diğer SERVER BUG'lar; (d) `auctionEndsAt` /
-   `openingEndsAt` yayınlanıyor mu doğrula; (e) GAME_RULES.md kural 5'e "Teklifler tam sayıdır." (Eren onayladı;
-   CLAUDE.md düzenleme yasağı olduğu için Eren'e bu tek değişiklik için onay sor ya da elle ekletir).
-3. Ekranlar için Eren'den gereken: `bazaar-design-package.zip` içeriğini `docs/design/` altına koyması
-   (DESIGN.md + Auction-Phone.html + Auction-Desktop.html). Sonra plan:
-   A) tek builder: istemci temeli (socket bağlantısı + token saklama + otomatik yeniden bağlanma, durum tipleri,
-      DESIGN.md'den renk/yazı tipi değişkenleri, ekran yönlendirici, `opening` fazı dahil tüm fazlar).
-   B) üç builder paralel, ayrı dosyalar: (1) giriş + lobi + yeniden bağlanma; (2) çark + açılış + mezat + satış bandı
-      (geri sayım `auctionEndsAt`'ten); (3) hakem bekleme/hata + sonuç + yeniden oyna.
-   Auditor: istemci için uçtan uca test önerisi (ör. Playwright) – Eren'e sorulmadan eklenebilir, bağımlılık ekler.
+✓ Kurulum tamamlandı: yeni workflow, ajan tanımları, .gitignore güncel. Ajan modelleri test edildi (Fable 5.1, Opus 5.5).
+
+✓ Task 03 denetimi tamamlandı (5a53327, 38cae39):
+  - Test protokol hataları düzeltildi: roomCode, revealedItem, ranking/commentary alanları
+  - Secrecy testi güçlendirildi: 40 tema ismi her state_update JSON'unda aranıyor
+  - probe_auction_bug.test.ts silindi
+  - Sabotaj testleri başarılı: timer, integer validation, judge timeout korumaları çalışıyor
+  - **Reconnect bug'ı YOK** - nickname zaten token ile gerekmiyor (test geçti)
+  - **Hakem validation bug'ı bulundu ve düzeltildi**: parseAndValidateJudgeResponse hataları 
+    artık judge_failed'a geçiyor (try-catch eklendi server/index.ts:401-418)
+  - **156/156 test geçti** (72 birim, 84 entegrasyon)
+
+✓ Timer broadcast'leri doğrulandı: auctionEndsAt ve openingEndsAt yayınlanıyor (server/index.ts:458-459, 473-474)
+
+⏭️ GAME_RULES.md güncelleme: Kural 5'e "Teklifler tam sayıdır." eklenecek (Eren onayladı; elle veya onaydan sonra)
+
+⏭️ Ekranlar (tasarım paketi bekleniyor):
+   - Eren `docs/design/` altına DESIGN.md + HTML'leri koyacak
+   - Phase A: tek builder, istemci temeli (socket, tipler, UI, routing)
+   - Phase B: 3 builder paralel - (1) giriş/lobi, (2) oyun/mezat, (3) hakem/sonuç
+   - Auditor: E2E test önerisi (Playwright)
