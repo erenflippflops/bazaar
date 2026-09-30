@@ -1,10 +1,26 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
+import RankingCard from '../components/RankingCard';
+
+interface Item {
+  name: string;
+  description: string;
+}
+
+interface Player {
+  id: string;
+  nickname: string;
+  gold: number;
+  slots: (Item | null)[];
+  token: string;
+  maxBid?: number;
+}
 
 interface GameState {
   phase: string;
   hostId: string;
+  players: Player[];
   ranking: { player: string; rank: number; reason: string }[] | null;
   commentary: string | null;
 }
@@ -23,7 +39,7 @@ export default function ResultsScreen({ socket, gameState }: ResultsScreenProps)
     }
   }, [gameState?.phase, navigate]);
 
-  if (!gameState) {
+  if (!gameState || !gameState.ranking) {
     return (
       <div style={{ padding: '40px', textAlign: 'center' }}>
         <p>Yükleniyor...</p>
@@ -31,7 +47,8 @@ export default function ResultsScreen({ socket, gameState }: ResultsScreenProps)
     );
   }
 
-  const isHost = gameState.hostId === socket?.id;
+  const myPlayerId = socket?.id;
+  const isHost = gameState.hostId === myPlayerId;
 
   const handleRematch = () => {
     if (!socket) return;
@@ -42,129 +59,90 @@ export default function ResultsScreen({ socket, gameState }: ResultsScreenProps)
     });
   };
 
-  const handleRetryJudge = () => {
-    if (!socket) return;
-    socket.emit('retry_judge', {}, (response: any) => {
-      if (response?.success === false) {
-        alert(response.error || 'Hakem tekrar çalıştırılamadı');
-      }
-    });
-  };
-
-  if (gameState.phase === 'judge_failed') {
-    return (
-      <div style={{ padding: '40px 20px', maxWidth: '600px', margin: '0 auto' }}>
-        <h1 style={{ fontSize: '48px', textAlign: 'center', marginBottom: '40px', color: 'var(--pomegranate)' }}>
-          Hakem Kafayı Yedi!
+  return (
+    <div style={{
+      minHeight: '100vh',
+      padding: '20px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    }}>
+      <div style={{
+        width: '100%',
+        maxWidth: '800px',
+      }}>
+        <h1 style={{
+          fontSize: '48px',
+          fontFamily: 'var(--font-heading)',
+          textAlign: 'center',
+          marginBottom: '40px',
+          color: 'var(--saffron)',
+        }}>
+          BAZAAR KAPANDI!
         </h1>
-        
-        <div className="card" style={{ textAlign: 'center', padding: '40px' }}>
-          <p style={{ fontSize: '18px', marginBottom: '30px' }}>
-            Sıralamada bir sorun oluştu. Ev sahibi hakemi tekrar çalıştırabilir.
-          </p>
-          
-          {isHost && (
-            <button 
-              className="primary-button" 
-              onClick={handleRetryJudge}
-              style={{ width: '100%', fontSize: '20px', padding: '16px' }}
-            >
-              Hakemi Tekrar Çalıştır
-            </button>
-          )}
-          
-          {!isHost && (
-            <p style={{ color: 'var(--muted)' }}>
-              Ev sahibinin hakemi tekrar çalıştırması bekleniyor...
-            </p>
-          )}
-        </div>
-      </div>
-    );
-  }
 
-  if (gameState.phase === 'finished') {
-    return (
-      <div style={{ padding: '40px 20px', maxWidth: '800px', margin: '0 auto' }}>
-        <h1 style={{ fontSize: '48px', textAlign: 'center', marginBottom: '40px' }}>
-          Bazaar Kapandı!
-        </h1>
-        
-        {/* Ranking */}
+        {/* Ranking cards */}
         <div style={{ marginBottom: '40px' }}>
-          {gameState.ranking?.map((entry, index) => (
-            <div 
-              key={entry.rank}
-              className="card"
-              style={{ 
-                marginBottom: '20px',
-                background: index === 0 ? 'var(--saffron)' : 'var(--dark)',
-                color: index === 0 ? 'var(--dark)' : 'var(--white)',
-                padding: '30px',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
-                {index === 0 && <span style={{ fontSize: '32px', marginRight: '10px' }}>👑</span>}
-                <h2 style={{ 
-                  fontSize: '32px', 
-                  fontFamily: 'var(--font-heading)',
-                  color: index === 0 ? 'var(--dark)' : 'var(--saffron)',
-                }}>
-                  {entry.rank}. {entry.player}
-                </h2>
-              </div>
-              <p style={{ 
-                fontSize: '16px',
-                lineHeight: '1.6',
-                color: index === 0 ? 'var(--dark)' : 'var(--muted)',
-              }}>
-                {entry.reason}
-              </p>
-            </div>
-          ))}
+          {gameState.ranking.map((entry) => {
+            const player = gameState.players.find(p => p.nickname === entry.player);
+            return (
+              <RankingCard
+                key={entry.rank}
+                rank={entry.rank}
+                player={entry.player}
+                items={player?.slots || [null, null, null]}
+                reason={entry.reason}
+              />
+            );
+          })}
         </div>
 
-        {/* Commentary */}
+        {/* Judge's commentary in arch card style */}
         {gameState.commentary && (
-          <div 
+          <div
             style={{
               background: 'var(--saffron)',
-              color: 'var(--dark)',
-              padding: '30px',
-              borderRadius: '20px 20px 0 0',
               border: '3px solid var(--dark)',
-              boxShadow: '0 6px 0 var(--dark)',
+              borderRadius: '20px 20px 0 0',
+              padding: '30px 25px 25px',
               textAlign: 'center',
               position: 'relative',
               marginBottom: '40px',
+              boxShadow: '0 6px 0 var(--dark)',
             }}
           >
-            <div 
+            <div
               style={{
                 position: 'absolute',
-                top: '-15px',
+                top: '-18px',
                 left: '50%',
                 transform: 'translateX(-50%)',
                 width: '0',
                 height: '0',
-                borderLeft: '60px solid transparent',
-                borderRight: '60px solid transparent',
-                borderBottom: '30px solid var(--saffron)',
+                borderLeft: '70px solid transparent',
+                borderRight: '70px solid transparent',
+                borderBottom: '35px solid var(--saffron)',
               }}
             />
-            <h3 style={{ 
-              fontSize: '20px', 
-              fontFamily: 'var(--font-heading)', 
-              marginBottom: '15px',
-              color: 'var(--dark)',
-            }}>
-              Hakem'in Sözü
-            </h3>
-            <p style={{ 
+            <div
+              style={{
+                position: 'absolute',
+                top: '-21px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '0',
+                height: '0',
+                borderLeft: '73px solid transparent',
+                borderRight: '73px solid transparent',
+                borderBottom: '38px solid var(--dark)',
+              }}
+            />
+            <p style={{
               fontSize: '18px',
               fontStyle: 'italic',
               lineHeight: '1.6',
               color: 'var(--dark)',
+              fontWeight: 600,
             }}>
               "{gameState.commentary}"
             </p>
@@ -173,8 +151,8 @@ export default function ResultsScreen({ socket, gameState }: ResultsScreenProps)
 
         {/* Rematch button */}
         {isHost && (
-          <button 
-            className="primary-button" 
+          <button
+            className="primary-button"
             onClick={handleRematch}
             style={{ width: '100%', fontSize: '24px', padding: '20px' }}
           >
@@ -183,13 +161,11 @@ export default function ResultsScreen({ socket, gameState }: ResultsScreenProps)
         )}
 
         {!isHost && (
-          <p style={{ textAlign: 'center', color: 'var(--muted)' }}>
+          <p style={{ textAlign: 'center', color: 'var(--muted)', fontSize: '16px' }}>
             Ev sahibi yeni oyun başlatabilir
           </p>
         )}
       </div>
-    );
-  }
-
-  return null;
+    </div>
+  );
 }

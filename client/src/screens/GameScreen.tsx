@@ -6,6 +6,7 @@ import ArchCard from '../components/ArchCard';
 import PlayerList from '../components/PlayerList';
 import AuctionPanel from '../components/AuctionPanel';
 import ItemCard from '../components/ItemCard';
+import JudgeWaiting from '../components/JudgeWaiting';
 
 interface Item {
   name: string;
@@ -45,7 +46,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (gameState?.phase === 'finished' || gameState?.phase === 'judge_failed') {
+    if (gameState?.phase === 'finished') {
       navigate('/results');
     }
   }, [gameState?.phase, navigate]);
@@ -61,6 +62,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
   const myPlayer = gameState.players.find(p => p.token === localStorage.getItem('playerToken'));
   const currentOpener = gameState.players[gameState.currentOpenerIndex];
   const isMyTurn = currentOpener?.id === myPlayer?.id;
+  const isHost = gameState.hostId === myPlayer?.id;
 
   const handleSpinWheel = () => {
     if (!socket) return;
@@ -169,11 +171,8 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
           />
         )}
 
-        {gameState.phase === 'judging' && (
-          <div className="card" style={{ textAlign: 'center', padding: '40px' }}>
-            <h3 style={{ fontSize: '24px', color: 'var(--white)' }}>Hakem düşünüyor...</h3>
-            <p style={{ color: 'var(--muted)', marginTop: '10px' }}>Sonuçlar hazırlanıyor</p>
-          </div>
+        {(gameState.phase === 'judging' || gameState.phase === 'judge_failed') && (
+          <JudgeWaiting socket={socket} gameState={gameState} isHost={isHost} />
         )}
       </div>
 
