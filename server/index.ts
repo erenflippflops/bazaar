@@ -231,13 +231,17 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         if (isOpeningBid) {
           // Opening bid placed - clear opening timer, schedule auction end
           roomTimers.clearOpeningTimer(room.timers);
+          const roomCode = room.code;
           roomTimers.scheduleAuctionEnd(room.timers, BIDDING_TIMEOUT, () => {
-            handleAuctionEnd(room);
+            const r = rooms.get(roomCode);
+            if (r) handleAuctionEnd(r);
           });
         } else {
           // Regular bid - extend if needed
+          const roomCode = room.code;
           roomTimers.extendAuctionIfNeeded(room.timers, BID_EXTENSION_THRESHOLD, BID_EXTENSION_THRESHOLD, () => {
-            handleAuctionEnd(room);
+            const r = rooms.get(roomCode);
+            if (r) handleAuctionEnd(r);
           });
         }
       }
@@ -304,25 +308,29 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
   function scheduleOpeningTimer(room: Room) {
     roomTimers.clearOpeningTimer(room.timers);
 
+    const roomCode = room.code;
     room.timers.openingTimer = setTimeout(() => {
       try {
-        if (room.state.phase !== 'playing' && room.state.phase !== 'opening') return;
+        const r = rooms.get(roomCode);
+        if (!r) return;
+        if (r.state.phase !== 'playing' && r.state.phase !== 'opening') return;
 
-        const result = engine.timeoutBid(room.state, seededRNG(), Date.now());
+        const result = engine.timeoutBid(r.state, seededRNG(), Date.now());
         if (result.error) {
           console.error('Opening timeout error:', result.error);
           return;
         }
 
-        room.state = result.state;
+        r.state = result.state;
 
-        if (room.state.phase === 'bidding') {
-          roomTimers.scheduleAuctionEnd(room.timers, BIDDING_TIMEOUT, () => {
-            handleAuctionEnd(room);
+        if (r.state.phase === 'bidding') {
+          roomTimers.scheduleAuctionEnd(r.timers, BIDDING_TIMEOUT, () => {
+            const r2 = rooms.get(roomCode);
+            if (r2) handleAuctionEnd(r2);
           });
         }
 
-        io.to(room.code).emit('state_update', sanitizeStateForAll(room.state, room));
+        io.to(r.code).emit('state_update', sanitizeStateForAll(r.state, r));
       } catch (error) {
         console.error('Timer error:', error);
       }
