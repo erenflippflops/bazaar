@@ -33,6 +33,7 @@ A party game for 2-6 friends: players take turns opening auctions for hidden ite
 - After the opening bid, every player with an empty slot may bid
 - A bid must be at least current highest + 1
 - The current highest bidder cannot raise their own bid
+-Teklifler tam sayidir (kusuratli teklifler kabul edilmez)
 - Timer: 10 seconds
 - A bid made with less than 5 seconds left sets the remaining time to 5 seconds
 - When the timer ends, the highest bidder pays and gets the item into an empty slot
