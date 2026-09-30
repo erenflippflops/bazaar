@@ -125,6 +125,10 @@ export function placeBid(state: GameState, playerId: string, amount: number, now
     return { state, events: [], error: 'Oyuncu bulunamadı' };
   }
 
+  if (!Number.isInteger(amount)) {
+    return { state, events: [], error: 'Teklif tam sayı olmalı' };
+  }
+
   const emptySlots = player.slots.filter(s => s === null).length;
   if (emptySlots === 0) {
     return { state, events: [], error: 'Slotların dolu' };
