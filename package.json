@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev:server": "tsx watch server/index.ts",
+    "dev:server": "tsx watch server/main.ts",
     "dev:client": "cd client && npm run dev",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "start": "node dist/server/main.js",
     "test:unit": "vitest run",
     "build:server": "tsc -p tsconfig.server.json",
     "build:client": "cd client && npm run build",
