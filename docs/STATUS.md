@@ -125,12 +125,27 @@ geçtiğini testle doğrula.
     artık judge_failed'a geçiyor (try-catch eklendi server/index.ts:401-418)
   - **156/156 test geçti** (72 birim, 84 entegrasyon)
 
-✓ Timer broadcast'leri doğrulandı: auctionEndsAt ve openingEndsAt yayınlanıyor (server/index.ts:458-459, 473-474)
+✓ Task 04 (hakem validation hatası düzeltildi): bd11383, 38cae39, 34afb74
+  - server/index.ts:401-418'e try-catch eklendi, validation hataları judge_failed'a geçiyor
 
-⏭️ GAME_RULES.md güncelleme: Kural 5'e "Teklifler tam sayıdır." eklenecek (Eren onayladı; elle veya onaydan sonra)
+✓ Tasarım paketi ve kural güncellemesi: 4f05d01
+  - docs/design/ altına DESIGN.md + 2 HTML eklendi
+  - GAME_RULES.md kural 5'e "Teklifler tam sayıdır" eklendi
 
-⏭️ Ekranlar (tasarım paketi bekleniyor):
-   - Eren `docs/design/` altına DESIGN.md + HTML'leri koyacak
-   - Phase A: tek builder, istemci temeli (socket, tipler, UI, routing)
-   - Phase B: 3 builder paralel - (1) giriş/lobi, (2) oyun/mezat, (3) hakem/sonuç
-   - Auditor: E2E test önerisi (Playwright)
+✓ Ekranlar Phase A tamamlandı (055a05d):
+  - 3 ekran: LobbyScreen, GameScreen, ResultsScreen
+  - useSocket hook (reconnection token desteği ile)
+  - Bileşenler: WheelDisplay, PlayerList, AuctionPanel, ItemCard
+  - Tasarım sistemi (App.css): royal blue, saffron/turquoise/pomegranate, Bungee/Rubik fontları
+  - React Router kurulumu
+  - Dev sunucuları çalışıyor: sunucu (3000), istemci (5173)
+
+⏳ Denetçi çalışıyor (paralel):
+  - Task 04 server commit'lerini denetliyor (7924ae3 sonrası)
+  - Sabotaj c (eksik oyunculu hakem sonucu) ve sabotaj d (hakem zaman aşımı) tekrarlanıyor
+  - Sonuçlar bekleniyor
+
+⏭️ Sonra:
+  - Ekranlar manuel test (2 tarayıcı sekmesi ile oyun akışı)
+  - Phase B: karakter sistemi (Task 06)
+  - Yayın hazırlığı (Render + Vercel)
