@@ -82,7 +82,8 @@ Bu dosyayı ana oturum (beyin) her açılışta okur ve her karardan sonra "9. �
   **Oyun ekranı mizansen (V2):** Mezat salonu. Sahne üstünde çark; karakterler önünde yarım daire (telefon: 2 sıra × 3).
   Teklif: karakter ayağa kalkar, numaralı levha kaldırır. En yüksek teklif sahibine spot ışık + son 5 sn'de titreme/kızarma;
   kaybeden üzgün. Her koltuğun altında küçük tabela: altın + 3 slot. "SATILDI" banner, öğe kartı kazananın koltuğuna uçar.
-  Fikir: sahnede müzayedeci karakter (yapay zeka hakem) — mezat sırasında konuşma balonu, sonunda sıralamayı açıklar.
+  Fikir: sahnede müzayedeci karakter (ayrı bir heyecan karakteri, yapay zeka hakem DEĞİL) — mezat sırasında konuşma balonu.
+  Yapay zeka hakem sonunda sıralamayı açıklar (ayrı sahne).
   
   **Müzayedeci sesi (V2):** Eren'in kendi sesi ile kayıt (~50 kısa klip: 1-20 sayılar, "altın", "diyen var mı?", 
   "satıyorum", "SATILDI!", genel heyecan cümleleri; her biri birkaç çekim çeşitlilik için). Oyun klipleri oyun durumuna
