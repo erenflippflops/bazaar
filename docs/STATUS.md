@@ -73,18 +73,23 @@ Bu dosyayı ana oturum (beyin) her açılışta okur ve her karardan sonra "9. �
 - Task 3 notları: istemci yeni `opening` fazını bilmeli; geri sayım için sunucu `auctionEndsAt` / `openingEndsAt`
   yayınlıyor olmalı (Task 03'te istendi, doğrula); saat farkı için ping ile ofset ölçümü fikri; çark animasyonu için
   MIT lisanslı "spin-wheel" kütüphanesi fikri (sonucu sunucu seçer, ekran oraya döner).
-- **Karakterler (Task 3'ten sonra):** Kahoot/Gartic tarzı, **insan** karakterler: 8 taban (farklı yaş/ten/saç,
+- **Karakterler (V2):** Kahoot/Gartic tarzı, **insan** karakterler: 8 taban (farklı yaş/ten/saç,
   büyük kafalı çizgi film), giydirme: şapka, yüz (gözlük/bıyık), eşya, arka plan rengi (6-8 seçenek, pazar + oyun
   şovu parçaları, karikatüre kaçmadan), "rastgele" butonu. İfadeler: normal/heyecanlı/stresli/sevinçli/üzgün.
   Teklif verince emote, son 5 sn'de en yüksek teklif sahibi kızarıp titrer, kazanan sevinir; hazır emote butonları.
   Sunucu sadece seçim numaralarını saklar/doğrular. İlham: Scam With Your Friends'teki büyüyen/kızaran kafalar.
+  
+  **Oyun ekranı mizansen (V2):** Mezat salonu. Sahne üstünde çark; karakterler önünde yarım daire (telefon: 2 sıra × 3).
+  Teklif: karakter ayağa kalkar, numaralı levha kaldırır. En yüksek teklif sahibine spot ışık + son 5 sn'de titreme/kızarma;
+  kaybeden üzgün. Her koltuğun altında küçük tabela: altın + 3 slot. "SATILDI" banner, öğe kartı kazananın koltuğuna uçar.
+  Fikir: sahnede müzayedeci karakter (yapay zeka hakem) — mezat sırasında konuşma balonu, sonunda sıralamayı açıklar.
 - **Jokerler (sonra):** oyun başında herkese 1, **gizli** (sunucu sadece sahibine gönderir; test gerekir).
   Nadirlik: yaygın %50, nadir %30, destansı %15, efsanevi %5 (seviye içinde eşit), bağımsız çekiliş.
   Aday liste: Mezat Kilidi (efsanevi; kilitlerken en az 5 altın önerildi), Takas teklifi, Dürbün (sonraki 2 öğeyi
   gör; çark sırasının önceden belirlenmesini gerektirir), Geri sat/iade, Pas, Altın kesesi +3, Sayaç dondur, Casus,
   Yeniden çevir, İndirim (yarı fiyat), Sıra çalma, Çifte çark, İtiraz, Son söz, Avukat (hakeme 1 cümle savunma).
   Açık soru: joker kullanılınca herkese "X şunu kullandı" gösterilsin mi (öneri: evet, bazıları sessiz olabilir).
-- Açık sorular: hakem neye göre sıralasın (savaş gücü / işe yararlık / eğlence)? "Ali" ile "ali" aynı ad mı?
+- Açık sorular: ~~hakem neye göre sıralasın~~ (karar: güçlerin sinerjisi ve yaratıcı kullanımı). ~~"Ali" ile "ali" aynı ad mı?~~ (karar: evet, büyük/küçük harf duyarsız).
 - `C:\Users\lolse\Desktop\Alinanlar`: arkadaşın verdiği projeler incelendi; kod kopyalanmayacak. Colyseus var
   (geçiş yok). "Online Auction System" (MERN) mimarisi bize uymuyor.
 - Arkadaşa teknik tanıtım dokümanı yazıldı (Claude Doc "Bazaar – Teknik Tanıtım").
