@@ -90,3 +90,34 @@ export function setupConsoleErrorCatcher(page: Page, errors: string[]) {
     errors.push(err.message);
   });
 }
+
+export async function waitForAuctionToComplete(page: Page) {
+  // Wait for auction to end and winner to be determined
+  // This means we're back in 'playing' phase or 'judging' phase
+  // Look for either the next player's turn or the results screen
+  await page.waitForFunction(
+    () => {
+      const text = document.body.innerText;
+      return text.includes('ÇARKI ÇEVİR') ||
+             text.includes('sıran') ||
+             text.includes('sonuç') ||
+             text.includes('sıralama');
+    },
+    { timeout: 15000 }
+  );
+}
+
+export async function verifyPlayerGold(page: Page, nickname: string, expectedGold: number) {
+  // Find the player's gold display and verify it matches expected value
+  // Gold is typically displayed near the player's name or in a status area
+  const goldLocator = page.locator(`text=/\\b${expectedGold}\\s*(?:gold|altın)/i`);
+  await expect(goldLocator).toBeVisible({ timeout: 5000 });
+}
+
+export async function verifyPlayerSlots(page: Page, nickname: string, expectedItemCount: number) {
+  // Verify that a player has the expected number of items in their slots
+  // This looks for filled slot indicators or item counts
+  const slotText = `${expectedItemCount}/3`;
+  const slotLocator = page.locator(`text="${slotText}"`);
+  await expect(slotLocator).toBeVisible({ timeout: 5000 });
+}

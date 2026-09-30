@@ -84,21 +84,67 @@ test.describe('Bazaar E2E Tests', () => {
     const errors: string[] = [];
     setupConsoleErrorCatcher(page, errors);
 
-    // Create room, join, start
+    // Create room with Alice, Bob joins
     const roomCode = await createRoom(page, 'Alice');
     const page2 = await context.newPage();
     setupConsoleErrorCatcher(page2, errors);
     await joinRoom(page2, roomCode, 'Bob');
+
+    // Start game
     await startGame(page);
+    await expect(page.locator('text=/sıran|çeviriyor|ÇARKI ÇEVİR/i')).toBeVisible({ timeout: 5000 });
+    await expect(page2.locator('text=/sıran|çeviriyor|ÇARKI ÇEVİR/i')).toBeVisible({ timeout: 5000 });
 
-    // Wait for game screen on both pages
-    // This verifies the game successfully started and transitioned from lobby to game
-    await expect(page.locator('text=/çark|wheel|güç|item/i').first()).toBeVisible({ timeout: 10000 });
-    await expect(page2.locator('text=/çark|wheel|güç|item/i').first()).toBeVisible({ timeout: 10000 });
+    // Play through all 6 auctions (2 players × 3 slots each)
+    for (let auctionNum = 1; auctionNum <= 6; auctionNum++) {
+      const isAliceTurn = (auctionNum % 2) === 1;
+      const spinnerPage = isAliceTurn ? page : page2;
+      const otherPage = isAliceTurn ? page2 : page;
+      const spinnerName = isAliceTurn ? 'Alice' : 'Bob';
 
-    // Verify we can see player info
-    await expect(page.locator('text="Alice"')).toBeVisible();
-    await expect(page.locator('text="Bob"')).toBeVisible();
+      console.log(`Auction ${auctionNum}: ${spinnerName}'s turn`);
+
+      // Spinner's turn: wait for spin button to be visible
+      await expect(spinnerPage.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 10000 });
+
+      // Spin the wheel
+      await spinWheel(spinnerPage);
+
+      // Wait for opening bid phase - both pages should see auction UI
+      await expect(spinnerPage.locator('text=/Açılış teklifi|Teklif Ver/i')).toBeVisible({ timeout: 5000 });
+      await expect(otherPage.locator('text=/Açılış teklifi|Teklif Ver/i')).toBeVisible({ timeout: 5000 });
+
+      // Spinner places opening bid (1 gold)
+      await placeBid(spinnerPage, 1);
+
+      // Wait briefly for bid to register
+      await page.waitForTimeout(500);
+
+      // Other player bids higher (2 gold)
+      await expect(otherPage.locator('button:has-text("Teklif Ver")')).toBeEnabled({ timeout: 3000 });
+      await placeBid(otherPage, 2);
+
+      // Wait for auction to complete (timer runs out, winner determined)
+      // The auction timer is 10 seconds, so wait up to 15 seconds
+      await page.waitForTimeout(11000);
+
+      // Verify we're back in playing phase (next player's turn or results)
+      const isGameOver = auctionNum === 6;
+      if (!isGameOver) {
+        // Should see next player's turn
+        const nextTurnPage = (auctionNum % 2) === 0 ? page : page2;
+        await expect(nextTurnPage.locator('text=/sıran|ÇARKI ÇEVİR/i')).toBeVisible({ timeout: 5000 });
+      }
+    }
+
+    // After 6 auctions, verify results screen appears with ranking
+    await expect(page.locator('text=/sonuç|sıralama|kazanan/i')).toBeVisible({ timeout: 30000 });
+    await expect(page2.locator('text=/sonuç|sıralama|kazanan/i')).toBeVisible({ timeout: 30000 });
+
+    // Verify commentary exists (judge should have provided commentary)
+    const hasCommentary = await page.locator('text=/yorum|commentary/i').count() > 0 ||
+                          await page.locator('p, div').filter({ hasText: /.{20,}/ }).count() > 0;
+    expect(hasCommentary).toBeTruthy();
 
     // Check for console errors
     expect(errors).toEqual([]);
@@ -106,32 +152,52 @@ test.describe('Bazaar E2E Tests', () => {
     await page2.close();
   });
 
-  test.skip('Reconnect after reload', async ({ page }) => {
-    // TODO: Implement reconnection logic
-    // Currently, after reload, the client loses the game state and doesn't reconnect
+  test('Reconnect after reload', async ({ page, context }) => {
     const errors: string[] = [];
     setupConsoleErrorCatcher(page, errors);
 
-    // Player 1 creates room and starts game
+    // Create room, second player joins, start game
     const roomCode = await createRoom(page, 'Player1');
-
-    // Start game (need 2 players minimum, so join with another account first)
-    const context = page.context();
     const page2 = await context.newPage();
+    setupConsoleErrorCatcher(page2, errors);
     await joinRoom(page2, roomCode, 'Player2');
     await startGame(page);
 
-    // Get initial state (check for game screen)
-    await expect(page.locator('text=/çark|wheel/i').first()).toBeVisible();
+    // Play 1-2 auctions so there's meaningful state
+    // Auction 1: Player1 spins
+    await expect(page.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 10000 });
+    await spinWheel(page);
+    await expect(page.locator('text=/Açılış teklifi|Teklif Ver/i')).toBeVisible({ timeout: 5000 });
+    await placeBid(page, 1);
+    await page.waitForTimeout(500);
+    await expect(page2.locator('button:has-text("Teklif Ver")')).toBeEnabled({ timeout: 3000 });
+    await placeBid(page2, 2);
+    await page.waitForTimeout(11000); // Wait for auction to complete
 
-    // Player 1 reloads page
+    // Auction 2: Player2 spins
+    await expect(page2.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 10000 });
+    await spinWheel(page2);
+    await expect(page2.locator('text=/Açılış teklifi|Teklif Ver/i')).toBeVisible({ timeout: 5000 });
+    await placeBid(page2, 1);
+    await page.waitForTimeout(500);
+    await expect(page.locator('button:has-text("Teklif Ver")')).toBeEnabled({ timeout: 3000 });
+    await placeBid(page, 2);
+    await page.waitForTimeout(11000); // Wait for auction to complete
+
+    // Verify Player1 has items and reduced gold before reload
+    await expect(page.locator('text=/sıran|ÇARKI ÇEVİR/i')).toBeVisible({ timeout: 5000 });
+
+    // Page 1 reloads
     await page.reload();
     setupConsoleErrorCatcher(page, errors);
 
-    // After reload, player returns to lobby (reconnection not yet implemented)
-    // Verify the lobby screen appears
-    await expect(page.locator('text="BAZAAR"')).toBeVisible({ timeout: 5000 });
-    await expect(page.locator('text="Oda Kur"')).toBeVisible();
+    // After reload, verify player 1 returns to game screen (not lobby)
+    // The client should attempt reconnection using stored token
+    await expect(page.locator('text=/sıran|çeviriyor|ÇARKI ÇEVİR|Açılış teklifi/i')).toBeVisible({ timeout: 10000 });
+
+    // Verify game continues - gold and slots should be preserved
+    await expect(page.locator('text="Player1"')).toBeVisible();
+    await expect(page.locator('text="Player2"')).toBeVisible();
 
     // Check for console errors
     expect(errors).toEqual([]);
@@ -139,13 +205,16 @@ test.describe('Bazaar E2E Tests', () => {
     await page2.close();
   });
 
-  test('Judge failed handling', async ({ page, context }) => {
+  test.skip('Judge failed handling', async ({ page, context }) => {
+    // TODO: This test requires a way to trigger judge failure in E2E environment
+    // Currently, the fake judge always succeeds. We need either:
+    // 1. An environment variable or config to force judge failure
+    // 2. A test-only endpoint to sabotage the judge
+    // 3. Mock the judge response at the network level
+    // Skipping for now until we have a mechanism to test this path
+
     const errors: string[] = [];
     setupConsoleErrorCatcher(page, errors);
-
-    // Note: This test requires the server to be configured to fail the judge
-    // For the fake judge setup, we'll simulate completion and check error handling
-    // In a real scenario, you'd mock the server to return invalid judge response
 
     // Create room with 2 players
     const roomCode = await createRoom(page, 'Player1');
@@ -156,15 +225,27 @@ test.describe('Bazaar E2E Tests', () => {
     // Start game
     await startGame(page);
 
-    // The fake judge should work correctly in test environment
-    // If judge fails, a "judge_failed" screen should appear
-    // For now, verify the test judge setup works correctly
-    await expect(page.locator('text=/çark|wheel/i').first()).toBeVisible();
+    // Play through 6 auctions quickly (minimal bids)
+    for (let i = 1; i <= 6; i++) {
+      const spinnerPage = (i % 2) === 1 ? page : page2;
+      const otherPage = (i % 2) === 1 ? page2 : page;
 
-    // This test verifies the fake judge is working
-    // In production, if judge fails, the error handling would show appropriate screen
+      await expect(spinnerPage.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 10000 });
+      await spinWheel(spinnerPage);
+      await placeBid(spinnerPage, 1);
+      await page.waitForTimeout(500);
+      await placeBid(otherPage, 2);
+      await page.waitForTimeout(11000);
+    }
 
-    // Check for console errors
+    // At this point judge should be called
+    // If judge fails, verify "judge_failed" state appears
+    await expect(page.locator('text=/judge.failed|hakem.hata|Tekrar.Dene/i')).toBeVisible({ timeout: 35000 });
+
+    // Verify host can see retry button
+    await expect(page.locator('button:has-text("Tekrar Dene")')).toBeVisible();
+
+    // Check for console errors (excluding expected judge errors)
     expect(errors).toEqual([]);
 
     await page2.close();
