@@ -158,7 +158,26 @@ geçtiğini testle doğrula.
 
 ✓ create_room state_update düzeltmesi: 50493fc
 
-⏳ Builder: Playwright E2E testleri kuruluyor (Task 05)
+✓ Playwright E2E kurulumu tamamlandı (Task 05):
+  - Builder: Playwright kurulumu, helpers, 5 test senaryosu (d3362f6, a97bb61)
+  - Socket URL fix: client .env.test + --mode test (70850c5, dd6fc38)
+  - Auditor: tam testler yazıldı (6 mezat, reconnect) (6632e7c)
+  - E2E testleri kırmızı: 2/5 geçiyor, oyun ekranı placeholder
+
+⚠️ KRITIK BULGU: GameScreen ve ResultsScreen mevcut ama yer tutucu (placeholder).
+  Önceki oturum (055a05d) "Phase A tamamlandı" dedi ama git log gösteriyor ki sadece iskelet.
+  E2E testleri kırmızı çünkü tasarım (DESIGN.md) uygulanmamış:
+  - Çark animasyonu yok (sadece sayaç)
+  - Kemer kart (arch card) yok
+  - Zamanlayıcı eksik
+  - Altın limiti UI yok
+  - "SATILDI" banner yok
+  - Fener zinciri, arka plan rays/yıldızlar yok
+
+⏳ ŞU AN: GameScreen ve ResultsScreen'i DESIGN.md'den paralel builder'larla inşa ediliyor:
+  1. Wheel + opening bid (kalan öğe sayacı ile)
+  2. Auction panel + timer (10s/5s) + altın limiti + SATILDI banner
+  3. Judge waiting/failed + results + rematch
 
 ⏭️ V1 Hedefi (tam otonom):
   1. Tarayıcıda tam oyun: lobi, mezat, hakem, yeniden oyna, reconnect
