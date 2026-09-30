@@ -35,7 +35,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -44,15 +44,15 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     const finalState = await client1.waitForState((s: any) => s.phase === 'finished', 5000);
 
     expect(finalState.phase).toBe('finished');
-    expect(finalState.results.ranking).toHaveLength(2);
-    expect(finalState.results.ranking[0].reason).toBe('Good collection');
-    expect(finalState.results.commentary).toBe('Well played game');
+    expect(finalState.ranking).toHaveLength(2);
+    expect(finalState.ranking[0].reason).toBe('Good collection');
+    expect(finalState.commentary).toBe('Well played game');
 
     clients.push(client1);
   }, 30000);
@@ -71,7 +71,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -80,7 +80,7 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     const finalState = await client1.waitForState((s: any) => s.phase === 'judge_failed', 5000);
@@ -101,7 +101,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -110,7 +110,7 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     const finalState = await client1.waitForState((s: any) => s.phase === 'judge_failed', 5000);
@@ -133,7 +133,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -142,7 +142,7 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     await client1.waitForState((s: any) => s.phase === 'judging', 5000);
@@ -173,7 +173,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -182,7 +182,7 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     const finalState = await client1.waitForState((s: any) => s.phase === 'judge_failed', 5000);
@@ -209,7 +209,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -218,7 +218,7 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     const finalState = await client1.waitForState((s: any) => s.phase === 'judge_failed', 5000);
@@ -245,7 +245,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -254,7 +254,7 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     const finalState = await client1.waitForState((s: any) => s.phase === 'judge_failed', 5000);
@@ -281,7 +281,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -290,7 +290,7 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     const finalState = await client1.waitForState((s: any) => s.phase === 'judge_failed', 5000);
@@ -318,7 +318,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -327,7 +327,7 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     const finalState = await client1.waitForState((s: any) => s.phase === 'judge_failed', 5000);
@@ -359,7 +359,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -368,7 +368,7 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     await client1.waitForState((s: any) => s.phase === 'judge_failed', 5000);
@@ -406,7 +406,7 @@ describe('Judge', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -415,7 +415,7 @@ describe('Judge', () => {
       const opener = i % 2 === 0 ? client1 : client2;
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     await client1.waitForState((s: any) => s.phase === 'finished', 5000);

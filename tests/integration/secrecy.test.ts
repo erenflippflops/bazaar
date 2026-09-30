@@ -35,7 +35,7 @@ describe('Secrecy', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -48,80 +48,47 @@ describe('Secrecy', () => {
 
       await opener.emitWithAck('spin_wheel', {});
 
-      const stateAfterSpin = await opener.emitWithAck('get_state', {});
-      const revealedItem = stateAfterSpin.state.currentItem;
+      const stateAfterSpin = await opener.waitForState((s: any) => s.revealedItem !== null, 2000);
+      const revealedItem = stateAfterSpin.revealedItem;
       if (revealedItem) {
         revealedItems.add(revealedItem.name);
       }
 
       await opener.emitWithAck('place_bid', { amount: 1 });
-      await opener.waitForState((s: any) => s.currentItem === null, 2000);
+      await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     await client1.waitForState((s: any) => s.phase === 'finished', 5000);
 
-    // Check all messages to both clients
+    // All 40 theme item names to search for
+    const allThemeItems = [
+      "Zaman Durdurma", "Teleportasyon", "Zihin Okuma", "Görünmezlik", "Uçma",
+      "Süper Güç", "Şekil Değiştirme", "Hız", "İyileştirme", "Ateş Kontrolü",
+      "Su Kontrolü", "Elektrik", "Klonlanma", "Lazer Gözler", "Duvar Geçme",
+      "Hayvan Diliyle Konuşma", "Hava Kontrolü", "Buzlanma", "Zırh Derisi", "Geleceği Görme",
+      "Işınlanma Işını", "Yerçekimi Kontrolü", "Metal Kontrolü", "Zehir Bağışıklığı", "Ses Dalgaları",
+      "Bitki Büyütme", "Karanlık Manipülasyonu", "Işık Patlaması", "Dokunma ile Patlama", "Kütle Değiştirme",
+      "Rüya Girme", "Doku Yapışma", "Kemik Çıkarma", "Ses Taklit", "Hız Çalma",
+      "Hologram Yaratma", "Doku Kontrolü", "Düşünce İletimi", "Güneş Enerjisi", "Portal Açma"
+    ];
+
+    // Check all state_update messages to both clients
     const allClients = [client1, client2];
 
     for (const client of allClients) {
-      const messagesByTime = [...client.messages].sort((a, b) => a.timestamp - b.timestamp);
+      const stateUpdates = client.messages.filter(m => m.event === 'state_update');
 
-      for (const msg of messagesByTime) {
-        const msgStr = JSON.stringify(msg.payload);
+      for (const msg of stateUpdates) {
+        const msgJSON = JSON.stringify(msg.payload);
 
-        // Extract all item names mentioned in this message
-        const mentionedItems: string[] = [];
-
-        if (msg.payload?.currentItem?.name) {
-          mentionedItems.push(msg.payload.currentItem.name);
-        }
-
-        if (msg.payload?.players) {
-          for (const player of msg.payload.players) {
-            if (player.slots) {
-              for (const slot of player.slots) {
-                if (slot?.name) {
-                  mentionedItems.push(slot.name);
-                }
-              }
-            }
-          }
-        }
-
-        // Each mentioned item must have been revealed by this timestamp
-        for (const itemName of mentionedItems) {
-          expect(revealedItems.has(itemName)).toBe(true);
-        }
-      }
-    }
-
-    // Items that were never revealed should not appear in any message
-    const allItemNames = new Set<string>();
-    for (const client of allClients) {
-      for (const msg of client.messages) {
-        const msgStr = JSON.stringify(msg.payload);
-
-        // Extract any item names
-        if (msg.payload?.currentItem?.name) {
-          allItemNames.add(msg.payload.currentItem.name);
-        }
-        if (msg.payload?.players) {
-          for (const player of msg.payload.players) {
-            if (player.slots) {
-              for (const slot of player.slots) {
-                if (slot?.name) {
-                  allItemNames.add(slot.name);
-                }
-              }
-            }
+        // Search for every theme item name in the full JSON
+        for (const themeName of allThemeItems) {
+          if (msgJSON.includes(themeName)) {
+            // If found, it must have been revealed by this message's timestamp
+            expect(revealedItems.has(themeName)).toBe(true);
           }
         }
       }
-    }
-
-    // All items that appeared must have been revealed
-    for (const itemName of allItemNames) {
-      expect(revealedItems.has(itemName)).toBe(true);
     }
 
     clients.push(client1);

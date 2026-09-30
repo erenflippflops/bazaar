@@ -35,7 +35,7 @@ describe('Full Game', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { code: room.code, nickname: 'P2' });
+    await client2.emitWithAck('join_room', { roomCode: room.roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
 
@@ -60,7 +60,7 @@ describe('Full Game', () => {
     expect(finalState.phase).toBe('finished');
     expect(finalState.players.every((p: any) => p.slots.filter((s: any) => s !== null).length === 3)).toBe(true);
     expect(finalState.players.every((p: any) => p.gold >= 0)).toBe(true);
-    expect(finalState.results.ranking.length).toBe(2);
+    expect(finalState.ranking.length).toBe(2);
     expect(finalState.wheel).toBe(40 - 6);
 
     clients.push(client1);
@@ -87,7 +87,7 @@ describe('Full Game', () => {
       const client = connectClient(server.port);
       clients.push(client);
       await waitForConnect(client);
-      await client.emitWithAck('join_room', { code: room.code, nickname: `P${i}` });
+      await client.emitWithAck('join_room', { roomCode: room.roomCode, nickname: `P${i}` });
       allClients.push(client);
     }
 
@@ -110,7 +110,7 @@ describe('Full Game', () => {
     expect(finalState.phase).toBe('finished');
     expect(finalState.players.every((p: any) => p.slots.filter((s: any) => s !== null).length === 3)).toBe(true);
     expect(finalState.players.every((p: any) => p.gold >= 0)).toBe(true);
-    expect(finalState.results.ranking.length).toBe(6);
+    expect(finalState.ranking.length).toBe(6);
     expect(finalState.wheel).toBe(40 - 18);
   }, 60000);
 });
