@@ -36,9 +36,7 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
   }, [gameState?.phase, navigate]);
 
   const handleCreateRoom = () => {
-    console.log('[LobbyScreen] handleCreateRoom called, socket:', !!socket, 'nickname:', nickname);
     if (!socket) {
-      console.log('[LobbyScreen] No socket available');
       return;
     }
     if (nickname.length < 1 || nickname.length > 16) {
@@ -46,9 +44,7 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
       return;
     }
 
-    console.log('[LobbyScreen] Emitting create_room');
     socket.emit('create_room', { nickname }, (response: any) => {
-      console.log('[LobbyScreen] create_room response:', response);
       if (response?.success === false) {
         setError(response.error || 'Oda oluşturulamadı');
       } else if (response?.roomCode && response?.token) {
@@ -56,9 +52,6 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
         localStorage.setItem('playerToken', response.token);
         setMode('create');
         setError('');
-        console.log('[LobbyScreen] Room created, mode set to create');
-      } else {
-        console.log('[LobbyScreen] Unexpected response format:', response);
       }
     });
   };
