@@ -1,12 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Socket } from 'socket.io-client';
+import Timer from './Timer';
+
+interface Player {
+  id: string;
+  nickname: string;
+  gold: number;
+  slots: any[];
+}
 
 interface AuctionPanelProps {
   socket: Socket | null;
   phase: string;
   currentHighestBid: number;
   currentHighestBidderId: string | null;
-  players: any[];
+  players: Player[];
   myPlayerId?: string;
   myMaxBid?: number;
   auctionEndsAt?: number;
@@ -26,131 +34,285 @@ export default function AuctionPanel({
   openingEndsAt,
   currentOpenerIndex,
 }: AuctionPanelProps) {
-  const [bidAmount, setBidAmount] = useState(0);
-  const [countdown, setCountdown] = useState(0);
-
-  useEffect(() => {
-    if (phase === 'bidding' && auctionEndsAt) {
-      const interval = setInterval(() => {
-        const remaining = Math.max(0, Math.ceil((auctionEndsAt - Date.now()) / 1000));
-        setCountdown(remaining);
-      }, 100);
-      return () => clearInterval(interval);
-    } else if (phase === 'opening' && openingEndsAt) {
-      const interval = setInterval(() => {
-        const remaining = Math.max(0, Math.ceil((openingEndsAt - Date.now()) / 1000));
-        setCountdown(remaining);
-      }, 100);
-      return () => clearInterval(interval);
-    }
-  }, [phase, auctionEndsAt, openingEndsAt]);
-
-  const handlePlaceBid = () => {
-    if (!socket || bidAmount <= 0) return;
-    socket.emit('place_bid', { amount: bidAmount }, (response: any) => {
-      if (response?.success === false) {
-        alert(response.error || 'Teklif verilemedi');
-      }
-    });
-  };
+  const [selectedIncrement, setSelectedIncrement] = useState(0);
 
   const currentOpener = players[currentOpenerIndex];
   const isMyTurn = currentOpener?.id === myPlayerId;
   const highestBidder = players.find(p => p.id === currentHighestBidderId);
   const amIHighestBidder = currentHighestBidderId === myPlayerId;
-  const minBid = currentHighestBid + 1;
-  const canBid = !amIHighestBidder && bidAmount >= minBid && bidAmount <= (myMaxBid || 0);
 
+  const myPlayer = players.find(p => p.id === myPlayerId);
+  const myGold = myPlayer?.gold || 0;
+  const myFilledSlots = myPlayer?.slots.filter(s => s !== null).length || 0;
+  const hasFullSlots = myFilledSlots >= 3;
+
+  const minBid = phase === 'opening' ? 1 : currentHighestBid + 1;
+  const proposedBid = phase === 'opening'
+    ? (selectedIncrement > 0 ? selectedIncrement : 1)
+    : (selectedIncrement > 0 ? currentHighestBid + selectedIncrement : minBid);
+
+  const canAfford = proposedBid <= (myMaxBid || 0);
+  const isValidBid = proposedBid >= minBid && canAfford;
+
+  const handleIncrement = (amount: number) => {
+    setSelectedIncrement(amount);
+  };
+
+  const handlePlaceBid = () => {
+    if (!socket || !isValidBid) return;
+
+    socket.emit('place_bid', { amount: proposedBid }, (response: any) => {
+      if (response?.success === false) {
+        alert(response.error || 'Teklif verilemedi');
+      } else {
+        setSelectedIncrement(0);
+      }
+    });
+  };
+
+  // Opening phase
   if (phase === 'opening') {
+    if (!isMyTurn) {
+      return (
+        <div className="card" style={{ textAlign: 'center' }}>
+          <Timer endsAt={openingEndsAt} />
+          <h3 style={{ fontSize: '20px', marginTop: '20px', color: 'var(--white)' }}>
+            {currentOpener?.nickname} açılış teklifi veriyor...
+          </h3>
+        </div>
+      );
+    }
+
     return (
       <div className="card" style={{ textAlign: 'center' }}>
-        <div className="timer" style={{ margin: '0 auto 20px' }}>
-          {countdown}
-        </div>
-        <h3 style={{ fontSize: '20px', marginBottom: '15px', color: 'var(--white)' }}>
-          {isMyTurn ? 'Açılış teklifi ver' : `${currentOpener?.nickname} açılış teklifi veriyor...`}
+        <Timer endsAt={openingEndsAt} label="AÇILIŞ" />
+
+        <h3 style={{ fontSize: '20px', margin: '20px 0 10px', color: 'var(--white)' }}>
+          Açılış teklifi ver
         </h3>
-        {isMyTurn && (
-          <>
-            <p style={{ fontSize: '14px', color: 'var(--muted)', marginBottom: '15px' }}>
-              En az 1 altın vermelisin
-            </p>
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
-              <button className="secondary-button" onClick={() => setBidAmount(Math.max(1, bidAmount - 1))}>-1</button>
-              <input
-                type="number"
-                value={bidAmount || ''}
-                onChange={(e) => setBidAmount(parseInt(e.target.value) || 0)}
-                min={1}
-                max={myMaxBid}
-                style={{ flex: 1, textAlign: 'center' }}
-              />
-              <button className="secondary-button" onClick={() => setBidAmount(Math.min(myMaxBid || 0, bidAmount + 1))}>+1</button>
-            </div>
-            <button 
-              className="primary-button" 
-              onClick={handlePlaceBid}
-              disabled={bidAmount < 1 || bidAmount > (myMaxBid || 0)}
-              style={{ width: '100%' }}
-            >
-              Teklif Ver
-            </button>
-          </>
+
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          fontSize: '14px',
+          fontWeight: 700,
+          color: 'var(--muted)',
+          marginBottom: '10px',
+          gap: '8px',
+          flexWrap: 'wrap'
+        }}>
+          <span>Altının <b style={{ color: 'var(--white)' }}>{myGold}</b></span>
+          <span>En fazla <b style={{ color: 'var(--white)' }}>{myMaxBid}</b> verebilirsin</span>
+          <span>Slot <b style={{ color: 'var(--white)' }}>{myFilledSlots}/3</b></span>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '10px' }}>
+          <button
+            className="secondary-button"
+            onClick={() => handleIncrement(1)}
+            disabled={1 > (myMaxBid || 0)}
+            style={{
+              height: '50px',
+              fontSize: '20px',
+              background: selectedIncrement === 1 ? 'var(--turquoise)' : 'var(--dark)',
+              color: selectedIncrement === 1 ? 'var(--dark)' : 'var(--white)',
+            }}
+          >
+            +1
+          </button>
+          <button
+            className="secondary-button"
+            onClick={() => handleIncrement(2)}
+            disabled={2 > (myMaxBid || 0)}
+            style={{
+              height: '50px',
+              fontSize: '20px',
+              background: selectedIncrement === 2 ? 'var(--turquoise)' : 'var(--dark)',
+              color: selectedIncrement === 2 ? 'var(--dark)' : 'var(--white)',
+            }}
+          >
+            +2
+          </button>
+          <button
+            className="secondary-button"
+            onClick={() => handleIncrement(5)}
+            disabled={5 > (myMaxBid || 0)}
+            style={{
+              height: '50px',
+              fontSize: '20px',
+              background: selectedIncrement === 5 ? 'var(--turquoise)' : 'var(--dark)',
+              color: selectedIncrement === 5 ? 'var(--dark)' : 'var(--white)',
+            }}
+          >
+            +5
+          </button>
+        </div>
+
+        <button
+          className="primary-button"
+          onClick={handlePlaceBid}
+          disabled={!isValidBid}
+          style={{
+            width: '100%',
+            height: '64px',
+            fontSize: '24px',
+          }}
+        >
+          TEKLİF VER · {proposedBid}
+        </button>
+
+        {!canAfford && proposedBid > 0 && (
+          <p style={{ marginTop: '10px', fontSize: '13px', color: 'var(--pomegranate)' }}>
+            Bu teklif altın limitini aşar
+          </p>
         )}
       </div>
     );
   }
 
+  // Bidding phase
   if (phase === 'bidding') {
     return (
-      <div className="card" style={{ textAlign: 'center' }}>
-        <div className="timer" style={{ margin: '0 auto 20px' }}>
-          {countdown}
+      <div className="card">
+        <div style={{
+          padding: '16px 18px',
+          background: 'var(--dark)',
+          border: '2px solid rgba(46, 196, 182, 0.55)',
+          borderRadius: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: '14px',
+        }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <span style={{
+              fontSize: '12px',
+              fontWeight: 800,
+              letterSpacing: '0.1em',
+              color: 'var(--muted)'
+            }}>
+              EN YÜKSEK TEKLİF
+            </span>
+            <span style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: '44px',
+              lineHeight: 1,
+              color: 'var(--white)'
+            }}>
+              {currentHighestBid} ALTIN
+            </span>
+            <span style={{
+              fontSize: '15px',
+              fontWeight: 700,
+              color: 'var(--turquoise)'
+            }}>
+              {highestBidder?.nickname || 'Kimse'} önde
+            </span>
+          </div>
+          <Timer endsAt={auctionEndsAt} />
         </div>
-        <h3 style={{ fontSize: '20px', marginBottom: '10px', color: 'var(--white)' }}>
-          Mevcut Teklif
-        </h3>
-        <p style={{ fontSize: '48px', fontFamily: 'var(--font-heading)', color: 'var(--saffron)', marginBottom: '10px' }}>
-          {currentHighestBid}
-        </p>
-        <p style={{ fontSize: '16px', color: 'var(--muted)', marginBottom: '20px' }}>
-          {highestBidder?.nickname || 'Kimse'}
-        </p>
 
-        {amIHighestBidder ? (
-          <p style={{ padding: '15px', background: 'var(--turquoise)', color: 'var(--dark)', borderRadius: '12px', fontWeight: 600 }}>
-            En yüksek teklif senin!
-          </p>
+        {hasFullSlots ? (
+          <div style={{
+            padding: '20px',
+            background: 'var(--dark)',
+            border: '2px solid rgba(46, 196, 182, 0.55)',
+            borderRadius: '14px',
+            textAlign: 'center',
+          }}>
+            <p style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)' }}>
+              Slotların dolu, izliyorsun
+            </p>
+          </div>
+        ) : amIHighestBidder ? (
+          <div style={{
+            padding: '20px',
+            background: 'var(--turquoise)',
+            border: '2px solid var(--turquoise)',
+            borderRadius: '14px',
+            textAlign: 'center',
+          }}>
+            <p style={{ fontSize: '18px', fontWeight: 800, color: 'var(--dark)' }}>
+              En yüksek teklif senin!
+            </p>
+          </div>
         ) : (
           <>
-            <p style={{ fontSize: '14px', color: 'var(--muted)', marginBottom: '15px' }}>
-              Altının: {myMaxBid} • En fazla {myMaxBid} verebilirsin
-            </p>
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
-              <button className="secondary-button" onClick={() => setBidAmount(minBid)}>+1</button>
-              <button className="secondary-button" onClick={() => setBidAmount(minBid + 1)}>+2</button>
-              <button className="secondary-button" onClick={() => setBidAmount(minBid + 4)}>+5</button>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              fontSize: '14px',
+              fontWeight: 700,
+              color: 'var(--muted)',
+              marginBottom: '10px',
+              gap: '8px',
+              flexWrap: 'wrap'
+            }}>
+              <span>Altının <b style={{ color: 'var(--white)' }}>{myGold}</b></span>
+              <span>En fazla <b style={{ color: 'var(--white)' }}>{myMaxBid}</b> verebilirsin</span>
+              <span>Slot <b style={{ color: 'var(--white)' }}>{myFilledSlots}/3</b></span>
             </div>
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
-              <button className="secondary-button" onClick={() => setBidAmount(Math.max(minBid, bidAmount - 1))}>-1</button>
-              <input
-                type="number"
-                value={bidAmount || ''}
-                onChange={(e) => setBidAmount(parseInt(e.target.value) || 0)}
-                min={minBid}
-                max={myMaxBid}
-                style={{ flex: 1, textAlign: 'center' }}
-              />
-              <button className="secondary-button" onClick={() => setBidAmount(Math.min(myMaxBid || 0, bidAmount + 1))}>+1</button>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '10px' }}>
+              <button
+                className="secondary-button"
+                onClick={() => handleIncrement(1)}
+                disabled={currentHighestBid + 1 > (myMaxBid || 0)}
+                style={{
+                  height: '50px',
+                  fontSize: '20px',
+                  background: selectedIncrement === 1 ? 'var(--turquoise)' : 'var(--dark)',
+                  color: selectedIncrement === 1 ? 'var(--dark)' : 'var(--white)',
+                }}
+              >
+                +1
+              </button>
+              <button
+                className="secondary-button"
+                onClick={() => handleIncrement(2)}
+                disabled={currentHighestBid + 2 > (myMaxBid || 0)}
+                style={{
+                  height: '50px',
+                  fontSize: '20px',
+                  background: selectedIncrement === 2 ? 'var(--turquoise)' : 'var(--dark)',
+                  color: selectedIncrement === 2 ? 'var(--dark)' : 'var(--white)',
+                }}
+              >
+                +2
+              </button>
+              <button
+                className="secondary-button"
+                onClick={() => handleIncrement(5)}
+                disabled={currentHighestBid + 5 > (myMaxBid || 0)}
+                style={{
+                  height: '50px',
+                  fontSize: '20px',
+                  background: selectedIncrement === 5 ? 'var(--turquoise)' : 'var(--dark)',
+                  color: selectedIncrement === 5 ? 'var(--dark)' : 'var(--white)',
+                }}
+              >
+                +5
+              </button>
             </div>
-            <button 
-              className="primary-button" 
+
+            <button
+              className="primary-button"
               onClick={handlePlaceBid}
-              disabled={!canBid}
-              style={{ width: '100%' }}
+              disabled={!isValidBid || selectedIncrement === 0}
+              style={{
+                width: '100%',
+                height: '64px',
+                fontSize: '24px',
+              }}
             >
-              Teklif Ver
+              TEKLİF VER · {proposedBid}
             </button>
+
+            {selectedIncrement > 0 && !canAfford && (
+              <p style={{ marginTop: '10px', fontSize: '13px', color: 'var(--pomegranate)', textAlign: 'center' }}>
+                Bu teklif altın limitini aşar
+              </p>
+            )}
           </>
         )}
       </div>
