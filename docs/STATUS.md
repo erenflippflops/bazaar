@@ -140,12 +140,26 @@ geçtiğini testle doğrula.
   - React Router kurulumu
   - Dev sunucuları çalışıyor: sunucu (3000), istemci (5173)
 
-⏳ Denetçi çalışıyor (paralel):
-  - Task 04 server commit'lerini denetliyor (7924ae3 sonrası)
-  - Sabotaj c (eksik oyunculu hakem sonucu) ve sabotaj d (hakem zaman aşımı) tekrarlanıyor
-  - Sonuçlar bekleniyor
+✓ Denetçi Task 04'ü onayladı:
+  - Judge hata kontrolü doğru implement edilmiş
+  - Sabotaj c ve d testleri başarılı
+  - Timeout mekanizması çalışıyor
 
-⏭️ Sonra:
-  - Ekranlar manuel test (2 tarayıcı sekmesi ile oyun akışı)
-  - Phase B: karakter sistemi (Task 06)
-  - Yayın hazırlığı (Render + Vercel)
+✓ create_room state_update düzeltmesi: 50493fc
+
+⏳ Builder: Playwright E2E testleri kuruluyor (Task 05)
+
+⏭️ V1 Hedefi (tam otonom):
+  1. Tarayıcıda tam oyun: lobi, mezat, hakem, yeniden oyna, reconnect
+  2. Tasarım (DESIGN.md): telefon + masaüstü, tüm ekranlar
+  3. Testler: E2E (Playwright) + birim + entegrasyon, 3 kez yeşil
+  4. Ekran görüntüleri: her ekran, 2 boyut, tasarıma göre kontrol
+  5. Final denetim: kurallar, gizlilik, sağlamlık
+  6. Gerçek hakem testi (API anahtarı commit edilmeyecek)
+  7. README: yerel kurulum (3 adım) + deploy talimatları
+
+Kararlar:
+  - Hakem: güçlerin sinerjisi ve yaratıcı kullanımına göre sıralar
+  - İsimler büyük/küçük harf duyarsız: "Ali" ve "ali" aynı
+  
+V2'ye ertelendi: karakterler/avatarlar, jokerler, yeni temalar
