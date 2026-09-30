@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import WheelDisplay from '../components/WheelDisplay';
+import ArchCard from '../components/ArchCard';
 import PlayerList from '../components/PlayerList';
 import AuctionPanel from '../components/AuctionPanel';
 import ItemCard from '../components/ItemCard';
@@ -125,6 +126,9 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
 
       {/* Wheel */}
       <WheelDisplay itemCount={gameState.wheel.length} />
+
+      {/* Arch card (revealed item) */}
+      <ArchCard item={gameState.revealedItem} />
 
       {/* Current item */}
       {gameState.revealedItem && gameState.phase !== 'playing' && (

@@ -3,56 +3,145 @@ interface WheelDisplayProps {
 }
 
 export default function WheelDisplay({ itemCount }: WheelDisplayProps) {
-  const segments = itemCount;
-  const colors = ['var(--saffron)', 'var(--turquoise)', 'var(--pomegranate)', 'var(--violet)', 'var(--orange)'];
-  
+  const colors = ['#FFC93C', '#2EC4B6', '#F0386B', '#7B5CFF', '#FF8A3D'];
+  const showQuestionMarks = itemCount <= 12;
+
+  // Responsive sizing
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const radius = isMobile ? 104 : 200;
+  const size = radius * 2;
+  const rimWidth = 10;
+  const hubRadius = 17;
+  const lightRadius = 2.8;
+  const lightCount = 16;
+
+  // Generate SVG path for each segment
+  const segments = Array.from({ length: itemCount }, (_, i) => {
+    const anglePerSegment = 360 / itemCount;
+    const startAngle = i * anglePerSegment;
+    const endAngle = (i + 1) * anglePerSegment;
+
+    const startRad = (startAngle - 90) * (Math.PI / 180);
+    const endRad = (endAngle - 90) * (Math.PI / 180);
+
+    const innerRadius = radius - rimWidth;
+    const x1 = radius + innerRadius * Math.cos(startRad);
+    const y1 = radius + innerRadius * Math.sin(startRad);
+    const x2 = radius + innerRadius * Math.cos(endRad);
+    const y2 = radius + innerRadius * Math.sin(endRad);
+
+    const largeArcFlag = anglePerSegment > 180 ? 1 : 0;
+
+    const path = `M${radius},${radius} L${x1},${y1} A${innerRadius},${innerRadius} 0 ${largeArcFlag},1 ${x2},${y2} Z`;
+
+    return {
+      path,
+      color: colors[i % colors.length],
+      midAngle: startAngle + anglePerSegment / 2,
+    };
+  });
+
+  // Generate lights around the rim
+  const lights = Array.from({ length: lightCount }, (_, i) => {
+    const angle = (i * 360) / lightCount;
+    const rad = (angle - 90) * (Math.PI / 180);
+    const lightDistance = radius - rimWidth / 2;
+    const x = radius + lightDistance * Math.cos(rad);
+    const y = radius + lightDistance * Math.sin(rad);
+    const color = i % 2 === 0 ? '#FFC93C' : '#FFF1C2';
+
+    return { x, y, color };
+  });
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
-      <div 
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px 0 0' }}>
+      <svg
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+        role="img"
+        aria-label={`Çark: ${itemCount} güç kaldı`}
         style={{
-          width: '200px',
-          height: '200px',
-          borderRadius: '50%',
-          border: '8px solid var(--white)',
-          background: 'conic-gradient(' + 
-            Array.from({ length: segments }, (_, i) => {
-              const percent = (i / segments) * 100;
-              const nextPercent = ((i + 1) / segments) * 100;
-              const color = colors[i % colors.length];
-              return `${color} ${percent}% ${nextPercent}%`;
-            }).join(', ') + ')',
-          position: 'relative',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+          maxWidth: '100%',
+          height: 'auto',
         }}
       >
-        <div 
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            background: 'var(--saffron)',
-            border: '4px solid var(--white)',
-          }}
+        {/* Outer white rim */}
+        <circle
+          cx={radius}
+          cy={radius}
+          r={radius - rimWidth / 2}
+          fill="none"
+          stroke="#FFFFFF"
+          strokeWidth={rimWidth}
         />
-        <div
-          style={{
-            position: 'absolute',
-            top: '-30px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '0',
-            height: '0',
-            borderLeft: '15px solid transparent',
-            borderRight: '15px solid transparent',
-            borderTop: '25px solid var(--saffron)',
-          }}
+
+        {/* Segments */}
+        {segments.map((segment, i) => (
+          <g key={i}>
+            <path
+              d={segment.path}
+              fill={segment.color}
+              stroke="#0B0C3F"
+              strokeWidth="2"
+            />
+            {showQuestionMarks && (
+              <text
+                x={radius + (radius - rimWidth - 30) * Math.cos((segment.midAngle - 90) * Math.PI / 180)}
+                y={radius + (radius - rimWidth - 30) * Math.sin((segment.midAngle - 90) * Math.PI / 180)}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill="#0B0C3F"
+                style={{
+                  fontFamily: 'Bungee, Impact, sans-serif',
+                  fontSize: Math.min(28, radius / 4),
+                }}
+              >
+                ?
+              </text>
+            )}
+          </g>
+        ))}
+
+        {/* Lights around the rim */}
+        {lights.map((light, i) => (
+          <circle
+            key={i}
+            cx={light.x}
+            cy={light.y}
+            r={lightRadius}
+            fill={light.color}
+          />
+        ))}
+
+        {/* Center hub */}
+        <circle
+          cx={radius}
+          cy={radius}
+          r={hubRadius}
+          fill="#FFC93C"
+          stroke="#0B0C3F"
+          strokeWidth="3"
         />
-      </div>
-      <p style={{ marginTop: '15px', fontSize: '18px', fontWeight: 600, color: 'var(--muted)' }}>
+
+        {/* Pointer at top */}
+        <path
+          d={`M${radius - 14},2 L${radius + 14},2 L${radius},${hubRadius + 5} Z`}
+          fill="#FFC93C"
+          stroke="#0B0C3F"
+          strokeWidth="2"
+        />
+      </svg>
+
+      <p
+        style={{
+          marginTop: '12px',
+          fontSize: '14px',
+          fontWeight: 700,
+          color: '#C9CBFF',
+          fontFamily: 'Rubik, sans-serif',
+        }}
+      >
         Çarkta {itemCount} güç kaldı
       </p>
     </div>
