@@ -6,7 +6,7 @@
     "dev:server": "tsx watch server/main.ts",
     "dev:client": "cd client && npm run dev",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "dev:e2e": "concurrently \"cross-env PORT=3100 npm run dev:server\" \"cd client && vite --port 5200 --strictPort --mode e2e\"",
+    "dev:e2e": "concurrently \"cross-env PORT=3100 npm run dev:server\" \"cd client && vite --port 5200 --strictPort --mode test\"",
     "start": "node dist/server/main.js",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
