@@ -347,7 +347,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         startJudging(room);
       }
 
-      io.to(room.code).emit('state_update', sanitizeStateForAll(room.state));
+      io.to(room.code).emit('state_update', sanitizeStateForAll(room.state, room));
     } catch (error) {
       console.error('Auction end error:', error);
     }
