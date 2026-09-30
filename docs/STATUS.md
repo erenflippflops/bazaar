@@ -83,6 +83,11 @@ Bu dosyayı ana oturum (beyin) her açılışta okur ve her karardan sonra "9. �
   Teklif: karakter ayağa kalkar, numaralı levha kaldırır. En yüksek teklif sahibine spot ışık + son 5 sn'de titreme/kızarma;
   kaybeden üzgün. Her koltuğun altında küçük tabela: altın + 3 slot. "SATILDI" banner, öğe kartı kazananın koltuğuna uçar.
   Fikir: sahnede müzayedeci karakter (yapay zeka hakem) — mezat sırasında konuşma balonu, sonunda sıralamayı açıklar.
+  
+  **Müzayedeci sesi (V2):** Eren'in kendi sesi ile kayıt (~50 kısa klip: 1-20 sayılar, "altın", "diyen var mı?", 
+  "satıyorum", "SATILDI!", genel heyecan cümleleri; her biri birkaç çekim çeşitlilik için). Oyun klipleri oyun durumuna
+  göre birleştirir. Yapay zeka'nın öğeye özel cümleleri sadece konuşma balonu metni olarak görünür. Yönetici V2
+  başladığında Eren için kayıt senaryosu hazırlayacak.
 - **Jokerler (sonra):** oyun başında herkese 1, **gizli** (sunucu sadece sahibine gönderir; test gerekir).
   Nadirlik: yaygın %50, nadir %30, destansı %15, efsanevi %5 (seviye içinde eşit), bağımsız çekiliş.
   Aday liste: Mezat Kilidi (efsanevi; kilitlerken en az 5 altın önerildi), Takas teklifi, Dürbün (sonraki 2 öğeyi
