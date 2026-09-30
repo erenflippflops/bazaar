@@ -36,7 +36,9 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
   }, [gameState?.phase, navigate]);
 
   const handleCreateRoom = () => {
-    if (!socket) return;
+    if (!socket) {
+      return;
+    }
     if (nickname.length < 1 || nickname.length > 16) {
       setError('İsim 1-16 karakter olmalı');
       return;
@@ -45,9 +47,9 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
     socket.emit('create_room', { nickname }, (response: any) => {
       if (response?.success === false) {
         setError(response.error || 'Oda oluşturulamadı');
-      } else if (response?.roomCode && response?.playerToken) {
+      } else if (response?.roomCode && response?.token) {
         localStorage.setItem('roomCode', response.roomCode);
-        localStorage.setItem('playerToken', response.playerToken);
+        localStorage.setItem('playerToken', response.token);
         setMode('create');
         setError('');
       }
@@ -56,8 +58,8 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
 
   const handleJoinRoom = () => {
     if (!socket) return;
-    if (roomCode.length !== 4) {
-      setError('Oda kodu 4 karakter olmalı');
+    if (roomCode.length < 4 || roomCode.length > 6) {
+      setError('Oda kodu 4-6 karakter olmalı');
       return;
     }
     if (nickname.length < 1 || nickname.length > 16) {
@@ -68,9 +70,9 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
     socket.emit('join_room', { roomCode: roomCode.toUpperCase(), nickname }, (response: any) => {
       if (response?.success === false) {
         setError(response.error || 'Odaya katılınamadı');
-      } else if (response?.playerToken) {
+      } else if (response?.token) {
         localStorage.setItem('roomCode', roomCode.toUpperCase());
-        localStorage.setItem('playerToken', response.playerToken);
+        localStorage.setItem('playerToken', response.token);
         setMode('join');
         setError('');
       }
@@ -117,7 +119,7 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
             placeholder="Oda Kodu"
             value={roomCode}
             onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-            maxLength={4}
+            maxLength={6}
             style={{ width: '100%', marginBottom: '15px', textTransform: 'uppercase' }}
           />
           <input

@@ -108,6 +108,9 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       const token = result.events[0]?.token as string;
       io.to(code).emit('state_update', sanitizeStateForAll(room.state, room));
       ack?.({ success: true, roomCode: code, playerId, token });
+
+      // Broadcast initial state to the room
+      io.to(code).emit('state_update', sanitizeStateForAll(room.state, room));
     }));
 
     socket.on('join_room', wrap<{ roomCode: string; nickname?: string; playerToken?: string }>((data, ack) => {
@@ -464,6 +467,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
   function sanitizeStateForAll(state: GameState, room: Room): unknown {
     return {
       ...state,
+      roomCode: room.code,
       wheel: state.wheel.length,
       players: state.players.map(p => ({
         id: p.id,

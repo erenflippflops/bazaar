@@ -40,11 +40,13 @@ export function useSocket() {
 
   useEffect(() => {
     const serverUrl = import.meta.env.VITE_SERVER_URL || 'http://localhost:3000';
+    console.log('[useSocket] Connecting to:', serverUrl);
     const newSocket = io(serverUrl, {
       autoConnect: true,
     });
 
     newSocket.on('connect', () => {
+      console.log('[useSocket] Connected to server');
       setConnected(true);
 
       // Reconnection: if we have a player token, rejoin
@@ -59,6 +61,7 @@ export function useSocket() {
     });
 
     newSocket.on('disconnect', () => {
+      console.log('[useSocket] Disconnected from server');
       setConnected(false);
     });
 
