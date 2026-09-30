@@ -106,6 +106,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       socket.join(code);
 
       const token = result.events[0]?.token as string;
+      io.to(code).emit('state_update', sanitizeStateForAll(room.state, room));
       ack?.({ success: true, roomCode: code, playerId, token });
     }));
 
