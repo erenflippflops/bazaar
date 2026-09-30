@@ -109,8 +109,8 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       ack?.({ success: true, roomCode: code, playerId, token });
     }));
 
-    socket.on('join_room', wrap<{ roomCode: string; nickname: string; playerToken?: string }>((data, ack) => {
-      if (!data || typeof data.roomCode !== 'string' || typeof data.nickname !== 'string') {
+    socket.on('join_room', wrap<{ roomCode: string; nickname?: string; playerToken?: string }>((data, ack) => {
+      if (!data || typeof data.roomCode !== 'string') {
         ack?.({ success: false, error: 'Geçersiz veri' });
         return;
       }
@@ -132,7 +132,12 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         }
       }
 
-      // New join
+      // New join - nickname is required
+      if (typeof data.nickname !== 'string') {
+        ack?.({ success: false, error: 'Takma ad gerekli' });
+        return;
+      }
+
       const playerId = socket.id;
       const result = engine.joinGame(room.state, playerId, data.nickname, seededRNG());
       if (result.error) {
