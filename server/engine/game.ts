@@ -110,7 +110,7 @@ export function spinWheel(state: GameState, playerId: string, rng: RNG, now: num
     ...state,
     revealedItem: revealed,
     wheel: newWheel,
-    phase: 'bidding',
+    phase: 'opening',
     currentHighestBid: 0,
     currentHighestBidderId: null,
     turnStartTime: now
@@ -125,16 +125,16 @@ export function placeBid(state: GameState, playerId: string, amount: number, now
     return { state, events: [], error: 'Oyuncu bulunamadı' };
   }
 
-  // Opening bid
-  if (state.phase === 'playing') {
+  const emptySlots = player.slots.filter(s => s === null).length;
+  if (emptySlots === 0) {
+    return { state, events: [], error: 'Slotların dolu' };
+  }
+
+  // Opening bid - only opener can bid after spin
+  if (state.phase === 'opening') {
     const opener = state.players[state.currentOpenerIndex];
     if (opener.id !== playerId) {
-      return { state, events: [], error: 'Sıra sende değil' };
-    }
-
-    const emptySlots = player.slots.filter(s => s === null).length;
-    if (emptySlots === 0) {
-      return { state, events: [], error: 'Slotların dolu' };
+      return { state, events: [], error: 'Sadece açan oyuncu ilk teklifi verebilir' };
     }
 
     const maxBid = player.gold - (emptySlots - 1);
@@ -143,11 +143,6 @@ export function placeBid(state: GameState, playerId: string, amount: number, now
     }
     if (amount > maxBid) {
       return { state, events: [], error: `Maksimum ${maxBid} altın teklif edebilirsin` };
-    }
-
-    // Must spin first
-    if (!state.revealedItem) {
-      return { state, events: [], error: 'Önce çarkı çevir' };
     }
 
     const newState: GameState = {
@@ -164,11 +159,6 @@ export function placeBid(state: GameState, playerId: string, amount: number, now
   // Regular bid
   if (state.phase !== 'bidding') {
     return { state, events: [], error: 'Şu anda teklif verilemez' };
-  }
-
-  const emptySlots = player.slots.filter(s => s === null).length;
-  if (emptySlots === 0) {
-    return { state, events: [], error: 'Slotların dolu' };
   }
 
   if (state.currentHighestBidderId === playerId) {
@@ -198,28 +188,37 @@ export function timeoutBid(state: GameState, rng: RNG, now: number): EngineResul
   if (state.phase === 'playing') {
     const opener = state.players[state.currentOpenerIndex];
 
-    // Spin first if not spun
-    let currentState = state;
-    let events: GameEvent[] = [];
-
-    if (!state.revealedItem) {
-      const spinResult = spinWheel(state, opener.id, rng, now);
-      if (spinResult.error) {
-        return spinResult;
-      }
-      currentState = spinResult.state;
-      events = spinResult.events;
+    // Spin first
+    const spinResult = spinWheel(state, opener.id, rng, now);
+    if (spinResult.error) {
+      return spinResult;
     }
 
     // Place minimum bid
-    const bidResult = placeBid(currentState, opener.id, 1, now);
+    const bidResult = placeBid(spinResult.state, opener.id, 1, now);
     if (bidResult.error) {
       return bidResult;
     }
 
     return {
       state: bidResult.state,
-      events: [...events, ...bidResult.events, { type: 'auto_bid', playerId: opener.id, nickname: opener.nickname }]
+      events: [...spinResult.events, ...bidResult.events, { type: 'auto_bid', playerId: opener.id, nickname: opener.nickname }]
+    };
+  }
+
+  // Opening timeout - opener spun but didn't bid
+  if (state.phase === 'opening') {
+    const opener = state.players[state.currentOpenerIndex];
+
+    // Place minimum bid
+    const bidResult = placeBid(state, opener.id, 1, now);
+    if (bidResult.error) {
+      return bidResult;
+    }
+
+    return {
+      state: bidResult.state,
+      events: [...bidResult.events, { type: 'auto_bid', playerId: opener.id, nickname: opener.nickname }]
     };
   }
 

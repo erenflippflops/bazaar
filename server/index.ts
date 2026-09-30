@@ -302,7 +302,7 @@ function scheduleOpeningTimer(room: Room) {
 
   room.timer = setTimeout(() => {
     try {
-      if (room.state.phase !== 'playing') return;
+      if (room.state.phase !== 'playing' && room.state.phase !== 'opening') return;
 
       const result = engine.timeoutBid(room.state, seededRNG(), Date.now());
       if (result.error) {

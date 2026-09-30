@@ -12,7 +12,7 @@ export interface Player {
 }
 
 export interface GameState {
-  phase: 'waiting' | 'playing' | 'bidding' | 'judging' | 'judge_failed' | 'finished';
+  phase: 'waiting' | 'playing' | 'opening' | 'bidding' | 'judging' | 'judge_failed' | 'finished';
   hostId: string;
   players: Player[];
   wheel: Item[]; // starts with all items of the theme, shrinks by one per spin
