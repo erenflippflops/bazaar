@@ -5,9 +5,10 @@ Source of truth for game rules: docs/GAME_RULES.md.
 Owner: Eren (no coding background). A MANAGER (another AI, via Eren) makes decisions.
 
 ## Your role depends on the folder you run in
-- Folder `BAZAAR`       -> you are the BUILDER.
-- Folder `BAZAAR-audit` -> you are the AUDITOR.
-If unsure, run `pwd` and check.
+- Folder `BAZAAR` + task file -> you are the BUILDER.
+  - Folder `BAZAAR-audit` -> you are the AUDITOR.
+  - Manager session (this conversation) -> full coordination permissions.
+  If unsure, run `pwd` and check
 
 ## Tasks
 - Each task is a file in docs/tasks/NN-name.md with a "Builder" and an "Audit" section.
