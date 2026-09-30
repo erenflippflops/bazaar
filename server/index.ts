@@ -242,7 +242,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         }
       }
 
-      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state));
+      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
       ack?.({ success: true });
     }));
 
@@ -267,7 +267,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
 
       room.state = result.state;
       startJudging(room);
-      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state));
+      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
       ack?.({ success: true });
     }));
 
