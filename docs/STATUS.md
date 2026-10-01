@@ -162,22 +162,18 @@ geçtiğini testle doğrula.
   - Builder: Playwright kurulumu, helpers, 5 test senaryosu (d3362f6, a97bb61)
   - Socket URL fix: client .env.test + --mode test (70850c5, dd6fc38)
   - Auditor: tam testler yazıldı (6 mezat, reconnect) (6632e7c)
-  - E2E testleri kırmızı: 2/5 geçiyor, oyun ekranı placeholder
 
-⚠️ KRITIK BULGU: GameScreen ve ResultsScreen mevcut ama yer tutucu (placeholder).
-  Önceki oturum (055a05d) "Phase A tamamlandı" dedi ama git log gösteriyor ki sadece iskelet.
-  E2E testleri kırmızı çünkü tasarım (DESIGN.md) uygulanmamış:
-  - Çark animasyonu yok (sadece sayaç)
-  - Kemer kart (arch card) yok
-  - Zamanlayıcı eksik
-  - Altın limiti UI yok
-  - "SATILDI" banner yok
-  - Fener zinciri, arka plan rays/yıldızlar yok
+✓ GameScreen ve ResultsScreen DESIGN.md'den inşa edildi:
+  - 3 paralel builder: wheel+arch, auction panel+timer, results+judge
+  - Merge: 31f4cd1, 1e8df38, 51be252
+  - Tüm unit testler geçiyor (78/78)
 
-⏳ ŞU AN: GameScreen ve ResultsScreen'i DESIGN.md'den paralel builder'larla inşa ediliyor:
-  1. Wheel + opening bid (kalan öğe sayacı ile)
-  2. Auction panel + timer (10s/5s) + altın limiti + SATILDI banner
-  3. Judge waiting/failed + results + rematch
+✓ playerId fix uygulandı (token güvenlik sorunu):
+  - LobbyScreen: playerId localStorage'a kaydediliyor (700cb54)
+  - GameScreen: token yerine playerId ile eşleştirme
+  - E2E testleri: ayrı browser context'ler (381443d, bd4a595)
+
+⏳ ŞU AN: E2E testleri çalışıyor (yeni ekranlarla)
 
 ⏭️ V1 Hedefi (tam otonom):
   1. Tarayıcıda tam oyun: lobi, mezat, hakem, yeniden oyna, reconnect
