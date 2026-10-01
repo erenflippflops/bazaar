@@ -108,40 +108,10 @@ All tests must pass before deployment.
 
 ### Prerequisites
 
-- Node.js 18+ 
-- OpenAI API key (for production judge)
-
-### Deploy to Vercel (Recommended)
-
-1. **Install Vercel CLI:**
-   ```bash
-   npm i -g vercel
-   ```
-
-2. **Deploy:**
-   ```bash
-   vercel
-   ```
-
-3. **Set environment variables in Vercel dashboard:**
-   - `OPENAI_API_KEY` - Your OpenAI API key
-   - `NODE_ENV` - Set to `production`
-
-4. **Done!** Your game is live at `https://your-app.vercel.app`
-
-### Deploy to Other Platforms
-
-The app is a standard Node.js + Vite app. Build steps:
-
-```bash
-npm run build            # Builds client to client/dist
-npm run server           # Starts server (set PORT env var)
-```
-
-**Requirements:**
-- Serve `client/dist` as static files
-- Run `npm run server` as the backend process
-- Enable WebSocket support (for Socket.IO)
+- GitHub account (for repository)
+- Render account (for backend server)
+- Vercel account (for frontend)
+- Anthropic API key (for AI judge)
 
 ## Game Rules
 
