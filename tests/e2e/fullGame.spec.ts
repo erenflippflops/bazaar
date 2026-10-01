@@ -85,10 +85,12 @@ test.describe('Bazaar E2E Tests', () => {
         return {
           playerId,
           myPlayerId: myPlayer?.id,
+          myPlayerMaxBid: myPlayer?.maxBid,
+          myPlayerGold: myPlayer?.gold,
           currentOpenerId: currentOpener?.id,
           currentOpenerIndex: gameState?.currentOpenerIndex,
           playersCount: gameState?.players?.length,
-          players: gameState?.players?.map((p: any) => ({ id: p.id, nickname: p.nickname }))
+          players: gameState?.players?.map((p: any) => ({ id: p.id, nickname: p.nickname, maxBid: p.maxBid, gold: p.gold }))
         };
       });
       console.log('[TEST DEBUG]', JSON.stringify(debugInfo, null, 2));
