@@ -9,6 +9,11 @@ interface Player {
   slots: any[];
 }
 
+interface Item {
+  name: string;
+  description: string;
+}
+
 interface AuctionPanelProps {
   socket: Socket | null;
   phase: string;
@@ -20,6 +25,7 @@ interface AuctionPanelProps {
   auctionEndsAt?: number;
   openingEndsAt?: number;
   currentOpenerIndex: number;
+  revealedItem?: Item;
 }
 
 export default function AuctionPanel({
@@ -33,6 +39,7 @@ export default function AuctionPanel({
   auctionEndsAt,
   openingEndsAt,
   currentOpenerIndex,
+  revealedItem,
 }: AuctionPanelProps) {
   const [selectedIncrement, setSelectedIncrement] = useState(0);
 
@@ -59,9 +66,22 @@ export default function AuctionPanel({
   };
 
   const handlePlaceBid = () => {
-    if (!socket || !isValidBid) return;
+    if (!socket) {
+      alert('Bağlantı koptu, lütfen sayfayı yenileyin');
+      return;
+    }
+    if (!socket.connected) {
+      alert('Sunucuya bağlanılamıyor, lütfen bekleyin');
+      return;
+    }
+    if (!isValidBid) {
+      console.log('[Client] Invalid bid - proposedBid:', proposedBid, 'minBid:', minBid, 'myMaxBid:', myMaxBid);
+      return;
+    }
 
+    console.log('[Client] Sending place_bid event, amount:', proposedBid);
     socket.emit('place_bid', { amount: proposedBid }, (response: any) => {
+      console.log('[Client] place_bid response:', response);
       if (response?.success === false) {
         alert(response.error || 'Teklif verilemedi');
       } else {
@@ -166,9 +186,14 @@ export default function AuctionPanel({
             width: '100%',
             height: '64px',
             fontSize: '24px',
+            ...((!isValidBid) && {
+              background: '#666',
+              color: '#999',
+              cursor: 'not-allowed',
+            }),
           }}
         >
-          TEKLİF VER · {proposedBid}
+          {!canAfford ? `Limit: ${myMaxBid}` : `TEKLİF VER · ${proposedBid}`}
         </button>
 
         {!canAfford && proposedBid > 0 && (
@@ -313,9 +338,14 @@ export default function AuctionPanel({
                 width: '100%',
                 height: '64px',
                 fontSize: '24px',
+                ...((!isValidBid) && {
+                  background: '#666',
+                  color: '#999',
+                  cursor: 'not-allowed',
+                }),
               }}
             >
-              TEKLİF VER · {proposedBid}
+              {!canAfford ? `Limit: ${myMaxBid}` : `TEKLİF VER · ${proposedBid}`}
             </button>
 
             {selectedIncrement > 0 && !canAfford && (

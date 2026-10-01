@@ -72,8 +72,17 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
   const isHost = gameState.hostId === myPlayer?.id;
 
   const handleSpinWheel = () => {
-    if (!socket) return;
+    if (!socket) {
+      alert('Bağlantı koptu, lütfen sayfayı yenileyin');
+      return;
+    }
+    if (!socket.connected) {
+      alert('Sunucuya bağlanılamıyor, lütfen bekleyin');
+      return;
+    }
+    console.log('[Client] Sending spin_wheel event');
     socket.emit('spin_wheel', {}, (response: any) => {
+      console.log('[Client] spin_wheel response:', response);
       if (response?.success === false) {
         alert(response.error || 'Çark çevrilemedi');
       }
@@ -102,7 +111,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
       </div>
 
       {/* Mobile: My slots */}
-      {myPlayer && (gameState.phase !== 'opening' && gameState.phase !== 'bidding') && (
+      {myPlayer && (
         <div style={{ marginBottom: '20px' }} className="mobile-only-slots">
           <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
             {myPlayer.slots.map((slot, i) => (
@@ -147,7 +156,10 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
 
         {/* Center column: Wheel and arch card */}
         <div className="wheel-column" style={{
-          display: (gameState.phase === 'opening' || gameState.phase === 'bidding') && typeof window !== 'undefined' && window.innerWidth < 768 ? 'none' : 'flex'
+          display: (gameState.phase === 'opening' || gameState.phase === 'bidding') && typeof window !== 'undefined' && window.innerWidth < 768 ? 'none' : 'flex',
+          ...(typeof window !== 'undefined' && window.innerWidth < 768 && {
+            alignItems: 'center',
+          }),
         }}>
           <WheelDisplay
             itemCount={gameState.wheel.length}
