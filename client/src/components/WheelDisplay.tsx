@@ -84,17 +84,7 @@ export default function WheelDisplay({ itemCount, isAuctionActive = false }: Whe
           height: 'auto',
         }}
       >
-        {/* Outer white rim */}
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill="none"
-          stroke="#FFFFFF"
-          strokeWidth={rimWidth}
-        />
-
-        {/* Segments */}
+        {/* Segments - draw first */}
         {segments.map((segment, i) => (
           <g key={i}>
             <path
@@ -120,6 +110,16 @@ export default function WheelDisplay({ itemCount, isAuctionActive = false }: Whe
             )}
           </g>
         ))}
+
+        {/* Outer white rim - draw after segments */}
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke="#FFFFFF"
+          strokeWidth={rimWidth}
+        />
 
         {/* Lights around the rim */}
         {lights.map((light, i) => (
