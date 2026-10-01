@@ -93,7 +93,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
         {myPlayer && (
           <div style={{ textAlign: 'right' }} className="mobile-only-gold">
             <p style={{ fontSize: '24px', fontFamily: 'var(--font-heading)', color: 'var(--saffron)' }}>
-              🪙 {myPlayer.gold}
+              {myPlayer.gold}
             </p>
             <p style={{ fontSize: '14px', color: 'var(--muted)' }}>
               Slot: {myPlayer.slots.filter(s => s !== null).length}/3
