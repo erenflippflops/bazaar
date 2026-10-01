@@ -185,22 +185,32 @@ Lobby → Game (6 rounds) → Judging → Results → Rematch/Exit
 
 ## Deployment
 
-### Render (Backend)
+### Prerequisites
+
+- GitHub account (for repository)
+- Render account (for backend server)
+- Vercel account (for frontend)
+- Anthropic API key (for AI judge)
+
+### Backend on Render
+
+The Socket.IO server must be deployed to a platform that supports WebSockets. Vercel does not support WebSockets, so use Render for the backend.
 
 1. **Create a new Web Service** on [Render](https://render.com)
 2. **Connect your GitHub repository**
 3. **Configure the service:**
-   - **Build Command:** `cd server && npm install && npm run build`
-   - **Start Command:** `cd server && npm start`
+   - **Root Directory:** `server`
+   - **Build Command:** `npm install && npm run build`
+   - **Start Command:** `npm start`
    - **Environment Variables:**
-     - `ANTHROPIC_API_KEY` = your Anthropic API key
+     - `ANTHROPIC_API_KEY` = your Anthropic API key (required)
      - `PORT` = `10000` (or leave default)
      - `GAME_TIME_SCALE` = `1` (optional, default 1)
 4. **Deploy** - Render will build and start your server
 
 **Note:** Free tier spins down after inactivity; first request may be slow.
 
-### Vercel (Frontend)
+### Frontend on Vercel
 
 1. **Install Vercel CLI:**
    ```bash
