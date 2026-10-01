@@ -35,16 +35,16 @@ export default function LanternString() {
         top: 0,
         left: 0,
         width: '100%',
-        height: '80px',
+        height: '60px',
         pointerEvents: 'none',
-        zIndex: 1,
+        zIndex: 0,
       }}
-      viewBox="0 0 1000 80"
+      viewBox="0 0 1000 60"
       preserveAspectRatio="none"
     >
       {/* String path - sagging curve */}
       <path
-        d="M 0,10 Q 250,30 500,30 T 1000,10"
+        d="M 0,8 Q 250,20 500,20 T 1000,8"
         stroke="var(--saffron)"
         strokeWidth="2"
         fill="none"
@@ -53,20 +53,20 @@ export default function LanternString() {
       {/* Lanterns */}
       {lanterns.map((lantern, index) => {
         const x = (index / (lanternCount - 1)) * 1000;
-        const y = 10 + 20 * Math.sin((index / (lanternCount - 1)) * Math.PI);
+        const y = 8 + 12 * Math.sin((index / (lanternCount - 1)) * Math.PI);
 
         return (
           <g key={lantern.id}>
             {/* Glow */}
             <ellipse
               cx={x}
-              cy={y + 15}
-              rx="12"
-              ry="14"
+              cy={y + 12}
+              rx="10"
+              ry="12"
               fill="var(--glow)"
-              opacity="0.4"
+              opacity="0.3"
               style={{
-                filter: 'blur(8px)',
+                filter: 'blur(6px)',
                 animation: prefersReducedMotion ? 'none' : `flicker-${lantern.id} ${3 + Math.random() * 2}s ease-in-out infinite`,
                 animationDelay: `${lantern.delay}s`,
               }}
@@ -77,17 +77,17 @@ export default function LanternString() {
               x1={x}
               y1={y}
               x2={x}
-              y2={y + 8}
+              y2={y + 6}
               stroke="var(--saffron)"
               strokeWidth="1"
             />
 
             {/* Lantern body */}
             <rect
-              x={x - 4}
-              y={y + 8}
-              width="8"
-              height="12"
+              x={x - 3.5}
+              y={y + 6}
+              width="7"
+              height="10"
               rx="1"
               fill={lantern.color}
               opacity="0.85"
@@ -99,18 +99,18 @@ export default function LanternString() {
 
             {/* Lantern top (metal cap) */}
             <rect
-              x={x - 4.5}
-              y={y + 7}
-              width="9"
-              height="2"
+              x={x - 4}
+              y={y + 5}
+              width="8"
+              height="1.5"
               fill="var(--saffron)"
             />
 
             {/* Lantern bottom (metal cap) */}
             <rect
-              x={x - 4.5}
-              y={y + 20}
-              width="9"
+              x={x - 4}
+              y={y + 16}
+              width="8"
               height="1.5"
               fill="var(--saffron)"
             />
