@@ -183,6 +183,73 @@ Lobby → Game (6 rounds) → Judging → Results → Rematch/Exit
  Join    Spin/Bid      AI Evaluation
 ```
 
+## Deployment
+
+### Render (Backend)
+
+1. **Create a new Web Service** on [Render](https://render.com)
+2. **Connect your GitHub repository**
+3. **Configure the service:**
+   - **Build Command:** `cd server && npm install && npm run build`
+   - **Start Command:** `cd server && npm start`
+   - **Environment Variables:**
+     - `ANTHROPIC_API_KEY` = your Anthropic API key
+     - `PORT` = `10000` (or leave default)
+     - `GAME_TIME_SCALE` = `1` (optional, default 1)
+4. **Deploy** - Render will build and start your server
+
+**Note:** Free tier spins down after inactivity; first request may be slow.
+
+### Vercel (Frontend)
+
+1. **Install Vercel CLI:**
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Deploy from the client directory:**
+   ```bash
+   cd client
+   vercel
+   ```
+
+3. **Follow the prompts:**
+   - Set up and deploy: `Y`
+   - Scope: Select your account
+   - Link to existing project: `N`
+   - Project name: `bazaar` (or your choice)
+   - Directory: `./` (current directory)
+   - Override settings: `N`
+
+4. **Configure environment variable:**
+   ```bash
+   vercel env add VITE_SERVER_URL production
+   ```
+   Enter your Render backend URL (e.g., `https://bazaar-server.onrender.com`)
+
+5. **Redeploy with environment variable:**
+   ```bash
+   vercel --prod
+   ```
+
+### Environment Variables
+
+**Server (.env in server/):**
+```bash
+ANTHROPIC_API_KEY=sk-ant-...  # Required for AI judge
+PORT=3001                       # Default 3001
+GAME_TIME_SCALE=1              # Optional: speed up timers for testing
+```
+
+**Client (.env in client/):**
+```bash
+VITE_SERVER_URL=http://localhost:3001  # Development
+# or
+VITE_SERVER_URL=https://your-server.onrender.com  # Production
+```
+
+**Important:** Never commit `.env` files to git. They are in `.gitignore`.
+
 ## Contributing
 
 1. Fork the repo
