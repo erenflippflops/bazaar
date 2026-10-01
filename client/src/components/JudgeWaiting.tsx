@@ -19,7 +19,7 @@ interface GameState {
   phase: string;
   hostId: string;
   players: Player[];
-  wheel: Item[];
+  wheel: number; // server sends the COUNT only (rule 3)
   revealedItem: Item | null;
   currentOpenerIndex: number;
   currentHighestBid: number;
