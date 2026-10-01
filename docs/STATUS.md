@@ -253,6 +253,22 @@ geçtiğini testle doğrula.
 
 ---
 
+## 11. Task 10 - Verified Fixes (1 Ekim 2026)
+
+**Status:** IN PROGRESS
+
+External review of f2a001d found Task 09 claimed fixes that screenshots don't show:
+1. Wheel still empty white circle (no colored slices, no counter)
+2. Phone 390x844: timer/bid buttons below fold during auction
+3. Desktop: lantern covers room code top-left
+4. Gold limit "En fazla X altın verebilirsin" not visible
+5. E2E tests: 6 passed, 6 failed (need to fix all failures)
+6. Real judge test with API key (do it, paste JSON)
+
+Builder agent working on visual fixes 1-4 in worktree.
+
+---
+
 ## 10. Task 08 - V1 Completion (1 Ekim 2026)
 
 ### Completed Items
