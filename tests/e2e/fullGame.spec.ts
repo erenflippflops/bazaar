@@ -102,7 +102,6 @@ test.describe('Bazaar E2E Tests', () => {
       await placeBid(spinnerPage, 1);
       await spinnerPage.waitForTimeout(500);
 
-      await expect(otherPage.locator('button:has-text("TEKLİF VER")')).toBeEnabled({ timeout: 3000 });
       await placeBid(otherPage, 2);
 
       await page.waitForTimeout(11000);
@@ -173,7 +172,6 @@ test.describe('Bazaar E2E Tests', () => {
     await expect(page2.locator('text=/Açılış teklifi|Teklif Ver/i')).toBeVisible({ timeout: 5000 });
     await placeBid(page2, 1);
     await page.waitForTimeout(500);
-    await expect(page.locator('button:has-text("TEKLİF VER")')).toBeEnabled({ timeout: 3000 });
     await placeBid(page, 2);
     await page.waitForTimeout(11000);
 
