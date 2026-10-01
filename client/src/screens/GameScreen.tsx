@@ -81,10 +81,10 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
   };
 
   return (
-    <div style={{ minHeight: '100vh', padding: '20px', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', padding: typeof window !== 'undefined' && window.innerWidth < 768 ? '10px' : '20px', position: 'relative' }}>
       <LanternString />
       {/* Top bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: typeof window !== 'undefined' && window.innerWidth < 768 ? '10px' : '20px', position: 'relative', zIndex: 2 }}>
         <div>
           <p style={{ fontSize: '14px', color: 'var(--muted)' }}>ODA: {gameState.roomCode}</p>
           <p style={{ fontSize: '14px', color: 'var(--muted)' }}>MEZAT: {gameState.auctionNumber || 1}/6</p>
@@ -102,7 +102,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
       </div>
 
       {/* Mobile: My slots */}
-      {myPlayer && (
+      {myPlayer && (gameState.phase !== 'opening' && gameState.phase !== 'bidding') && (
         <div style={{ marginBottom: '20px' }} className="mobile-only-slots">
           <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
             {myPlayer.slots.map((slot, i) => (
@@ -146,7 +146,9 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
         </div>
 
         {/* Center column: Wheel and arch card */}
-        <div className="wheel-column">
+        <div className="wheel-column" style={{
+          display: (gameState.phase === 'opening' || gameState.phase === 'bidding') && typeof window !== 'undefined' && window.innerWidth < 768 ? 'none' : 'flex'
+        }}>
           <WheelDisplay
             itemCount={gameState.wheel.length}
             isAuctionActive={gameState.phase === 'opening' || gameState.phase === 'bidding'}
@@ -199,7 +201,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
         .game-layout {
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 10px;
         }
 
         .players-column,
@@ -219,12 +221,8 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
 
         /* Compact layout on mobile during auction */
         @media (max-width: 767px) {
-          .wheel-column {
-            padding: 0;
-          }
-
-          .auction-column {
-            margin-top: auto;
+          .game-layout {
+            gap: 10px;
           }
         }
 

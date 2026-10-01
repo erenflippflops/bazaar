@@ -112,7 +112,7 @@ export default function AuctionPanel({
           flexWrap: 'wrap'
         }}>
           <span>Altının <b style={{ color: 'var(--white)' }}>{myGold}</b></span>
-          <span>En fazla <b style={{ color: 'var(--white)' }}>{myMaxBid}</b> verebilirsin</span>
+          <span style={{ color: 'var(--saffron)', fontWeight: 800 }}>En fazla <b style={{ color: 'var(--saffron)' }}>{myMaxBid}</b> altın verebilirsin</span>
           <span>Slot <b style={{ color: 'var(--white)' }}>{myFilledSlots}/3</b></span>
         </div>
 
@@ -259,7 +259,7 @@ export default function AuctionPanel({
               flexWrap: 'wrap'
             }}>
               <span>Altının <b style={{ color: 'var(--white)' }}>{myGold}</b></span>
-              <span>En fazla <b style={{ color: 'var(--white)' }}>{myMaxBid}</b> verebilirsin</span>
+              <span style={{ color: 'var(--saffron)', fontWeight: 800 }}>En fazla <b style={{ color: 'var(--saffron)' }}>{myMaxBid}</b> altın verebilirsin</span>
               <span>Slot <b style={{ color: 'var(--white)' }}>{myFilledSlots}/3</b></span>
             </div>
 
