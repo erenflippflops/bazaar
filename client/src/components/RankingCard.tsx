@@ -22,7 +22,7 @@ export default function RankingCard({ rank, player, items, reason }: RankingCard
         borderRadius: '14px',
         padding: isFirst ? '40px 30px' : '30px',
         marginBottom: '20px',
-        opacity: isFirst ? 0.55 : 1,
+        opacity: 1,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px', gap: '10px' }}>
