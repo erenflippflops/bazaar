@@ -104,6 +104,25 @@ test.describe('Bazaar E2E Tests', () => {
 
       console.log(`Auction ${auctionNum}: ${spinnerName}'s turn`);
 
+      // Debug: Check isMyTurn logic
+      const debugInfo = await spinnerPage.evaluate(() => {
+        const gameState = (window as any).__gameState;
+        const token = localStorage.getItem('playerToken');
+        const myPlayer = gameState?.players?.find((p: any) => p.token === token);
+        const currentOpener = gameState?.players?.[gameState?.currentOpenerIndex];
+        return {
+          token,
+          myPlayerId: myPlayer?.id,
+          myPlayerToken: myPlayer?.token,
+          currentOpenerId: currentOpener?.id,
+          currentOpenerToken: currentOpener?.token,
+          currentOpenerIndex: gameState?.currentOpenerIndex,
+          playersCount: gameState?.players?.length,
+          players: gameState?.players?.map((p: any) => ({ id: p.id, nickname: p.nickname, token: p.token }))
+        };
+      });
+      console.log('[TEST DEBUG]', JSON.stringify(debugInfo, null, 2));
+
       // Spinner's turn: wait for spin button to be visible
       await expect(spinnerPage.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 10000 });
 
@@ -165,6 +184,26 @@ test.describe('Bazaar E2E Tests', () => {
 
     // Play 1-2 auctions so there's meaningful state
     // Auction 1: Player1 spins
+
+    // Debug: Check isMyTurn logic
+    const debugInfo = await page.evaluate(() => {
+      const gameState = (window as any).__gameState;
+      const playerId = localStorage.getItem('playerId');
+      const myPlayer = gameState?.players?.find((p: any) => p.id === playerId);
+      const currentOpener = gameState?.players?.[gameState?.currentOpenerIndex];
+      return {
+        playerId,
+        myPlayerId: myPlayer?.id,
+        myPlayerToken: myPlayer?.token,
+        currentOpenerId: currentOpener?.id,
+        currentOpenerToken: currentOpener?.token,
+        currentOpenerIndex: gameState?.currentOpenerIndex,
+        playersCount: gameState?.players?.length,
+        players: gameState?.players?.map((p: any) => ({ id: p.id, nickname: p.nickname, token: p.token }))
+      };
+    });
+    console.log('[TEST DEBUG Reconnect]', JSON.stringify(debugInfo, null, 2));
+
     await expect(page.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 10000 });
     await spinWheel(page);
     await expect(page.locator('text=/Açılış teklifi|Teklif Ver/i')).toBeVisible({ timeout: 5000 });
