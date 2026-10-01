@@ -7,7 +7,8 @@ export function createGame(hostId: string, hostNickname: string, items: Item[], 
     nickname: hostNickname,
     gold: 20,
     slots: [null, null, null],
-    token
+    token,
+    maxBid: 18 // 20 - (3 - 1)
   };
 
   const state: GameState = {
@@ -54,7 +55,8 @@ export function joinGame(state: GameState, playerId: string, nickname: string, r
     nickname,
     gold: 20,
     slots: [null, null, null],
-    token
+    token,
+    maxBid: 18 // 20 - (3 - 1)
   };
 
   const newState = { ...state, players: [...state.players, player] };
@@ -257,9 +259,13 @@ export function resolveBid(state: GameState): EngineResult {
   const newSlots = [...winner.slots];
   newSlots[emptySlotIndex] = state.revealedItem;
 
+  const newGold = winner.gold - state.currentHighestBid;
+  const newEmptySlots = newSlots.filter(s => s === null).length;
+  const newMaxBid = newGold - (newEmptySlots - 1);
+
   const newPlayers = state.players.map(p =>
     p.id === winner.id
-      ? { ...p, gold: p.gold - state.currentHighestBid, slots: newSlots }
+      ? { ...p, gold: newGold, slots: newSlots, maxBid: newMaxBid }
       : p
   );
 

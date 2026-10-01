@@ -9,6 +9,7 @@ export interface Player {
   gold: number;
   slots: (Item | null)[]; // length 3
   token: string;
+  maxBid: number; // maximum gold this player can bid (gold - empty slots + 1)
 }
 
 export interface GameState {
