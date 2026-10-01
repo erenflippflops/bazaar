@@ -16,24 +16,41 @@ interface PlayerListProps {
 }
 
 export default function PlayerList({ players, currentPlayerId }: PlayerListProps) {
+  const myPlayerId = localStorage.getItem('playerId');
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
       {players.map((player) => {
         const isActive = player.id === currentPlayerId;
+        const isMe = player.id === myPlayerId;
         return (
-          <div 
-            key={player.id} 
+          <div
+            key={player.id}
             className={`player-card ${isActive ? 'active' : ''}`}
             style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
           >
             <div>
-              <div style={{ fontWeight: 600, marginBottom: '4px' }}>
-                {player.nickname}
-                {isActive && <span style={{ marginLeft: '8px', fontSize: '12px' }}>SIRA</span>}
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', fontWeight: 800, marginBottom: '4px', fontSize: '14px' }}>
+                <span>{player.nickname}</span>
+                {isMe && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: isActive ? 'var(--white)' : 'var(--muted)' }}>SEN</span>}
+                {isActive && !isMe && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--white)' }}>SIRA</span>}
               </div>
-              <div style={{ fontSize: '14px', color: 'var(--muted)' }}>
-                🪙 {player.gold} altın • {player.slots.filter(s => s !== null).length}/3 slot
+              <div style={{ fontSize: '13px', fontWeight: 700 }}>
+                {player.gold} <span style={{ fontWeight: 600, color: isActive ? 'var(--white)' : 'var(--muted)' }}>altın</span>
               </div>
+            </div>
+            <div style={{ display: 'flex', gap: '3px' }}>
+              {player.slots.map((slot, i) => (
+                <span
+                  key={i}
+                  style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: slot ? 'var(--saffron)' : 'rgba(255,255,255,0.22)',
+                  }}
+                />
+              ))}
             </div>
           </div>
         );
