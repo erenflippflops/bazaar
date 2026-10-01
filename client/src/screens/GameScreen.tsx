@@ -51,6 +51,13 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
     }
   }, [gameState?.phase, navigate]);
 
+  // Expose gameState for E2E test debugging
+  useEffect(() => {
+    if (gameState) {
+      (window as any).__gameState = gameState;
+    }
+  }, [gameState]);
+
   if (!gameState) {
     return (
       <div style={{ padding: '40px', textAlign: 'center' }}>
@@ -59,7 +66,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
     );
   }
 
-  const myPlayer = gameState.players.find(p => p.token === localStorage.getItem('playerToken'));
+  const myPlayer = gameState.players.find(p => p.id === localStorage.getItem('playerId'));
   const currentOpener = gameState.players[gameState.currentOpenerIndex];
   const isMyTurn = currentOpener?.id === myPlayer?.id;
   const isHost = gameState.hostId === myPlayer?.id;
