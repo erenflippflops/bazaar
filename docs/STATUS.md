@@ -192,69 +192,55 @@ geçtiğini testle doğrula.
 
 ---
 
-## 9. maxBid Implementation & E2E Bid Button Bug (Şu An)
+## 9. Bid Button Bug Fixed (Şu An)
 
-### Tamamlanan
-- ✅ Player type'ına `maxBid` field eklendi (server/engine/types.ts)
-- ✅ createGame ve joinGame'de maxBid = 18 (20 - 2) başlatılıyor
-- ✅ resolveBid'de auction kazanıldıktan sonra maxBid güncelleniyor
-- ✅ server/index.ts'de state_update broadcast'ine maxBid dahil
-- ✅ AuctionPanel'de myMaxBid prop alınıyor ve kullanılıyor
-- ✅ isIncrementDisabled helper fonksiyonu: opening fazında increment > myMaxBid, bidding fazında (currentHighestBid + increment) > myMaxBid
-- ✅ Unit testler: 78/78 geçiyor
-- ✅ 45 commit GitHub'a push edildi (57f4be3)
+### ✅ Bid Button Bug Çözüldü (823960f)
+**Root Cause:** AuctionPanel.tsx'de bidding fazı butonu:
+```tsx
+disabled={!isValidBid || selectedIncrement === 0}
+```
+Opening fazında sadece `disabled={!isValidBid}` vardı. `selectedIncrement === 0` koşulu:
+1. Mantıksal olarak gereksizdi (proposedBid hesaplaması zaten minBid kullanıyor)
+2. React state update timing'i yüzünden buton disabled kalıyordu
+
+**Fix:** Bidding fazı butonunu opening ile tutarlı hale getirdim: `disabled={!isValidBid}`
+
+**Debug log bulguları:**
+- Server `maxBid`'i doğru gönderiyor (sanitizeStateForAll:478)
+- Client `isValidBid: true` hesaplıyor ama `selectedIncrement: 0` kalıyor
+- Increment button click → state update → DOM re-render arasında timing gap
+
+### ✅ E2E Test İyileştirmeleri
+- Test selector düzeltildi: `text=/sıran|ÇARKI ÇEVİR/i` → `button:has-text("ÇARKI ÇEVİR")` (strict mode violation düzeltildi)
+- playwright.config.ts eklendi
 
 ### Mevcut E2E Test Durumu (2/5 Passing)
 **Geçen testler:**
-1. ✅ "Lobby creation and joining"
-2. ✅ "Judge failed handling"
+1. ✅ "Create and join with 2 players"
+2. ✅ "Create and join with 6 players"
 
 **Fail eden testler:**
-1. ❌ "Full game flow (2 players)" - Line 102-106
-2. ❌ "Reconnect after reload" - Line 174-177
+1. ❌ "Full game flow" - Test timeout (30s), 3 auction tamamlandı ama devam edemiyor
+2. ❌ "Reconnect after reload" - Reload sonrası player nickname'ler görünmüyor
 3. ⏭️ "Judge failed handling" - skipped
 
-### Bid Button Bug (Kritik)
-**Semptomlar:**
-- Console log: `{"phase":"bidding","selectedIncrement":1,"proposedBid":2,"minBid":2,"myMaxBid":18,"canAfford":true,"isValidBid":true,"currentHighestBid":1}`
-- DOM: `<button disabled class="primary-button">TEKLİF VER · 2</button>`
-- isValidBid = true ama buton disabled kalıyor
+**İlerleme:** Bid button artık çalışıyor (placeBid helper başarılı), ama testler genel timeout'a takılıyor.
 
-**Hipotezler:**
-1. React state update ile DOM senkronizasyon sorunu
-2. selectedIncrement setState sonrası proposedBid/isValidBid hesaplaması async race condition
-3. AuctionPanel re-render'ı tamamlanmadan Playwright butona erişmeye çalışıyor
-
-**Debugging adımları (yapıldı):**
-- ✅ Console log eklendi: isValidBid true döndüğü doğrulandı
-- ✅ placeBid helper'a `waitFor` + `toBeEnabled` eklendi (timeout: 5000ms)
-- ✅ Test'ten redundant manual expect'ler kaldırıldı
-- ✅ Button text "Teklif Ver" → "TEKLİF VER" düzeltildi
-- ❌ Hâlâ timeout oluyor
-
-**Sorular (Eren'e sabah soruları):**
-- AuctionPanel'de `disabled={!isValidBid}` doğru mu yoksa başka bir condition eklemeli miyiz?
-- React 18 concurrent rendering ile ilgili bir sorun olabilir mi?
-- E2E'de butonu click'lemeden önce farklı bir selector kullanmalı mıyız?
-
-### Sonraki Adımlar (V1'e Doğru)
-1. **Bid button bug'ı çöz** (blocker):
-   - AuctionPanel'de useEffect ile isValidBid değişimini log'la
-   - Playwright'ta button'un tam attribute'lerini kontrol et (disabled property vs attribute)
-   - Worst case: increment button'a tıkladıktan sonra 200-300ms wait ekle (state update için)
-
-2. **Reconnect testi düzelt**:
-   - Auction timeout sonrası next opener'a geçiş kontrolü
-   - "ÇARKI ÇEVİR" butonu görünmeme sorununu araştır
-
-3. **Final E2E verification**:
+### Sonraki Adımlar
+1. **Test timeout sorununu çöz:**
+   - 3. auction'dan sonra neden timeout oluyor?
+   - Test timeout'unu 60s'ye çıkar veya auction wait süresini optimize et
+   
+2. **Reconnect testi düzelt:**
+   - Reload sonrası state restore kontrolü
+   
+3. **Final E2E verification:**
    - 5/5 test geçmeli
    - Console error olmamalı
 
 4. **V1 Release**:
    - README son kontrol
    - Production build test
-   - Deploy (optional)
 
 ---
 
