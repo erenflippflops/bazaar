@@ -54,11 +54,6 @@ export default function AuctionPanel({
   const canAfford = proposedBid <= (myMaxBid || 0);
   const isValidBid = proposedBid >= minBid && canAfford;
 
-  // Debug log (remove after testing)
-  if (typeof window !== 'undefined' && selectedIncrement > 0) {
-    console.log('[AuctionPanel]', JSON.stringify({ phase, selectedIncrement, proposedBid, minBid, myMaxBid, canAfford, isValidBid, currentHighestBid }));
-  }
-
   const handleIncrement = (amount: number) => {
     setSelectedIncrement(amount);
   };
@@ -313,7 +308,7 @@ export default function AuctionPanel({
             <button
               className="primary-button"
               onClick={handlePlaceBid}
-              disabled={!isValidBid || selectedIncrement === 0}
+              disabled={!isValidBid}
               style={{
                 width: '100%',
                 height: '64px',

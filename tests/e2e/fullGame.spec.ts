@@ -109,7 +109,7 @@ test.describe('Bazaar E2E Tests', () => {
       const isGameOver = auctionNum === 6;
       if (!isGameOver) {
         const nextTurnPage = (auctionNum % 2) === 0 ? page : page2;
-        await expect(nextTurnPage.locator('text=/sıran|ÇARKI ÇEVİR/i')).toBeVisible({ timeout: 5000 });
+        await expect(nextTurnPage.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 5000 });
       }
     }
 
@@ -175,7 +175,7 @@ test.describe('Bazaar E2E Tests', () => {
     await placeBid(page, 2);
     await page.waitForTimeout(11000);
 
-    await expect(page.locator('text=/sıran|ÇARKI ÇEVİR/i')).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 5000 });
 
     await page.reload();
     setupConsoleErrorCatcher(page, errors);
