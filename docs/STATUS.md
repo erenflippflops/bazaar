@@ -163,6 +163,8 @@ geçtiğini testle doğrula.
   - Socket URL fix: client .env.test + --mode test (70850c5, dd6fc38)
   - Auditor: tam testler yazıldı (6 mezat, reconnect) (6632e7c)
 
+## V1 Durum Raporu
+
 ✓ GameScreen ve ResultsScreen DESIGN.md'den inşa edildi:
   - 3 paralel builder: wheel+arch, auction panel+timer, results+judge
   - Merge: 31f4cd1, 1e8df38, 51be252
@@ -173,14 +175,20 @@ geçtiğini testle doğrula.
   - GameScreen: token yerine playerId ile eşleştirme
   - E2E testleri: ayrı browser context'ler (381443d, bd4a595)
 
-✓ maxBid ve bid button fixes:
+✓ maxBid implementasyonu:
+  - Player type'ına maxBid eklendi (7c04179)
   - Server: maxBid state_update'e eklendi (d83e6af)
   - AuctionPanel: doğru disabled mantığı (f5cf56b)
-  - Helper: placeBid +increment butonları kullanıyor (3f30e71)
+  - resolveBid'de maxBid güncelleniyor
 
 ✓ README.md eklendi: 3-step setup, dev guide, deployment (a66dde8)
 
-⏳ ŞU AN: E2E testleri çalışıyor (tüm düzeltmelerle)
+⚠️ E2E Testler: 2/5 geçiyor
+  - "Full game flow": placeBid helper timeout (TEKLİF VER butonu 5s içinde enabled olmuyor)
+  - "Reconnect after reload": auction sonrası "ÇARKI ÇEVİR" görünmüyor
+  - Root cause araştırılıyor
+
+ŞU AN: E2E test sorunlarını debug ediyorum
 
 ⏭️ V1 Hedefi (tam otonom):
   1. Tarayıcıda tam oyun: lobi, mezat, hakem, yeniden oyna, reconnect
