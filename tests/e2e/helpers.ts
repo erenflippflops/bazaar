@@ -49,24 +49,26 @@ export async function startGame(page: Page) {
   await expect(page.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 5000 });
 }
 
-export async function spinWheel(page: Page) {
-  await page.click('button:has-text("ÇARKI ÇEVİR")');
+export async function spinWheel(page: Page, clickCanvas = false) {
+  if (clickCanvas) {
+    // Click the wheel canvas directly
+    const canvas = page.locator('canvas');
+    await canvas.click();
+  } else {
+    // Click the "ÇARKI ÇEVİR" button under the wheel
+    await page.click('button:has-text("ÇARKI ÇEVİR")');
+  }
   // Wait for auction phase - look for auction-related text
   await expect(page.locator('text=/Açılış teklifi|Teklif Ver/i')).toBeVisible({ timeout: 5000 });
 }
 
 export async function placeBid(page: Page, amount: number) {
-  // Click the +amount button to select increment
+  // Click the +amount button - this now bids IMMEDIATELY (one-click bidding)
   const incrementButton = page.locator(`button:has-text("+${amount}")`);
   await incrementButton.click();
 
-  // Wait for button to be enabled (state update + re-render)
-  const bidButton = page.locator('button:has-text("TEKLİF VER")');
-  await bidButton.waitFor({ state: 'visible', timeout: 5000 });
-  await expect(bidButton).toBeEnabled({ timeout: 5000 });
-
-  // Click "TEKLİF VER" to place the bid
-  await bidButton.click();
+  // Wait for bid to process
+  await page.waitForTimeout(500);
 }
 
 export async function waitForPhase(page: Page, phase: string, timeout = 10000) {
