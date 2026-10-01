@@ -80,13 +80,14 @@ test.describe('Bazaar E2E Tests', () => {
     }
   });
 
-  test('Full game flow (2 players)', async ({ page, context }) => {
+  test('Full game flow (2 players)', async ({ page, browser }) => {
     const errors: string[] = [];
     setupConsoleErrorCatcher(page, errors);
 
-    // Create room with Alice, Bob joins
+    // Create room with Alice, Bob joins in separate context
     const roomCode = await createRoom(page, 'Alice');
-    const page2 = await context.newPage();
+    const context2 = await browser.newContext();
+    const page2 = await context2.newPage();
     setupConsoleErrorCatcher(page2, errors);
     await joinRoom(page2, roomCode, 'Bob');
 
@@ -167,15 +168,17 @@ test.describe('Bazaar E2E Tests', () => {
     expect(errors).toEqual([]);
 
     await page2.close();
+    await context2.close();
   });
 
-  test('Reconnect after reload', async ({ page, context }) => {
+  test('Reconnect after reload', async ({ page, browser }) => {
     const errors: string[] = [];
     setupConsoleErrorCatcher(page, errors);
 
     // Create room, second player joins, start game
     const roomCode = await createRoom(page, 'Player1');
-    const page2 = await context.newPage();
+    const context2 = await browser.newContext();
+    const page2 = await context2.newPage();
     setupConsoleErrorCatcher(page2, errors);
     await joinRoom(page2, roomCode, 'Player2');
     await startGame(page);
