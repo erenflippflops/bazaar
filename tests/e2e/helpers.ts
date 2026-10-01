@@ -45,8 +45,8 @@ export async function joinRoom(page: Page, roomCode: string, nickname: string) {
 
 export async function startGame(page: Page) {
   await page.click('button:has-text("Oyunu Başlat")');
-  // Wait for game screen - look for the wheel or player turn text
-  await expect(page.locator('text=/sıran|çeviriyor|ÇARKI ÇEVİR/i')).toBeVisible({ timeout: 5000 });
+  // Wait for game screen - look for the spin button specifically
+  await expect(page.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 5000 });
 }
 
 export async function spinWheel(page: Page) {
