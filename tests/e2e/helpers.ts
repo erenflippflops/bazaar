@@ -60,8 +60,11 @@ export async function placeBid(page: Page, amount: number) {
   const incrementButton = page.locator(`button:has-text("+${amount}")`);
   await incrementButton.click();
 
-  // Click "Teklif Ver" to place the bid
-  await page.click('button:has-text("Teklif Ver")');
+  // Wait for button to be enabled
+  await page.waitForTimeout(100);
+
+  // Click "TEKLİF VER" to place the bid
+  await page.click('button:has-text("TEKLİF VER")');
 }
 
 export async function waitForPhase(page: Page, phase: string, timeout = 10000) {
