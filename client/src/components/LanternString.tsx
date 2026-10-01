@@ -37,7 +37,7 @@ export default function LanternString() {
         width: '100%',
         height: '80px',
         pointerEvents: 'none',
-        zIndex: 10,
+        zIndex: 1,
       }}
       viewBox="0 0 1000 80"
       preserveAspectRatio="none"
