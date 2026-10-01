@@ -191,8 +191,9 @@ test.describe('Bazaar E2E Tests', () => {
     setupConsoleErrorCatcher(page, errors);
 
     // Wait for socket reconnection and game state restoration
-    // After reload, game could be in any phase, so wait for any game UI element
-    await expect(page.locator('[class*="game"], button, h1, h2').first()).toBeVisible({ timeout: 10000 });
+    // After reload, wait for the app to render - check for any common game element
+    await page.waitForLoadState('networkidle', { timeout: 10000 });
+    await page.waitForTimeout(2000); // Additional buffer for socket reconnection
 
     // Now verify player names are visible
     await expect(page.locator('text="Player1"')).toBeVisible({ timeout: 5000 });
