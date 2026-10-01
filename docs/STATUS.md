@@ -173,7 +173,14 @@ geçtiğini testle doğrula.
   - GameScreen: token yerine playerId ile eşleştirme
   - E2E testleri: ayrı browser context'ler (381443d, bd4a595)
 
-⏳ ŞU AN: E2E testleri çalışıyor (yeni ekranlarla)
+✓ maxBid ve bid button fixes:
+  - Server: maxBid state_update'e eklendi (d83e6af)
+  - AuctionPanel: doğru disabled mantığı (f5cf56b)
+  - Helper: placeBid +increment butonları kullanıyor (3f30e71)
+
+✓ README.md eklendi: 3-step setup, dev guide, deployment (a66dde8)
+
+⏳ ŞU AN: E2E testleri çalışıyor (tüm düzeltmelerle)
 
 ⏭️ V1 Hedefi (tam otonom):
   1. Tarayıcıda tam oyun: lobi, mezat, hakem, yeniden oyna, reconnect
