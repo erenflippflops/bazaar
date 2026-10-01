@@ -70,6 +70,16 @@ export default function AuctionPanel({
     });
   };
 
+  // Helper to check if an increment button should be disabled
+  const isIncrementDisabled = (increment: number) => {
+    if (phase === 'opening') {
+      return increment > (myMaxBid || 0);
+    }
+    // In bidding phase, check if currentHighestBid + increment exceeds myMaxBid
+    const wouldBid = currentHighestBid + increment;
+    return wouldBid > (myMaxBid || 0);
+  };
+
   // Opening phase
   if (phase === 'opening') {
     if (!isMyTurn) {
@@ -110,7 +120,7 @@ export default function AuctionPanel({
           <button
             className="secondary-button"
             onClick={() => handleIncrement(1)}
-            disabled={1 > (myMaxBid || 0)}
+            disabled={isIncrementDisabled(1)}
             style={{
               height: '50px',
               fontSize: '20px',
@@ -123,7 +133,7 @@ export default function AuctionPanel({
           <button
             className="secondary-button"
             onClick={() => handleIncrement(2)}
-            disabled={2 > (myMaxBid || 0)}
+            disabled={isIncrementDisabled(2)}
             style={{
               height: '50px',
               fontSize: '20px',
@@ -136,7 +146,7 @@ export default function AuctionPanel({
           <button
             className="secondary-button"
             onClick={() => handleIncrement(5)}
-            disabled={5 > (myMaxBid || 0)}
+            disabled={isIncrementDisabled(5)}
             style={{
               height: '50px',
               fontSize: '20px',
