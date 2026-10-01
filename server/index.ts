@@ -132,6 +132,8 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
           socketToPlayer.set(socket.id, { roomCode: data.roomCode, playerId: reconnected.playerId });
           socket.join(data.roomCode);
           ack?.({ success: true, reconnected: true, playerId: reconnected.playerId, token: data.playerToken, state: sanitizeState(room.state, reconnected.playerId, room) });
+          // Send state_update to the reconnected socket so client's useSocket receives it
+          socket.emit('state_update', sanitizeState(room.state, reconnected.playerId, room));
           return;
         }
       }

@@ -191,12 +191,30 @@ test.describe('Bazaar E2E Tests', () => {
     setupConsoleErrorCatcher(page, errors);
 
     // Wait for socket reconnection and game state restoration
-    // After reload, wait for the app to render - check for any common game element
     await page.waitForLoadState('networkidle', { timeout: 10000 });
-    await page.waitForTimeout(2000); // Additional buffer for socket reconnection
+    await page.waitForTimeout(3000); // Buffer for socket reconnection + state update
 
-    // Now verify player names are visible
-    await expect(page.locator('text="Player1"')).toBeVisible({ timeout: 5000 });
+    // Debug: Check what's actually on the page after reload
+    const afterReloadDebug = await page.evaluate(() => {
+      const gameState = (window as any).__gameState;
+      const playerId = localStorage.getItem('playerId');
+      const roomCode = localStorage.getItem('roomCode');
+      const playerToken = localStorage.getItem('playerToken');
+      return {
+        hasGameState: !!gameState,
+        phase: gameState?.phase,
+        playerCount: gameState?.players?.length,
+        players: gameState?.players?.map((p: any) => ({ id: p.id, nickname: p.nickname })),
+        playerId,
+        roomCode,
+        hasToken: !!playerToken,
+        pageContent: document.body.innerText.substring(0, 200)
+      };
+    });
+    console.log('[TEST DEBUG After Reload]', JSON.stringify(afterReloadDebug, null, 2));
+
+    // Now verify player names are visible (they're rendered in PlayerList)
+    await expect(page.locator('text="Player1"')).toBeVisible({ timeout: 10000 });
     await expect(page.locator('text="Player2"')).toBeVisible({ timeout: 5000 });
 
     expect(errors).toEqual([]);
