@@ -8,8 +8,23 @@ const PORT = parseInt(process.env.PORT || '3001');
 const GAME_TIME_SCALE = parseFloat(process.env.GAME_TIME_SCALE || '1') || 1;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
+// Track judge failures for E2E testing (fail only once per room)
+const judgeFailureAttempts = new Set<string>();
+
 // Fake judge for E2E tests (PORT=3100)
 const fakeJudge = async (players: { nickname: string; items: { name: string; description: string }[] }[]) => {
+  // Trigger judge failure if a player named "FailJudge" exists
+  // but only fail once (allow retry to succeed)
+  const hasTrigger = players.some(p => p.nickname === 'FailJudge');
+  if (hasTrigger) {
+    const roomKey = players.map(p => p.nickname).sort().join(',');
+    if (!judgeFailureAttempts.has(roomKey)) {
+      judgeFailureAttempts.add(roomKey);
+      throw new Error('Simulated judge failure for E2E test');
+    }
+    // On retry (second attempt), succeed
+  }
+
   return JSON.stringify({
     ranking: players.map((p, i) => ({
       player: p.nickname,

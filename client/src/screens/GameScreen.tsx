@@ -7,6 +7,7 @@ import PlayerList from '../components/PlayerList';
 import AuctionPanel from '../components/AuctionPanel';
 import ItemCard from '../components/ItemCard';
 import JudgeWaiting from '../components/JudgeWaiting';
+import LanternString from '../components/LanternString';
 
 interface Item {
   name: string;
@@ -81,7 +82,8 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
   };
 
   return (
-    <div style={{ minHeight: '100vh', padding: '20px' }}>
+    <div style={{ minHeight: '100vh', padding: '20px', position: 'relative' }}>
+      <LanternString />
       {/* Top bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
         <div>
@@ -89,7 +91,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
           <p style={{ fontSize: '14px', color: 'var(--muted)' }}>MEZAT: {gameState.auctionNumber || 1}/6</p>
         </div>
         {myPlayer && (
-          <div style={{ textAlign: 'right' }}>
+          <div style={{ textAlign: 'right' }} className="mobile-only-gold">
             <p style={{ fontSize: '24px', fontFamily: 'var(--font-heading)', color: 'var(--saffron)' }}>
               🪙 {myPlayer.gold}
             </p>
@@ -100,16 +102,16 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
         )}
       </div>
 
-      {/* My slots */}
+      {/* Mobile: My slots */}
       {myPlayer && (
-        <div style={{ marginBottom: '20px' }}>
+        <div style={{ marginBottom: '20px' }} className="mobile-only-slots">
           <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
             {myPlayer.slots.map((slot, i) => (
-              <div 
+              <div
                 key={i}
                 className="card"
-                style={{ 
-                  flex: 1, 
+                style={{
+                  flex: 1,
                   maxWidth: '120px',
                   padding: '15px 10px',
                   textAlign: 'center',
@@ -133,64 +135,124 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
         </div>
       )}
 
-      {/* Wheel */}
-      <WheelDisplay itemCount={gameState.wheel.length} />
-
-      {/* Arch card (revealed item) */}
-      <ArchCard item={gameState.revealedItem} />
-
-      {/* Current item */}
-      {gameState.revealedItem && gameState.phase !== 'playing' && (
-        <ItemCard item={gameState.revealedItem} />
-      )}
-
-      {/* Turn/Auction status */}
-      <div style={{ marginTop: '30px', marginBottom: '30px' }}>
-        {gameState.phase === 'playing' && (
-          <div className="card" style={{ textAlign: 'center' }}>
-            <h3 style={{ fontSize: '24px', marginBottom: '20px', color: 'var(--white)' }}>
-              {isMyTurn ? 'Senin sıran!' : `${currentOpener?.nickname} çarkı çeviriyor...`}
-            </h3>
-            {isMyTurn && (
-              <button 
-                className="primary-button" 
-                onClick={handleSpinWheel}
-                style={{ width: '100%', fontSize: '24px', padding: '20px' }}
-              >
-                ÇARKI ÇEVİR
-              </button>
-            )}
-          </div>
-        )}
-
-        {(gameState.phase === 'opening' || gameState.phase === 'bidding') && (
-          <AuctionPanel
-            socket={socket}
-            phase={gameState.phase}
-            currentHighestBid={gameState.currentHighestBid}
-            currentHighestBidderId={gameState.currentHighestBidderId}
+      {/* Desktop: 3-column layout */}
+      <div className="game-layout">
+        {/* Left column: Players with collections */}
+        <div className="players-column">
+          <h3 style={{ fontSize: '18px', marginBottom: '15px', color: 'var(--muted)' }}>Oyuncular</h3>
+          <PlayerList
             players={gameState.players}
-            myPlayerId={myPlayer?.id}
-            myMaxBid={myPlayer?.maxBid}
-            auctionEndsAt={gameState.auctionEndsAt}
-            openingEndsAt={gameState.openingEndsAt}
-            currentOpenerIndex={gameState.currentOpenerIndex}
+            currentPlayerId={gameState.phase === 'playing' ? currentOpener?.id : undefined}
           />
-        )}
+        </div>
 
-        {(gameState.phase === 'judging' || gameState.phase === 'judge_failed') && (
-          <JudgeWaiting socket={socket} gameState={gameState} isHost={isHost} />
-        )}
+        {/* Center column: Wheel and arch card */}
+        <div className="wheel-column">
+          <WheelDisplay itemCount={gameState.wheel.length} />
+          <ArchCard item={gameState.revealedItem} />
+
+          {/* Current item (fallback) */}
+          {gameState.revealedItem && gameState.phase !== 'playing' && (
+            <ItemCard item={gameState.revealedItem} />
+          )}
+        </div>
+
+        {/* Right column: Auction panel */}
+        <div className="auction-column">
+          {gameState.phase === 'playing' && (
+            <div className="card" style={{ textAlign: 'center' }}>
+              <h3 style={{ fontSize: '24px', marginBottom: '20px', color: 'var(--white)' }}>
+                {isMyTurn ? 'Senin sıran!' : `${currentOpener?.nickname} çarkı çeviriyor...`}
+              </h3>
+              {isMyTurn && (
+                <button
+                  className="primary-button"
+                  onClick={handleSpinWheel}
+                  style={{ width: '100%', fontSize: '24px', padding: '20px' }}
+                >
+                  ÇARKI ÇEVİR
+                </button>
+              )}
+            </div>
+          )}
+
+          {(gameState.phase === 'opening' || gameState.phase === 'bidding') && (
+            <AuctionPanel
+              socket={socket}
+              phase={gameState.phase}
+              currentHighestBid={gameState.currentHighestBid}
+              currentHighestBidderId={gameState.currentHighestBidderId}
+              players={gameState.players}
+              myPlayerId={myPlayer?.id}
+              myMaxBid={myPlayer?.maxBid}
+              auctionEndsAt={gameState.auctionEndsAt}
+              openingEndsAt={gameState.openingEndsAt}
+              currentOpenerIndex={gameState.currentOpenerIndex}
+            />
+          )}
+
+          {(gameState.phase === 'judging' || gameState.phase === 'judge_failed') && (
+            <JudgeWaiting socket={socket} gameState={gameState} isHost={isHost} />
+          )}
+        </div>
       </div>
 
-      {/* Player list */}
-      <div style={{ marginTop: '30px' }}>
-        <h3 style={{ fontSize: '18px', marginBottom: '15px', color: 'var(--muted)' }}>Oyuncular</h3>
-        <PlayerList 
-          players={gameState.players} 
-          currentPlayerId={gameState.phase === 'playing' ? currentOpener?.id : undefined}
-        />
-      </div>
+      <style>{`
+        /* Mobile-first: single column */
+        .game-layout {
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .players-column,
+        .wheel-column,
+        .auction-column {
+          width: 100%;
+        }
+
+        .mobile-only-gold,
+        .mobile-only-slots {
+          display: block;
+        }
+
+        /* Desktop: 3-column layout */
+        @media (min-width: 1024px) {
+          .mobile-only-gold,
+          .mobile-only-slots {
+            display: none;
+          }
+
+          .game-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr 360px;
+            gap: 40px;
+            max-width: 1440px;
+            margin: 0 auto;
+          }
+
+          .players-column {
+            position: sticky;
+            top: 20px;
+            align-self: start;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+          }
+
+          .wheel-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+          }
+
+          .auction-column {
+            position: sticky;
+            top: 20px;
+            align-self: start;
+          }
+        }
+      `}</style>
     </div>
   );
 }
