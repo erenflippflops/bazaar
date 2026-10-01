@@ -107,18 +107,16 @@ test.describe('Bazaar E2E Tests', () => {
       // Debug: Check isMyTurn logic
       const debugInfo = await spinnerPage.evaluate(() => {
         const gameState = (window as any).__gameState;
-        const token = localStorage.getItem('playerToken');
-        const myPlayer = gameState?.players?.find((p: any) => p.token === token);
+        const playerId = localStorage.getItem('playerId');
+        const myPlayer = gameState?.players?.find((p: any) => p.id === playerId);
         const currentOpener = gameState?.players?.[gameState?.currentOpenerIndex];
         return {
-          token,
+          playerId,
           myPlayerId: myPlayer?.id,
-          myPlayerToken: myPlayer?.token,
           currentOpenerId: currentOpener?.id,
-          currentOpenerToken: currentOpener?.token,
           currentOpenerIndex: gameState?.currentOpenerIndex,
           playersCount: gameState?.players?.length,
-          players: gameState?.players?.map((p: any) => ({ id: p.id, nickname: p.nickname, token: p.token }))
+          players: gameState?.players?.map((p: any) => ({ id: p.id, nickname: p.nickname }))
         };
       });
       console.log('[TEST DEBUG]', JSON.stringify(debugInfo, null, 2));
