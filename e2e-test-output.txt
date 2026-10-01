@@ -1,0 +1,259 @@
+
+[2mRunning [22m12[2m tests using [22m1[2m worker[22m
+
+Room code: J94LQ5Kodu
+  [31mx[39m  [2m 1 [22m[31m[chromium] › tests\e2e\capture-results.spec.ts:11:1 › Capture results screen - simple[39m[2m (10.0m)[22m
+  [32mok[39m [2m 2 [22m[chromium] › tests\e2e\fullGame.spec.ts:5:3 › Bazaar E2E Tests › Create and join with 2 players[2m (6.3s)[22m
+  [32mok[39m [2m 3 [22m[chromium] › tests\e2e\fullGame.spec.ts:24:3 › Bazaar E2E Tests › Create and join with 6 players[2m (18.6s)[22m
+Auction 1/6: Alice's turn to open
+After auction 1: Alice=0 items, Bob=1 items
+Auction 2/6: Bob's turn to open
+After auction 2: Alice=1 items, Bob=1 items
+Auction 3/6: Alice's turn to open
+After auction 3: Alice=1 items, Bob=2 items
+Auction 4/6: Bob's turn to open
+After auction 4: Alice=2 items, Bob=2 items
+Auction 5/6: Alice's turn to open
+After auction 5: Alice=2 items, Bob=3 items
+Auction 6/6: Alice's turn to open
+After auction 6: Alice=3 items, Bob=3 items
+  [32mok[39m [2m 4 [22m[chromium] › tests\e2e\fullGame.spec.ts:58:3 › Bazaar E2E Tests › Full game flow (2 players)[2m (1.4m)[22m
+
+Auction 1/18: Player1 (index 0) opens
+  Player2 outbid with 2 gold
+After auction 1: Player1=0, Player2=1, Player3=0, Player4=0, Player5=0, Player6=0 (total: 1/18)
+
+Auction 2/18: Player2 (index 1) opens
+  Player1 outbid with 2 gold
+After auction 2: Player1=1, Player2=1, Player3=0, Player4=0, Player5=0, Player6=0 (total: 2/18)
+
+Auction 3/18: Player3 (index 2) opens
+  Player1 outbid with 2 gold
+After auction 3: Player1=2, Player2=1, Player3=0, Player4=0, Player5=0, Player6=0 (total: 3/18)
+
+Auction 4/18: Player4 (index 3) opens
+  Player1 outbid with 2 gold
+After auction 4: Player1=3, Player2=1, Player3=0, Player4=0, Player5=0, Player6=0 (total: 4/18)
+
+Auction 5/18: Player5 (index 4) opens
+  Player2 outbid with 2 gold
+After auction 5: Player1=3, Player2=2, Player3=0, Player4=0, Player5=0, Player6=0 (total: 5/18)
+
+Auction 6/18: Player6 (index 5) opens
+  Player2 outbid with 2 gold
+After auction 6: Player1=3, Player2=3, Player3=0, Player4=0, Player5=0, Player6=0 (total: 6/18)
+
+Auction 7/18: Player3 (index 2) opens
+  Player4 outbid with 2 gold
+After auction 7: Player1=3, Player2=3, Player3=0, Player4=1, Player5=0, Player6=0 (total: 7/18)
+
+Auction 8/18: Player4 (index 3) opens
+  Player3 outbid with 2 gold
+After auction 8: Player1=3, Player2=3, Player3=1, Player4=1, Player5=0, Player6=0 (total: 8/18)
+
+Auction 9/18: Player5 (index 4) opens
+  Player3 outbid with 2 gold
+After auction 9: Player1=3, Player2=3, Player3=2, Player4=1, Player5=0, Player6=0 (total: 9/18)
+
+Auction 10/18: Player6 (index 5) opens
+  Player3 outbid with 2 gold
+After auction 10: Player1=3, Player2=3, Player3=3, Player4=1, Player5=0, Player6=0 (total: 10/18)
+
+Auction 11/18: Player4 (index 3) opens
+  Player5 outbid with 2 gold
+After auction 11: Player1=3, Player2=3, Player3=3, Player4=1, Player5=1, Player6=0 (total: 11/18)
+
+Auction 12/18: Player5 (index 4) opens
+  Player4 outbid with 2 gold
+After auction 12: Player1=3, Player2=3, Player3=3, Player4=2, Player5=1, Player6=0 (total: 12/18)
+
+Auction 13/18: Player6 (index 5) opens
+  Player4 outbid with 2 gold
+After auction 13: Player1=3, Player2=3, Player3=3, Player4=3, Player5=1, Player6=0 (total: 13/18)
+
+Auction 14/18: Player5 (index 4) opens
+  Player6 outbid with 2 gold
+After auction 14: Player1=3, Player2=3, Player3=3, Player4=3, Player5=1, Player6=1 (total: 14/18)
+
+Auction 15/18: Player6 (index 5) opens
+  Player5 outbid with 2 gold
+After auction 15: Player1=3, Player2=3, Player3=3, Player4=3, Player5=2, Player6=1 (total: 15/18)
+
+Auction 16/18: Player5 (index 4) opens
+  Player6 outbid with 2 gold
+After auction 16: Player1=3, Player2=3, Player3=3, Player4=3, Player5=2, Player6=2 (total: 16/18)
+
+Auction 17/18: Player6 (index 5) opens
+  Player5 outbid with 2 gold
+After auction 17: Player1=3, Player2=3, Player3=3, Player4=3, Player5=3, Player6=2 (total: 17/18)
+
+Auction 18/18: Player6 (index 5) opens
+  No outbid - Player6 will win with opening bid
+After auction 18: Player1=3, Player2=3, Player3=3, Player4=3, Player5=3, Player6=3 (total: 18/18)
+
+All 18 auctions complete! Phase: finished
+Final phase check: finished
+  [32mok[39m [2m 5 [22m[chromium] › tests\e2e\fullGame.spec.ts:138:3 › Bazaar E2E Tests › Full game flow (6 players)[2m (4.2m)[22m
+[TEST DEBUG Reconnect] {
+  "playerId": "_Zz497L3xuTHytxeAAEg",
+  "myPlayerId": "_Zz497L3xuTHytxeAAEg",
+  "myPlayerMaxBid": 18,
+  "myPlayerGold": 20,
+  "currentOpenerId": "_Zz497L3xuTHytxeAAEg",
+  "currentOpenerIndex": 0,
+  "playersCount": 2,
+  "players": [
+    {
+      "id": "_Zz497L3xuTHytxeAAEg",
+      "nickname": "Player1",
+      "maxBid": 18,
+      "gold": 20
+    },
+    {
+      "id": "R8DWKf5o3855S-v3AAEh",
+      "nickname": "Player2",
+      "maxBid": 18,
+      "gold": 20
+    }
+  ]
+}
+[Browser Console] [vite] connecting...
+[Browser Console] [vite] connected.
+[Browser Console] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold
+[Browser Console] [useSocket] Connecting to: http://localhost:3100
+[Browser Console] [useSocket] Connecting to: http://localhost:3100
+[Browser Console] [useSocket] Connected to server
+[TEST DEBUG After Reload] {
+  "hasGameState": true,
+  "phase": "playing",
+  "playerCount": 2,
+  "players": [
+    {
+      "id": "_Zz497L3xuTHytxeAAEg",
+      "nickname": "Player1"
+    },
+    {
+      "id": "R8DWKf5o3855S-v3AAEh",
+      "nickname": "Player2"
+    }
+  ],
+  "playerId": "_Zz497L3xuTHytxeAAEg",
+  "roomCode": "ID3PSQ",
+  "hasToken": true,
+  "pageContent": "ODA:\n\nMEZAT: 1/6\n\nOyuncular\nPlayer1\nSEN\n17 altın\nPlayer2\n17 altın\n\nÇarkta güç kaldı\n\nSenin sıran!\nÇARKI ÇEVİR"
+}
+  [32mok[39m [2m 6 [22m[chromium] › tests\e2e\fullGame.spec.ts:299:3 › Bazaar E2E Tests › Reconnect after reload[2m (33.5s)[22m
+  [31mx[39m  [2m 7 [22m[31m[chromium] › tests\e2e\fullGame.spec.ts:387:3 › Bazaar E2E Tests › Judge failed handling[39m[2m (1.9m)[22m
+Auction 1/6
+Auction 2/6
+Auction 3/6
+Auction 4/6
+  [31mx[39m  [2m 8 [22m[31m[chromium] › tests\e2e\results-only.spec.ts:12:1 › Results screenshot minimal[39m[2m (10.0m)[22m
+  [31mx[39m  [2m 9 [22m[31m[chromium] › tests\e2e\screenshots-results.spec.ts:16:3 › Results Screen Screenshot › Capture results screen[39m[2m (10.0m)[22m
+  [32mok[39m [2m10 [22m[chromium] › tests\e2e\screenshots.spec.ts:16:3 › Screenshots for V1 › Home screen[2m (4.1s)[22m
+  [32mok[39m [2m11 [22m[chromium] › tests\e2e\screenshots.spec.ts:24:3 › Screenshots for V1 › Lobby screen[2m (2.5s)[22m
+  [32mok[39m [2m12 [22m[chromium] › tests\e2e\screenshots.spec.ts:37:3 › Screenshots for V1 › Game screens[2m (1.4m)[22m
+
+
+[31m  1) [chromium] › tests\e2e\capture-results.spec.ts:11:1 › Capture results screen - simple [2m─────────[22m[39m
+
+    [31mTest timeout of 600000ms exceeded.[39m
+
+    Error: locator.fill: Test ended.
+    Call log:
+    [2m  - waiting for locator('input[placeholder="Oda kodu"]')[22m
+
+
+    [0m [90m 32 |[39m   [36mawait[39m page2[33m.[39mgoto([32m'http://localhost:5200'[39m)[33m;[39m
+     [90m 33 |[39m   [36mawait[39m page2[33m.[39mwaitForTimeout([35m2000[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 34 |[39m   [36mawait[39m page2[33m.[39mlocator([32m'input[placeholder="Oda kodu"]'[39m)[33m.[39mfill(roomCode)[33m;[39m
+     [90m    |[39m                                                        [31m[1m^[22m[39m
+     [90m 35 |[39m   [36mawait[39m page2[33m.[39mlocator([32m'input[placeholder="İsmin"]'[39m)[33m.[39mlast()[33m.[39mfill([32m'Player2'[39m)[33m;[39m
+     [90m 36 |[39m   [36mawait[39m page2[33m.[39mclick([32m'button:has-text("Odaya Katıl")'[39m)[33m;[39m
+     [90m 37 |[39m   [36mawait[39m page2[33m.[39mwaitForTimeout([35m1000[39m)[33m;[39m[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\capture-results.spec.ts:34:56[22m
+
+[2m    Error Context: test-results\capture-results-Capture-results-screen---simple-chromium\error-context.md[22m
+
+[31m  2) [chromium] › tests\e2e\fullGame.spec.ts:387:3 › Bazaar E2E Tests › Judge failed handling [2m──────[22m[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('text="Hakem Kafayı Yedi!"')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" locator('text="Hakem Kafayı Yedi!"') with timeout 30000ms[22m
+    [2m  - waiting for locator('text="Hakem Kafayı Yedi!"')[22m
+
+
+    [0m [90m 430 |[39m
+     [90m 431 |[39m     [90m// Wait for judge to fail[39m
+    [31m[1m>[22m[39m[90m 432 |[39m     [36mawait[39m expect(page[33m.[39mlocator([32m'text="Hakem Kafayı Yedi!"'[39m))[33m.[39mtoBeVisible({ timeout[33m:[39m [35m30000[39m })[33m;[39m
+     [90m     |[39m                                                             [31m[1m^[22m[39m
+     [90m 433 |[39m     [36mawait[39m expect(page2[33m.[39mlocator([32m'text="Hakem Kafayı Yedi!"'[39m))[33m.[39mtoBeVisible({ timeout[33m:[39m [35m30000[39m })[33m;[39m
+     [90m 434 |[39m
+     [90m 435 |[39m     [90m// Verify error message is shown[39m[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\fullGame.spec.ts:432:61[22m
+
+[2m    Error Context: test-results\fullGame-Bazaar-E2E-Tests-Judge-failed-handling-chromium\error-context.md[22m
+
+[31m  3) [chromium] › tests\e2e\results-only.spec.ts:12:1 › Results screenshot minimal [2m─────────────────[22m[39m
+
+    [31mTest timeout of 600000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 600000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("ÇARKI ÇEVİR")')[22m
+
+
+    [90m   at [39mhelpers.ts:53
+
+    [0m [90m 51 |[39m
+     [90m 52 |[39m [36mexport[39m [36masync[39m [36mfunction[39m spinWheel(page[33m:[39m [33mPage[39m) {
+    [31m[1m>[22m[39m[90m 53 |[39m   [36mawait[39m page[33m.[39mclick([32m'button:has-text("ÇARKI ÇEVİR")'[39m)[33m;[39m
+     [90m    |[39m              [31m[1m^[22m[39m
+     [90m 54 |[39m   [90m// Wait for auction phase - look for auction-related text[39m
+     [90m 55 |[39m   [36mawait[39m expect(page[33m.[39mlocator([32m'text=/Açılış teklifi|Teklif Ver/i'[39m))[33m.[39mtoBeVisible({ timeout[33m:[39m [35m5000[39m })[33m;[39m
+     [90m 56 |[39m }[0m
+    [2m    at spinWheel (C:\Users\lolse\Projects\BAZAAR\tests\e2e\helpers.ts:53:14)[22m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\results-only.spec.ts:26:11[22m
+
+[2m    Error Context: test-results\results-only-Results-screenshot-minimal-chromium\error-context.md[22m
+
+[31m  4) [chromium] › tests\e2e\screenshots-results.spec.ts:16:3 › Results Screen Screenshot › Capture results screen [39m
+
+    [31mTest timeout of 600000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 600000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("ÇARKI ÇEVİR")')[22m
+
+
+    [90m   at [39mhelpers.ts:53
+
+    [0m [90m 51 |[39m
+     [90m 52 |[39m [36mexport[39m [36masync[39m [36mfunction[39m spinWheel(page[33m:[39m [33mPage[39m) {
+    [31m[1m>[22m[39m[90m 53 |[39m   [36mawait[39m page[33m.[39mclick([32m'button:has-text("ÇARKI ÇEVİR")'[39m)[33m;[39m
+     [90m    |[39m              [31m[1m^[22m[39m
+     [90m 54 |[39m   [90m// Wait for auction phase - look for auction-related text[39m
+     [90m 55 |[39m   [36mawait[39m expect(page[33m.[39mlocator([32m'text=/Açılış teklifi|Teklif Ver/i'[39m))[33m.[39mtoBeVisible({ timeout[33m:[39m [35m5000[39m })[33m;[39m
+     [90m 56 |[39m }[0m
+    [2m    at spinWheel (C:\Users\lolse\Projects\BAZAAR\tests\e2e\helpers.ts:53:14)[22m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\screenshots-results.spec.ts:29:13[22m
+
+[2m    Error Context: test-results\screenshots-results-Result-fc0b5-shot-Capture-results-screen-chromium\error-context.md[22m
+
+[33m  Slow test file: [39m[chromium] › tests\e2e\screenshots-results.spec.ts[33m (10.0m)[39m
+[33m  Slow test file: [39m[chromium] › tests\e2e\results-only.spec.ts[33m (10.0m)[39m
+[33m  Slow test file: [39m[chromium] › tests\e2e\capture-results.spec.ts[33m (10.0m)[39m
+[33m  Slow test file: [39m[chromium] › tests\e2e\fullGame.spec.ts[33m (8.5m)[39m
+[33m  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel[39m
+[31m  4 failed[39m
+[31m    [chromium] › tests\e2e\capture-results.spec.ts:11:1 › Capture results screen - simple [2m──────────[22m[39m
+[31m    [chromium] › tests\e2e\fullGame.spec.ts:387:3 › Bazaar E2E Tests › Judge failed handling [2m───────[22m[39m
+[31m    [chromium] › tests\e2e\results-only.spec.ts:12:1 › Results screenshot minimal [2m──────────────────[22m[39m
+[31m    [chromium] › tests\e2e\screenshots-results.spec.ts:16:3 › Results Screen Screenshot › Capture results screen [39m
+[32m  8 passed[39m[2m (40.0m)[22m

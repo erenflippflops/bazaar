@@ -39,17 +39,19 @@ export default function PlayerList({ players, currentPlayerId }: PlayerListProps
                 {player.gold} <span style={{ fontWeight: 600, color: isActive ? 'var(--white)' : 'var(--muted)' }}>altın</span>
               </div>
             </div>
-            <div style={{ display: 'flex', gap: '3px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', alignItems: 'flex-end' }}>
               {player.slots.map((slot, i) => (
                 <span
                   key={i}
                   style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    background: slot ? 'var(--saffron)' : 'rgba(255,255,255,0.22)',
+                    fontSize: '10px',
+                    fontWeight: 600,
+                    color: slot ? 'var(--saffron)' : 'rgba(255,255,255,0.22)',
+                    whiteSpace: 'nowrap',
                   }}
-                />
+                >
+                  {slot ? slot.name : '—'}
+                </span>
               ))}
             </div>
           </div>

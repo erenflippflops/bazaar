@@ -24,6 +24,7 @@ export interface GameState {
   turnStartTime: number | null; // injected timestamp
   ranking: { player: string; rank: number; reason: string }[] | null;
   commentary: string | null;
+  auctionNumber: number; // current auction (1 to 3N where N = player count)
 }
 
 export interface GameEvent {

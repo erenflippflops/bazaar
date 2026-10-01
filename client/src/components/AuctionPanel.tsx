@@ -100,11 +100,47 @@ export default function AuctionPanel({
     return wouldBid > (myMaxBid || 0);
   };
 
+  // Compact item display for opening and bidding phases
+  const CompactItemDisplay = () => {
+    if (!revealedItem) return null;
+
+    return (
+      <div style={{
+        background: 'var(--saffron)',
+        color: 'var(--dark)',
+        padding: '12px 16px',
+        borderRadius: '12px',
+        border: '2px solid var(--dark)',
+        marginBottom: '14px',
+        textAlign: 'center',
+      }}>
+        <h4 style={{
+          fontFamily: 'var(--font-heading)',
+          fontSize: '18px',
+          marginBottom: '4px',
+          color: 'var(--dark)',
+          lineHeight: 1.2,
+        }}>
+          {revealedItem.name.toUpperCase()}
+        </h4>
+        <p style={{
+          fontSize: '13px',
+          fontWeight: 600,
+          color: 'var(--dark)',
+          lineHeight: 1.3,
+        }}>
+          {revealedItem.description}
+        </p>
+      </div>
+    );
+  };
+
   // Opening phase
   if (phase === 'opening') {
     if (!isMyTurn) {
       return (
         <div className="card" style={{ textAlign: 'center' }}>
+          <CompactItemDisplay />
           <Timer endsAt={openingEndsAt} />
           <h3 style={{ fontSize: '20px', marginTop: '20px', color: 'var(--white)' }}>
             {currentOpener?.nickname} açılış teklifi veriyor...
@@ -115,6 +151,7 @@ export default function AuctionPanel({
 
     return (
       <div className="card" style={{ textAlign: 'center' }}>
+        <CompactItemDisplay />
         <Timer endsAt={openingEndsAt} label="AÇILIŞ" />
 
         <h3 style={{ fontSize: '20px', margin: '20px 0 10px', color: 'var(--white)' }}>
@@ -209,6 +246,7 @@ export default function AuctionPanel({
   if (phase === 'bidding') {
     return (
       <div className="card">
+        <CompactItemDisplay />
         <div style={{
           padding: '16px 18px',
           background: 'var(--dark)',

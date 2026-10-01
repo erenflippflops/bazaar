@@ -1,0 +1,39 @@
+
+[2mRunning [22m1[2m test using [22m1[2m worker[22m
+
+=== STEP 1: Player 1 creates room ===
+Room code: 4939I2
+=== STEP 2: Player 2 joins room ===
+Both players visible in lobby
+=== STEP 3: Start game ===
+Game started
+=== STEP 4: Check wheel visibility ===
+Wheel elements found: 1
+Wheel items/segments found: 0
+=== STEP 5: First auction - Player 1 opens ===
+Player1 is the opener
+Player1 spun the wheel
+Auction phase started
+=== STEP 6: Check gold display ===
+Player1 gold display: 20 altın
+Player2 gold display: 20 altın
+=== STEP 7: Check bid buttons ===
+Player1 bid increment buttons: 3
+Player2 bid increment buttons: 0
+Player1 TEKLİF VER button visible: true
+Player2 TEKLİF VER button visible: false
+=== STEP 8: Place opening bid ===
+Player1 placed opening bid of 1
+=== STEP 9: Other player bids ===
+Player2 can bid: true
+Player2 placed bid of 1
+=== STEP 10: Check console errors ===
+Console errors detected:
+  1. Failed to load resource: the server responded with a status of 404 (Not Found)
+=== STEP 11: Get auction panel details ===
+Player1 auction panel HTML (truncated): <div class="card" style=""><div style="padding: 16px 18px; background: var(--dark); border: 2px solid rgba(46, 196, 182, 0.55); border-radius: 16px; display: flex; align-items: center; justify-content
+=== TEST COMPLETE ===
+Total console errors: 1
+  [32mok[39m [2m1 [22m[chromium] › tests\e2e\joining-bidding-test.spec.ts:5:3 › Joining and Bidding Flow Test › Join room and test bidding with 2 players[2m (13.8s)[22m
+
+[32m  1 passed[39m[2m (14.7s)[22m

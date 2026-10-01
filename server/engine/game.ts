@@ -22,7 +22,8 @@ export function createGame(hostId: string, hostNickname: string, items: Item[], 
     currentHighestBidderId: null,
     turnStartTime: null,
     ranking: null,
-    commentary: null
+    commentary: null,
+    auctionNumber: 0
   };
 
   return { state, events: [{ type: 'game_created', hostId, nickname: hostNickname, token }] };
@@ -83,7 +84,8 @@ export function startGame(state: GameState, playerId: string, items: Item[], rng
     ...state,
     phase: 'playing',
     wheel,
-    currentOpenerIndex: 0
+    currentOpenerIndex: 0,
+    auctionNumber: 1
   };
 
   return { state: newState, events: [{ type: 'game_started', wheelSize: wheel.length }] };
@@ -298,7 +300,8 @@ export function resolveBid(state: GameState): EngineResult {
     currentHighestBid: 0,
     currentHighestBidderId: null,
     currentOpenerIndex: nextOpenerIndex,
-    turnStartTime: null
+    turnStartTime: null,
+    auctionNumber: state.auctionNumber + 1
   };
 
   return { state: newState, events: [{ type: 'bid_resolved', winnerId: winner.id, nickname: winner.nickname, amount: state.currentHighestBid, item: state.revealedItem }, { type: 'next_turn', openerIndex: nextOpenerIndex, openerId: newPlayers[nextOpenerIndex].id }] };
@@ -393,7 +396,8 @@ export function rematch(state: GameState, playerId: string, items: Item[], rng: 
     currentHighestBidderId: null,
     turnStartTime: null,
     ranking: null,
-    commentary: null
+    commentary: null,
+    auctionNumber: 1
   };
 
   return { state: newState, events: [{ type: 'rematch_started', wheelSize: wheel.length }] };

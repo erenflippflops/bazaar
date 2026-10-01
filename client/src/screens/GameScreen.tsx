@@ -70,6 +70,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
   const currentOpener = gameState.players[gameState.currentOpenerIndex];
   const isMyTurn = currentOpener?.id === myPlayer?.id;
   const isHost = gameState.hostId === myPlayer?.id;
+  const totalAuctions = gameState.players.length * 3;
 
   const handleSpinWheel = () => {
     if (!socket) {
@@ -96,7 +97,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: typeof window !== 'undefined' && window.innerWidth < 768 ? '10px' : '20px', position: 'relative', zIndex: 2 }}>
         <div>
           <p style={{ fontSize: '14px', color: 'var(--muted)' }}>ODA: {gameState.roomCode}</p>
-          <p style={{ fontSize: '14px', color: 'var(--muted)' }}>MEZAT: {gameState.auctionNumber || 1}/6</p>
+          <p style={{ fontSize: '14px', color: 'var(--muted)' }}>MEZAT: {gameState.auctionNumber || 1}/{totalAuctions}</p>
         </div>
         {myPlayer && (
           <div style={{ textAlign: 'right' }} className="mobile-only-gold">
@@ -199,6 +200,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
               auctionEndsAt={gameState.auctionEndsAt}
               openingEndsAt={gameState.openingEndsAt}
               currentOpenerIndex={gameState.currentOpenerIndex}
+              revealedItem={gameState.revealedItem || undefined}
             />
           )}
 

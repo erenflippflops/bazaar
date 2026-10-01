@@ -62,6 +62,8 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
   });
 
   io.on('connection', (socket) => {
+    console.log('[Socket] Client connected:', socket.id);
+
     const wrap = <T>(handler: (data: T, ack?: (response: unknown) => void) => void | Promise<void>) => {
       return async (data: T, ack?: unknown) => {
         try {
@@ -186,43 +188,53 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
     }));
 
     socket.on('spin_wheel', wrap<{}>((data, ack) => {
+      console.log('[spin_wheel] Received from socket:', socket.id);
       const player = socketToPlayer.get(socket.id);
       if (!player) {
+        console.log('[spin_wheel] Player not found in room');
         ack?.({ success: false, error: 'Odada değilsin' });
         return;
       }
 
       const room = rooms.get(player.roomCode);
       if (!room) {
+        console.log('[spin_wheel] Room not found:', player.roomCode);
         ack?.({ success: false, error: 'Oda bulunamadı' });
         return;
       }
 
+      console.log('[spin_wheel] Processing spin for player:', player.playerId, 'in room:', player.roomCode);
       const result = engine.spinWheel(room.state, player.playerId, seededRNG(), Date.now());
       if (result.error) {
+        console.log('[spin_wheel] Error:', result.error);
         ack?.({ success: false, error: result.error });
         return;
       }
 
       room.state = result.state;
       io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
+      console.log('[spin_wheel] Success, revealed item:', result.state.revealedItem?.name);
       ack?.({ success: true });
     }));
 
     socket.on('place_bid', wrap<{ amount: number }>((data, ack) => {
+      console.log('[place_bid] Received from socket:', socket.id, 'amount:', data?.amount);
       if (!data || typeof data.amount !== 'number') {
+        console.log('[place_bid] Invalid amount');
         ack?.({ success: false, error: 'Geçersiz miktar' });
         return;
       }
 
       const player = socketToPlayer.get(socket.id);
       if (!player) {
+        console.log('[place_bid] Player not found in room');
         ack?.({ success: false, error: 'Odada değilsin' });
         return;
       }
 
       const room = rooms.get(player.roomCode);
       if (!room) {
+        console.log('[place_bid] Room not found:', player.roomCode);
         ack?.({ success: false, error: 'Oda bulunamadı' });
         return;
       }
