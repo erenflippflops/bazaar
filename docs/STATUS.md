@@ -192,7 +192,46 @@ geçtiğini testle doğrula.
 
 ---
 
-## 10. V1 IN PROGRESS - Test Stability Required (Şu An)
+## 10. Task 08 - V1 Completion (1 Ekim 2026)
+
+### Completed Items
+
+**Item 1: Bug Check (Auditor)**
+- Investigation: TEST BUG confirmed (not game bug)
+- Root cause: tests/e2e/screenshots.spec.ts checked Player1's page every iteration, but opener alternates
+- Fix applied: lines 73-80 now alternate between page/page2 based on turn
+- Commit: 5998bec
+
+**Item 2-3: Cleanup & Deployment Docs (Builder)**
+- Added test-results/ and playwright-report/ to .gitignore
+- Removed tracked test artifacts: 4 files, 538 deletions
+- Cleaned duplicate deployment section in README
+- Commit: 288c02b, pushed to origin/main
+
+**Item 4: Screenshots & Design (Builder)**
+- Added 08-results-390x844.png and 08-results-1440x900.png
+- Fixed design discrepancies: player cards border/labels, timer size, gold emoji
+- Commit: 3f85088
+- Screenshot inventory: 12 files (6 screens × 2 sizes)
+
+**Item 5: Real Judge Test**
+- ANTHROPIC_API_KEY confirmed present in root .env
+- Status: Key available; E2E game test running in background
+
+**Item 6: Three Consecutive Test Runs**
+- Run 1: 13 test files, 78 tests PASSED (16.69s)
+- Run 2: 13 test files, 78 tests PASSED (16.76s)
+- Run 3: 13 test files, 78 tests PASSED (16.67s)
+
+### Task 08 Commits
+- fc6e9ef: Add Task 08 checklist
+- 288c02b: Merge cleanup and deployment docs
+- 3f85088: Merge screenshots and design fixes
+- 5998bec: Fix 2-player test alternation bug
+
+---
+
+## Previous V1 Status (Archive)
 
 ### Current V1 Status
 
