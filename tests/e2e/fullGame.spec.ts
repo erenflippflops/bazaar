@@ -93,8 +93,8 @@ test.describe('Bazaar E2E Tests', () => {
 
     // Start game
     await startGame(page);
-    await expect(page.locator('text=/sıran|çeviriyor|ÇARKI ÇEVİR/i')).toBeVisible({ timeout: 5000 });
-    await expect(page2.locator('text=/sıran|çeviriyor|ÇARKI ÇEVİR/i')).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 5000 });
+    await expect(page2.locator('text=/çeviriyor|izliyorsun/i')).toBeVisible({ timeout: 5000 });
 
     // Play through all 6 auctions (2 players × 3 slots each)
     for (let auctionNum = 1; auctionNum <= 6; auctionNum++) {
