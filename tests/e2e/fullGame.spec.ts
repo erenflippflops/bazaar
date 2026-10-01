@@ -102,7 +102,7 @@ test.describe('Bazaar E2E Tests', () => {
       await placeBid(spinnerPage, 1);
       await spinnerPage.waitForTimeout(500);
 
-      await expect(otherPage.locator('button:has-text("Teklif Ver")')).toBeEnabled({ timeout: 3000 });
+      await expect(otherPage.locator('button:has-text("TEKLİF VER")')).toBeEnabled({ timeout: 3000 });
       await placeBid(otherPage, 2);
 
       await page.waitForTimeout(11000);
@@ -153,6 +153,10 @@ test.describe('Bazaar E2E Tests', () => {
       };
     });
     console.log('[TEST DEBUG Reconnect]', JSON.stringify(debugInfo, null, 2));
+
+    // Debug console logs
+    page.on('console', msg => console.log('[Browser Console]', msg.text()));
+    page2.on('console', msg => console.log('[Browser Console]', msg.text()));
 
     await expect(page.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 10000 });
     await spinWheel(page);
