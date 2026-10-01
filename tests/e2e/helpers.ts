@@ -56,7 +56,11 @@ export async function spinWheel(page: Page) {
 }
 
 export async function placeBid(page: Page, amount: number) {
-  await page.fill('input[type="number"]', amount.toString());
+  // Click the +amount button to select increment
+  const incrementButton = page.locator(`button:has-text("+${amount}")`);
+  await incrementButton.click();
+
+  // Click "Teklif Ver" to place the bid
   await page.click('button:has-text("Teklif Ver")');
 }
 
