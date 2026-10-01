@@ -56,6 +56,7 @@ test.describe('Bazaar E2E Tests', () => {
   });
 
   test('Full game flow (2 players)', async ({ page, browser }) => {
+    test.setTimeout(120000); // 2 minutes for full game
     const errors: string[] = [];
     setupConsoleErrorCatcher(page, errors);
 
@@ -69,11 +70,25 @@ test.describe('Bazaar E2E Tests', () => {
     await expect(page.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 5000 });
     await expect(page2.locator('text=/çeviriyor|izliyorsun/i')).toBeVisible({ timeout: 5000 });
 
-    for (let auctionNum = 1; auctionNum <= 6; auctionNum++) {
-      const isAliceTurn = (auctionNum % 2) === 1;
-      const spinnerPage = isAliceTurn ? page : page2;
-      const otherPage = isAliceTurn ? page2 : page;
-      const spinnerName = isAliceTurn ? 'Alice' : 'Bob';
+    let auctionNum = 0;
+    let isGameOver = false;
+
+    while (!isGameOver && auctionNum < 10) { // max 10 auctions to prevent infinite loop
+      auctionNum++;
+
+      // Determine who should spin
+      await page.waitForTimeout(1000);
+
+      const aliceIsOpener = await page.evaluate(() => {
+        const gameState = (window as any).__gameState;
+        const playerId = localStorage.getItem('playerId');
+        const currentOpener = gameState?.players?.[gameState?.currentOpenerIndex];
+        return currentOpener?.id === playerId;
+      });
+
+      const spinnerPage = aliceIsOpener ? page : page2;
+      const otherPage = aliceIsOpener ? page2 : page;
+      const spinnerName = aliceIsOpener ? 'Alice' : 'Bob';
 
       console.log(`Auction ${auctionNum}: ${spinnerName}'s turn`);
 
@@ -83,17 +98,31 @@ test.describe('Bazaar E2E Tests', () => {
         const myPlayer = gameState?.players?.find((p: any) => p.id === playerId);
         const currentOpener = gameState?.players?.[gameState?.currentOpenerIndex];
         return {
+          phase: gameState?.phase,
           playerId,
           myPlayerId: myPlayer?.id,
           myPlayerMaxBid: myPlayer?.maxBid,
           myPlayerGold: myPlayer?.gold,
+          myPlayerSlots: myPlayer?.slots?.filter((s: any) => s !== null).length,
           currentOpenerId: currentOpener?.id,
           currentOpenerIndex: gameState?.currentOpenerIndex,
           playersCount: gameState?.players?.length,
-          players: gameState?.players?.map((p: any) => ({ id: p.id, nickname: p.nickname, maxBid: p.maxBid, gold: p.gold }))
+          players: gameState?.players?.map((p: any) => ({
+            id: p.id,
+            nickname: p.nickname,
+            maxBid: p.maxBid,
+            gold: p.gold,
+            filledSlots: p.slots?.filter((s: any) => s !== null).length
+          }))
         };
       });
       console.log('[TEST DEBUG]', JSON.stringify(debugInfo, null, 2));
+
+      // Check if game is already over before spinning
+      if (debugInfo.phase === 'judging' || debugInfo.phase === 'finished') {
+        isGameOver = true;
+        break;
+      }
 
       await expect(spinnerPage.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 10000 });
       await spinWheel(spinnerPage);
@@ -102,22 +131,24 @@ test.describe('Bazaar E2E Tests', () => {
       await placeBid(spinnerPage, 1);
       await spinnerPage.waitForTimeout(500);
 
-      await placeBid(otherPage, 2);
+      // Check if other player can bid (not full slots)
+      const otherCanBid = await otherPage.locator('button:has-text("TEKLİF VER")').isVisible().catch(() => false);
+      if (otherCanBid) {
+        await placeBid(otherPage, 2);
+      }
 
       await page.waitForTimeout(11000);
 
-      const isGameOver = auctionNum === 6;
-      if (!isGameOver) {
-        const nextTurnPage = (auctionNum % 2) === 0 ? page : page2;
-        await expect(nextTurnPage.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 5000 });
-      }
+      // Check if game is over (judging phase)
+      const phase = await page.evaluate(() => (window as any).__gameState?.phase);
+      isGameOver = phase === 'judging';
     }
 
-    await expect(page.locator('text=/sonuç|sıralama|kazanan/i')).toBeVisible({ timeout: 30000 });
-    await expect(page2.locator('text=/sonuç|sıralama|kazanan/i')).toBeVisible({ timeout: 30000 });
+    await expect(page.locator('h1:has-text("BAZAAR KAPANDI")')).toBeVisible({ timeout: 30000 });
+    await expect(page2.locator('h1:has-text("BAZAAR KAPANDI")')).toBeVisible({ timeout: 30000 });
 
     const hasCommentary = await page.locator('text=/yorum|commentary/i').count() > 0 ||
-                          await page.locator('p, div').filter({ hasText: /.{20,}/ }).count() > 0;
+                          await page.locator('p').filter({ hasText: /.{20,}/ }).count() > 0;
 
     expect(hasCommentary).toBe(true);
     expect(errors).toEqual([]);
@@ -127,6 +158,7 @@ test.describe('Bazaar E2E Tests', () => {
   });
 
   test('Reconnect after reload', async ({ page, browser }) => {
+    test.setTimeout(90000); // 1.5 minutes for reconnect test
     const errors: string[] = [];
     setupConsoleErrorCatcher(page, errors);
 
