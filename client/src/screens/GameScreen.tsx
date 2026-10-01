@@ -5,7 +5,6 @@ import WheelDisplay from '../components/WheelDisplay';
 import ArchCard from '../components/ArchCard';
 import PlayerList from '../components/PlayerList';
 import AuctionPanel from '../components/AuctionPanel';
-import ItemCard from '../components/ItemCard';
 import JudgeWaiting from '../components/JudgeWaiting';
 import LanternString from '../components/LanternString';
 
@@ -148,13 +147,11 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
 
         {/* Center column: Wheel and arch card */}
         <div className="wheel-column">
-          <WheelDisplay itemCount={gameState.wheel.length} />
+          <WheelDisplay
+            itemCount={gameState.wheel.length}
+            isAuctionActive={gameState.phase === 'opening' || gameState.phase === 'bidding'}
+          />
           <ArchCard item={gameState.revealedItem} />
-
-          {/* Current item (fallback) */}
-          {gameState.revealedItem && gameState.phase !== 'playing' && (
-            <ItemCard item={gameState.revealedItem} />
-          )}
         </div>
 
         {/* Right column: Auction panel */}
@@ -202,7 +199,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
         .game-layout {
           display: flex;
           flex-direction: column;
-          gap: 30px;
+          gap: 20px;
         }
 
         .players-column,
@@ -211,9 +208,24 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
           width: 100%;
         }
 
+        .wheel-column {
+          flex-shrink: 0;
+        }
+
         .mobile-only-gold,
         .mobile-only-slots {
           display: block;
+        }
+
+        /* Compact layout on mobile during auction */
+        @media (max-width: 767px) {
+          .wheel-column {
+            padding: 0;
+          }
+
+          .auction-column {
+            margin-top: auto;
+          }
         }
 
         /* Desktop: 3-column layout */

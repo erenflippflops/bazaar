@@ -45,6 +45,10 @@ button:active:not(:disabled) {
   transform: translateY(6px);
 }
 
+button:active:not(:disabled).primary-button {
+  box-shadow: 0 0 0 var(--dark);
+}
+
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
