@@ -73,7 +73,7 @@ test.describe('Screenshots for V1', () => {
     // Play through to results (5 more auctions, alternating players)
     for (let i = 0; i < 5; i++) {
       const currentPage = i % 2 === 1 ? page : page2; // Player2's turn (i=0), then alternates
-      await currentPage.waitForSelector('button:has-text("Çarkı Çevir")', { timeout: 5000 });
+      await currentPage.waitForSelector('button:has-text("ÇARKI ÇEVİR")', { timeout: 10000 });
       await spinWheel(currentPage);
       await placeBid(currentPage, 1);
       await page.waitForTimeout(12000);

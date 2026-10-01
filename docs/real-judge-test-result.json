@@ -1,0 +1,38 @@
+{
+  "test_date": "2026-10-01T19:44:00Z",
+  "test_players": [
+    {
+      "nickname": "Alice",
+      "items": [
+        { "name": "Uçma", "description": "Havada uç" },
+        { "name": "Görünmezlik", "description": "Görünmez ol" },
+        { "name": "Telepati", "description": "Düşünceleri oku" }
+      ]
+    },
+    {
+      "nickname": "Bob",
+      "items": [
+        { "name": "Süper Hız", "description": "Çok hızlı koş" },
+        { "name": "Zaman Durdurma", "description": "Zamanı durdur" },
+        { "name": "Işınlanma", "description": "Bir anda başka yere git" }
+      ]
+    }
+  ],
+  "judge_response": {
+    "ranking": [
+      {
+        "player": "Bob",
+        "rank": 1,
+        "reason": "Zaman Durdurma ve Işınlanma kombinasyonu neredeyse yenilmezdir. Bob zamanı durdurabilir, rakibini avantajsız bırakabilir ve tehlike anında anında uzaklaşabilir. Süper Hız ise zaten diğer iki güçle birleşince çok güçlü hale gelir."
+      },
+      {
+        "player": "Alice",
+        "rank": 2,
+        "reason": "Telepati ve Görünmezlik Alice'e büyük avantaj verir, ancak Uçma saldırıdan kaçmaktan öte fazla bir şey sağlamaz. Bob'un sızıcı güçleri kombinasyonu Alice'in defensif yaklaşımını etkisiz kılabilir."
+      }
+    ],
+    "commentary": "Alice düşünceleri okuyabilir ama Bob zaman durdurduğunda Alice'in beyni de donacak, işe yaramaz!"
+  },
+  "status": "SUCCESS",
+  "notes": "Real Anthropic API test with ANTHROPIC_API_KEY from .env. Response format is valid and matches expected structure."
+}
