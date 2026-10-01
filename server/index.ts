@@ -456,6 +456,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         nickname: p.nickname,
         gold: p.gold,
         slots: p.slots,
+        maxBid: p.maxBid,
         isMe: p.id === playerId
       })),
       myToken: player?.token,
@@ -473,7 +474,8 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         id: p.id,
         nickname: p.nickname,
         gold: p.gold,
-        slots: p.slots
+        slots: p.slots,
+        maxBid: p.maxBid
       })),
       auctionEndsAt: room.timers.auctionEndTime,
       openingEndsAt: room.timers.openingTimer ? Date.now() + OPENING_TIMEOUT : null
