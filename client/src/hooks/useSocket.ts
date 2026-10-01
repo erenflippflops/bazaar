@@ -19,7 +19,7 @@ interface GameState {
   phase: 'waiting' | 'playing' | 'opening' | 'bidding' | 'judging' | 'judge_failed' | 'finished';
   hostId: string;
   players: Player[];
-  wheel: Item[];
+  wheel: number;
   revealedItem: Item | null;
   currentOpenerIndex: number;
   currentHighestBid: number;

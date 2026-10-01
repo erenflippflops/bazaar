@@ -163,7 +163,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
           }),
         }}>
           <WheelDisplay
-            itemCount={gameState.wheel.length}
+            itemCount={gameState.wheel}
             isAuctionActive={gameState.phase === 'opening' || gameState.phase === 'bidding'}
           />
           <ArchCard item={gameState.revealedItem} />
