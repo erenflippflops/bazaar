@@ -107,7 +107,7 @@ export default function WheelDisplay({ itemCount, isAuctionActive = false, canSp
 
   return (
     <div className="wheel-wrap" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, width: '100%' }}>
-      <div style={{ position: 'relative', width: 'min(100%, 46vh, 460px)', aspectRatio: '1 / 1' }}>
+      <div style={{ position: 'relative', width: 'min(100%, calc(46vh / var(--z, 1)), 520px)', aspectRatio: '1 / 1' }}>
         <canvas
           ref={canvasRef}
           data-testid="wheel-canvas"
