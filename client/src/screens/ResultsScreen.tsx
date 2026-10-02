@@ -85,12 +85,13 @@ export default function ResultsScreen({ socket, gameState }: ResultsScreenProps)
         <div style={{ marginBottom: '40px' }}>
           {gameState.ranking.map((entry) => {
             const player = gameState.players.find(p => p.nickname === entry.player);
+            const slots = player?.slots || [];
             return (
               <RankingCard
                 key={entry.rank}
                 rank={entry.rank}
                 player={entry.player}
-                items={player?.slots || [null, null, null]}
+                items={slots}
                 reason={entry.reason}
               />
             );

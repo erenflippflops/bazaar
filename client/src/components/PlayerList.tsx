@@ -52,6 +52,9 @@ export default function PlayerList({ players, currentPlayerId, phase, passedPlay
                     fontWeight: 600,
                     color: slot ? 'var(--saffron)' : 'rgba(255,255,255,0.22)',
                     whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    maxWidth: '120px',
                   }}
                 >
                   {slot ? slot.name : '—'}

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useSocket } from './hooks/useSocket';
+import HomeScreen from './screens/HomeScreen';
 import LobbyScreen from './screens/LobbyScreen';
 import BriefingScreen from './screens/BriefingScreen';
 import GameScreen from './screens/GameScreen';
@@ -35,7 +36,8 @@ function App() {
       <BackgroundDecorations />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LobbyScreen socket={socket} gameState={gameState} />} />
+          <Route path="/" element={<HomeScreen socket={socket} />} />
+          <Route path="/lobby" element={<LobbyScreen socket={socket} gameState={gameState} />} />
           <Route path="/briefing" element={<BriefingScreen socket={socket} gameState={gameState} />} />
           <Route path="/game" element={<GameScreen socket={socket} gameState={gameState} />} />
           <Route path="/results" element={<ResultsScreen socket={socket} gameState={gameState} />} />
