@@ -7,6 +7,7 @@ import PlayerList from '../components/PlayerList';
 import AuctionPanel from '../components/AuctionPanel';
 import JudgeWaiting from '../components/JudgeWaiting';
 import LanternString from '../components/LanternString';
+import { Theme } from '../types';
 
 interface Item {
   name: string;
@@ -37,6 +38,7 @@ interface GameState {
   auctionNumber?: number;
   passedPlayerIds?: string[];
   isAuctionSettled?: boolean;
+  theme?: Theme;
 }
 
 interface GameScreenProps {
@@ -75,8 +77,9 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
   const isHost = gameState.hostId === myPlayer?.id;
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const auctionActive = gameState.phase === 'opening' || gameState.phase === 'bidding';
+  const slotsPerPlayer = gameState.theme?.slots || 3;
   const completedAuctions = gameState.players.reduce((n, p) => n + p.slots.filter(s => s !== null).length, 0);
-  const totalAuctions = gameState.players.length * 3;
+  const totalAuctions = gameState.players.length * slotsPerPlayer;
   const currentAuction = Math.min(totalAuctions, (gameState.phase === 'playing' || auctionActive) ? completedAuctions + 1 : completedAuctions);
   const spinKey = auctionActive && gameState.revealedItem ? `${gameState.wheel}-${gameState.revealedItem.name}` : null;
   const showItem = auctionActive && landedKey === spinKey;
@@ -105,7 +108,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
               {myPlayer.gold}
             </p>
             <p style={{ fontSize: '14px', color: 'var(--muted)' }}>
-              Slot: {myPlayer.slots.filter(s => s !== null).length}/3
+              Slot: {myPlayer.slots.filter(s => s !== null).length}/{slotsPerPlayer}
             </p>
           </div>
         )}
