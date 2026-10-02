@@ -461,3 +461,28 @@ Kararlar:
   - İsimler büyük/küçük harf duyarsız: "Ali" ve "ali" aynı
   
 V2'ye ertelendi: karakterler/avatarlar, jokerler, yeni temalar
+
+---
+
+## 12. Task 15 - Gameplay Complete (Başladı)
+
+**Durum:** Devam ediyor
+
+**Neler yapılıyor:**
+- ✅ UI patch uygulandı: canvas çark, tek tık teklif, telefon düzeni (153a136, c9cf640)
+- 🔄 Auditor testleri yazıyor (pas kuralı, +3s timer, insan oynatma testleri)
+- ⏳ Builder'lar bekleniyor
+
+**Plan:**
+1. Auditor ÖNCE tüm testleri yazar
+2. Builder 1: Engine core (pas kuralı)
+3. Builder 2: Server entegrasyonu (pas + timer düzeltmeleri)
+4. Builder 3: Client identity fix (sessionStorage) + pas UI
+5. Builder 4: Brifing ekranı + versiyon damgaları
+
+**Hedef:**
+- sessionStorage düzeltmesi (aynı tarayıcı iki sekme sorunu)
+- Pas butonu ve kuralı
+- Timer +3s (reset to 5s yerine add 3s)
+- Brifing ekranı
+- İnsan oynatma testleri (autoPlay: false)
