@@ -35,6 +35,8 @@ interface GameState {
   openingEndsAt?: number;
   roomCode?: string;
   auctionNumber?: number;
+  passedPlayerIds?: string[];
+  isAuctionSettled?: boolean;
 }
 
 interface GameScreenProps {
@@ -67,7 +69,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
     );
   }
 
-  const myPlayer = gameState.players.find(p => p.id === localStorage.getItem('playerId'));
+  const myPlayer = gameState.players.find(p => p.id === sessionStorage.getItem('playerId'));
   const currentOpener = gameState.players[gameState.currentOpenerIndex];
   const isMyTurn = currentOpener?.id === myPlayer?.id;
   const isHost = gameState.hostId === myPlayer?.id;
@@ -150,6 +152,8 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
           <PlayerList
             players={gameState.players}
             currentPlayerId={gameState.phase === 'playing' ? currentOpener?.id : undefined}
+            phase={gameState.phase}
+            passedPlayerIds={gameState.passedPlayerIds || []}
           />
         </div>
 
@@ -195,6 +199,8 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
               auctionEndsAt={gameState.auctionEndsAt}
               openingEndsAt={gameState.openingEndsAt}
               currentOpenerIndex={gameState.currentOpenerIndex}
+              passedPlayerIds={gameState.passedPlayerIds || []}
+              isAuctionSettled={gameState.isAuctionSettled}
             />
           )}
 

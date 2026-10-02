@@ -13,16 +13,19 @@ interface Player {
 interface PlayerListProps {
   players: Player[];
   currentPlayerId?: string;
+  phase?: string;
+  passedPlayerIds?: string[];
 }
 
-export default function PlayerList({ players, currentPlayerId }: PlayerListProps) {
-  const myPlayerId = localStorage.getItem('playerId');
+export default function PlayerList({ players, currentPlayerId, phase, passedPlayerIds = [] }: PlayerListProps) {
+  const myPlayerId = sessionStorage.getItem('playerId');
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
       {players.map((player) => {
         const isActive = player.id === currentPlayerId;
         const isMe = player.id === myPlayerId;
+        const hasPassed = passedPlayerIds.includes(player.id);
         return (
           <div
             key={player.id}
@@ -34,6 +37,7 @@ export default function PlayerList({ players, currentPlayerId }: PlayerListProps
                 <span>{player.nickname}</span>
                 {isMe && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: isActive ? 'var(--white)' : 'var(--muted)' }}>SEN</span>}
                 {isActive && !isMe && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--white)' }}>SIRA</span>}
+                {phase === 'bidding' && hasPassed && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--pomegranate)' }}>PAS</span>}
               </div>
               <div style={{ fontSize: '13px', fontWeight: 700 }}>
                 {player.gold} <span style={{ fontWeight: 600, color: isActive ? 'var(--white)' : 'var(--muted)' }}>altın</span>

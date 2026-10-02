@@ -20,6 +20,8 @@ interface AuctionPanelProps {
   auctionEndsAt?: number;
   openingEndsAt?: number;
   currentOpenerIndex: number;
+  passedPlayerIds: string[];
+  isAuctionSettled?: boolean;
 }
 
 export default function AuctionPanel({
@@ -33,10 +35,14 @@ export default function AuctionPanel({
   auctionEndsAt,
   openingEndsAt,
   currentOpenerIndex,
+  passedPlayerIds,
+  isAuctionSettled,
 }: AuctionPanelProps) {
   const [selectedIncrement, setSelectedIncrement] = useState(0);
   const [pending, setPending] = useState(false);
   const [feedback, setFeedback] = useState<{ ok: boolean; text: string } | null>(null);
+  const [passPending, setPassPending] = useState(false);
+  const [hasPassed, setHasPassed] = useState(false);
 
   const currentOpener = players[currentOpenerIndex];
   const isMyTurn = currentOpener?.id === myPlayerId;
@@ -47,6 +53,7 @@ export default function AuctionPanel({
   const myGold = myPlayer?.gold || 0;
   const myFilledSlots = myPlayer?.slots.filter(s => s !== null).length || 0;
   const hasFullSlots = myFilledSlots >= 3;
+  const hasEmptySlot = myFilledSlots < 3;
 
   const minBid = phase === 'opening' ? 1 : currentHighestBid + 1;
   const proposedBid = phase === 'opening'
@@ -55,6 +62,20 @@ export default function AuctionPanel({
 
   const canAfford = proposedBid <= (myMaxBid || 0);
   const isValidBid = proposedBid >= minBid && canAfford;
+
+  const handlePass = () => {
+    if (!socket || passPending) return;
+    setPassPending(true);
+    socket.emit('pass_bid', {}, (response: any) => {
+      setPassPending(false);
+      if (response?.success === false) {
+        setFeedback({ ok: false, text: response.error || 'Pas geçilemedi' });
+        setTimeout(() => setFeedback(null), 1800);
+      } else {
+        setHasPassed(true);
+      }
+    });
+  };
 
   // One click = one bid. The server is the judge of validity.
   const placeBid = (amount: number) => {
@@ -199,6 +220,27 @@ export default function AuctionPanel({
 
   // Bidding phase
   if (phase === 'bidding') {
+    // Show settled banner when everyone passed
+    if (isAuctionSettled) {
+      return (
+        <div className="card">
+          <div style={{
+            padding: '20px',
+            background: 'var(--saffron)',
+            border: '2px solid var(--saffron)',
+            borderRadius: '14px',
+            textAlign: 'center',
+          }}>
+            <p style={{ fontSize: '18px', fontWeight: 800, color: 'var(--dark)' }}>
+              Herkes pas dedi – SATILDI!
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    const showPassButton = !amIHighestBidder && !passedPlayerIds.includes(myPlayerId || '') && !hasPassed && hasEmptySlot;
+
     return (
       <div className="card">
         <div style={{
@@ -249,6 +291,18 @@ export default function AuctionPanel({
           }}>
             <p style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)' }}>
               Slotların dolu, izliyorsun
+            </p>
+          </div>
+        ) : hasPassed ? (
+          <div style={{
+            padding: '20px',
+            background: 'var(--dark)',
+            border: '2px solid var(--pomegranate)',
+            borderRadius: '14px',
+            textAlign: 'center',
+          }}>
+            <p style={{ fontSize: '16px', fontWeight: 700, color: 'var(--pomegranate)' }}>
+              Pas dedin
             </p>
           </div>
         ) : amIHighestBidder ? (
@@ -334,6 +388,26 @@ export default function AuctionPanel({
             >
               {minBid > (myMaxBid || 0) ? `Limit: ${myMaxBid || 0} altın` : `TEKLİF VER · ${minBid}`}
             </button>
+
+            {showPassButton && (
+              <button
+                className="secondary-button"
+                onClick={handlePass}
+                disabled={passPending}
+                style={{
+                  width: '100%',
+                  height: '48px',
+                  fontSize: '18px',
+                  marginTop: '10px',
+                  background: 'var(--dark)',
+                  border: '2px solid var(--pomegranate)',
+                  color: 'var(--pomegranate)',
+                }}
+              >
+                PAS
+              </button>
+            )}
+
           {feedback && (
             <p data-testid="bid-feedback" style={{ marginTop: 8, textAlign: 'center', fontWeight: 700, color: feedback.ok ? 'var(--turquoise)' : 'var(--pomegranate, #F0386B)' }}>{feedback.text}</p>
           )}

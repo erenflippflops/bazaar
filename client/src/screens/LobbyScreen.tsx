@@ -48,9 +48,9 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
       if (response?.success === false) {
         setError(response.error || 'Oda oluşturulamadı');
       } else if (response?.roomCode && response?.token) {
-        localStorage.setItem('roomCode', response.roomCode);
-        localStorage.setItem('playerToken', response.token);
-        localStorage.setItem('playerId', response.playerId);
+        sessionStorage.setItem('roomCode', response.roomCode);
+        sessionStorage.setItem('playerToken', response.token);
+        sessionStorage.setItem('playerId', response.playerId);
         setMode('create');
         setError('');
       }
@@ -72,9 +72,9 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
       if (response?.success === false) {
         setError(response.error || 'Odaya katılınamadı');
       } else if (response?.token) {
-        localStorage.setItem('roomCode', roomCode.toUpperCase());
-        localStorage.setItem('playerToken', response.token);
-        localStorage.setItem('playerId', response.playerId);
+        sessionStorage.setItem('roomCode', roomCode.toUpperCase());
+        sessionStorage.setItem('playerToken', response.token);
+        sessionStorage.setItem('playerId', response.playerId);
         setMode('join');
         setError('');
       }
