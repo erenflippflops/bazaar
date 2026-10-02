@@ -41,8 +41,8 @@ const judge = PORT === 3100 ? fakeJudge : (() => {
     console.error('ANTHROPIC_API_KEY is required');
     process.exit(1);
   }
-  return (players: { nickname: string; items: { name: string; description: string }[] }[]) => {
-    return callAnthropicJudge(ANTHROPIC_API_KEY, players);
+  return (players: { nickname: string; items: { name: string; description: string }[] }[], themeCriterion: string) => {
+    return callAnthropicJudge(ANTHROPIC_API_KEY, players, themeCriterion);
   };
 })();
 

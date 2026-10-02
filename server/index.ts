@@ -8,7 +8,7 @@ import * as engine from './engine/game.js';
 import type { GameState, Item } from './engine/types.js';
 import { parseAndValidateJudgeResponse } from './judgeResult.js';
 import * as roomTimers from './roomTimers.js';
-import { getTheme, isValidThemeId, type Theme } from './themes.js';
+import { getTheme, isValidThemeId, themeItemsToEngineItems, type Theme } from './themes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -107,7 +107,8 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       const code = generateRoomCode();
       const playerId = socket.id;
 
-      const result = engine.createGame(playerId, data.nickname, theme.items, seededRNG(), theme.slots);
+      const engineItems = themeItemsToEngineItems(theme.items);
+      const result = engine.createGame(playerId, data.nickname, engineItems, seededRNG(), theme.slots);
       if (result.error) {
         ack?.({ success: false, error: result.error });
         return;
@@ -193,7 +194,8 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         return;
       }
 
-      const result = engine.startGame(room.state, player.playerId, room.theme.items, seededRNG(), room.theme.slots);
+      const engineItems = themeItemsToEngineItems(room.theme.items);
+      const result = engine.startGame(room.state, player.playerId, engineItems, seededRNG(), room.theme.slots);
       if (result.error) {
         ack?.({ success: false, error: result.error });
         return;
@@ -387,7 +389,8 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         return;
       }
 
-      const result = engine.rematch(room.state, player.playerId, room.theme.items, seededRNG(), room.theme.slots);
+      const engineItems = themeItemsToEngineItems(room.theme.items);
+      const result = engine.rematch(room.state, player.playerId, engineItems, seededRNG(), room.theme.slots);
       if (result.error) {
         ack?.({ success: false, error: result.error });
         return;
@@ -569,7 +572,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       items: p.slots.filter(s => s !== null).map(s => ({ name: s!.name, description: s!.description }))
     }));
 
-    judge(playersData)
+    judge(playersData, room.theme.judgeCriterion.tr)
       .then(rawText => {
         clearTimeout(timeoutId);
         if (judgeSettled || abort.signal.aborted) return;
