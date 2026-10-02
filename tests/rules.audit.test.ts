@@ -22,7 +22,7 @@ function seededRNG(seed: number): RNG {
 describe('Rule 1: Room', () => {
   it('first player is host', () => {
     const rng = seededRNG(1);
-    const result = engine.createGame('host-id', 'Host', superpowers, rng);
+    const result = engine.createGame('host-id', 'Host', superpowers, rng, 3);
     expect(result.state.hostId).toBe('host-id');
     expect(result.state.players[0].id).toBe('host-id');
     expect(result.state.players[0].nickname).toBe('Host');
@@ -30,7 +30,7 @@ describe('Rule 1: Room', () => {
 
   it('6 players can join; a 7th is rejected', () => {
     const rng = seededRNG(2);
-    let result = engine.createGame('p1', 'P1', superpowers, rng);
+    let result = engine.createGame('p1', 'P1', superpowers, rng, 3);
     let state = result.state;
 
     for (let i = 2; i <= 6; i++) {
@@ -47,7 +47,7 @@ describe('Rule 1: Room', () => {
 
   it('nickname "" and 17 chars rejected; 1 and 16 chars accepted', () => {
     const rng = seededRNG(3);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     // Empty nickname
@@ -70,7 +70,7 @@ describe('Rule 1: Room', () => {
 
   it('duplicate nickname in same room rejected', () => {
     const rng = seededRNG(4);
-    let result = engine.createGame('host', 'Alice', superpowers, rng);
+    let result = engine.createGame('host', 'Alice', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Bob', rng);
@@ -82,13 +82,13 @@ describe('Rule 1: Room', () => {
 
   it('join after start rejected', () => {
     const rng = seededRNG(5);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.joinGame(state, 'p3', 'P3', rng);
@@ -97,22 +97,22 @@ describe('Rule 1: Room', () => {
 
   it('non-host cannot start; host cannot start with 1 player; host starts with 2', () => {
     const rng = seededRNG(6);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     // Host with 1 player
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     expect(result.error).toBe('En az 2 oyuncu gerekli');
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
     // Non-host tries to start
-    result = engine.startGame(state, 'p2', superpowers, rng);
+    result = engine.startGame(state, 'p2', superpowers, rng, 3);
     expect(result.error).toBe('Sadece host oyunu başlatabilir');
 
     // Host starts with 2
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     expect(result.error).toBeUndefined();
     expect(result.state.phase).toBe('briefing');
   });
@@ -121,7 +121,7 @@ describe('Rule 1: Room', () => {
 describe('Rule 2: Start', () => {
   it('after start every player has 20 gold and 3 empty slots', () => {
     const rng = seededRNG(7);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     for (let i = 2; i <= 4; i++) {
@@ -129,7 +129,7 @@ describe('Rule 2: Start', () => {
       state = result.state;
     }
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     state.players.forEach(p => {
@@ -142,13 +142,13 @@ describe('Rule 2: Start', () => {
 describe('Rule 4: Opening Order', () => {
   it('opening bid 0 rejected; 1 accepted', () => {
     const rng = seededRNG(8);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -168,7 +168,7 @@ describe('Rule 4: Opening Order', () => {
 
   it('3 players, P3 has 3 full slots: after P2 turn the next opener is P1', () => {
     const rng = seededRNG(9);
-    let result = engine.createGame('p1', 'P1', superpowers, rng);
+    let result = engine.createGame('p1', 'P1', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
@@ -176,7 +176,7 @@ describe('Rule 4: Opening Order', () => {
     result = engine.joinGame(state, 'p3', 'P3', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'p1', superpowers, rng);
+    result = engine.startGame(state, 'p1', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -209,7 +209,7 @@ describe('Rule 4: Opening Order', () => {
 
   it('next opener follows the previous OPENER, not the auction winner', () => {
     const rng = seededRNG(10);
-    let result = engine.createGame('p1', 'P1', superpowers, rng);
+    let result = engine.createGame('p1', 'P1', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
@@ -217,7 +217,7 @@ describe('Rule 4: Opening Order', () => {
     result = engine.joinGame(state, 'p3', 'P3', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'p1', superpowers, rng);
+    result = engine.startGame(state, 'p1', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -243,13 +243,13 @@ describe('Rule 4: Opening Order', () => {
 describe('Rule 5: Bidding', () => {
   it('a player with 3 full slots cannot bid', () => {
     const rng = seededRNG(11);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -268,13 +268,13 @@ describe('Rule 5: Bidding', () => {
 
   it('nobody raises: the opener gets the item and pays exactly the opening bid', () => {
     const rng = seededRNG(12);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -301,7 +301,7 @@ describe('Rule 5: Bidding', () => {
 
   it("winner's gold drops by exactly the winning bid; others' gold unchanged", () => {
     const rng = seededRNG(13);
-    let result = engine.createGame('p1', 'P1', superpowers, rng);
+    let result = engine.createGame('p1', 'P1', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
@@ -309,7 +309,7 @@ describe('Rule 5: Bidding', () => {
     result = engine.joinGame(state, 'p3', 'P3', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'p1', superpowers, rng);
+    result = engine.startGame(state, 'p1', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -341,13 +341,13 @@ describe('Rule 5: Bidding', () => {
 describe('Rule 6: Gold Reserve', () => {
   it('opening bid: 20 gold, 3 empty slots -> 18 accepted, 19 rejected', () => {
     const rng = seededRNG(14);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -369,25 +369,25 @@ describe('Rule 6: Gold Reserve', () => {
 describe('Rule 9: Rematch', () => {
   it('non-host cannot rematch', () => {
     const rng = seededRNG(15);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     // Simulate finished game
     state.phase = 'finished';
 
-    result = engine.rematch(state, 'p2', superpowers, rng);
+    result = engine.rematch(state, 'p2', superpowers, rng, 3);
     expect(result.error).toBe('Sadece host revanche başlatabilir');
   });
 
   it('after rematch: same players in same order, 20 gold each, 3 empty slots, wheel has all 40 items, phase is playing', () => {
     const rng = seededRNG(16);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
@@ -395,7 +395,7 @@ describe('Rule 9: Rematch', () => {
     result = engine.joinGame(state, 'p3', 'P3', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     const playerOrder = state.players.map(p => p.id);
@@ -405,7 +405,7 @@ describe('Rule 9: Rematch', () => {
     state.players[0].slots[0] = superpowers[0];
     state.phase = 'finished';
 
-    result = engine.rematch(state, 'host', superpowers, rng);
+    result = engine.rematch(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     expect(state.phase).toBe('briefing');

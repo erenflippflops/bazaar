@@ -26,13 +26,13 @@ function seededRNG(seed: number): RNG {
 describe('Rule 3: Deck and Wheel', () => {
   it('wheel starts with all items and shrinks without refilling', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -75,13 +75,13 @@ describe('Rule 3: Deck and Wheel', () => {
     );
 
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     expect(state.wheel.length).toBe(40);
@@ -89,13 +89,13 @@ describe('Rule 3: Deck and Wheel', () => {
 
   it('each spin removes exactly the revealed item and nothing else', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -136,7 +136,7 @@ describe('Rule 3: Deck and Wheel', () => {
     );
 
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     // Add 5 more players (total 6)
@@ -145,7 +145,7 @@ describe('Rule 3: Deck and Wheel', () => {
       state = result.state;
     }
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -183,13 +183,13 @@ describe('Rule 3: Deck and Wheel', () => {
 describe('Rule 4: Opening Order', () => {
   it('skips players with 3 filled slots', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -232,13 +232,13 @@ describe('Rule 4: Opening Order', () => {
 
   it('auto-bids 1 gold after 20s timeout', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -257,13 +257,13 @@ describe('Rule 4: Opening Order', () => {
 describe('Rule 5: Bidding', () => {
   it('enforces minimum bid of current highest + 1', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -290,13 +290,13 @@ describe('Rule 5: Bidding', () => {
 
   it('prevents highest bidder from raising their own bid', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -315,13 +315,13 @@ describe('Rule 5: Bidding', () => {
 
   it('awards item to highest bidder on timeout', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -352,13 +352,13 @@ describe('Rule 5: Bidding', () => {
 describe('Rule 6: Gold Reserve', () => {
   it('enforces gold reserve: cannot bid more than gold - (emptySlots - 1)', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -382,13 +382,13 @@ describe('Rule 6: Gold Reserve', () => {
 
   it('updates max bid as slots fill', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -425,13 +425,13 @@ describe('Rule 6: Gold Reserve', () => {
 describe('Rule 7: End of Auction', () => {
   it('transitions to judging when all players have 3 filled slots', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -461,7 +461,7 @@ describe('Rule 7: End of Auction', () => {
 describe('Rule 10: Reconnect', () => {
   it('allows reconnect with valid playerToken', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     const token = result.events[0]?.token as string;
@@ -475,7 +475,7 @@ describe('Rule 10: Reconnect', () => {
 
   it('rejects reconnect with invalid token', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     const reconnected = engine.reconnect(state, 'invalid_token');
@@ -485,7 +485,7 @@ describe('Rule 10: Reconnect', () => {
 
   it('preserves player state on reconnect', () => {
     const rng = seededRNG(42);
-    let result = engine.createGame('host', 'Host', mockItems, rng);
+    let result = engine.createGame('host', 'Host', mockItems, rng, 3);
     let state = result.state;
 
     const token = result.events[0]?.token as string;
@@ -493,7 +493,7 @@ describe('Rule 10: Reconnect', () => {
     result = engine.joinGame(state, 'p2', 'Player2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', mockItems, rng);
+    result = engine.startGame(state, 'host', mockItems, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);

@@ -22,7 +22,7 @@ function seededRNG(seed: number): RNG {
 describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
   it('after opener spins, non-opener cannot bid before the opener places opening bid', () => {
     const rng = seededRNG(100);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
@@ -30,7 +30,7 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
     result = engine.joinGame(state, 'p3', 'P3', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -48,13 +48,13 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
 
   it('before spinning, nobody can bid, including the opener', () => {
     const rng = seededRNG(101);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -71,13 +71,13 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
 
   it('after spin, opener bids 0 rejected; opener bids 1 accepted and becomes highest bidder', () => {
     const rng = seededRNG(102);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -100,13 +100,13 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
 
   it('after opening bid, other players can bid (current + 1); opener cannot raise own bid', () => {
     const rng = seededRNG(103);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -135,13 +135,13 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
 
   it('opening bid respects gold reserve: 20 gold, 3 empty slots -> 19 rejected, 18 accepted', () => {
     const rng = seededRNG(104);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -161,13 +161,13 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
 
   it('timeout after opener spun but did not bid: places 1-gold opening bid for opener', () => {
     const rng = seededRNG(105);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
@@ -189,13 +189,13 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
 
   it('timeout when opener did not spin: spins and places 1-gold opening bid, wheel shrinks by 1', () => {
     const rng = seededRNG(106);
-    let result = engine.createGame('host', 'Host', superpowers, rng);
+    let result = engine.createGame('host', 'Host', superpowers, rng, 3);
     let state = result.state;
 
     result = engine.joinGame(state, 'p2', 'P2', rng);
     state = result.state;
 
-    result = engine.startGame(state, 'host', superpowers, rng);
+    result = engine.startGame(state, 'host', superpowers, rng, 3);
     state = result.state;
 
     result = engine.startPlaying(state);
