@@ -23,7 +23,8 @@ export function createGame(hostId: string, hostNickname: string, items: Item[], 
     turnStartTime: null,
     ranking: null,
     commentary: null,
-    auctionNumber: 0
+    auctionNumber: 0,
+    passedPlayerIds: []
   };
 
   return { state, events: [{ type: 'game_created', hostId, nickname: hostNickname, token }] };
@@ -117,7 +118,8 @@ export function spinWheel(state: GameState, playerId: string, rng: RNG, now: num
     phase: 'opening',
     currentHighestBid: 0,
     currentHighestBidderId: null,
-    turnStartTime: now
+    turnStartTime: now,
+    passedPlayerIds: []
   };
 
   return { state: newState, events: [{ type: 'wheel_spun', item: revealed, wheelSize: newWheel.length }] };
@@ -136,6 +138,11 @@ export function placeBid(state: GameState, playerId: string, amount: number, now
   const emptySlots = player.slots.filter(s => s === null).length;
   if (emptySlots === 0) {
     return { state, events: [], error: 'Slotların dolu' };
+  }
+
+  // Check if player has passed
+  if (state.passedPlayerIds.includes(playerId)) {
+    return { state, events: [], error: 'Pas dedin, teklif veremezsin' };
   }
 
   // Opening bid - only opener can bid after spin
@@ -281,7 +288,8 @@ export function resolveBid(state: GameState): EngineResult {
       revealedItem: null,
       currentHighestBid: 0,
       currentHighestBidderId: null,
-      turnStartTime: null
+      turnStartTime: null,
+      passedPlayerIds: []
     };
     return { state: newState, events: [{ type: 'bid_resolved', winnerId: winner.id, nickname: winner.nickname, amount: state.currentHighestBid, item: state.revealedItem }, { type: 'judging_started' }] };
   }
@@ -301,7 +309,8 @@ export function resolveBid(state: GameState): EngineResult {
     currentHighestBidderId: null,
     currentOpenerIndex: nextOpenerIndex,
     turnStartTime: null,
-    auctionNumber: state.auctionNumber + 1
+    auctionNumber: state.auctionNumber + 1,
+    passedPlayerIds: []
   };
 
   return { state: newState, events: [{ type: 'bid_resolved', winnerId: winner.id, nickname: winner.nickname, amount: state.currentHighestBid, item: state.revealedItem }, { type: 'next_turn', openerIndex: nextOpenerIndex, openerId: newPlayers[nextOpenerIndex].id }] };
@@ -409,6 +418,76 @@ export function reconnect(state: GameState, playerToken: string): { playerId: st
     return { playerId: null, nickname: null };
   }
   return { playerId: player.id, nickname: player.nickname };
+}
+
+export function passBid(state: GameState, playerId: string): EngineResult {
+  const player = state.players.find(p => p.id === playerId);
+  if (!player) {
+    return { state, events: [], error: 'Oyuncu bulunamadı' };
+  }
+
+  if (state.phase !== 'bidding') {
+    return { state, events: [], error: 'Açılış aşamasında pas diyemezsin' };
+  }
+
+  if (state.currentHighestBidderId === playerId) {
+    return { state, events: [], error: 'En yüksek teklif sahibi pas diyemez' };
+  }
+
+  if (state.passedPlayerIds.includes(playerId)) {
+    return { state, events: [], error: 'Zaten pas dedin' };
+  }
+
+  const emptySlots = player.slots.filter(s => s === null).length;
+  if (emptySlots === 0) {
+    return { state, events: [], error: 'Slotların dolu, pas diyemezsin' };
+  }
+
+  const newState: GameState = {
+    ...state,
+    passedPlayerIds: [...state.passedPlayerIds, playerId]
+  };
+
+  return { state: newState, events: [{ type: 'bid_passed', playerId, nickname: player.nickname }] };
+}
+
+export function isOutOfAuction(state: GameState, player: Player): boolean {
+  // Player explicitly passed
+  if (state.passedPlayerIds.includes(player.id)) {
+    return true;
+  }
+
+  // Player has no empty slots
+  const emptySlots = player.slots.filter(s => s === null).length;
+  if (emptySlots === 0) {
+    return true;
+  }
+
+  // Player cannot afford to bid (maxBid < currentHighestBid + 1)
+  if (player.maxBid < state.currentHighestBid + 1) {
+    return true;
+  }
+
+  return false;
+}
+
+export function isAuctionSettled(state: GameState): boolean {
+  // Opening phase - not settled
+  if (state.phase === 'opening' || state.currentHighestBidderId === null) {
+    return false;
+  }
+
+  // Check if all players except the highest bidder are out of auction
+  for (const player of state.players) {
+    if (player.id === state.currentHighestBidderId) {
+      continue; // Skip the highest bidder
+    }
+    if (!isOutOfAuction(state, player)) {
+      return false; // At least one player can still bid
+    }
+  }
+
+  return true;
 }
 
 // Helper functions
