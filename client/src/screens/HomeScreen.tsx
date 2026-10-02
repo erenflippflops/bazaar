@@ -79,8 +79,8 @@ export default function HomeScreen({ socket }: HomeScreenProps) {
       setError('İsim 1-16 karakter olmalı');
       return;
     }
-    if (!roomCode || roomCode.length !== 4) {
-      setError('Geçerli bir oda kodu gir (4 harf)');
+    if (!roomCode || roomCode.length !== 6) {
+      setError('Geçerli bir oda kodu gir (6 harf)');
       return;
     }
 
@@ -159,10 +159,10 @@ export default function HomeScreen({ socket }: HomeScreenProps) {
         />
         <input
           type="text"
-          placeholder="Oda Kodu (4 harf)"
+          placeholder="Oda Kodu (6 harf)"
           value={roomCode}
           onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-          maxLength={4}
+          maxLength={6}
           style={{ width: '100%', marginBottom: '15px', textTransform: 'uppercase' }}
         />
         <button className="primary-button" onClick={handleJoinRoom} style={{ width: '100%' }}>
