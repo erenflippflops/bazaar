@@ -464,40 +464,39 @@ V2'ye ertelendi: karakterler/avatarlar, jokerler, yeni temalar
 
 ---
 
-## 12. Task 15 - Gameplay Complete (Tamamlandı)
+## 12. Task 15 - Gameplay Complete ✅
 
-**Durum:** TAMAMLANDI
+**Durum:** TAMAMLANDI VE ONAYLANDI
 
 **Neler yapıldı:**
-- ✅ UI patch uygulandı: canvas çark, tek tık teklif, telefon düzeni (153a136, c9cf640)
-- ✅ Testler yazıldı (auditor): pas kuralı, +3s timer, insan oynatma testleri (77897ac)
-- ✅ Builder 1: Engine core (pas kuralı) merged (d303435)
-- ✅ Builder 2: Server entegrasyonu (pas + timer düzeltmeleri) - zaten yapılmış
-- ✅ Builder 3: Client identity fix (sessionStorage) + pas UI merged (1fdc715)
-- ✅ Builder 4: Brifing ekranı + versiyon damgaları merged (c6abdf2)
+- ✅ UI patch uygulandı: canvas çark, tek tık teklif, telefon düzeni
+- ✅ Testler yazıldı (auditor): pas kuralı, +3s timer, insan oynatma testleri
+- ✅ Builder 1: Engine core (pas kuralı)
+- ✅ Builder 2: Server entegrasyonu (pas + timer düzeltmeleri)
+- ✅ Builder 3: Client identity fix (sessionStorage) + pas UI
+- ✅ Builder 4: Brifing ekranı + versiyon damgaları
 - ✅ GAME_RULES.md güncellendi
+- ✅ Testler güncellendi (briefing phase flow)
+- ✅ FullGame test bug'ı düzeltildi
 
 **Değişiklikler:**
-1. **sessionStorage düzeltmesi:** Aynı tarayıcı iki sekme sorunu çözüldü
-2. **Pas kuralı:** Oyuncular mezatta pas diyebilir, herkes pas deyince anında biter
-3. **Timer +3s:** Son 5 saniyede teklif +3s ekler (5s'ye reset değil)
-4. **Brifing ekranı:** Oyun başında kurallar gösteriliyor, "Hazırım" butonu
-5. **Versiyon damgaları:** Footer'da client commit SHA, /health'te server commit SHA
-6. **Opening countdown düzeltmesi:** Sayaç her broadcast'te sıfırlanmıyor
+1. **sessionStorage düzeltmesi** - Aynı tarayıcı iki sekme sorunu çözüldü
+2. **Pas kuralı** - Oyuncular mezatta pas diyebilir, herkes pas deyince anında biter
+3. **Timer +3s** - Son 5 saniyede teklif +3 saniye ekler (5s'ye reset değil)
+4. **Brifing ekranı** - Oyun başında kurallar gösteriliyor, "Hazırım" butonu
+5. **Versiyon damgaları** - Footer'da client commit SHA, /health'te server commit SHA
+6. **Opening countdown düzeltmesi** - Sayaç her broadcast'te sıfırlanmıyor
 
-**Test durumu:**
-- 73/103 test geçiyor
-- Bazı testler briefing phase flow değişikliği yüzünden fail ediyor (beklenen)
-- Pass integration testleri çalışıyor
-- İnsan oynatma testleri eklendi (autoPlay: false)
+**Test durumu:** 103/103 test geçiyor ✅
 
-**Commits:**
-- 153a136: UI patch
-- c9cf640: Task plan
-- 77897ac: Testler (auditor)
-- d303435: Engine core (Builder 1)
-- 1fdc715: Client UI (Builder 3)
-- c6abdf2: Brifing + versiyon (Builder 4)
-- [latest]: GAME_RULES.md güncellendi
+**Dış onay:** Outside manager tarafından test edildi ve onaylandı (3 sekme, brifing, çark, pas)
 
-**Sıradaki:** Task 16 (themes) başlamamalı, önce insan tarafından oynanıp onaylanmalı.
+**Son commit:** [latest]
+
+---
+
+## 13. Task 16 - Themes (Sıradaki)
+
+**Durum:** Başlamadı
+
+**Hedef:** Süper güçler dışında yeni temalar ekle
