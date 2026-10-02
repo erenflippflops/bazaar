@@ -13,7 +13,7 @@ export interface Player {
 }
 
 export interface GameState {
-  phase: 'waiting' | 'playing' | 'opening' | 'bidding' | 'judging' | 'judge_failed' | 'finished';
+  phase: 'waiting' | 'briefing' | 'playing' | 'opening' | 'bidding' | 'judging' | 'judge_failed' | 'finished';
   hostId: string;
   players: Player[];
   wheel: Item[]; // starts with all items of the theme, shrinks by one per spin
@@ -25,6 +25,7 @@ export interface GameState {
   ranking: { player: string; rank: number; reason: string }[] | null;
   commentary: string | null;
   auctionNumber: number; // current auction (1 to 3N where N = player count)
+  briefingReadyPlayers: string[]; // player IDs who marked themselves ready during briefing
 }
 
 export interface GameEvent {

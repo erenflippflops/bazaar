@@ -30,7 +30,9 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (gameState?.phase === 'playing' || gameState?.phase === 'opening' || gameState?.phase === 'bidding') {
+    if (gameState?.phase === 'briefing') {
+      navigate('/briefing');
+    } else if (gameState?.phase === 'playing' || gameState?.phase === 'opening' || gameState?.phase === 'bidding') {
       navigate('/game');
     }
   }, [gameState?.phase, navigate]);

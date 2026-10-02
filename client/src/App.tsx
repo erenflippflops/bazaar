@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useSocket } from './hooks/useSocket';
 import LobbyScreen from './screens/LobbyScreen';
+import BriefingScreen from './screens/BriefingScreen';
 import GameScreen from './screens/GameScreen';
 import ResultsScreen from './screens/ResultsScreen';
 import BackgroundDecorations from './components/BackgroundDecorations';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -34,11 +36,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LobbyScreen socket={socket} gameState={gameState} />} />
+          <Route path="/briefing" element={<BriefingScreen socket={socket} gameState={gameState} />} />
           <Route path="/game" element={<GameScreen socket={socket} gameState={gameState} />} />
           <Route path="/results" element={<ResultsScreen socket={socket} gameState={gameState} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }
