@@ -39,18 +39,21 @@ describe('Full Game', () => {
 
     await client1.emitWithAck('start_game', {});
 
+    // Mark both players ready for briefing
+    await client1.emitWithAck('ready_briefing', {});
+    await client2.emitWithAck('ready_briefing', {});
+
     // Play through by always bidding 1 gold on every auction
     for (let round = 0; round < 3; round++) {
       for (let playerTurn = 0; playerTurn < 2; playerTurn++) {
         const currentClient = playerTurn === 0 ? client1 : client2;
 
-        await currentClient.waitForState((s: any) => s.phase === 'playing', 10000);
         await currentClient.emitWithAck('spin_wheel', {});
         await currentClient.emitWithAck('place_bid', { amount: 1 });
 
-        // Wait for auction to resolve
+        // Wait for auction to resolve (bidding timeout with timeScale 0.01 = 100ms)
         await currentClient.waitForState((s: any) =>
-          s.phase === 'playing' || s.phase === 'judging', 2000);
+          s.phase === 'playing' || s.phase === 'judging', 5000);
       }
     }
 
@@ -93,16 +96,21 @@ describe('Full Game', () => {
 
     await client1.emitWithAck('start_game', {});
 
+    // Mark all players ready for briefing
+    for (const client of allClients) {
+      await client.emitWithAck('ready_briefing', {});
+    }
+
     // Play through 18 auctions (6 players × 3 items each)
     for (let round = 0; round < 18; round++) {
       const opener = allClients[round % 6];
 
-      await opener.waitForState((s: any) => s.phase === 'playing', 10000);
       await opener.emitWithAck('spin_wheel', {});
       await opener.emitWithAck('place_bid', { amount: 1 });
 
+      // Wait for auction to resolve (bidding timeout with timeScale 0.01 = 100ms)
       await opener.waitForState((s: any) =>
-        s.phase === 'playing' || s.phase === 'judging', 2000);
+        s.phase === 'playing' || s.phase === 'judging', 5000);
     }
 
     const finalState = await client1.waitForState((s: any) => s.phase === 'finished', 5000);

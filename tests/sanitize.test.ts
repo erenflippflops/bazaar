@@ -44,6 +44,10 @@ describe('Rule 3: Public state sanitization', () => {
     result = engine.startGame(state, 'host', mockItems, rng);
     state = result.state;
 
+    // Transition from briefing to playing
+    result = engine.startPlaying(state);
+    state = result.state;
+
     // Sanitize state as server would send to clients
     const publicState = sanitizeStateForAll(state) as any;
 

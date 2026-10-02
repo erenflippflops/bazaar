@@ -35,6 +35,9 @@ describe('Rule 3: Deck and Wheel', () => {
     result = engine.startGame(state, 'host', mockItems, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     expect(state.wheel.length).toBe(10); // All items
 
     // Spin and reveal
@@ -95,6 +98,9 @@ describe('Rule 3: Deck and Wheel', () => {
     result = engine.startGame(state, 'host', mockItems, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     const initialWheel = [...state.wheel];
     const initialCount = initialWheel.length;
 
@@ -142,6 +148,9 @@ describe('Rule 3: Deck and Wheel', () => {
     result = engine.startGame(state, 'host', superpowers, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     expect(state.wheel.length).toBe(40);
 
     // Play 18 auctions (6 players × 3 slots)
@@ -181,6 +190,9 @@ describe('Rule 4: Opening Order', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', mockItems, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     // Host opens first auction normally
@@ -229,6 +241,9 @@ describe('Rule 4: Opening Order', () => {
     result = engine.startGame(state, 'host', mockItems, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     // Timeout - should auto-spin and bid
     result = engine.timeoutBid(state, rng, 1000);
     state = result.state;
@@ -249,6 +264,9 @@ describe('Rule 5: Bidding', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', mockItems, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     result = engine.spinWheel(state, 'host', rng, 1000);
@@ -281,6 +299,9 @@ describe('Rule 5: Bidding', () => {
     result = engine.startGame(state, 'host', mockItems, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     result = engine.spinWheel(state, 'host', rng, 1000);
     state = result.state;
 
@@ -301,6 +322,9 @@ describe('Rule 5: Bidding', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', mockItems, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     result = engine.spinWheel(state, 'host', rng, 1000);
@@ -337,6 +361,9 @@ describe('Rule 6: Gold Reserve', () => {
     result = engine.startGame(state, 'host', mockItems, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     // Host has 20 gold, 3 empty slots
     // Max bid = 20 - (3-1) = 18
 
@@ -362,6 +389,9 @@ describe('Rule 6: Gold Reserve', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', mockItems, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     // Fill one slot
@@ -402,6 +432,9 @@ describe('Rule 7: End of Auction', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', mockItems, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     // Fill slots for both players (6 auctions)
@@ -461,6 +494,9 @@ describe('Rule 10: Reconnect', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', mockItems, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     // Play a round

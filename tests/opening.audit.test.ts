@@ -33,6 +33,9 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
     result = engine.startGame(state, 'host', superpowers, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     result = engine.spinWheel(state, 'host', rng, 1000);
     state = result.state;
 
@@ -54,6 +57,9 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
     result = engine.startGame(state, 'host', superpowers, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     // Opener tries to bid without spinning
     result = engine.placeBid(state, 'host', 1, 1000);
     expect(result.error).toBeDefined();
@@ -72,6 +78,9 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', superpowers, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     result = engine.spinWheel(state, 'host', rng, 1000);
@@ -98,6 +107,9 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', superpowers, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     result = engine.spinWheel(state, 'host', rng, 1000);
@@ -132,6 +144,9 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
     result = engine.startGame(state, 'host', superpowers, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     result = engine.spinWheel(state, 'host', rng, 1000);
     state = result.state;
 
@@ -153,6 +168,9 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', superpowers, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     result = engine.spinWheel(state, 'host', rng, 1000);
@@ -178,6 +196,9 @@ describe('Opening Bid Turn Order (Rule 4 & 5)', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', superpowers, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     const wheelSizeBefore = state.wheel.length;
