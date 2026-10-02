@@ -1,14 +1,14 @@
 import type { GameState, Player, Item, RNG, EngineResult, GameEvent } from './types.js';
 
-export function createGame(hostId: string, hostNickname: string, items: Item[], rng: RNG): EngineResult {
+export function createGame(hostId: string, hostNickname: string, items: Item[], rng: RNG, slots: number): EngineResult {
   const token = generateToken(rng);
   const host: Player = {
     id: hostId,
     nickname: hostNickname,
     gold: 20,
-    slots: [null, null, null],
+    slots: Array(slots).fill(null),
     token,
-    maxBid: 18 // 20 - (3 - 1)
+    maxBid: 20 - (slots - 1)
   };
 
   const state: GameState = {
@@ -52,21 +52,22 @@ export function joinGame(state: GameState, playerId: string, nickname: string, r
     return { state, events: [], error: 'Zaten odadasın' };
   }
 
+  const slots = state.players[0].slots.length;
   const token = generateToken(rng);
   const player: Player = {
     id: playerId,
     nickname,
     gold: 20,
-    slots: [null, null, null],
+    slots: Array(slots).fill(null),
     token,
-    maxBid: 18 // 20 - (3 - 1)
+    maxBid: 20 - (slots - 1)
   };
 
   const newState = { ...state, players: [...state.players, player] };
   return { state: newState, events: [{ type: 'player_joined', playerId, nickname, token }] };
 }
 
-export function startGame(state: GameState, playerId: string, items: Item[], rng: RNG): EngineResult {
+export function startGame(state: GameState, playerId: string, items: Item[], rng: RNG, slots: number): EngineResult {
   if (playerId !== state.hostId) {
     return { state, events: [], error: 'Sadece host oyunu başlatabilir' };
   }
@@ -377,7 +378,7 @@ export function retryJudge(state: GameState, playerId: string): EngineResult {
   return { state: newState, events: [{ type: 'judge_retry' }] };
 }
 
-export function rematch(state: GameState, playerId: string, items: Item[], rng: RNG): EngineResult {
+export function rematch(state: GameState, playerId: string, items: Item[], rng: RNG, slots: number): EngineResult {
   if (playerId !== state.hostId) {
     return { state, events: [], error: 'Sadece host revanche başlatabilir' };
   }
@@ -386,11 +387,12 @@ export function rematch(state: GameState, playerId: string, items: Item[], rng: 
     return { state, events: [], error: 'Oyun bitmedi' };
   }
 
-  // Reset all players
+  // Reset all players with correct slot count
   const newPlayers = state.players.map(p => ({
     ...p,
     gold: 20,
-    slots: [null, null, null]
+    slots: Array(slots).fill(null),
+    maxBid: 20 - (slots - 1)
   }));
 
   // Shuffle all items into wheel
