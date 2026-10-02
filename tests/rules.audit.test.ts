@@ -114,7 +114,7 @@ describe('Rule 1: Room', () => {
     // Host starts with 2
     result = engine.startGame(state, 'host', superpowers, rng);
     expect(result.error).toBeUndefined();
-    expect(result.state.phase).toBe('playing');
+    expect(result.state.phase).toBe('briefing');
   });
 });
 
@@ -151,6 +151,9 @@ describe('Rule 4: Opening Order', () => {
     result = engine.startGame(state, 'host', superpowers, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     result = engine.spinWheel(state, 'host', rng, 1000);
     state = result.state;
 
@@ -174,6 +177,9 @@ describe('Rule 4: Opening Order', () => {
     state = result.state;
 
     result = engine.startGame(state, 'p1', superpowers, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     // Fill P3's slots manually
@@ -214,6 +220,9 @@ describe('Rule 4: Opening Order', () => {
     result = engine.startGame(state, 'p1', superpowers, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     // P1 opens
     result = engine.spinWheel(state, 'p1', rng, 1000);
     state = result.state;
@@ -243,6 +252,9 @@ describe('Rule 5: Bidding', () => {
     result = engine.startGame(state, 'host', superpowers, rng);
     state = result.state;
 
+    result = engine.startPlaying(state);
+    state = result.state;
+
     // Fill P2's slots
     const p2 = state.players.find(p => p.id === 'p2')!;
     p2.slots = [superpowers[0], superpowers[1], superpowers[2]];
@@ -263,6 +275,9 @@ describe('Rule 5: Bidding', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', superpowers, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     const initialGold = state.players[0].gold;
@@ -295,6 +310,9 @@ describe('Rule 5: Bidding', () => {
     state = result.state;
 
     result = engine.startGame(state, 'p1', superpowers, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     const p1Gold = state.players[0].gold;
@@ -330,6 +348,9 @@ describe('Rule 6: Gold Reserve', () => {
     state = result.state;
 
     result = engine.startGame(state, 'host', superpowers, rng);
+    state = result.state;
+
+    result = engine.startPlaying(state);
     state = result.state;
 
     result = engine.spinWheel(state, 'host', rng, 1000);
@@ -387,7 +408,7 @@ describe('Rule 9: Rematch', () => {
     result = engine.rematch(state, 'host', superpowers, rng);
     state = result.state;
 
-    expect(state.phase).toBe('playing');
+    expect(state.phase).toBe('briefing');
     expect(state.players.map(p => p.id)).toEqual(playerOrder);
     expect(state.wheel.length).toBe(40);
 

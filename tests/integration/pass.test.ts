@@ -306,7 +306,7 @@ describe('Pass Rule', () => {
     const client2 = connectClient(server.port);
     clients.push(client2);
     await waitForConnect(client2);
-    await client2.emitWithAck('join_room', { roomCode, nickname: 'P2' });
+    const joinResult = await client2.emitWithAck('join_room', { roomCode, nickname: 'P2' });
 
     await client1.emitWithAck('start_game', {});
     await client1.waitForState((s: any) => s.phase === 'playing', 5000);
@@ -327,7 +327,7 @@ describe('Pass Rule', () => {
 
     // P2 should now be the highest bidder (pass was reset from previous auction)
     const state = client1.getLastState();
-    expect(state.currentHighestBidderId).toBe(createResult.playerId); // This will fail if passedPlayerIds wasn't reset
+    expect(state.currentHighestBidderId).toBe(joinResult.playerId); // P2's ID
 
     clients.push(client1);
   }, 10000);

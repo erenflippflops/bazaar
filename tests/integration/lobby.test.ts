@@ -23,7 +23,7 @@ describe('Lobby', () => {
     const response = await fetch(`http://localhost:${server.port}/health`);
     const data = await response.json();
 
-    expect(data).toEqual({ status: 'ok' });
+    expect(data).toEqual({ status: 'ok', commit: 'dev' });
   });
 
   it('6 players join; the 7th is rejected', async () => {
