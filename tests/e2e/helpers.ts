@@ -45,29 +45,54 @@ export async function joinRoom(page: Page, roomCode: string, nickname: string) {
 
 export async function startGame(page: Page) {
   await page.click('button:has-text("Oyunu Başlat")');
-  // Wait for game screen - look for the spin button specifically
-  await expect(page.locator('button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 5000 });
+  // Wait for briefing screen or game screen
+  try {
+    await expect(page.locator('text=/Nasıl oynanır|Hazırım/i')).toBeVisible({ timeout: 2000 });
+    // If briefing screen appears, click ready
+    const readyButton = page.locator('button:has-text("Hazırım")');
+    if (await readyButton.isVisible()) {
+      await readyButton.click();
+    }
+  } catch {
+    // No briefing screen, game started directly
+  }
+  // Wait for game screen - look for the canvas/wheel or spin button
+  await expect(page.locator('canvas, button:has-text("ÇARKI ÇEVİR")')).toBeVisible({ timeout: 5000 });
 }
 
-export async function spinWheel(page: Page, clickCanvas = false) {
+export async function spinWheel(page: Page, clickCanvas = true) {
   if (clickCanvas) {
-    // Click the wheel canvas directly
+    // Click the wheel canvas directly (default for new UI)
     const canvas = page.locator('canvas');
     await canvas.click();
   } else {
-    // Click the "ÇARKI ÇEVİR" button under the wheel
-    await page.click('button:has-text("ÇARKI ÇEVİR")');
+    // Click the "ÇARKI ÇEVİR" button if it exists
+    const button = page.locator('button:has-text("ÇARKI ÇEVİR")');
+    if (await button.isVisible()) {
+      await button.click();
+    }
   }
   // Wait for auction phase - look for auction-related text
-  await expect(page.locator('text=/Açılış teklifi|Teklif Ver/i')).toBeVisible({ timeout: 5000 });
+  await expect(page.locator('text=/Açılış teklifi|Teklif Ver|\\+1|\\+2|\\+5/i')).toBeVisible({ timeout: 5000 });
 }
 
 export async function placeBid(page: Page, amount: number) {
   // Click the +amount button - this now bids IMMEDIATELY (one-click bidding)
   const incrementButton = page.locator(`button:has-text("+${amount}")`);
+  await expect(incrementButton).toBeVisible({ timeout: 2000 });
   await incrementButton.click();
 
   // Wait for bid to process
+  await page.waitForTimeout(500);
+}
+
+export async function passBid(page: Page) {
+  // Click the PAS button
+  const passButton = page.locator('button:has-text("PAS")');
+  await expect(passButton).toBeVisible({ timeout: 2000 });
+  await passButton.click();
+
+  // Wait for pass to process
   await page.waitForTimeout(500);
 }
 

@@ -20,6 +20,7 @@ export interface ServerOptions {
   port: number;
   judge: JudgeFunction;
   timeScale?: number;
+  autoPlay?: boolean;
 }
 
 export interface ServerInstance {
@@ -28,7 +29,7 @@ export interface ServerInstance {
 }
 
 export async function createServer(options: ServerOptions): Promise<ServerInstance> {
-  const { port, judge, timeScale = 1 } = options;
+  const { port, judge, timeScale = 1, autoPlay = true } = options;
 
   const OPENING_TIMEOUT = 20000 * timeScale;
   const BIDDING_TIMEOUT = 10000 * timeScale;
@@ -330,6 +331,8 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
 
   function scheduleOpeningTimer(room: Room) {
     roomTimers.clearOpeningTimer(room.timers);
+
+    if (!autoPlay) return;
 
     const roomCode = room.code;
     room.timers.openingTimer = setTimeout(() => {
