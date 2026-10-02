@@ -142,9 +142,16 @@ describe('Task 16: Themes - Integration', () => {
 
     await client1.waitForState((s: any) => s.phase === 'judging' || s.phase === 'finished', 5000);
 
-    // Check that judge received a prompt containing the theme criterion
+    // Load the exact judgeCriterion from the halisaha theme file
+    const fs = await import('fs');
+    const path = await import('path');
+    const themePath = path.join(process.cwd(), 'server', 'themes', 'halisaha.json');
+    const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
+    const expectedCriterion = themeData.judgeCriterion.tr;
+
+    // Check that judge received the exact criterion text
     expect(receivedPrompt).toBeTruthy();
-    expect(receivedPrompt.toLowerCase()).toContain('halı saha');
+    expect(receivedPrompt).toContain(expectedCriterion);
 
     clients.push(client1);
   }, 30000);

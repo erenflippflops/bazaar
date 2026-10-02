@@ -1,5 +1,7 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { startServer, connectClient, waitForConnect, TestServer, TestClient } from './helpers.js';
+import * as fs from 'fs';
+import * as path from 'path';
 
 let server: TestServer | null = null;
 let clients: TestClient[] = [];
@@ -39,7 +41,13 @@ describe('Secrecy', () => {
 
     await client1.emitWithAck('start_game', {});
 
-    const revealedItems: Set<string> = new Set();
+    // Load exact item names from the superpowers theme file
+    const themePath = path.join(process.cwd(), 'server', 'themes', 'superpowers.json');
+    const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
+    const allThemeItems: string[] = themeData.items.map((item: any) => item.name.tr);
+
+    // Track revealed items with their timestamps
+    const revealedItemsTimestamps: Map<string, number> = new Map();
 
     // Play full game and track revealed items
     for (let i = 0; i < 6; i++) {
@@ -51,7 +59,7 @@ describe('Secrecy', () => {
       const stateAfterSpin = await opener.waitForState((s: any) => s.revealedItem !== null, 2000);
       const revealedItem = stateAfterSpin.revealedItem;
       if (revealedItem) {
-        revealedItems.add(revealedItem.name);
+        revealedItemsTimestamps.set(revealedItem.name, Date.now());
       }
 
       await opener.emitWithAck('place_bid', { amount: 1 });
@@ -59,18 +67,6 @@ describe('Secrecy', () => {
     }
 
     await client1.waitForState((s: any) => s.phase === 'finished', 5000);
-
-    // All 40 theme item names to search for
-    const allThemeItems = [
-      "Zaman Durdurma", "Teleportasyon", "Zihin Okuma", "Görünmezlik", "Uçma",
-      "Süper Güç", "Şekil Değiştirme", "Hız", "İyileştirme", "Ateş Kontrolü",
-      "Su Kontrolü", "Elektrik", "Klonlanma", "Lazer Gözler", "Duvar Geçme",
-      "Hayvan Diliyle Konuşma", "Hava Kontrolü", "Buzlanma", "Zırh Derisi", "Geleceği Görme",
-      "Işınlanma Işını", "Yerçekimi Kontrolü", "Metal Kontrolü", "Zehir Bağışıklığı", "Ses Dalgaları",
-      "Bitki Büyütme", "Karanlık Manipülasyonu", "Işık Patlaması", "Dokunma ile Patlama", "Kütle Değiştirme",
-      "Rüya Girme", "Doku Yapışma", "Kemik Çıkarma", "Ses Taklit", "Hız Çalma",
-      "Hologram Yaratma", "Doku Kontrolü", "Düşünce İletimi", "Güneş Enerjisi", "Portal Açma"
-    ];
 
     // Check all state_update messages to both clients
     const allClients = [client1, client2];
@@ -80,12 +76,17 @@ describe('Secrecy', () => {
 
       for (const msg of stateUpdates) {
         const msgJSON = JSON.stringify(msg.payload);
+        const msgTimestamp = msg.timestamp || 0;
 
-        // Search for every theme item name in the full JSON
+        // Search for every theme item name as an exact JSON string value
         for (const themeName of allThemeItems) {
-          if (msgJSON.includes(themeName)) {
-            // If found, it must have been revealed by this message's timestamp
-            expect(revealedItems.has(themeName)).toBe(true);
+          // Match as a JSON string value: "\"ItemName\""
+          const exactPattern = `"${themeName}"`;
+          if (msgJSON.includes(exactPattern)) {
+            // If found, it must have been revealed before or at this message's timestamp
+            const revealTimestamp = revealedItemsTimestamps.get(themeName);
+            expect(revealTimestamp).toBeDefined();
+            expect(revealTimestamp!).toBeLessThanOrEqual(msgTimestamp);
           }
         }
       }
