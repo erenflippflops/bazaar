@@ -43,6 +43,7 @@ interface HomeScreenProps {
 export default function HomeScreen({ socket }: HomeScreenProps) {
   const [selectedTheme, setSelectedTheme] = useState<string>('superpowers');
   const [nickname, setNickname] = useState('');
+  const [roomCode, setRoomCode] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -61,6 +62,33 @@ export default function HomeScreen({ socket }: HomeScreenProps) {
         setError(response.error || 'Oda oluşturulamadı');
       } else if (response?.roomCode && response?.token) {
         sessionStorage.setItem('roomCode', response.roomCode);
+        sessionStorage.setItem('playerToken', response.token);
+        sessionStorage.setItem('playerId', response.playerId);
+        setError('');
+        navigate('/lobby');
+      }
+    });
+  };
+
+  const handleJoinRoom = () => {
+    if (!socket) {
+      setError('Bağlantı yok');
+      return;
+    }
+    if (nickname.length < 1 || nickname.length > 16) {
+      setError('İsim 1-16 karakter olmalı');
+      return;
+    }
+    if (!roomCode || roomCode.length !== 4) {
+      setError('Geçerli bir oda kodu gir (4 harf)');
+      return;
+    }
+
+    socket.emit('join_room', { roomCode: roomCode.toUpperCase(), nickname }, (response: any) => {
+      if (response?.success === false) {
+        setError(response.error || 'Odaya katılınamadı');
+      } else if (response?.token) {
+        sessionStorage.setItem('roomCode', roomCode.toUpperCase());
         sessionStorage.setItem('playerToken', response.token);
         sessionStorage.setItem('playerId', response.playerId);
         setError('');
@@ -116,6 +144,29 @@ export default function HomeScreen({ socket }: HomeScreenProps) {
         />
         <button className="primary-button" onClick={handleCreateRoom} style={{ width: '100%' }}>
           ODA OLUŞTUR
+        </button>
+      </div>
+
+      <div className="card" style={{ marginBottom: '20px' }}>
+        <h2 style={{ fontSize: '24px', marginBottom: '20px' }}>Odaya Katıl</h2>
+        <input
+          type="text"
+          placeholder="İsmin"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+          maxLength={16}
+          style={{ width: '100%', marginBottom: '15px' }}
+        />
+        <input
+          type="text"
+          placeholder="Oda Kodu (4 harf)"
+          value={roomCode}
+          onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
+          maxLength={4}
+          style={{ width: '100%', marginBottom: '15px', textTransform: 'uppercase' }}
+        />
+        <button className="primary-button" onClick={handleJoinRoom} style={{ width: '100%' }}>
+          ODAYA KATIL
         </button>
       </div>
 
