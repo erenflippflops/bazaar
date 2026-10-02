@@ -8,12 +8,13 @@ import * as engine from './engine/game.js';
 import type { GameState, Item } from './engine/types.js';
 import { parseAndValidateJudgeResponse } from './judgeResult.js';
 import * as roomTimers from './roomTimers.js';
+import { getTheme, isValidThemeId, type Theme } from './themes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export interface JudgeFunction {
-  (players: { nickname: string; items: { name: string; description: string }[] }[]): Promise<string>;
+  (players: { nickname: string; items: { name: string; description: string }[] }[], themeCriterion: string): Promise<string>;
 }
 
 export interface ServerOptions {
@@ -47,6 +48,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
   interface Room {
     code: string;
     state: GameState;
+    theme: Theme;
     timers: roomTimers.TimerState;
     judgeAbort: AbortController | null;
   }
@@ -84,16 +86,28 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       };
     };
 
-    socket.on('create_room', wrap<{ nickname: string }>((data, ack) => {
+    socket.on('create_room', wrap<{ nickname: string; themeId?: string }>((data, ack) => {
       if (!data || typeof data.nickname !== 'string') {
         ack?.({ success: false, error: 'Geçersiz isim' });
+        return;
+      }
+
+      const themeId = data.themeId || 'superpowers';
+      if (!isValidThemeId(themeId)) {
+        ack?.({ success: false, error: 'Geçersiz tema' });
+        return;
+      }
+
+      const theme = getTheme(themeId);
+      if (!theme) {
+        ack?.({ success: false, error: 'Tema bulunamadı' });
         return;
       }
 
       const code = generateRoomCode();
       const playerId = socket.id;
 
-      const result = engine.createGame(playerId, data.nickname, superpowers, seededRNG());
+      const result = engine.createGame(playerId, data.nickname, theme.items, seededRNG(), theme.slots);
       if (result.error) {
         ack?.({ success: false, error: result.error });
         return;
@@ -102,6 +116,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       const room: Room = {
         code,
         state: result.state,
+        theme,
         timers: roomTimers.createTimerState(),
         judgeAbort: null
       };
@@ -178,7 +193,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         return;
       }
 
-      const result = engine.startGame(room.state, player.playerId, superpowers, seededRNG());
+      const result = engine.startGame(room.state, player.playerId, room.theme.items, seededRNG(), room.theme.slots);
       if (result.error) {
         ack?.({ success: false, error: result.error });
         return;
@@ -372,7 +387,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         return;
       }
 
-      const result = engine.rematch(room.state, player.playerId, superpowers, seededRNG());
+      const result = engine.rematch(room.state, player.playerId, room.theme.items, seededRNG(), room.theme.slots);
       if (result.error) {
         ack?.({ success: false, error: result.error });
         return;
@@ -627,6 +642,13 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
     return {
       ...state,
       roomCode: room.code,
+      theme: {
+        id: room.theme.id,
+        name: room.theme.name,
+        emoji: room.theme.emoji,
+        slots: room.theme.slots,
+        judgeCriterion: room.theme.judgeCriterion
+      },
       wheel: state.wheel.length,
       players: state.players.map(p => ({
         id: p.id,

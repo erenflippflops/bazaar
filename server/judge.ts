@@ -1,9 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
 
-export async function callAnthropicJudge(apiKey: string, players: { nickname: string; items: { name: string; description: string }[] }[]): Promise<string> {
+export async function callAnthropicJudge(apiKey: string, players: { nickname: string; items: { name: string; description: string }[] }[], themeCriterion: string): Promise<string> {
   const client = new Anthropic({ apiKey });
 
-  const prompt = `Sen bir süper güç koleksiyonu hakemisin. ${players.length} oyuncunun topladığı süper güçlere bakarak en iyi koleksiyonu seç.
+  const prompt = `Sen bir ${themeCriterion} hakemisin. ${players.length} oyuncunun topladığı koleksiyonlara bakarak en iyi koleksiyonu seç.
 
 Oyuncular ve koleksiyonları:
 ${players.map(p => `${p.nickname}: ${p.items.map(i => `${i.name} (${i.description})`).join(', ')}`).join('\n')}
