@@ -2,13 +2,15 @@ export interface TimerState {
   openingTimer: NodeJS.Timeout | null;
   auctionEndTime: number | null;
   auctionTimer: NodeJS.Timeout | null;
+  openingEndTime: number | null;
 }
 
 export function createTimerState(): TimerState {
   return {
     openingTimer: null,
     auctionEndTime: null,
-    auctionTimer: null
+    auctionTimer: null,
+    openingEndTime: null
   };
 }
 
@@ -22,6 +24,7 @@ export function clearAllTimers(timers: TimerState): void {
     timers.auctionTimer = null;
   }
   timers.auctionEndTime = null;
+  timers.openingEndTime = null;
 }
 
 export function clearOpeningTimer(timers: TimerState): void {
@@ -29,6 +32,7 @@ export function clearOpeningTimer(timers: TimerState): void {
     clearTimeout(timers.openingTimer);
     timers.openingTimer = null;
   }
+  timers.openingEndTime = null;
 }
 
 export function clearAuctionTimer(timers: TimerState): void {
@@ -52,14 +56,15 @@ export function scheduleAuctionEnd(
 export function extendAuctionIfNeeded(
   timers: TimerState,
   extensionThreshold: number,
-  extensionDelay: number,
+  extensionAmount: number,
   callback: () => void
 ): boolean {
   if (!timers.auctionEndTime) return false;
 
   const remaining = timers.auctionEndTime - Date.now();
   if (remaining < extensionThreshold) {
-    scheduleAuctionEnd(timers, extensionDelay, callback);
+    // Add extensionAmount to remaining time instead of resetting
+    scheduleAuctionEnd(timers, remaining + extensionAmount, callback);
     return true;
   }
   return false;

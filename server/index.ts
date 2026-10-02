@@ -34,6 +34,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
   const OPENING_TIMEOUT = 20000 * timeScale;
   const BIDDING_TIMEOUT = 10000 * timeScale;
   const BID_EXTENSION_THRESHOLD = 5000 * timeScale;
+  const BID_EXTENSION_AMOUNT = 3000 * timeScale;
   const JUDGE_TIMEOUT = 30000 * timeScale;
 
   // Load superpowers
@@ -250,6 +251,24 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
 
       room.state = result.state;
 
+      // Check if auction is settled immediately after bid
+      if (room.state.phase === 'bidding' && engine.isAuctionSettled(room.state)) {
+        // Clear any pending timer and resolve immediately
+        roomTimers.clearAuctionTimer(room.timers);
+        const resolveResult = engine.resolveBid(room.state);
+        if (!resolveResult.error) {
+          room.state = resolveResult.state;
+          if (room.state.phase === 'playing') {
+            scheduleOpeningTimer(room);
+          } else if (room.state.phase === 'judging') {
+            startJudging(room);
+          }
+        }
+        io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
+        ack?.({ success: true });
+        return;
+      }
+
       // Handle auction timer
       if (room.state.phase === 'bidding') {
         if (isOpeningBid) {
@@ -263,10 +282,50 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         } else {
           // Regular bid - extend if needed
           const roomCode = room.code;
-          roomTimers.extendAuctionIfNeeded(room.timers, BID_EXTENSION_THRESHOLD, BID_EXTENSION_THRESHOLD, () => {
+          roomTimers.extendAuctionIfNeeded(room.timers, BID_EXTENSION_THRESHOLD, BID_EXTENSION_AMOUNT, () => {
             const r = rooms.get(roomCode);
             if (r) handleAuctionEnd(r);
           });
+        }
+      }
+
+      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
+      ack?.({ success: true });
+    }));
+
+    socket.on('pass_bid', wrap<{}>((data, ack) => {
+      const player = socketToPlayer.get(socket.id);
+      if (!player) {
+        ack?.({ success: false, error: 'Odada değilsin' });
+        return;
+      }
+
+      const room = rooms.get(player.roomCode);
+      if (!room) {
+        ack?.({ success: false, error: 'Oda bulunamadı' });
+        return;
+      }
+
+      const result = engine.passBid(room.state, player.playerId);
+      if (result.error) {
+        ack?.({ success: false, error: result.error });
+        return;
+      }
+
+      room.state = result.state;
+
+      // Check if auction is settled after pass
+      if (room.state.phase === 'bidding' && engine.isAuctionSettled(room.state)) {
+        // Clear any pending timer and resolve immediately
+        roomTimers.clearAuctionTimer(room.timers);
+        const resolveResult = engine.resolveBid(room.state);
+        if (!resolveResult.error) {
+          room.state = resolveResult.state;
+          if (room.state.phase === 'playing') {
+            scheduleOpeningTimer(room);
+          } else if (room.state.phase === 'judging') {
+            startJudging(room);
+          }
         }
       }
 
@@ -335,6 +394,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
     if (!autoPlay) return;
 
     const roomCode = room.code;
+    room.timers.openingEndTime = Date.now() + OPENING_TIMEOUT;
     room.timers.openingTimer = setTimeout(() => {
       try {
         const r = rooms.get(roomCode);
@@ -348,6 +408,22 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         }
 
         r.state = result.state;
+
+        // Check if auction is settled after auto-open
+        if (r.state.phase === 'bidding' && engine.isAuctionSettled(r.state)) {
+          // Resolve immediately without starting timer
+          const resolveResult = engine.resolveBid(r.state);
+          if (!resolveResult.error) {
+            r.state = resolveResult.state;
+            if (r.state.phase === 'playing') {
+              scheduleOpeningTimer(r);
+            } else if (r.state.phase === 'judging') {
+              startJudging(r);
+            }
+          }
+          io.to(r.code).emit('state_update', sanitizeStateForAll(r.state, r));
+          return;
+        }
 
         if (r.state.phase === 'bidding') {
           roomTimers.scheduleAuctionEnd(r.timers, BIDDING_TIMEOUT, () => {
@@ -478,7 +554,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       })),
       myToken: player?.token,
       auctionEndsAt: room.timers.auctionEndTime,
-      openingEndsAt: room.timers.openingTimer ? Date.now() + OPENING_TIMEOUT : null
+      openingEndsAt: room.timers.openingEndTime
     };
   }
 
@@ -495,7 +571,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         maxBid: p.maxBid
       })),
       auctionEndsAt: room.timers.auctionEndTime,
-      openingEndsAt: room.timers.openingTimer ? Date.now() + OPENING_TIMEOUT : null
+      openingEndsAt: room.timers.openingEndTime
     };
   }
 
