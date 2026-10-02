@@ -52,8 +52,9 @@ describe('Full Game', () => {
         await currentClient.emitWithAck('place_bid', { amount: 1 });
 
         // Wait for auction to resolve (bidding timeout with timeScale 0.01 = 100ms)
+        // On the final auction, game may transition directly to 'finished'
         await currentClient.waitForState((s: any) =>
-          s.phase === 'playing' || s.phase === 'judging', 5000);
+          s.phase === 'playing' || s.phase === 'judging' || s.phase === 'finished', 5000);
       }
     }
 
@@ -109,8 +110,9 @@ describe('Full Game', () => {
       await opener.emitWithAck('place_bid', { amount: 1 });
 
       // Wait for auction to resolve (bidding timeout with timeScale 0.01 = 100ms)
+      // On the final auction, game may transition directly to 'finished'
       await opener.waitForState((s: any) =>
-        s.phase === 'playing' || s.phase === 'judging', 5000);
+        s.phase === 'playing' || s.phase === 'judging' || s.phase === 'finished', 5000);
     }
 
     const finalState = await client1.waitForState((s: any) => s.phase === 'finished', 5000);
