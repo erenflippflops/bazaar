@@ -31,6 +31,8 @@ interface GameState {
   roomCode?: string;
   themeName?: string;
   auctionNumber?: number;
+  passedPlayerIds: string[];
+  isAuctionSettled?: boolean;
 }
 
 export function useSocket() {
@@ -50,8 +52,8 @@ export function useSocket() {
       setConnected(true);
 
       // Reconnection: if we have a player token, rejoin
-      const savedToken = localStorage.getItem('playerToken');
-      const savedRoomCode = localStorage.getItem('roomCode');
+      const savedToken = sessionStorage.getItem('playerToken');
+      const savedRoomCode = sessionStorage.getItem('roomCode');
       if (savedToken && savedRoomCode) {
         newSocket.emit('join_room', {
           roomCode: savedRoomCode,
