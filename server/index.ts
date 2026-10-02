@@ -36,6 +36,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
   const BID_EXTENSION_THRESHOLD = 5000 * timeScale;
   const BID_EXTENSION_AMOUNT = 3000 * timeScale;
   const JUDGE_TIMEOUT = 30000 * timeScale;
+  const BRIEFING_TIMEOUT = 15000 * timeScale;
 
   // Load superpowers
   const superpowers: Item[] = JSON.parse(
@@ -60,7 +61,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
   });
 
   app.get('/health', (req, res) => {
-    res.json({ status: 'ok' });
+    res.json({ status: 'ok', commit: process.env.RENDER_GIT_COMMIT || 'dev' });
   });
 
   io.on('connection', (socket) => {
@@ -184,7 +185,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       }
 
       room.state = result.state;
-      scheduleOpeningTimer(room);
+      scheduleBriefingTimer(room);
       io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
       ack?.({ success: true });
     }));
@@ -378,8 +379,44 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       }
 
       room.state = result.state;
-      scheduleOpeningTimer(room);
+      scheduleBriefingTimer(room);
       io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
+      ack?.({ success: true });
+    }));
+
+    socket.on('ready_briefing', wrap<{}>((data, ack) => {
+      const player = socketToPlayer.get(socket.id);
+      if (!player) {
+        ack?.({ success: false, error: 'Odada değilsin' });
+        return;
+      }
+
+      const room = rooms.get(player.roomCode);
+      if (!room) {
+        ack?.({ success: false, error: 'Oda bulunamadı' });
+        return;
+      }
+
+      const result = engine.markBriefingReady(room.state, player.playerId);
+      if (result.error) {
+        ack?.({ success: false, error: result.error });
+        return;
+      }
+
+      room.state = result.state;
+      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
+
+      // Check if all players are ready
+      if (engine.allBriefingReady(room.state)) {
+        const playResult = engine.startPlaying(room.state);
+        if (!playResult.error) {
+          room.state = playResult.state;
+          roomTimers.clearOpeningTimer(room.timers); // Clear briefing timer
+          scheduleOpeningTimer(room);
+          io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
+        }
+      }
+
       ack?.({ success: true });
     }));
 
@@ -387,6 +424,34 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       socketToPlayer.delete(socket.id);
     });
   });
+
+  function scheduleBriefingTimer(room: Room) {
+    roomTimers.clearOpeningTimer(room.timers);
+
+    if (!autoPlay) return;
+
+    const roomCode = room.code;
+    room.timers.openingTimer = setTimeout(() => {
+      try {
+        const r = rooms.get(roomCode);
+        if (!r) return;
+        if (r.state.phase !== 'briefing') return;
+
+        // Briefing timeout - start playing
+        const result = engine.startPlaying(r.state);
+        if (result.error) {
+          console.error('Briefing timeout error:', result.error);
+          return;
+        }
+
+        r.state = result.state;
+        scheduleOpeningTimer(r);
+        io.to(r.code).emit('state_update', sanitizeStateForAll(r.state, r));
+      } catch (error) {
+        console.error('Briefing timer error:', error);
+      }
+    }, BRIEFING_TIMEOUT);
+  }
 
   function scheduleOpeningTimer(room: Room) {
     roomTimers.clearOpeningTimer(room.timers);

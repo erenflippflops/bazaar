@@ -24,7 +24,8 @@ export function createGame(hostId: string, hostNickname: string, items: Item[], 
     ranking: null,
     commentary: null,
     auctionNumber: 0,
-    passedPlayerIds: []
+    passedPlayerIds: [],
+    briefingReadyPlayers: []
   };
 
   return { state, events: [{ type: 'game_created', hostId, nickname: hostNickname, token }] };
@@ -83,10 +84,11 @@ export function startGame(state: GameState, playerId: string, items: Item[], rng
 
   const newState: GameState = {
     ...state,
-    phase: 'playing',
+    phase: 'briefing',
     wheel,
     currentOpenerIndex: 0,
-    auctionNumber: 1
+    auctionNumber: 1,
+    briefingReadyPlayers: []
   };
 
   return { state: newState, events: [{ type: 'game_started', wheelSize: wheel.length }] };
@@ -396,7 +398,7 @@ export function rematch(state: GameState, playerId: string, items: Item[], rng: 
 
   const newState: GameState = {
     ...state,
-    phase: 'playing',
+    phase: 'briefing',
     players: newPlayers,
     wheel,
     revealedItem: null,
@@ -406,7 +408,8 @@ export function rematch(state: GameState, playerId: string, items: Item[], rng: 
     turnStartTime: null,
     ranking: null,
     commentary: null,
-    auctionNumber: 1
+    auctionNumber: 1,
+    briefingReadyPlayers: []
   };
 
   return { state: newState, events: [{ type: 'rematch_started', wheelSize: wheel.length }] };
@@ -488,6 +491,45 @@ export function isAuctionSettled(state: GameState): boolean {
   }
 
   return true;
+}
+
+export function markBriefingReady(state: GameState, playerId: string): EngineResult {
+  if (state.phase !== 'briefing') {
+    return { state, events: [], error: 'Briefing aşaması değil' };
+  }
+
+  const player = state.players.find(p => p.id === playerId);
+  if (!player) {
+    return { state, events: [], error: 'Oyuncu bulunamadı' };
+  }
+
+  if (state.briefingReadyPlayers.includes(playerId)) {
+    return { state, events: [], error: 'Zaten hazırsın' };
+  }
+
+  const newState: GameState = {
+    ...state,
+    briefingReadyPlayers: [...state.briefingReadyPlayers, playerId]
+  };
+
+  return { state: newState, events: [{ type: 'briefing_ready', playerId, nickname: player.nickname }] };
+}
+
+export function allBriefingReady(state: GameState): boolean {
+  return state.briefingReadyPlayers.length === state.players.length;
+}
+
+export function startPlaying(state: GameState): EngineResult {
+  if (state.phase !== 'briefing') {
+    return { state, events: [], error: 'Briefing aşaması değil' };
+  }
+
+  const newState: GameState = {
+    ...state,
+    phase: 'playing'
+  };
+
+  return { state: newState, events: [{ type: 'playing_started' }] };
 }
 
 // Helper functions
