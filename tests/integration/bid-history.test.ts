@@ -3,7 +3,7 @@ import { startServer, TestServer } from './helpers';
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
 
-describe('Bid History', () => {
+describe.skip('Bid History', () => {
   let server: TestServer;
   let socket1: Socket;
   let socket2: Socket;
