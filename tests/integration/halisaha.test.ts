@@ -141,9 +141,14 @@ describe('Halisaha Integration', () => {
       await currentClient.emitWithAck('spin_wheel', {});
 
       const afterSpin = await currentClient.waitForState(
-        (s: any) => s.phase === 'opening' || s.phase === 'playing',
+        (s: any) => s.phase === 'opening' || s.phase === 'playing' || s.phase === 'judging' || s.phase === 'finished',
         2000
       );
+
+      // If game ended, exit loop
+      if (afterSpin.phase === 'judging' || afterSpin.phase === 'finished') {
+        break;
+      }
 
       if (afterSpin.phase === 'opening') {
         // Always let P1 win
@@ -154,7 +159,10 @@ describe('Halisaha Integration', () => {
           await client1.emitWithAck('place_bid', { amount: 2 });
         }
 
-        await currentClient.waitForState((s: any) => s.phase === 'playing', 2000);
+        await currentClient.waitForState(
+          (s: any) => s.phase === 'playing' || s.phase === 'judging' || s.phase === 'finished',
+          2000
+        );
       }
     }
 
@@ -218,7 +226,7 @@ describe('Halisaha Integration', () => {
       await currentClient.emitWithAck('spin_wheel', {});
 
       const afterSpin = await currentClient.waitForState(
-        (s: any) => s.phase === 'opening' || s.phase === 'playing',
+        (s: any) => s.phase === 'opening' || s.phase === 'playing' || s.phase === 'judging' || s.phase === 'finished',
         2000
       );
 
