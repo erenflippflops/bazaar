@@ -30,7 +30,7 @@ describe('Halisaha Integration', () => {
 
     const client1 = connectClient(server.port);
     await waitForConnect(client1);
-    const room = await client1.emitWithAck('create_room', { nickname: 'P1', theme: 'halisaha' });
+    const room = await client1.emitWithAck('create_room', { nickname: 'P1', themeId: 'halisaha' });
 
     const client2 = connectClient(server.port);
     clients.push(client2);
@@ -108,7 +108,7 @@ describe('Halisaha Integration', () => {
 
     const client1 = connectClient(server.port);
     await waitForConnect(client1);
-    const room = await client1.emitWithAck('create_room', { nickname: 'P1', theme: 'halisaha' });
+    const room = await client1.emitWithAck('create_room', { nickname: 'P1', themeId: 'halisaha' });
 
     const client2 = connectClient(server.port);
     clients.push(client2);
@@ -185,7 +185,7 @@ describe('Halisaha Integration', () => {
 
     const client1 = connectClient(server.port);
     await waitForConnect(client1);
-    const room = await client1.emitWithAck('create_room', { nickname: 'P1', theme: 'halisaha' });
+    const room = await client1.emitWithAck('create_room', { nickname: 'P1', themeId: 'halisaha' });
 
     const client2 = connectClient(server.port);
     clients.push(client2);
