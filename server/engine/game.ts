@@ -587,12 +587,17 @@ export function markBriefingReady(state: GameState, playerId: string): EngineRes
   return { state: newState, events };
 }
 
-export function checkBriefingComplete(state: GameState): EngineResult {
+export function checkBriefingComplete(state: GameState, connectedPlayerIds?: string[]): EngineResult {
   if (state.phase !== 'briefing') {
     return { state, events: [] };
   }
 
-  if (state.briefingReadyPlayers.length === state.players.length) {
+  // If connectedPlayerIds provided, only check if all CONNECTED players are ready
+  // Disconnected players are automatically considered ready
+  const playersToCheck = connectedPlayerIds || state.players.map(p => p.id);
+  const allConnectedReady = playersToCheck.every(id => state.briefingReadyPlayers.includes(id));
+
+  if (allConnectedReady) {
     const newState: GameState = {
       ...state,
       phase: 'playing',
