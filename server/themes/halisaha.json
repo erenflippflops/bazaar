@@ -54,8 +54,6 @@
     { "id": "van-basten", "name": { "tr": "Marco van Basten", "en": "", "de": "" }, "description": { "tr": "Forvet – 3 Altın Top, voley golü ustası", "en": "", "de": "" } },
     { "id": "romario", "name": { "tr": "Romário", "en": "", "de": "" }, "description": { "tr": "Forvet – Dünya Kupası 94, ceza sahasının kralı", "en": "", "de": "" } },
     { "id": "zlatan", "name": { "tr": "Zlatan Ibrahimović", "en": "", "de": "" }, "description": { "tr": "Forvet – 12 farklı ligde şampiyon", "en": "", "de": "" } },
-    { "id": "salah", "name": { "tr": "Mohamed Salah", "en": "", "de": "" }, "description": { "tr": "Forvet – Premier League gol kralı, Mısır Kralı", "en": "", "de": "" } },
-    { "id": "villa", "name": { "tr": "David Villa", "en": "", "de": "" }, "description": { "tr": "Forvet – İspanya'nın gol kralı, Dünya Kupası", "en": "", "de": "" } },
-    { "id": "aguero", "name": { "tr": "Sergio Agüero", "en": "", "de": "" }, "description": { "tr": "Forvet – Manchester City efsanesi, 93:20 golü", "en": "", "de": "" } }
+    { "id": "salah", "name": { "tr": "Mohamed Salah", "en": "", "de": "" }, "description": { "tr": "Forvet – Premier League gol kralı, Mısır Kralı", "en": "", "de": "" } }
   ]
 }
