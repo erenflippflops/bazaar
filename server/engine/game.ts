@@ -624,16 +624,6 @@ export function forceStartBriefing(state: GameState, playerId: string): EngineRe
 
   return { state: newState, events: [{ type: 'briefing_complete' }] };
 }
-    return { state, events: [], error: 'Briefing aşaması değil' };
-  }
-
-  const newState: GameState = {
-    ...state,
-    phase: 'playing'
-  };
-
-  return { state: newState, events: [{ type: 'playing_started' }] };
-}
 
 // Helper functions
 function generateToken(rng: RNG): string {
