@@ -114,6 +114,49 @@ export function spinWheel(state: GameState, playerId: string, rng: RNG, now: num
   const revealed = state.wheel[index];
   const newWheel = state.wheel.filter((_, i) => i !== index);
 
+  const events: GameEvent[] = [{ type: 'wheel_spun', item: revealed, wheelSize: newWheel.length }];
+
+  // Check if anyone can fit this item (halisaha only)
+  if (state.slotTypes && !anyPlayerCanFit(state.players, revealed, state.slotTypes)) {
+    // Item discarded - no one can fit it
+    events.push({ type: 'item_discarded', item: revealed });
+
+    // Find next opener (skip players with all slots full)
+    let nextOpenerIndex = (state.currentOpenerIndex + 1) % state.players.length;
+    while (state.players[nextOpenerIndex].slots.every(s => s !== null)) {
+      nextOpenerIndex = (nextOpenerIndex + 1) % state.players.length;
+    }
+
+    const newState: GameState = {
+      ...state,
+      wheel: newWheel,
+      currentOpenerIndex: nextOpenerIndex,
+      auctionNumber: state.auctionNumber + 1
+    };
+
+    events.push({ type: 'next_turn', openerIndex: nextOpenerIndex, openerId: state.players[nextOpenerIndex].id });
+    return { state: newState, events };
+  }
+
+  // Check if opener needs to be changed (halisaha only)
+  let actualOpenerIndex = state.currentOpenerIndex;
+  if (state.slotTypes && !hasEmptyFittingSlot(opener, revealed, state.slotTypes)) {
+    // Find next player with fitting slot
+    let searchIndex = (state.currentOpenerIndex + 1) % state.players.length;
+    while (searchIndex !== state.currentOpenerIndex) {
+      if (hasEmptyFittingSlot(state.players[searchIndex], revealed, state.slotTypes)) {
+        actualOpenerIndex = searchIndex;
+        events.push({
+          type: 'opener_changed',
+          from: opener.id,
+          to: state.players[searchIndex].id
+        });
+        break;
+      }
+      searchIndex = (searchIndex + 1) % state.players.length;
+    }
+  }
+
   const newState: GameState = {
     ...state,
     revealedItem: revealed,
@@ -122,10 +165,11 @@ export function spinWheel(state: GameState, playerId: string, rng: RNG, now: num
     currentHighestBid: 0,
     currentHighestBidderId: null,
     turnStartTime: now,
-    passedPlayerIds: []
+    passedPlayerIds: [],
+    currentOpenerIndex: actualOpenerIndex
   };
 
-  return { state: newState, events: [{ type: 'wheel_spun', item: revealed, wheelSize: newWheel.length }] };
+  return { state: newState, events };
 }
 
 export function placeBid(state: GameState, playerId: string, amount: number, now: number): EngineResult {
@@ -262,8 +306,8 @@ export function resolveBid(state: GameState): EngineResult {
     return { state, events: [], error: 'Kazanan bulunamadı' };
   }
 
-  // Award item
-  const emptySlotIndex = winner.slots.findIndex(s => s === null);
+  // Award item - use fitting slot logic for halisaha
+  const emptySlotIndex = findFittingSlot(winner.slots, state.revealedItem, state.slotTypes);
   if (emptySlotIndex === -1) {
     return { state, events: [], error: 'Kazananın boş slotu yok' };
   }
@@ -317,6 +361,14 @@ export function resolveBid(state: GameState): EngineResult {
   };
 
   return { state: newState, events: [{ type: 'bid_resolved', winnerId: winner.id, nickname: winner.nickname, amount: state.currentHighestBid, item: state.revealedItem }, { type: 'next_turn', openerIndex: nextOpenerIndex, openerId: newPlayers[nextOpenerIndex].id }] };
+}
+
+export function settleBid(state: GameState, now: number): EngineResult {
+  // Check if auction is settled
+  if (isAuctionSettled(state)) {
+    return resolveBid(state);
+  }
+  return { state, events: [] };
 }
 
 export function setJudgeResult(state: GameState, ranking: { player: string; rank: number; reason: string }[], commentary: string): EngineResult {
@@ -468,6 +520,13 @@ export function isOutOfAuction(state: GameState, player: Player): boolean {
     return true;
   }
 
+  // Halisaha: check if player has no empty slot that fits the revealed item
+  if (state.revealedItem && state.slotTypes) {
+    if (!hasEmptyFittingSlot(player, state.revealedItem, state.slotTypes)) {
+      return true;
+    }
+  }
+
   // Player cannot afford to bid (maxBid < currentHighestBid + 1)
   if (player.maxBid < state.currentHighestBid + 1) {
     return true;
@@ -551,4 +610,41 @@ function shuffle<T>(array: T[], rng: RNG): T[] {
     [result[i], result[j]] = [result[j], result[i]];
   }
   return result;
+}
+
+// Halisaha helper: check if item fits in slot
+function itemFitsSlot(item: Item, slotType: string): boolean {
+  if (slotType === 'GK') {
+    return item.position === 'GK';
+  }
+  if (slotType === 'FIELD') {
+    return item.position !== 'GK';
+  }
+  return true;
+}
+
+// Halisaha helper: find first empty slot that fits the item
+function findFittingSlot(slots: (Item | null)[], item: Item, slotTypes?: string[]): number {
+  if (!slotTypes) {
+    // No slot types - use first empty slot
+    return slots.findIndex(s => s === null);
+  }
+
+  // With slot types - find first empty slot that fits
+  for (let i = 0; i < slots.length; i++) {
+    if (slots[i] === null && itemFitsSlot(item, slotTypes[i])) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+// Halisaha helper: check if player has any empty slot that fits the item
+function hasEmptyFittingSlot(player: Player, item: Item, slotTypes?: string[]): boolean {
+  return findFittingSlot(player.slots, item, slotTypes) !== -1;
+}
+
+// Halisaha helper: check if any player can fit the item
+function anyPlayerCanFit(players: Player[], item: Item, slotTypes?: string[]): boolean {
+  return players.some(p => hasEmptyFittingSlot(p, item, slotTypes));
 }

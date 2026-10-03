@@ -28,6 +28,7 @@ export interface GameState {
   auctionNumber: number; // current auction (1 to 3N where N = player count)
   passedPlayerIds: string[];
   briefingReadyPlayers: string[]; // player IDs who marked themselves ready during briefing
+  slotTypes?: string[]; // For halisaha: ["GK", "FIELD", "FIELD", "FIELD"]
 }
 
 export interface GameEvent {
