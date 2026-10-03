@@ -46,47 +46,52 @@ describe('Secrecy', () => {
     const themeData = JSON.parse(fs.readFileSync(themePath, 'utf-8'));
     const allThemeItems: string[] = themeData.items.map((item: any) => item.name.tr);
 
-    // Track revealed items with their timestamps
-    const revealedItemsTimestamps: Map<string, number> = new Map();
-
-    // Play full game and track revealed items
+    // Play full game
     for (let i = 0; i < 6; i++) {
       await client1.waitForState((s: any) => s.phase === 'playing', 10000);
       const opener = i % 2 === 0 ? client1 : client2;
 
       await opener.emitWithAck('spin_wheel', {});
-
-      const stateAfterSpin = await opener.waitForState((s: any) => s.revealedItem !== null, 2000);
-      const revealedItem = stateAfterSpin.revealedItem;
-      if (revealedItem) {
-        revealedItemsTimestamps.set(revealedItem.name, Date.now());
-      }
-
+      await opener.waitForState((s: any) => s.revealedItem !== null, 2000);
       await opener.emitWithAck('place_bid', { amount: 1 });
       await opener.waitForState((s: any) => s.revealedItem === null, 2000);
     }
 
     await client1.waitForState((s: any) => s.phase === 'finished', 5000);
 
-    // Check all state_update messages to both clients
+    // Check all messages to both clients using message order
     const allClients = [client1, client2];
 
     for (const client of allClients) {
-      const stateUpdates = client.messages.filter(m => m.event === 'state_update');
+      const messages = client.messages;
 
-      for (const msg of stateUpdates) {
+      // For each item, find the sequence number when it was first revealed
+      const revealSequence: Map<string, number> = new Map();
+
+      for (let i = 0; i < messages.length; i++) {
+        const msg = messages[i];
+        if (msg.event === 'state_update' && msg.payload?.revealedItem?.name) {
+          const itemName = msg.payload.revealedItem.name;
+          if (!revealSequence.has(itemName)) {
+            revealSequence.set(itemName, i);
+          }
+        }
+      }
+
+      // Now check that each item name never appears before its reveal sequence
+      for (let i = 0; i < messages.length; i++) {
+        const msg = messages[i];
         const msgJSON = JSON.stringify(msg.payload);
-        const msgTimestamp = msg.timestamp || 0;
 
         // Search for every theme item name as an exact JSON string value
         for (const themeName of allThemeItems) {
           // Match as a JSON string value: "\"ItemName\""
           const exactPattern = `"${themeName}"`;
           if (msgJSON.includes(exactPattern)) {
-            // If found, it must have been revealed before or at this message's timestamp
-            const revealTimestamp = revealedItemsTimestamps.get(themeName);
-            expect(revealTimestamp).toBeDefined();
-            expect(revealTimestamp!).toBeLessThanOrEqual(msgTimestamp);
+            // If found, it must have been revealed at or before this message sequence
+            const revealSeq = revealSequence.get(themeName);
+            expect(revealSeq, `Item "${themeName}" appears in message ${i} but was never revealed`).toBeDefined();
+            expect(revealSeq!, `Item "${themeName}" appears in message ${i} but was revealed later at ${revealSeq}`).toBeLessThanOrEqual(i);
           }
         }
       }
