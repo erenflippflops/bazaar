@@ -564,8 +564,9 @@ export function markBriefingReady(state: GameState, playerId: string): EngineRes
     return { state, events: [], error: 'Oyuncu bulunamadı' };
   }
 
+  // Allow duplicate ready marks (idempotent)
   if (state.briefingReadyPlayers.includes(playerId)) {
-    return { state, events: [], error: 'Zaten hazırsın' };
+    return { state, events: [] };
   }
 
   const newState: GameState = {
@@ -573,15 +574,56 @@ export function markBriefingReady(state: GameState, playerId: string): EngineRes
     briefingReadyPlayers: [...state.briefingReadyPlayers, playerId]
   };
 
-  return { state: newState, events: [{ type: 'briefing_ready', playerId, nickname: player.nickname }] };
+  const events: GameEvent[] = [{ type: 'briefing_ready', playerId, nickname: player.nickname }];
+
+  // Check if all players are ready
+  if (newState.briefingReadyPlayers.length === newState.players.length) {
+    newState.phase = 'playing';
+    newState.currentOpenerIndex = 0;
+    newState.turnStartTime = Date.now();
+    events.push({ type: 'briefing_complete' });
+  }
+
+  return { state: newState, events };
 }
 
-export function allBriefingReady(state: GameState): boolean {
-  return state.briefingReadyPlayers.length === state.players.length;
-}
-
-export function startPlaying(state: GameState): EngineResult {
+export function checkBriefingComplete(state: GameState): EngineResult {
   if (state.phase !== 'briefing') {
+    return { state, events: [] };
+  }
+
+  if (state.briefingReadyPlayers.length === state.players.length) {
+    const newState: GameState = {
+      ...state,
+      phase: 'playing',
+      currentOpenerIndex: 0,
+      turnStartTime: Date.now()
+    };
+    return { state: newState, events: [{ type: 'briefing_complete' }] };
+  }
+
+  return { state, events: [] };
+}
+
+export function forceStartBriefing(state: GameState, playerId: string): EngineResult {
+  if (state.phase !== 'briefing') {
+    return { state, events: [], error: 'Briefing aşaması değil' };
+  }
+
+  if (state.hostId !== playerId) {
+    return { state, events: [], error: 'Sadece host zorla başlatabilir' };
+  }
+
+  const newState: GameState = {
+    ...state,
+    phase: 'playing',
+    currentOpenerIndex: 0,
+    turnStartTime: Date.now(),
+    briefingReadyPlayers: state.players.map(p => p.id)
+  };
+
+  return { state: newState, events: [{ type: 'briefing_complete' }] };
+}
     return { state, events: [], error: 'Briefing aşaması değil' };
   }
 
