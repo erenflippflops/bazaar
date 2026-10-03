@@ -26,7 +26,8 @@ export function createGame(hostId: string, hostNickname: string, items: Item[], 
     auctionNumber: 0,
     passedPlayerIds: [],
     briefingReadyPlayers: [],
-    slotTypes
+    slotTypes,
+    bidHistory: []
   };
 
   return { state, events: [{ type: 'game_created', hostId, nickname: hostNickname, token }] };
@@ -168,7 +169,8 @@ export function spinWheel(state: GameState, playerId: string, rng: RNG, now: num
     currentHighestBidderId: null,
     turnStartTime: now,
     passedPlayerIds: [],
-    currentOpenerIndex: actualOpenerIndex
+    currentOpenerIndex: actualOpenerIndex,
+    bidHistory: []
   };
 
   return { state: newState, events };
@@ -214,7 +216,8 @@ export function placeBid(state: GameState, playerId: string, amount: number, now
       phase: 'bidding',
       currentHighestBid: amount,
       currentHighestBidderId: playerId,
-      turnStartTime: now
+      turnStartTime: now,
+      bidHistory: [...state.bidHistory, { playerId, amount, at: now }]
     };
 
     return { state: newState, events: [{ type: 'bid_placed', playerId, nickname: player.nickname, amount, isOpening: true }] };
@@ -241,7 +244,8 @@ export function placeBid(state: GameState, playerId: string, amount: number, now
     ...state,
     currentHighestBid: amount,
     currentHighestBidderId: playerId,
-    turnStartTime: now
+    turnStartTime: now,
+    bidHistory: [...state.bidHistory, { playerId, amount, at: now }]
   };
 
   return { state: newState, events: [{ type: 'bid_placed', playerId, nickname: player.nickname, amount, isOpening: false }] };
