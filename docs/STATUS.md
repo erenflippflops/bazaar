@@ -134,10 +134,23 @@ geçtiğini testle doğrula.
   
 ⚠️ Task 18 iptal edildi (Task 19 ile değiştirildi)
 
-▶️ ŞU AN: Task 19 başlatılıyor - Mockupları oyuna port et
+▶️ ŞU AN: Task 19 yürütülüyor - Mockupları oyuna port et
   - Sıra: Task 19 → Task 17 (çoklu dil)
   - Task 19 büyük bir UI yenileme: mockuplardan pikseline sadık React componentleri
-  - Çalışma planı: tests first (auditor), sonra paralel builders (dosya sahipliğine göre bölünmüş)
+  
+  Task 19 alt görevlere bölündü (19a-19j):
+  - 19a: bidHistory server (auditor testleri yazıyor) ⏳
+  - 19b: Scaling system (hazır)
+  - 19c: Background, Lanterns, Header (hazır)
+  - 19d: Wheel, PlayerCard (hazır)
+  - 19e: StatusBox, BidHistory, Controls (hazır)
+  - 19f: Login, Lobby, Briefing ekranları (hazır)
+  - 19g: GameScreen tüm durumlar (hazır)
+  - 19h: Results ve judging ekranları (hazır)
+  - 19i: i18n altyapısı (hazır)
+  - 19j: Pixel testleri (hazır)
+  
+  Şu an: 19a auditor tamamlanması bekleniyor, sonra paralel builder'lar başlayacak
 ✓ Kurulum tamamlandı: yeni workflow, ajan tanımları, .gitignore güncel. Ajan modelleri test edildi (Fable 5.1, Opus 5.5).
 
 ✓ Task 03 denetimi tamamlandı (5a53327, 38cae39):
