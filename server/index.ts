@@ -108,7 +108,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       const playerId = socket.id;
 
       const engineItems = themeItemsToEngineItems(theme.items);
-      const result = engine.createGame(playerId, data.nickname, engineItems, seededRNG(), theme.slots);
+      const result = engine.createGame(playerId, data.nickname, engineItems, seededRNG(), theme.slots, theme.slotTypes);
       if (result.error) {
         ack?.({ success: false, error: result.error });
         return;
@@ -195,7 +195,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       }
 
       const engineItems = themeItemsToEngineItems(room.theme.items);
-      const result = engine.startGame(room.state, player.playerId, engineItems, seededRNG(), room.theme.slots);
+      const result = engine.startGame(room.state, player.playerId, engineItems, seededRNG(), room.theme.slots, room.theme.slotTypes);
       if (result.error) {
         ack?.({ success: false, error: result.error });
         return;
@@ -390,7 +390,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       }
 
       const engineItems = themeItemsToEngineItems(room.theme.items);
-      const result = engine.rematch(room.state, player.playerId, engineItems, seededRNG(), room.theme.slots);
+      const result = engine.rematch(room.state, player.playerId, engineItems, seededRNG(), room.theme.slots, room.theme.slotTypes);
       if (result.error) {
         ack?.({ success: false, error: result.error });
         return;
