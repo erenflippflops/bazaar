@@ -125,10 +125,13 @@ geçtiğini testle doğrula.
 
 ## 9. Şu anki durum (buradan devam et)
 
-✓ Task 16b hazırlık: halisaha.json düzeltildi (6 GK, 10 DEF, 12 MID, 12 FWD = 40 öğe)
-  - data-check.test.ts geçiyor (22/22)
-  - secrecy.test.ts hâlâ kırık (timing issue, Task 16b'den bağımsız)
-  - Şimdi Task 16b'nin asıl parçalarına başlıyorum
+✓ Task 16b tamamlandı (c964e62, 7bb64be, 06bd4ea):
+  - startPlaying fonksiyonu geri yüklendi (d011939'da yanlışlıkla silinmişti)
+  - Server düzeltmeleri: ready_briefing, force_start_briefing, outReason/passedBadge
+  - UI: AuctionPanel'de outReason mesajları, PlayerList'te PAS rozetleri
+  - /health endpoint'e commit SHA eklendi (RENDER_GIT_COMMIT)
+  - 161/163 test geçiyor (2 başarısız: halisaha oyun bitişi, secrecy timing)
+  - Kalan 2 test Task 16b'den bağımsız önceden var olan sorunlar
 
 ## 9. Şu anki durum (buradan devam et)
 ✓ Kurulum tamamlandı: yeni workflow, ajan tanımları, .gitignore güncel. Ajan modelleri test edildi (Fable 5.1, Opus 5.5).
