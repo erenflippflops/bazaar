@@ -1,6 +1,6 @@
 import type { GameState, Player, Item, RNG, EngineResult, GameEvent } from './types.js';
 
-export function createGame(hostId: string, hostNickname: string, items: Item[], rng: RNG, slots: number): EngineResult {
+export function createGame(hostId: string, hostNickname: string, items: Item[], rng: RNG, slots: number, slotTypes?: string[]): EngineResult {
   const token = generateToken(rng);
   const host: Player = {
     id: hostId,
@@ -25,7 +25,8 @@ export function createGame(hostId: string, hostNickname: string, items: Item[], 
     commentary: null,
     auctionNumber: 0,
     passedPlayerIds: [],
-    briefingReadyPlayers: []
+    briefingReadyPlayers: [],
+    slotTypes
   };
 
   return { state, events: [{ type: 'game_created', hostId, nickname: hostNickname, token }] };
@@ -67,7 +68,7 @@ export function joinGame(state: GameState, playerId: string, nickname: string, r
   return { state: newState, events: [{ type: 'player_joined', playerId, nickname, token }] };
 }
 
-export function startGame(state: GameState, playerId: string, items: Item[], rng: RNG, slots: number): EngineResult {
+export function startGame(state: GameState, playerId: string, items: Item[], rng: RNG, slots: number, slotTypes?: string[]): EngineResult {
   if (playerId !== state.hostId) {
     return { state, events: [], error: 'Sadece host oyunu başlatabilir' };
   }
@@ -89,7 +90,8 @@ export function startGame(state: GameState, playerId: string, items: Item[], rng
     wheel,
     currentOpenerIndex: 0,
     auctionNumber: 1,
-    briefingReadyPlayers: []
+    briefingReadyPlayers: [],
+    slotTypes
   };
 
   return { state: newState, events: [{ type: 'game_started', wheelSize: wheel.length }] };
@@ -430,7 +432,7 @@ export function retryJudge(state: GameState, playerId: string): EngineResult {
   return { state: newState, events: [{ type: 'judge_retry' }] };
 }
 
-export function rematch(state: GameState, playerId: string, items: Item[], rng: RNG, slots: number): EngineResult {
+export function rematch(state: GameState, playerId: string, items: Item[], rng: RNG, slots: number, slotTypes?: string[]): EngineResult {
   if (playerId !== state.hostId) {
     return { state, events: [], error: 'Sadece host revanche başlatabilir' };
   }
@@ -463,7 +465,8 @@ export function rematch(state: GameState, playerId: string, items: Item[], rng: 
     ranking: null,
     commentary: null,
     auctionNumber: 1,
-    briefingReadyPlayers: []
+    briefingReadyPlayers: [],
+    slotTypes
   };
 
   return { state: newState, events: [{ type: 'rematch_started', wheelSize: wheel.length }] };
