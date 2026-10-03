@@ -630,6 +630,19 @@ export function forceStartBriefing(state: GameState, playerId: string): EngineRe
   return { state: newState, events: [{ type: 'briefing_forced' }] };
 }
 
+export function startPlaying(state: GameState): EngineResult {
+  if (state.phase !== 'briefing') {
+    return { state, events: [], error: 'Briefing aşaması değil' };
+  }
+
+  const newState: GameState = {
+    ...state,
+    phase: 'playing'
+  };
+
+  return { state: newState, events: [{ type: 'playing_started' }] };
+}
+
 // Helper functions
 function generateToken(rng: RNG): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
