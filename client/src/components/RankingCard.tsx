@@ -4,74 +4,80 @@ interface Item {
 }
 
 interface RankingCardProps {
-  rank: number;
-  player: string;
+  position: number;
+  nickname: string;
   items: (Item | null)[];
-  reason: string;
+  commentary: string;
 }
 
-export default function RankingCard({ rank, player, items, reason }: RankingCardProps) {
-  const isFirst = rank === 1;
+export default function RankingCard({ position, nickname, items, commentary }: RankingCardProps) {
+  const isFirst = position === 1;
 
   return (
-    <div
-      className="card"
-      style={{
-        background: isFirst ? 'var(--saffron)' : 'var(--dark)',
-        border: '2px solid var(--turquoise)',
-        borderRadius: '14px',
-        padding: isFirst ? '40px 30px' : '30px',
-        marginBottom: '20px',
-        opacity: 1,
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px', gap: '10px' }}>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '8px',
+      padding: '12px 14px',
+      background: 'var(--dark)',
+      border: isFirst ? '3px solid var(--saffron)' : '2px solid rgba(46, 196, 182, 0.55)',
+      borderRadius: '14px',
+    }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'baseline',
+      }}>
         <span style={{
-          fontSize: isFirst ? '48px' : '32px',
-          fontFamily: 'var(--font-heading)',
-          color: isFirst ? 'var(--dark)' : 'var(--saffron)',
+          fontSize: '18px',
+          fontWeight: 800,
         }}>
-          {rank}
+          {nickname}
         </span>
-        <h2 style={{
-          fontSize: isFirst ? '32px' : '24px',
+        <span style={{
           fontFamily: 'var(--font-heading)',
-          color: isFirst ? 'var(--dark)' : 'var(--white)',
+          fontSize: '20px',
+          color: 'var(--saffron)',
         }}>
-          {player}
-        </h2>
+          {position}.
+        </span>
       </div>
 
       <div style={{
         display: 'flex',
-        gap: '8px',
-        marginBottom: '15px',
+        gap: '6px',
         flexWrap: 'wrap',
       }}>
         {items.map((item, idx) => (
-          <div
+          <span
             key={idx}
             style={{
-              padding: '6px 12px',
-              background: isFirst ? 'rgba(11, 12, 63, 0.3)' : 'rgba(255, 201, 60, 0.15)',
+              flex: '0 0 auto',
+              minWidth: 0,
+              padding: '4px 8px',
               borderRadius: '8px',
-              fontSize: '14px',
-              fontWeight: 600,
-              color: isFirst ? 'var(--dark)' : 'var(--saffron)',
+              background: 'rgba(255, 201, 60, 0.16)',
+              border: '1.5px solid var(--saffron)',
+              fontSize: '12px',
+              fontWeight: 700,
+              textAlign: 'center',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
             }}
           >
             {item?.name || 'boş'}
-          </div>
+          </span>
         ))}
       </div>
 
-      <p style={{
-        fontSize: '16px',
-        lineHeight: '1.6',
-        color: isFirst ? 'var(--dark)' : 'var(--muted)',
+      <span style={{
+        fontSize: '14px',
+        fontWeight: 600,
+        color: '#C9CBFF',
       }}>
-        {reason}
-      </p>
+        {commentary}
+      </span>
     </div>
   );
 }
