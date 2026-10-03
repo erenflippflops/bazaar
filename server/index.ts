@@ -424,17 +424,45 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
       room.state = result.state;
       io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
 
-      // Check if all players are ready
-      if (engine.allBriefingReady(room.state)) {
-        const playResult = engine.startPlaying(room.state);
-        if (!playResult.error) {
-          room.state = playResult.state;
-          roomTimers.clearOpeningTimer(room.timers); // Clear briefing timer
-          scheduleOpeningTimer(room);
-          io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
-        }
+      // Check if all connected players are ready
+      const connectedPlayerIds = Array.from(socketToPlayer.values())
+        .filter(p => p.roomCode === player.roomCode)
+        .map(p => p.playerId);
+      const checkResult = engine.checkBriefingComplete(room.state, connectedPlayerIds);
+
+      if (checkResult.events.some(e => e.type === 'briefing_complete')) {
+        room.state = checkResult.state;
+        roomTimers.clearOpeningTimer(room.timers); // Clear briefing timer
+        scheduleOpeningTimer(room);
+        io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
       }
 
+      ack?.({ success: true });
+    }));
+
+    socket.on('force_start_briefing', wrap<{}>((data, ack) => {
+      const player = socketToPlayer.get(socket.id);
+      if (!player) {
+        ack?.({ success: false, error: 'Odada değilsin' });
+        return;
+      }
+
+      const room = rooms.get(player.roomCode);
+      if (!room) {
+        ack?.({ success: false, error: 'Oda bulunamadı' });
+        return;
+      }
+
+      const result = engine.forceStartBriefing(room.state, player.playerId);
+      if (result.error) {
+        ack?.({ success: false, error: result.error });
+        return;
+      }
+
+      room.state = result.state;
+      roomTimers.clearOpeningTimer(room.timers); // Clear briefing timer
+      scheduleOpeningTimer(room);
+      io.to(player.roomCode).emit('state_update', sanitizeStateForAll(room.state, room));
       ack?.({ success: true });
     }));
 
