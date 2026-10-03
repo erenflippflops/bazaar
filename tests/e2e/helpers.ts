@@ -157,3 +157,63 @@ export async function verifyPlayerSlots(page: Page, nickname: string, expectedIt
   const slotLocator = page.locator(`text="${slotText}"`);
   await expect(slotLocator).toBeVisible({ timeout: 5000 });
 }
+
+/**
+ * Compare two screenshots and return the percentage of different pixels
+ * @param page - Playwright page instance
+ * @param mockupPath - Path to the HTML mockup file to compare against
+ * @param width - Screenshot width
+ * @param height - Screenshot height
+ * @param threshold - Pixel difference threshold (0.015 = 1.5%)
+ * @returns Object with pass/fail status, diff percentage, and optional diff buffer
+ */
+export async function compareScreenshots(
+  page: Page,
+  mockupPath: string,
+  width: number,
+  height: number,
+  threshold: number = 0.015
+): Promise<{ passed: boolean; diffPercent: number; diffBuffer?: Buffer }> {
+  const pixelmatch = (await import('pixelmatch')).default;
+  const { PNG } = await import('pngjs');
+
+  // Wait for fonts to be ready
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(500); // Extra time for rendering to stabilize
+
+  // Capture the rendered React screen
+  const reactScreenshot = await page.screenshot({ fullPage: false });
+  const reactPng = PNG.sync.read(reactScreenshot);
+
+  // Open the mockup HTML in a new page
+  const mockupPage = await page.context().newPage();
+  await mockupPage.setViewportSize({ width, height });
+  await mockupPage.goto(`file://${mockupPath}`, { waitUntil: 'networkidle' });
+  await mockupPage.evaluate(() => document.fonts.ready);
+  await mockupPage.waitForTimeout(500);
+
+  const mockupScreenshot = await mockupPage.screenshot({ fullPage: false });
+  const mockupPng = PNG.sync.read(mockupScreenshot);
+  await mockupPage.close();
+
+  // Compare images
+  const diff = new PNG({ width, height });
+  const numDiffPixels = pixelmatch(
+    reactPng.data,
+    mockupPng.data,
+    diff.data,
+    width,
+    height,
+    { threshold: 0.1 }
+  );
+
+  const totalPixels = width * height;
+  const diffPercent = numDiffPixels / totalPixels;
+  const passed = diffPercent < threshold;
+
+  return {
+    passed,
+    diffPercent,
+    diffBuffer: passed ? undefined : Buffer.from(PNG.sync.write(diff)),
+  };
+}

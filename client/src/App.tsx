@@ -7,9 +7,16 @@ import GameScreen from './screens/GameScreen';
 import ResultsScreen from './screens/ResultsScreen';
 import BackgroundDecorations from './components/BackgroundDecorations';
 import Footer from './components/Footer';
+import DesignHarness from './harness/DesignHarness';
 import './App.css';
 
 function App() {
+  // Check if we're in design harness mode
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('mock')) {
+    return <DesignHarness />;
+  }
+
   const { socket, gameState, connected } = useSocket();
 
   if (!connected) {
