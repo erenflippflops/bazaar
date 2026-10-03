@@ -1,6 +1,7 @@
 export interface Item {
   name: string;
   description: string;
+  position?: string; // For halisaha: "GK" | "DEF" | "MID" | "FWD"
 }
 
 export interface Player {

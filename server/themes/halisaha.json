@@ -1,6 +1,12 @@
 {
   "id": "halisaha",
   "slots": 4,
+  "slotTypes": [
+    "GK",
+    "FIELD",
+    "FIELD",
+    "FIELD"
+  ],
   "emoji": "⚽",
   "name": {
     "tr": "4'lü Halı Saha",
@@ -13,45 +19,565 @@
     "de": ""
   },
   "items": [
-    { "id": "neuer", "name": { "tr": "Manuel Neuer", "en": "", "de": "" }, "description": { "tr": "Kaleci – Dünya Kupası şampiyonu", "en": "", "de": "" } },
-    { "id": "courtois", "name": { "tr": "Thibaut Courtois", "en": "", "de": "" }, "description": { "tr": "Kaleci – Şampiyonlar Ligi finali yıldızı", "en": "", "de": "" } },
-    { "id": "alisson", "name": { "tr": "Alisson Becker", "en": "", "de": "" }, "description": { "tr": "Kaleci – Premier League ve UCL şampiyonu", "en": "", "de": "" } },
-    { "id": "oblak", "name": { "tr": "Jan Oblak", "en": "", "de": "" }, "description": { "tr": "Kaleci – En az gol yiyen kalecilerden", "en": "", "de": "" } },
-    { "id": "buffon", "name": { "tr": "Gianluigi Buffon", "en": "", "de": "" }, "description": { "tr": "Kaleci – İtalyan efsanesi, Dünya Kupası kazandı", "en": "", "de": "" } },
-    { "id": "casillas", "name": { "tr": "Iker Casillas", "en": "", "de": "" }, "description": { "tr": "Kaleci – 3 Şampiyonlar Ligi, Dünya Kupası", "en": "", "de": "" } },
-    { "id": "van-dijk", "name": { "tr": "Virgil van Dijk", "en": "", "de": "" }, "description": { "tr": "Defans – Yılın futbolcusu, modern stoper lideri", "en": "", "de": "" } },
-    { "id": "ramos", "name": { "tr": "Sergio Ramos", "en": "", "de": "" }, "description": { "tr": "Defans – 4 Şampiyonlar Ligi, liderlik sembolü", "en": "", "de": "" } },
-    { "id": "maldini", "name": { "tr": "Paolo Maldini", "en": "", "de": "" }, "description": { "tr": "Defans – Tüm zamanların en iyisi, 5 UCL", "en": "", "de": "" } },
-    { "id": "puyol", "name": { "tr": "Carles Puyol", "en": "", "de": "" }, "description": { "tr": "Defans – Barcelona'nın kalbi, Dünya Kupası", "en": "", "de": "" } },
-    { "id": "beckenbauer", "name": { "tr": "Franz Beckenbauer", "en": "", "de": "" }, "description": { "tr": "Defans – Libero'nun mucidi, Dünya Kupası", "en": "", "de": "" } },
-    { "id": "cannavaro", "name": { "tr": "Fabio Cannavaro", "en": "", "de": "" }, "description": { "tr": "Defans – Altın Top kazanan savunmacı", "en": "", "de": "" } },
-    { "id": "chiellini", "name": { "tr": "Giorgio Chiellini", "en": "", "de": "" }, "description": { "tr": "Defans – Euro şampiyonu, İtalyan çeliği", "en": "", "de": "" } },
-    { "id": "baresi", "name": { "tr": "Franco Baresi", "en": "", "de": "" }, "description": { "tr": "Defans – Milan efsanesi, 6 scudetto", "en": "", "de": "" } },
-    { "id": "lahm", "name": { "tr": "Philipp Lahm", "en": "", "de": "" }, "description": { "tr": "Defans – Dünya Kupası kaptanı, çok yönlü", "en": "", "de": "" } },
-    { "id": "cafu", "name": { "tr": "Cafu", "en": "", "de": "" }, "description": { "tr": "Defans – 2 Dünya Kupası, sağ bek efsanesi", "en": "", "de": "" } },
-    { "id": "modric", "name": { "tr": "Luka Modrić", "en": "", "de": "" }, "description": { "tr": "Orta saha – Altın Top, 5 Şampiyonlar Ligi", "en": "", "de": "" } },
-    { "id": "xavi", "name": { "tr": "Xavi Hernández", "en": "", "de": "" }, "description": { "tr": "Orta saha – Tiki-taka ustası, 4 UCL", "en": "", "de": "" } },
-    { "id": "iniesta", "name": { "tr": "Andrés Iniesta", "en": "", "de": "" }, "description": { "tr": "Orta saha – Dünya Kupası golü attı, 4 UCL", "en": "", "de": "" } },
-    { "id": "zidane", "name": { "tr": "Zinedine Zidane", "en": "", "de": "" }, "description": { "tr": "Orta saha – Dünya Kupası ve UCL şampiyonu", "en": "", "de": "" } },
-    { "id": "pirlo", "name": { "tr": "Andrea Pirlo", "en": "", "de": "" }, "description": { "tr": "Orta saha – Serbest vuruş sanatçısı", "en": "", "de": "" } },
-    { "id": "gerrard", "name": { "tr": "Steven Gerrard", "en": "", "de": "" }, "description": { "tr": "Orta saha – Liverpool'un kalbi, 2005 UCL", "en": "", "de": "" } },
-    { "id": "kante", "name": { "tr": "N'Golo Kanté", "en": "", "de": "" }, "description": { "tr": "Orta saha – Top kapmada dünyanın en iyisi", "en": "", "de": "" } },
-    { "id": "de-bruyne", "name": { "tr": "Kevin De Bruyne", "en": "", "de": "" }, "description": { "tr": "Orta saha – Asist kralı, vizyon oyuncusu", "en": "", "de": "" } },
-    { "id": "busquets", "name": { "tr": "Sergio Busquets", "en": "", "de": "" }, "description": { "tr": "Orta saha – Sessiz lider, oyunu okur", "en": "", "de": "" } },
-    { "id": "seedorf", "name": { "tr": "Clarence Seedorf", "en": "", "de": "" }, "description": { "tr": "Orta saha – 3 farklı kulüple UCL kazandı", "en": "", "de": "" } },
-    { "id": "scholes", "name": { "tr": "Paul Scholes", "en": "", "de": "" }, "description": { "tr": "Orta saha – Manchester United'ın beyni", "en": "", "de": "" } },
-    { "id": "lampard", "name": { "tr": "Frank Lampard", "en": "", "de": "" }, "description": { "tr": "Orta saha – Chelsea efsanesi, gol atan ortasaha", "en": "", "de": "" } },
-    { "id": "messi", "name": { "tr": "Lionel Messi", "en": "", "de": "" }, "description": { "tr": "Forvet – 8 Altın Top, Dünya Kupası", "en": "", "de": "" } },
-    { "id": "ronaldo", "name": { "tr": "Cristiano Ronaldo", "en": "", "de": "" }, "description": { "tr": "Forvet – 5 Altın Top, 5 Şampiyonlar Ligi", "en": "", "de": "" } },
-    { "id": "r9", "name": { "tr": "Ronaldo Nazário", "en": "", "de": "" }, "description": { "tr": "Forvet – 2 Dünya Kupası, orijinal Fenomeno", "en": "", "de": "" } },
-    { "id": "mbappe", "name": { "tr": "Kylian Mbappé", "en": "", "de": "" }, "description": { "tr": "Forvet – Dünya Kupası şampiyonu, süper hız", "en": "", "de": "" } },
-    { "id": "haaland", "name": { "tr": "Erling Haaland", "en": "", "de": "" }, "description": { "tr": "Forvet – Premier League 36 gol rekoru", "en": "", "de": "" } },
-    { "id": "lewandowski", "name": { "tr": "Robert Lewandowski", "en": "", "de": "" }, "description": { "tr": "Forvet – Şampiyonlar Ligi gol makinesi", "en": "", "de": "" } },
-    { "id": "benzema", "name": { "tr": "Karim Benzema", "en": "", "de": "" }, "description": { "tr": "Forvet – Altın Top, 5 Şampiyonlar Ligi", "en": "", "de": "" } },
-    { "id": "suarez", "name": { "tr": "Luis Suárez", "en": "", "de": "" }, "description": { "tr": "Forvet – İnatçı golcü, MSN üçlüsünde", "en": "", "de": "" } },
-    { "id": "romario", "name": { "tr": "Romário", "en": "", "de": "" }, "description": { "tr": "Forvet – Dünya Kupası 94, ceza sahasının kralı", "en": "", "de": "" } },
-    { "id": "zlatan", "name": { "tr": "Zlatan Ibrahimović", "en": "", "de": "" }, "description": { "tr": "Forvet – 12 farklı ligde şampiyon", "en": "", "de": "" } },
-    { "id": "salah", "name": { "tr": "Mohamed Salah", "en": "", "de": "" }, "description": { "tr": "Forvet – Premier League gol kralı, Mısır Kralı", "en": "", "de": "" } },
-    { "id": "villa", "name": { "tr": "David Villa", "en": "", "de": "" }, "description": { "tr": "Forvet – İspanya'nın gol kralı, Dünya Kupası", "en": "", "de": "" } }
+    {
+      "id": "neuer",
+      "name": {
+        "tr": "Manuel Neuer",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Kaleci – Dünya Kupası şampiyonu",
+        "en": "",
+        "de": ""
+      },
+      "position": "GK"
+    },
+    {
+      "id": "courtois",
+      "name": {
+        "tr": "Thibaut Courtois",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Kaleci – Şampiyonlar Ligi finali yıldızı",
+        "en": "",
+        "de": ""
+      },
+      "position": "GK"
+    },
+    {
+      "id": "alisson",
+      "name": {
+        "tr": "Alisson Becker",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Kaleci – Premier League ve UCL şampiyonu",
+        "en": "",
+        "de": ""
+      },
+      "position": "GK"
+    },
+    {
+      "id": "oblak",
+      "name": {
+        "tr": "Jan Oblak",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Kaleci – En az gol yiyen kalecilerden",
+        "en": "",
+        "de": ""
+      },
+      "position": "GK"
+    },
+    {
+      "id": "buffon",
+      "name": {
+        "tr": "Gianluigi Buffon",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Kaleci – İtalyan efsanesi, Dünya Kupası kazandı",
+        "en": "",
+        "de": ""
+      },
+      "position": "GK"
+    },
+    {
+      "id": "casillas",
+      "name": {
+        "tr": "Iker Casillas",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Kaleci – 3 Şampiyonlar Ligi, Dünya Kupası",
+        "en": "",
+        "de": ""
+      },
+      "position": "GK"
+    },
+    {
+      "id": "van-dijk",
+      "name": {
+        "tr": "Virgil van Dijk",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Defans – Yılın futbolcusu, modern stoper lideri",
+        "en": "",
+        "de": ""
+      },
+      "position": "DEF"
+    },
+    {
+      "id": "ramos",
+      "name": {
+        "tr": "Sergio Ramos",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Defans – 4 Şampiyonlar Ligi, liderlik sembolü",
+        "en": "",
+        "de": ""
+      },
+      "position": "DEF"
+    },
+    {
+      "id": "maldini",
+      "name": {
+        "tr": "Paolo Maldini",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Defans – Tüm zamanların en iyisi, 5 UCL",
+        "en": "",
+        "de": ""
+      },
+      "position": "DEF"
+    },
+    {
+      "id": "puyol",
+      "name": {
+        "tr": "Carles Puyol",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Defans – Barcelona'nın kalbi, Dünya Kupası",
+        "en": "",
+        "de": ""
+      },
+      "position": "DEF"
+    },
+    {
+      "id": "beckenbauer",
+      "name": {
+        "tr": "Franz Beckenbauer",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Defans – Libero'nun mucidi, Dünya Kupası",
+        "en": "",
+        "de": ""
+      },
+      "position": "DEF"
+    },
+    {
+      "id": "cannavaro",
+      "name": {
+        "tr": "Fabio Cannavaro",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Defans – Altın Top kazanan savunmacı",
+        "en": "",
+        "de": ""
+      },
+      "position": "DEF"
+    },
+    {
+      "id": "chiellini",
+      "name": {
+        "tr": "Giorgio Chiellini",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Defans – Euro şampiyonu, İtalyan çeliği",
+        "en": "",
+        "de": ""
+      },
+      "position": "DEF"
+    },
+    {
+      "id": "baresi",
+      "name": {
+        "tr": "Franco Baresi",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Defans – Milan efsanesi, 6 scudetto",
+        "en": "",
+        "de": ""
+      },
+      "position": "DEF"
+    },
+    {
+      "id": "lahm",
+      "name": {
+        "tr": "Philipp Lahm",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Defans – Dünya Kupası kaptanı, çok yönlü",
+        "en": "",
+        "de": ""
+      },
+      "position": "DEF"
+    },
+    {
+      "id": "cafu",
+      "name": {
+        "tr": "Cafu",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Defans – 2 Dünya Kupası, sağ bek efsanesi",
+        "en": "",
+        "de": ""
+      },
+      "position": "DEF"
+    },
+    {
+      "id": "modric",
+      "name": {
+        "tr": "Luka Modrić",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Altın Top, 5 Şampiyonlar Ligi",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "xavi",
+      "name": {
+        "tr": "Xavi Hernández",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Tiki-taka ustası, 4 UCL",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "iniesta",
+      "name": {
+        "tr": "Andrés Iniesta",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Dünya Kupası golü attı, 4 UCL",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "zidane",
+      "name": {
+        "tr": "Zinedine Zidane",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Dünya Kupası ve UCL şampiyonu",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "pirlo",
+      "name": {
+        "tr": "Andrea Pirlo",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Serbest vuruş sanatçısı",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "gerrard",
+      "name": {
+        "tr": "Steven Gerrard",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Liverpool'un kalbi, 2005 UCL",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "kante",
+      "name": {
+        "tr": "N'Golo Kanté",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Top kapmada dünyanın en iyisi",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "de-bruyne",
+      "name": {
+        "tr": "Kevin De Bruyne",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Asist kralı, vizyon oyuncusu",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "busquets",
+      "name": {
+        "tr": "Sergio Busquets",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Sessiz lider, oyunu okur",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "seedorf",
+      "name": {
+        "tr": "Clarence Seedorf",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – 3 farklı kulüple UCL kazandı",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "scholes",
+      "name": {
+        "tr": "Paul Scholes",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Manchester United'ın beyni",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "lampard",
+      "name": {
+        "tr": "Frank Lampard",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Orta saha – Chelsea efsanesi, gol atan ortasaha",
+        "en": "",
+        "de": ""
+      },
+      "position": "MID"
+    },
+    {
+      "id": "messi",
+      "name": {
+        "tr": "Lionel Messi",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – 8 Altın Top, Dünya Kupası",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "ronaldo",
+      "name": {
+        "tr": "Cristiano Ronaldo",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – 5 Altın Top, 5 Şampiyonlar Ligi",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "r9",
+      "name": {
+        "tr": "Ronaldo Nazário",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – 2 Dünya Kupası, orijinal Fenomeno",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "mbappe",
+      "name": {
+        "tr": "Kylian Mbappé",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – Dünya Kupası şampiyonu, süper hız",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "haaland",
+      "name": {
+        "tr": "Erling Haaland",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – Premier League 36 gol rekoru",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "lewandowski",
+      "name": {
+        "tr": "Robert Lewandowski",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – Şampiyonlar Ligi gol makinesi",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "benzema",
+      "name": {
+        "tr": "Karim Benzema",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – Altın Top, 5 Şampiyonlar Ligi",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "suarez",
+      "name": {
+        "tr": "Luis Suárez",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – İnatçı golcü, MSN üçlüsünde",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "romario",
+      "name": {
+        "tr": "Romário",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – Dünya Kupası 94, ceza sahasının kralı",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "zlatan",
+      "name": {
+        "tr": "Zlatan Ibrahimović",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – 12 farklı ligde şampiyon",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "salah",
+      "name": {
+        "tr": "Mohamed Salah",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – Premier League gol kralı, Mısır Kralı",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    },
+    {
+      "id": "villa",
+      "name": {
+        "tr": "David Villa",
+        "en": "",
+        "de": ""
+      },
+      "description": {
+        "tr": "Forvet – İspanya'nın gol kralı, Dünya Kupası",
+        "en": "",
+        "de": ""
+      },
+      "position": "FWD"
+    }
   ]
 }
