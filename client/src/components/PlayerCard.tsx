@@ -1,3 +1,5 @@
+import { t } from '../i18n';
+
 interface PlayerCardProps {
   player: {
     nickname: string;
@@ -71,7 +73,7 @@ export default function PlayerCard({ player, themeId }: PlayerCardProps) {
           {gold}
         </span>
         <span style={{ fontSize: '12px', fontWeight: 700, color: textColor }}>
-          altın · {filledSlots}/{totalSlots} slot
+          {t('player.gold')} · {filledSlots}/{totalSlots} {t('player.slot')}
         </span>
       </div>
 
@@ -113,10 +115,10 @@ export default function PlayerCard({ player, themeId }: PlayerCardProps) {
             >
               {isEmpty
                 ? isKaleciSlot
-                  ? 'kaleci'
+                  ? t('player.slotGoalie')
                   : isHalisaha
-                  ? 'oyuncu'
-                  : 'boş'
+                  ? t('player.slotPlayer')
+                  : t('player.slotEmpty')
                 : slot.itemName}
             </span>
           );

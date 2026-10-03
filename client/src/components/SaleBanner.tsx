@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { t } from '../i18n';
 
 interface SaleBannerProps {
   item: string;
@@ -42,7 +43,7 @@ export default function SaleBanner({ item, winner, amount, onComplete }: SaleBan
           margin: 0,
         }}
       >
-        {item} → {winner} · {amount} altın
+        {item} → {winner} · {amount} {t('playerList.gold')}
       </p>
       <style>{`
         @keyframes slideDown {

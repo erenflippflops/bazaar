@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Socket } from 'socket.io-client';
 import Timer from './Timer';
+import { t } from '../i18n';
 
 interface Player {
   id: string;
@@ -71,7 +72,7 @@ export default function AuctionPanel({
     socket.emit('pass_bid', {}, (response: any) => {
       setPassPending(false);
       if (response?.success === false) {
-        setFeedback({ ok: false, text: response.error || 'Pas geçilemedi' });
+        setFeedback({ ok: false, text: response.error || t('auction.opening.passFailed') });
         setTimeout(() => setFeedback(null), 1800);
       } else {
         setHasPassed(true);
@@ -85,8 +86,8 @@ export default function AuctionPanel({
     setPending(true); setFeedback(null);
     socket.emit('place_bid', { amount }, (response: any) => {
       setPending(false);
-      if (response?.success === false) setFeedback({ ok: false, text: response.error || 'Teklif verilemedi' });
-      else setFeedback({ ok: true, text: `Teklifin alındı: ${amount} altın` });
+      if (response?.success === false) setFeedback({ ok: false, text: response.error || t('auction.opening.bidFailed') });
+      else setFeedback({ ok: true, text: t('auction.opening.bidAccepted', { amount }) });
       setTimeout(() => setFeedback(null), 1800);
     });
   };
@@ -100,7 +101,7 @@ export default function AuctionPanel({
 
     socket.emit('place_bid', { amount: proposedBid }, (response: any) => {
       if (response?.success === false) {
-        alert(response.error || 'Teklif verilemedi');
+        alert(response.error || t('auction.opening.bidFailed'));
       } else {
         setSelectedIncrement(0);
       }
@@ -124,7 +125,7 @@ export default function AuctionPanel({
         <div className="card" style={{ textAlign: 'center' }}>
           <Timer endsAt={openingEndsAt} />
           <h3 style={{ fontSize: '20px', marginTop: '20px', color: 'var(--white)' }}>
-            {currentOpener?.nickname} açılış teklifi veriyor...
+            {t('auction.opening.waiting', { nickname: currentOpener?.nickname })}
           </h3>
         </div>
       );
@@ -132,10 +133,10 @@ export default function AuctionPanel({
 
     return (
       <div className="card" style={{ textAlign: 'center' }}>
-        <Timer endsAt={openingEndsAt} label="AÇILIŞ" />
+        <Timer endsAt={openingEndsAt} label={t('auction.opening.label')} />
 
         <h3 style={{ fontSize: '20px', margin: '20px 0 10px', color: 'var(--white)' }}>
-          Açılış teklifi ver
+          {t('auction.opening.yourTurn')}
         </h3>
 
         <div style={{
@@ -148,9 +149,9 @@ export default function AuctionPanel({
           gap: '8px',
           flexWrap: 'wrap'
         }}>
-          <span>Altının <b style={{ color: 'var(--white)' }}>{myGold}</b></span>
-          <span style={{ color: 'var(--saffron)', fontWeight: 800 }}>En fazla <b style={{ color: 'var(--saffron)' }}>{myMaxBid}</b> altın verebilirsin</span>
-          <span>Slot <b style={{ color: 'var(--white)' }}>{myFilledSlots}/3</b></span>
+          <span>{t('auction.opening.yourGold', { gold: myGold })}</span>
+          <span style={{ color: 'var(--saffron)', fontWeight: 800 }}>{t('auction.opening.maxBid', { max: myMaxBid })}</span>
+          <span>{t('auction.opening.slotInfo', { filled: myFilledSlots, total: 3 })}</span>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '10px' }}>
@@ -205,7 +206,7 @@ export default function AuctionPanel({
             fontSize: '24px',
           }}
         >
-          {minBid > (myMaxBid || 0) ? `Limit: ${myMaxBid || 0} altın` : `TEKLİF VER · ${minBid}`}
+          {minBid > (myMaxBid || 0) ? t('auction.opening.limitReached', { max: myMaxBid || 0 }) : t('auction.opening.placeBid', { amount: minBid })}
         </button>
           {feedback && (
             <p data-testid="bid-feedback" style={{ marginTop: 8, textAlign: 'center', fontWeight: 700, color: feedback.ok ? 'var(--turquoise)' : 'var(--pomegranate, #F0386B)' }}>{feedback.text}</p>
@@ -213,7 +214,7 @@ export default function AuctionPanel({
 
         {!canAfford && proposedBid > 0 && (
           <p style={{ marginTop: '10px', fontSize: '13px', color: 'var(--pomegranate)' }}>
-            Bu teklif altın limitini aşar
+            {t('auction.opening.exceedsLimit')}
           </p>
         )}
       </div>
@@ -234,7 +235,7 @@ export default function AuctionPanel({
             textAlign: 'center',
           }}>
             <p style={{ fontSize: '18px', fontWeight: 800, color: 'var(--dark)' }}>
-              Herkes pas dedi – SATILDI!
+              {t('auction.bidding.settled')}
             </p>
           </div>
         </div>
@@ -262,7 +263,7 @@ export default function AuctionPanel({
                 letterSpacing: '0.1em',
                 color: 'var(--muted)'
               }}>
-                EN YÜKSEK TEKLİF
+                {t('auction.bidding.highestBid')}
               </span>
               <span style={{
                 fontFamily: 'var(--font-heading)',
@@ -270,14 +271,14 @@ export default function AuctionPanel({
                 lineHeight: 1,
                 color: 'var(--white)'
               }}>
-                {currentHighestBid} ALTIN
+                {currentHighestBid} {t('auction.bidding.gold')}
               </span>
               <span style={{
                 fontSize: '15px',
                 fontWeight: 700,
                 color: 'var(--turquoise)'
               }}>
-                {highestBidder?.nickname || 'Kimse'} önde
+                {t('auction.bidding.leading', { nickname: highestBidder?.nickname || t('auction.bidding.nobody') })}
               </span>
             </div>
             <Timer endsAt={auctionEndsAt} />
@@ -319,7 +320,7 @@ export default function AuctionPanel({
               letterSpacing: '0.1em',
               color: 'var(--muted)'
             }}>
-              EN YÜKSEK TEKLİF
+              {t('auction.bidding.highestBid')}
             </span>
             <span style={{
               fontFamily: 'var(--font-heading)',
@@ -327,14 +328,14 @@ export default function AuctionPanel({
               lineHeight: 1,
               color: 'var(--white)'
             }}>
-              {currentHighestBid} ALTIN
+              {currentHighestBid} {t('auction.bidding.gold')}
             </span>
             <span style={{
               fontSize: '15px',
               fontWeight: 700,
               color: 'var(--turquoise)'
             }}>
-              {highestBidder?.nickname || 'Kimse'} önde
+              {t('auction.bidding.leading', { nickname: highestBidder?.nickname || t('auction.bidding.nobody') })}
             </span>
           </div>
           <Timer endsAt={auctionEndsAt} />
@@ -349,7 +350,7 @@ export default function AuctionPanel({
             textAlign: 'center',
           }}>
             <p style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)' }}>
-              Slotların dolu, izliyorsun
+              {t('auction.bidding.youreOut')}
             </p>
           </div>
         ) : amIHighestBidder ? (
@@ -361,7 +362,7 @@ export default function AuctionPanel({
             textAlign: 'center',
           }}>
             <p style={{ fontSize: '18px', fontWeight: 800, color: 'var(--dark)' }}>
-              En yüksek teklif senin!
+              {t('auction.bidding.youreLeading')}
             </p>
           </div>
         ) : (
@@ -376,9 +377,9 @@ export default function AuctionPanel({
               gap: '8px',
               flexWrap: 'wrap'
             }}>
-              <span>Altının <b style={{ color: 'var(--white)' }}>{myGold}</b></span>
-              <span style={{ color: 'var(--saffron)', fontWeight: 800 }}>En fazla <b style={{ color: 'var(--saffron)' }}>{myMaxBid}</b> altın verebilirsin</span>
-              <span>Slot <b style={{ color: 'var(--white)' }}>{myFilledSlots}/3</b></span>
+              <span>{t('auction.opening.yourGold', { gold: myGold })}</span>
+              <span style={{ color: 'var(--saffron)', fontWeight: 800 }}>{t('auction.opening.maxBid', { max: myMaxBid })}</span>
+              <span>{t('auction.opening.slotInfo', { filled: myFilledSlots, total: 3 })}</span>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '10px' }}>
@@ -433,7 +434,7 @@ export default function AuctionPanel({
                 fontSize: '24px',
               }}
             >
-              {minBid > (myMaxBid || 0) ? `Limit: ${myMaxBid || 0} altın` : `TEKLİF VER · ${minBid}`}
+              {minBid > (myMaxBid || 0) ? t('auction.opening.limitReached', { max: myMaxBid || 0 }) : t('auction.opening.placeBid', { amount: minBid })}
             </button>
 
             {showPassButton && (
@@ -451,7 +452,7 @@ export default function AuctionPanel({
                   color: 'var(--pomegranate)',
                 }}
               >
-                PAS
+                {t('auction.bidding.passButton')}
               </button>
             )}
 
@@ -461,7 +462,7 @@ export default function AuctionPanel({
 
             {selectedIncrement > 0 && !canAfford && (
               <p style={{ marginTop: '10px', fontSize: '13px', color: 'var(--pomegranate)', textAlign: 'center' }}>
-                Bu teklif altın limitini aşar
+                {t('auction.opening.exceedsLimit')}
               </p>
             )}
           </>

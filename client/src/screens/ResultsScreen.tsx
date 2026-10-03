@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import RankingCard from '../components/RankingCard';
+import { t } from '../i18n';
 
 interface Item {
   name: string;
@@ -42,7 +43,7 @@ export default function ResultsScreen({ socket, gameState }: ResultsScreenProps)
   if (!gameState || !gameState.ranking) {
     return (
       <div style={{ padding: '40px', textAlign: 'center' }}>
-        <p>Yükleniyor...</p>
+        <p>{t('results.loading')}</p>
       </div>
     );
   }
@@ -54,7 +55,7 @@ export default function ResultsScreen({ socket, gameState }: ResultsScreenProps)
     if (!socket) return;
     socket.emit('rematch', {}, (response: any) => {
       if (response?.success === false) {
-        alert(response.error || 'Yeniden oyun başlatılamadı');
+        alert(response.error || t('results.errorRematchFailed'));
       }
     });
   };
@@ -78,7 +79,7 @@ export default function ResultsScreen({ socket, gameState }: ResultsScreenProps)
           marginBottom: '40px',
           color: 'var(--saffron)',
         }}>
-          BAZAAR KAPANDI!
+          {t('results.title')}
         </h1>
 
         {/* Ranking cards */}
@@ -157,13 +158,13 @@ export default function ResultsScreen({ socket, gameState }: ResultsScreenProps)
             onClick={handleRematch}
             style={{ width: '100%', fontSize: '24px', padding: '20px' }}
           >
-            Yeniden Oyna
+            {t('results.rematch')}
           </button>
         )}
 
         {!isHost && (
           <p style={{ textAlign: 'center', color: 'var(--muted)', fontSize: '16px' }}>
-            Ev sahibi yeni oyun başlatabilir
+            {t('results.hostCanRematch')}
           </p>
         )}
       </div>

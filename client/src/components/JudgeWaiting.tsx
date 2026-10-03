@@ -1,5 +1,6 @@
 import { Socket } from 'socket.io-client';
 import { useEffect, useState } from 'react';
+import { t } from '../i18n';
 
 interface Item {
   name: string;
@@ -63,7 +64,7 @@ export default function JudgeWaiting({ socket, gameState, isHost }: JudgeWaiting
     if (!socket) return;
     socket.emit('retry_judge', {}, (response: any) => {
       if (response?.success === false) {
-        alert(response.error || 'Hakem tekrar çalıştırılamadı');
+        alert(response.error || t('judge.errorRetryFailed'));
       }
     });
   };
@@ -88,10 +89,10 @@ export default function JudgeWaiting({ socket, gameState, isHost }: JudgeWaiting
           color: 'var(--white)',
           marginBottom: '15px',
         }}>
-          Hakem düşünüyor...
+          {t('judge.thinking')}
         </h3>
         <p style={{ color: 'var(--muted)', fontSize: '16px' }}>
-          Koleksiyonlar değerlendiriliyor
+          {t('judge.evaluating')}
         </p>
       </div>
     );
@@ -106,7 +107,7 @@ export default function JudgeWaiting({ socket, gameState, isHost }: JudgeWaiting
           color: 'var(--pomegranate)',
           marginBottom: '20px',
         }}>
-          Hakem Kafayı Yedi!
+          {t('judge.failed.title')}
         </h3>
         <p style={{
           fontSize: '16px',
@@ -114,7 +115,7 @@ export default function JudgeWaiting({ socket, gameState, isHost }: JudgeWaiting
           marginBottom: '30px',
           lineHeight: '1.5',
         }}>
-          Sıralamada bir sorun oluştu. {isHost ? 'Hakemi tekrar çalıştırabilirsin.' : 'Ev sahibi hakemi tekrar çalıştırabilir.'}
+          {t('judge.failed.message', { isHost: isHost ? t('judge.failed.messageHost') : t('judge.failed.messageGuest') })}
         </p>
         {isHost && (
           <button
@@ -122,7 +123,7 @@ export default function JudgeWaiting({ socket, gameState, isHost }: JudgeWaiting
             onClick={handleRetry}
             style={{ width: '100%', fontSize: '20px', padding: '16px' }}
           >
-            Tekrar Dene
+            {t('judge.retry')}
           </button>
         )}
       </div>

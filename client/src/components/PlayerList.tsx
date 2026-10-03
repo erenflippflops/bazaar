@@ -1,3 +1,5 @@
+import { t } from '../i18n';
+
 interface Item {
   name: string;
   description: string;
@@ -36,12 +38,12 @@ export default function PlayerList({ players, currentPlayerId, phase, passedPlay
             <div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', fontWeight: 800, marginBottom: '4px', fontSize: '14px' }}>
                 <span>{player.nickname}</span>
-                {isMe && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: isActive ? 'var(--white)' : 'var(--muted)' }}>SEN</span>}
-                {isActive && !isMe && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--white)' }}>SIRA</span>}
-                {showPassBadge && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--pomegranate)' }}>PAS</span>}
+                {isMe && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: isActive ? 'var(--white)' : 'var(--muted)' }}>{t('player.you')}</span>}
+                {isActive && !isMe && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--white)' }}>{t('player.turn')}</span>}
+                {showPassBadge && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--pomegranate)' }}>{t('player.passed')}</span>}
               </div>
               <div style={{ fontSize: '13px', fontWeight: 700 }}>
-                {player.gold} <span style={{ fontWeight: 600, color: isActive ? 'var(--white)' : 'var(--muted)' }}>altın</span>
+                {player.gold} <span style={{ fontWeight: 600, color: isActive ? 'var(--white)' : 'var(--muted)' }}>{t('playerList.gold')}</span>
               </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', alignItems: 'flex-end' }}>

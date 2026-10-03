@@ -8,6 +8,7 @@ import AuctionPanel from '../components/AuctionPanel';
 import JudgeWaiting from '../components/JudgeWaiting';
 import LanternString from '../components/LanternString';
 import { Theme } from '../types';
+import { t } from '../i18n';
 
 interface Item {
   name: string;
@@ -66,7 +67,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
   if (!gameState) {
     return (
       <div style={{ padding: '40px', textAlign: 'center' }}>
-        <p>Yükleniyor...</p>
+        <p>{t('game.loading')}</p>
       </div>
     );
   }
@@ -88,7 +89,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
     if (!socket) return;
     socket.emit('spin_wheel', {}, (response: any) => {
       if (response?.success === false) {
-        alert(response.error || 'Çark çevrilemedi');
+        alert(response.error || t('game.errorSpinFailed'));
       }
     });
   };
@@ -99,8 +100,8 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
       {/* Top bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: typeof window !== 'undefined' && window.innerWidth < 768 ? '10px' : '20px', position: 'relative', zIndex: 2 }}>
         <div>
-          <p style={{ fontSize: '14px', color: 'var(--muted)' }}>ODA: {gameState.roomCode}</p>
-          <p style={{ fontSize: '14px', color: 'var(--muted)' }}>MEZAT: {currentAuction}/{totalAuctions}</p>
+          <p style={{ fontSize: '14px', color: 'var(--muted)' }}>{t('game.room', { code: gameState.roomCode })}</p>
+          <p style={{ fontSize: '14px', color: 'var(--muted)' }}>{t('game.auction', { current: currentAuction, total: totalAuctions })}</p>
         </div>
         {myPlayer && (
           <div style={{ textAlign: 'right' }} className="mobile-only-gold">
@@ -108,7 +109,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
               {myPlayer.gold}
             </p>
             <p style={{ fontSize: '14px', color: 'var(--muted)' }}>
-              Slot: {myPlayer.slots.filter(s => s !== null).length}/{slotsPerPlayer}
+              {t('game.slot', { filled: myPlayer.slots.filter(s => s !== null).length, total: slotsPerPlayer })}
             </p>
           </div>
         )}
@@ -139,7 +140,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
                     <p style={{ fontSize: '10px', color: 'var(--muted)' }}>{slot.description}</p>
                   </>
                 ) : (
-                  <p style={{ color: 'var(--muted)', fontSize: '14px' }}>boş</p>
+                  <p style={{ color: 'var(--muted)', fontSize: '14px' }}>{t('game.empty')}</p>
                 )}
               </div>
             ))}
@@ -151,7 +152,7 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
       <div className="game-layout">
         {/* Left column: Players with collections */}
         <div className="players-column">
-          <h3 style={{ fontSize: '18px', marginBottom: '15px', color: 'var(--muted)' }}>Oyuncular</h3>
+          <h3 style={{ fontSize: '18px', marginBottom: '15px', color: 'var(--muted)' }}>{t('game.players')}</h3>
           <PlayerList
             players={gameState.players}
             currentPlayerId={gameState.phase === 'playing' ? currentOpener?.id : undefined}
@@ -181,9 +182,9 @@ export default function GameScreen({ socket, gameState }: GameScreenProps) {
           {gameState.phase === 'playing' && (
             <div className="card" style={{ textAlign: 'center' }}>
               <h3 style={{ fontSize: '24px', marginBottom: '20px', color: 'var(--white)' }}>
-                {isMyTurn ? 'Senin sıran!' : `${currentOpener?.nickname} çarkı çeviriyor...`}
+                {isMyTurn ? t('game.yourTurn') : t('game.playerSpinning', { nickname: currentOpener?.nickname })}
               </h3>
-              {isMyTurn && <p style={{ color: 'var(--muted)', margin: 0 }}>Çarka dokun ya da "ÇARKI ÇEVİR"e bas.</p>}
+              {isMyTurn && <p style={{ color: 'var(--muted)', margin: 0 }}>{t('game.spinInstruction')}</p>}
             </div>
           )}
 

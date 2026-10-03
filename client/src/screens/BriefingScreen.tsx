@@ -1,6 +1,7 @@
 import { Socket } from 'socket.io-client';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { t } from '../i18n';
 
 interface BriefingScreenProps {
   socket: Socket;
@@ -39,7 +40,7 @@ function BriefingScreen({ socket, gameState }: BriefingScreenProps) {
       flexDirection: 'column',
       justifyContent: 'center'
     }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>Nasıl Oynanır?</h1>
+      <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>{t('briefing.title')}</h1>
 
       <div style={{
         background: 'var(--card-bg)',
@@ -56,37 +57,37 @@ function BriefingScreen({ socket, gameState }: BriefingScreenProps) {
           lineHeight: '1.6'
         }}>
           <div>
-            <strong style={{ color: 'var(--primary)' }}>1. Çark Çevir</strong>
+            <strong style={{ color: 'var(--primary)' }}>{t('briefing.step1.title')}</strong>
             <p style={{ margin: '5px 0 0 0', color: 'var(--text)' }}>
-              Sıra sende mi? ÇARK ÇEVİR butonuna tıkla ve rastgele bir süper güç çıkar.
+              {t('briefing.step1.text')}
             </p>
           </div>
 
           <div>
-            <strong style={{ color: 'var(--primary)' }}>2. Açılış Teklifi</strong>
+            <strong style={{ color: 'var(--primary)' }}>{t('briefing.step2.title')}</strong>
             <p style={{ margin: '5px 0 0 0', color: 'var(--text)' }}>
-              Çarkı sen çevirdin mi? İlk teklifi sen verirsin (1-18 altın arası).
+              {t('briefing.step2.text')}
             </p>
           </div>
 
           <div>
-            <strong style={{ color: 'var(--primary)' }}>3. Artır veya Pas</strong>
+            <strong style={{ color: 'var(--primary)' }}>{t('briefing.step3.title')}</strong>
             <p style={{ margin: '5px 0 0 0', color: 'var(--text)' }}>
-              +1, +2 veya +5 ile teklifi artır. İstemiyorsan PAS de. Herkes pas derse en yüksek teklif kazanır.
+              {t('briefing.step3.text')}
             </p>
           </div>
 
           <div>
-            <strong style={{ color: 'var(--primary)' }}>4. Altın Limiti</strong>
+            <strong style={{ color: 'var(--primary)' }}>{t('briefing.step4.title')}</strong>
             <p style={{ margin: '5px 0 0 0', color: 'var(--text)' }}>
-              Boş slotların için altın ayır. 2 boş slot = en fazla 18 altın teklif edebilirsin.
+              {t('briefing.step4.text')}
             </p>
           </div>
 
           <div>
-            <strong style={{ color: 'var(--primary)' }}>5. Hakem</strong>
+            <strong style={{ color: 'var(--primary)' }}>{t('briefing.step5.title')}</strong>
             <p style={{ margin: '5px 0 0 0', color: 'var(--text)' }}>
-              Herkes 3 güç topladı mı? Yapay zeka hakem sıralar ve kazananı açıklar.
+              {t('briefing.step5.text')}
             </p>
           </div>
         </div>
@@ -98,7 +99,7 @@ function BriefingScreen({ socket, gameState }: BriefingScreenProps) {
         color: 'var(--muted)',
         fontSize: '14px'
       }}>
-        {readyCount} / {totalPlayers} oyuncu hazır
+        {t('briefing.readyCount', { ready: readyCount, total: totalPlayers })}
       </div>
 
       <button
@@ -118,7 +119,7 @@ function BriefingScreen({ socket, gameState }: BriefingScreenProps) {
           display: 'block'
         }}
       >
-        {isReady ? 'Hazırsın ✓' : 'Hazırım!'}
+        {isReady ? t('briefing.readyButtonDone') : t('briefing.readyButton')}
       </button>
     </div>
   );
