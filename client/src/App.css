@@ -148,9 +148,3 @@ input:focus {
     transition: none;
   }
 }
-
-/* Big screens: scale the whole UI up instead of leaving it tiny in a corner. */
-@media (min-width: 1700px) { #root { zoom: 1.2; --z: 1.2; } }
-@media (min-width: 2100px) { #root { zoom: 1.45; --z: 1.45; } }
-@media (min-width: 2500px) { #root { zoom: 1.7; --z: 1.7; } }
-@media (min-width: 3200px) { #root { zoom: 2.1; --z: 2.1; } }
