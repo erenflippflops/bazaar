@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { t } from '../i18n';
 
 interface WheelProps {
   itemsLeft: number;
@@ -108,7 +109,7 @@ export default function Wheel({ itemsLeft, state, onSpin, spinKey }: WheelProps)
       height="432"
       viewBox="0 0 432 432"
       role="img"
-      aria-label={`Çark: ${itemsLeft} kapalı güç`}
+      aria-label={t('wheel.ariaLabel', { count: itemsLeft })}
       style={{
         filter: clickable
           ? 'drop-shadow(0 0 22px rgba(255,201,60,0.95))'
@@ -189,7 +190,7 @@ export default function Wheel({ itemsLeft, state, onSpin, spinKey }: WheelProps)
             fontSize: '15px',
           }}
         >
-          ÇEVİR!
+          {t('wheel.spin')}
         </text>
       )}
     </svg>

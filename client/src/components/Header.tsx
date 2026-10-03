@@ -1,3 +1,5 @@
+import { t } from '../i18n';
+
 interface HeaderProps {
   roomCode: string | null;
   theme: string;
@@ -54,7 +56,7 @@ export function Header({
               color: '#C9CBFF',
             }}
           >
-            {roomCode ? `ODA ${roomCode}` : ''} · {theme.toUpperCase()}
+            {roomCode ? t('header.room', { code: roomCode }) : ''} · {theme.toUpperCase()}
           </span>
           <span
             style={{
@@ -64,8 +66,8 @@ export function Header({
             }}
           >
             {mode === 'lobby'
-              ? 'LOBİ'
-              : `MEZAT ${auctionNumber}/${totalAuctions}`}
+              ? t('header.lobby')
+              : t('header.auction', { current: auctionNumber, total: totalAuctions })}
           </span>
         </div>
       </header>
@@ -103,7 +105,7 @@ export function Header({
             color: '#C9CBFF',
           }}
         >
-          {roomCode ? `ODA ${roomCode}` : ''} · {theme.toUpperCase()}
+          {roomCode ? t('header.room', { code: roomCode }) : ''} · {theme.toUpperCase()}
         </span>
         <span
           style={{
@@ -113,8 +115,8 @@ export function Header({
           }}
         >
           {mode === 'lobby'
-            ? 'LOBİ'
-            : `MEZAT ${auctionNumber}/${totalAuctions}`}
+            ? t('header.lobby')
+            : t('header.auction', { current: auctionNumber, total: totalAuctions })}
         </span>
       </div>
     </header>

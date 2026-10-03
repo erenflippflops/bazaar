@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
+import { t } from '../i18n';
 import { Background } from '../components/Background';
 import { Lanterns } from '../components/Lanterns';
 import { Header } from '../components/Header';

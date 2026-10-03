@@ -1,3 +1,5 @@
+import { t } from '../i18n';
+
 interface Item {
   name: string;
   description: string;
@@ -66,7 +68,7 @@ export default function RankingCard({ position, nickname, items, commentary }: R
               textOverflow: 'ellipsis',
             }}
           >
-            {item?.name || 'boş'}
+            {item?.name || t('results.emptySlot')}
           </span>
         ))}
       </div>

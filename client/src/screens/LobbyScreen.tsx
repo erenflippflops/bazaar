@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { Theme } from '../types';
+import { t } from '../i18n';
 
 interface Player {
   id: string;
@@ -42,7 +43,7 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
     if (!socket) return;
     socket.emit('start_game', {}, (response: any) => {
       if (response?.success === false) {
-        setError(response.error || 'Oyun başlatılamadı');
+        setError(response.error || t('lobby.errorStartFailed'));
       }
     });
   };
@@ -57,7 +58,7 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
 
   return (
     <div style={{ padding: '40px 20px', maxWidth: '600px', margin: '0 auto' }}>
-      <h1 style={{ fontSize: '48px', textAlign: 'center', marginBottom: '20px' }}>BAZAAR</h1>
+      <h1 style={{ fontSize: '48px', textAlign: 'center', marginBottom: '20px' }}>{t('home.title')}</h1>
 
       {gameState.theme && (
         <div className="card" style={{ marginBottom: '20px', textAlign: 'center' }}>
@@ -67,7 +68,7 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
       )}
 
       <div className="card" style={{ marginBottom: '30px', textAlign: 'center' }}>
-        <p style={{ color: 'var(--muted)', marginBottom: '10px', fontSize: '14px' }}>ODA KODU</p>
+        <p style={{ color: 'var(--muted)', marginBottom: '10px', fontSize: '14px' }}>{t('lobby.roomCode')}</p>
         <h2 style={{ fontSize: '64px', letterSpacing: '8px', marginBottom: '15px' }}>
           {gameState?.roomCode || '----'}
         </h2>
@@ -79,18 +80,18 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
             }
           }}
         >
-          Kodu Kopyala
+          {t('lobby.copyCode')}
         </button>
       </div>
 
       <div className="card" style={{ marginBottom: '30px' }}>
-        <h3 style={{ fontSize: '20px', marginBottom: '15px', color: 'var(--white)' }}>Oyuncular ({playerCount})</h3>
+        <h3 style={{ fontSize: '20px', marginBottom: '15px', color: 'var(--white)' }}>{t('lobby.players', { count: playerCount })}</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {gameState?.players?.map((player) => (
             <div key={player.id} className="player-card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontWeight: 600 }}>{player.nickname}</span>
               {player.id === gameState.hostId && (
-                <span style={{ color: 'var(--saffron)', fontSize: '14px' }}>EV SAHİBİ</span>
+                <span style={{ color: 'var(--saffron)', fontSize: '14px' }}>{t('lobby.host')}</span>
               )}
             </div>
           ))}
@@ -104,13 +105,13 @@ export default function LobbyScreen({ socket, gameState }: LobbyScreenProps) {
           disabled={!canStart}
           style={{ width: '100%', fontSize: '24px', padding: '16px' }}
         >
-          {canStart ? 'Oyunu Başlat' : 'En az 2 oyuncu gerekli'}
+          {canStart ? t('lobby.startGame') : t('lobby.minPlayersNeeded')}
         </button>
       )}
 
       {!isHost && (
         <div style={{ textAlign: 'center', padding: '20px', color: 'var(--muted)' }}>
-          Ev sahibinin oyunu başlatması bekleniyor...
+          {t('lobby.waitingForHost')}
         </div>
       )}
 

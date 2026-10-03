@@ -9,6 +9,7 @@ import ResultsScreen from './screens/ResultsScreen';
 import BackgroundDecorations from './components/BackgroundDecorations';
 import Footer from './components/Footer';
 import DesignHarness from './harness/DesignHarness';
+import { t } from './i18n';
 import './App.css';
 
 function App() {
@@ -44,8 +45,8 @@ function App() {
             flexDirection: 'column',
             gap: '20px',
           }}>
-            <h2>Bağlanıyor...</h2>
-            <p style={{ color: 'var(--muted)' }}>Sunucuya bağlantı kuruluyor</p>
+            <h2>{t('app.connecting')}</h2>
+            <p style={{ color: 'var(--muted)' }}>{t('app.connectingServer')}</p>
           </div>
         </div>
       </>

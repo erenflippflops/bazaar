@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
+import { t } from '../i18n';
 
 interface Theme {
   id: string;
@@ -49,17 +50,17 @@ export default function HomeScreen({ socket }: HomeScreenProps) {
 
   const handleCreateRoom = () => {
     if (!socket) {
-      setError('Bağlantı yok');
+      setError(t('home.errorNoConnection'));
       return;
     }
     if (nickname.length < 1 || nickname.length > 16) {
-      setError('İsim 1-16 karakter olmalı');
+      setError(t('home.errorNicknameLength'));
       return;
     }
 
     socket.emit('create_room', { nickname, themeId: selectedTheme }, (response: any) => {
       if (response?.success === false) {
-        setError(response.error || 'Oda oluşturulamadı');
+        setError(response.error || t('home.errorCreateFailed'));
       } else if (response?.roomCode && response?.token) {
         sessionStorage.setItem('roomCode', response.roomCode);
         sessionStorage.setItem('playerToken', response.token);
@@ -72,21 +73,21 @@ export default function HomeScreen({ socket }: HomeScreenProps) {
 
   const handleJoinRoom = () => {
     if (!socket) {
-      setError('Bağlantı yok');
+      setError(t('home.errorNoConnection'));
       return;
     }
     if (nickname.length < 1 || nickname.length > 16) {
-      setError('İsim 1-16 karakter olmalı');
+      setError(t('home.errorNicknameLength'));
       return;
     }
     if (!roomCode || roomCode.length !== 6) {
-      setError('Geçerli bir oda kodu gir (6 harf)');
+      setError(t('home.errorInvalidRoomCode'));
       return;
     }
 
     socket.emit('join_room', { roomCode: roomCode.toUpperCase(), nickname }, (response: any) => {
       if (response?.success === false) {
-        setError(response.error || 'Odaya katılınamadı');
+        setError(response.error || t('home.errorJoinFailed'));
       } else if (response?.token) {
         sessionStorage.setItem('roomCode', roomCode.toUpperCase());
         sessionStorage.setItem('playerToken', response.token);
@@ -99,10 +100,10 @@ export default function HomeScreen({ socket }: HomeScreenProps) {
 
   return (
     <div style={{ padding: '40px 20px', maxWidth: '800px', margin: '0 auto' }}>
-      <h1 style={{ fontSize: '48px', textAlign: 'center', marginBottom: '40px' }}>BAZAAR</h1>
+      <h1 style={{ fontSize: '48px', textAlign: 'center', marginBottom: '40px' }}>{t('home.title')}</h1>
 
       <div style={{ marginBottom: '40px' }}>
-        <h2 style={{ fontSize: '24px', marginBottom: '20px', textAlign: 'center' }}>Konsept Seç</h2>
+        <h2 style={{ fontSize: '24px', marginBottom: '20px', textAlign: 'center' }}>{t('home.selectTheme')}</h2>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
@@ -123,9 +124,9 @@ export default function HomeScreen({ socket }: HomeScreenProps) {
               }}
             >
               <div style={{ fontSize: '48px', marginBottom: '10px' }}>{theme.emoji}</div>
-              <h3 style={{ fontSize: '16px', fontWeight: 700, marginBottom: '8px' }}>{theme.name}</h3>
+              <h3 style={{ fontSize: '16px', fontWeight: 700, marginBottom: '8px' }}>{t(`theme.${theme.id}.name`)}</h3>
               <p style={{ fontSize: '12px', color: 'var(--muted)', lineHeight: '1.4' }}>
-                {theme.description}
+                {t(`theme.${theme.id}.description`)}
               </p>
             </div>
           ))}
@@ -133,25 +134,25 @@ export default function HomeScreen({ socket }: HomeScreenProps) {
       </div>
 
       <div className="card" style={{ marginBottom: '20px' }}>
-        <h2 style={{ fontSize: '24px', marginBottom: '20px' }}>Oda Oluştur</h2>
+        <h2 style={{ fontSize: '24px', marginBottom: '20px' }}>{t('home.createRoom')}</h2>
         <input
           type="text"
-          placeholder="İsmin"
+          placeholder={t('home.nickname')}
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           maxLength={16}
           style={{ width: '100%', marginBottom: '15px' }}
         />
         <button className="primary-button" onClick={handleCreateRoom} style={{ width: '100%' }}>
-          ODA OLUŞTUR
+          {t('home.createRoomButton')}
         </button>
       </div>
 
       <div className="card" style={{ marginBottom: '20px' }}>
-        <h2 style={{ fontSize: '24px', marginBottom: '20px' }}>Odaya Katıl</h2>
+        <h2 style={{ fontSize: '24px', marginBottom: '20px' }}>{t('home.joinRoom')}</h2>
         <input
           type="text"
-          placeholder="İsmin"
+          placeholder={t('home.nickname')}
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           maxLength={16}
@@ -159,14 +160,14 @@ export default function HomeScreen({ socket }: HomeScreenProps) {
         />
         <input
           type="text"
-          placeholder="Oda Kodu (6 harf)"
+          placeholder={t('home.roomCode')}
           value={roomCode}
           onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
           maxLength={6}
           style={{ width: '100%', marginBottom: '15px', textTransform: 'uppercase' }}
         />
         <button className="primary-button" onClick={handleJoinRoom} style={{ width: '100%' }}>
-          ODAYA KATIL
+          {t('home.joinRoomButton')}
         </button>
       </div>
 
