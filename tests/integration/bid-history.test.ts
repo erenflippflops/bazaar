@@ -35,11 +35,22 @@ describe('Bid History', () => {
       socket1.on('state_update', (state) => {
         if (state.roomCode) {
           socket2.emit('join_room', { roomCode: state.roomCode, nickname: 'Player2' });
+        }
+        if (state.phase === 'waiting' && state.players.length === 2) {
           socket1.emit('start_game');
+        }
+        if (state.phase === 'briefing') {
+          socket1.emit('mark_ready');
+          socket2.emit('mark_ready');
         }
         if (state.phase === 'opening') {
           expect(state.bidHistory).toEqual([]);
           resolve();
+        }
+      });
+      socket2.on('state_update', (state) => {
+        if (state.phase === 'briefing') {
+          socket2.emit('mark_ready');
         }
       });
     });
@@ -64,6 +75,10 @@ describe('Bid History', () => {
         if (state.phase === 'waiting' && state.players.length === 2) {
           socket1.emit('start_game');
         }
+        if (state.phase === 'briefing') {
+          socket1.emit('mark_ready');
+          socket2.emit('mark_ready');
+        }
         if (state.phase === 'playing' && state.currentPlayer === player1Id) {
           socket1.emit('spin_wheel');
         }
@@ -77,6 +92,11 @@ describe('Bid History', () => {
           expect(state.bidHistory[0].amount).toBe(3);
           expect(typeof state.bidHistory[0].at).toBe('number');
           resolve();
+        }
+      });
+      socket2.on('state_update', (state) => {
+        if (state.phase === 'briefing') {
+          socket2.emit('mark_ready');
         }
       });
     });
@@ -95,6 +115,11 @@ describe('Bid History', () => {
       let bidsSent = { opening: false, p2: false, p3: false };
 
       const handleState = (state: any) => {
+        if (state.phase === 'briefing') {
+          socket1.emit('mark_ready');
+          socket2.emit('mark_ready');
+          socket3.emit('mark_ready');
+        }
         if (state.phase === 'opening' && !bidsSent.opening) {
           bidsSent.opening = true;
           socket1.emit('place_bid', { amount: 3 });
@@ -168,6 +193,10 @@ describe('Bid History', () => {
           player2Id = state.players[1].id;
           socket1.emit('start_game');
         }
+        if (state.phase === 'briefing') {
+          socket1.emit('mark_ready');
+          socket2.emit('mark_ready');
+        }
         if (state.phase === 'playing' && state.currentPlayer === player1Id && !firstAuctionCompleted) {
           socket1.emit('spin_wheel');
         }
@@ -203,6 +232,11 @@ describe('Bid History', () => {
           }
         }
       });
+      socket2.on('state_update', (state) => {
+        if (state.phase === 'briefing') {
+          socket2.emit('mark_ready');
+        }
+      });
     });
   }, 30000);
 
@@ -216,21 +250,11 @@ describe('Bid History', () => {
       let player1Id: string;
       let bidsSent = { opening: false, p2: false, p3: false };
 
-      socket1.emit('create_room', { nickname: 'Player1' });
-      socket1.on('state_update', (state) => {
-        if (state.roomCode && !roomCode) {
-          roomCode = state.roomCode;
-          player1Id = state.players[0].id;
-          socket2.emit('join_room', { roomCode, nickname: 'Player2' });
-        }
-        if (state.players.length === 2) {
-          socket3.emit('join_room', { roomCode, nickname: 'Player3' });
-        }
-        if (state.phase === 'waiting' && state.players.length === 3) {
-          socket1.emit('start_game');
-        }
-        if (state.phase === 'playing' && state.currentPlayer === player1Id) {
-          socket1.emit('spin_wheel');
+      const handleState = (state: any) => {
+        if (state.phase === 'briefing') {
+          socket1.emit('mark_ready');
+          socket2.emit('mark_ready');
+          socket3.emit('mark_ready');
         }
         if (state.phase === 'opening' && !bidsSent.opening) {
           bidsSent.opening = true;
@@ -251,7 +275,29 @@ describe('Bid History', () => {
             resolve();
           }
         }
+      };
+
+      socket1.emit('create_room', { nickname: 'Player1' });
+      socket1.on('state_update', (state) => {
+        if (state.roomCode && !roomCode) {
+          roomCode = state.roomCode;
+          player1Id = state.players[0].id;
+          socket2.emit('join_room', { roomCode, nickname: 'Player2' });
+        }
+        if (state.players.length === 2) {
+          socket3.emit('join_room', { roomCode, nickname: 'Player3' });
+        }
+        if (state.phase === 'waiting' && state.players.length === 3) {
+          socket1.emit('start_game');
+        }
+        if (state.phase === 'playing' && state.currentPlayer === player1Id) {
+          socket1.emit('spin_wheel');
+        }
+        handleState(state);
       });
+
+      socket2.on('state_update', handleState);
+      socket3.on('state_update', handleState);
     });
   }, 30000);
 });
