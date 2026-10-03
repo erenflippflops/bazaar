@@ -16,6 +16,8 @@ Owner: Eren (no coding background; talk to him in short, simple Turkish).
 - If a game rule is unclear: stop and ask (agents ask the manager; the manager asks Eren).
 - Never change model names, the judge prompt, docs/GAME_RULES.md or this file
   unless Eren approved it and the task says so.
+- Before any merge and before reporting: `cd client && npx vite build` must pass, all tests
+  green with none skipped, and for UI work the pixel table is pasted. Otherwise it is not done.
 
 ## Manager
 Start of every session: read docs/STATUS.md, give Eren a 4-5 line Turkish summary, continue.
