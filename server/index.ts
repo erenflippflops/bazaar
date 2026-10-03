@@ -63,7 +63,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
   });
 
   app.get('/health', (req, res) => {
-    res.json({ status: 'ok', commit: process.env.RENDER_GIT_COMMIT || 'dev' });
+    res.json({ status: 'ok', commit: process.env.RENDER_GIT_COMMIT || 'unknown' });
   });
 
   io.on('connection', (socket) => {
