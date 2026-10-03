@@ -124,6 +124,13 @@ Bu dosyayı ana oturum (beyin) her açılışta okur ve her karardan sonra "9. �
 geçtiğini testle doğrula.
 
 ## 9. Şu anki durum (buradan devam et)
+
+✓ Task 16b hazırlık: halisaha.json düzeltildi (6 GK, 10 DEF, 12 MID, 12 FWD = 40 öğe)
+  - data-check.test.ts geçiyor (22/22)
+  - secrecy.test.ts hâlâ kırık (timing issue, Task 16b'den bağımsız)
+  - Şimdi Task 16b'nin asıl parçalarına başlıyorum
+
+## 9. Şu anki durum (buradan devam et)
 ✓ Kurulum tamamlandı: yeni workflow, ajan tanımları, .gitignore güncel. Ajan modelleri test edildi (Fable 5.1, Opus 5.5).
 
 ✓ Task 03 denetimi tamamlandı (5a53327, 38cae39):
