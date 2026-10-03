@@ -29,6 +29,7 @@ export interface GameState {
   passedPlayerIds: string[];
   briefingReadyPlayers: string[]; // player IDs who marked themselves ready during briefing
   slotTypes?: string[]; // For halisaha: ["GK", "FIELD", "FIELD", "FIELD"]
+  bidHistory: Array<{ playerId: string; amount: number; at: number }>;
 }
 
 export interface GameEvent {
