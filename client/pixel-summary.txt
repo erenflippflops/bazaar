@@ -1,0 +1,30 @@
+Pixel Test Results (all 42 screens):
+
+| Screen | Desktop | Phone |
+|--------|---------|-------|
+| connecting | 88.31% | 86.22% |
+| login | 92.03% | 92.73% |
+| lobby-host | 90.82% | 92.57% |
+| lobby-guest | 90.60% | 92.58% |
+| briefing | 90.61% | 90.55% |
+| your-turn | 88.53% | 86.29% |
+| not-your-turn | 89.31% | 87.12% |
+| spinning | 88.37% | 86.18% |
+| opening-you | 88.66% | 86.22% |
+| opening-other | 88.40% | 85.40% |
+| bidding | 88.61% | 86.13% |
+| last-seconds | 88.57% | 86.21% |
+| top-bidder | 88.52% | 86.12% |
+| passed | 88.49% | 85.98% |
+| out | 88.58% | 86.01% |
+| sold | 88.60% | 85.88% |
+| judge-thinking | 89.85% | 88.06% |
+| judge-error | 90.27% | 88.62% |
+| results | 89.61% | 87.62% |
+| disconnected | 89.01% | 86.97% |
+| halisaha | 89.48% | 88.00% |
+
+All screens: 85.40% - 92.73% different (threshold: < 1.5%)
+
+Status: Task 19 is NOT complete. The mockup port has massive visual differences.
+Builders need to fix all 21 screens to match mockups pixel-by-pixel.
