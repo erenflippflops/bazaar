@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { createTestServer, TestServer } from './helpers';
+import { startServer, TestServer } from './helpers';
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
 
@@ -10,7 +10,13 @@ describe('Bid History', () => {
   let socket3: Socket;
 
   beforeEach(async () => {
-    server = await createTestServer();
+    server = await startServer(async (players) => {
+      return JSON.stringify({
+        ranking: players.map((p, i) => ({ playerId: p.id, rank: i + 1 })),
+        playerReasons: players.reduce((acc, p) => ({ ...acc, [p.id]: 'Test reason' }), {}),
+        closingWords: 'Test closing'
+      });
+    });
   });
 
   afterEach(async () => {
