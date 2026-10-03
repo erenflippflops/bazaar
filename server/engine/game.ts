@@ -627,7 +627,7 @@ export function forceStartBriefing(state: GameState, playerId: string): EngineRe
     briefingReadyPlayers: state.players.map(p => p.id)
   };
 
-  return { state: newState, events: [{ type: 'briefing_complete' }] };
+  return { state: newState, events: [{ type: 'briefing_forced' }] };
 }
 
 // Helper functions
