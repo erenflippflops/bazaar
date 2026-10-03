@@ -6,7 +6,7 @@ import LobbyScreen from './screens/LobbyScreen';
 import BriefingScreen from './screens/BriefingScreen';
 import GameScreen from './screens/GameScreen';
 import ResultsScreen from './screens/ResultsScreen';
-import BackgroundDecorations from './components/BackgroundDecorations';
+import { Background } from './components/Background';
 import Footer from './components/Footer';
 import DesignHarness from './harness/DesignHarness';
 import { t } from './i18n';
@@ -25,7 +25,7 @@ function App() {
   if (!connected) {
     return (
       <>
-        <BackgroundDecorations />
+        <Background />
         <div style={{
           width: stage === 'desktop' ? 1440 : 390,
           height: stage === 'desktop' ? 900 : 844,
@@ -55,7 +55,7 @@ function App() {
 
   return (
     <>
-      <BackgroundDecorations />
+      <Background />
       <div style={{
         width: stage === 'desktop' ? 1440 : 390,
         height: stage === 'desktop' ? 900 : 844,

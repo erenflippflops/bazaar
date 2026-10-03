@@ -681,6 +681,7 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         judgeCriterion: room.theme.judgeCriterion
       },
       wheel: state.wheel.length,
+      bidHistory: state.bidHistory,
       players: state.players.map(p => {
         let outReason: string | undefined = undefined;
         let passedBadge = false;

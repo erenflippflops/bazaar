@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import BackgroundDecorations from '../components/BackgroundDecorations';
-import LanternString from '../components/LanternString';
+import { Background } from '../components/Background';
+import { Lanterns } from '../components/Lanterns';
 import Footer from '../components/Footer';
 import HomeScreen from '../screens/HomeScreen';
 import LobbyScreen from '../screens/LobbyScreen';
@@ -132,8 +132,8 @@ export default function DesignHarness() {
 
   return (
     <div style={{ width, height, overflow: 'hidden' }}>
-      <BackgroundDecorations />
-      <LanternString />
+      <Background />
+      <Lanterns stage={stage as 'desktop' | 'phone'} />
       <BrowserRouter>
         {renderScreen()}
       </BrowserRouter>

@@ -3,7 +3,7 @@ import { startServer, TestServer } from './helpers';
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
 
-describe.skip('Bid History', () => {
+describe('Bid History', () => {
   let server: TestServer;
   let socket1: Socket;
   let socket2: Socket;
@@ -43,7 +43,7 @@ describe.skip('Bid History', () => {
         }
       });
     });
-  });
+  }, 30000);
 
   it('opening bid appears in bidHistory', async () => {
     socket1 = io(`http://localhost:${server.port}`);
@@ -52,6 +52,7 @@ describe.skip('Bid History', () => {
     await new Promise<void>((resolve) => {
       let roomCode: string;
       let player1Id: string;
+      let openingBidPlaced = false;
 
       socket1.emit('create_room', { nickname: 'Player1' });
       socket1.on('state_update', (state) => {
@@ -66,7 +67,8 @@ describe.skip('Bid History', () => {
         if (state.phase === 'playing' && state.currentPlayer === player1Id) {
           socket1.emit('spin_wheel');
         }
-        if (state.phase === 'opening') {
+        if (state.phase === 'opening' && !openingBidPlaced) {
+          openingBidPlaced = true;
           socket1.emit('place_bid', { amount: 3 });
         }
         if (state.phase === 'bidding' && state.bidHistory && state.bidHistory.length === 1) {
@@ -78,7 +80,7 @@ describe.skip('Bid History', () => {
         }
       });
     });
-  });
+  }, 30000);
 
   it('subsequent bids append to bidHistory in order', async () => {
     socket1 = io(`http://localhost:${server.port}`);
@@ -90,9 +92,13 @@ describe.skip('Bid History', () => {
       let player1Id: string;
       let player2Id: string;
       let player3Id: string;
-      let bidsSent = { p2: false, p3: false };
+      let bidsSent = { opening: false, p2: false, p3: false };
 
       const handleState = (state: any) => {
+        if (state.phase === 'opening' && !bidsSent.opening) {
+          bidsSent.opening = true;
+          socket1.emit('place_bid', { amount: 3 });
+        }
         if (state.phase === 'bidding') {
           const history = state.bidHistory || [];
           if (history.length === 1 && !bidsSent.p2) {
@@ -132,16 +138,13 @@ describe.skip('Bid History', () => {
         if (state.phase === 'playing' && state.currentPlayer === player1Id) {
           socket1.emit('spin_wheel');
         }
-        if (state.phase === 'opening') {
-          socket1.emit('place_bid', { amount: 3 });
-        }
         handleState(state);
       });
 
       socket2.on('state_update', handleState);
       socket3.on('state_update', handleState);
     });
-  });
+  }, 30000);
 
   it('bidHistory resets for next auction', async () => {
     socket1 = io(`http://localhost:${server.port}`);
@@ -152,6 +155,7 @@ describe.skip('Bid History', () => {
       let player1Id: string;
       let player2Id: string;
       let firstAuctionCompleted = false;
+      let bidsSent = { first: false, firstP2: false, second: false };
 
       socket1.emit('create_room', { nickname: 'Player1' });
       socket1.on('state_update', (state) => {
@@ -167,12 +171,14 @@ describe.skip('Bid History', () => {
         if (state.phase === 'playing' && state.currentPlayer === player1Id && !firstAuctionCompleted) {
           socket1.emit('spin_wheel');
         }
-        if (state.phase === 'opening' && !firstAuctionCompleted) {
+        if (state.phase === 'opening' && !firstAuctionCompleted && !bidsSent.first) {
+          bidsSent.first = true;
           socket1.emit('place_bid', { amount: 3 });
         }
         if (state.phase === 'bidding' && !firstAuctionCompleted) {
           const history = state.bidHistory || [];
-          if (history.length === 1) {
+          if (history.length === 1 && !bidsSent.firstP2) {
+            bidsSent.firstP2 = true;
             socket2.emit('place_bid', { amount: 5 });
           } else if (history.length === 2) {
             // Wait for auction to resolve
@@ -182,9 +188,10 @@ describe.skip('Bid History', () => {
         if (state.phase === 'playing' && firstAuctionCompleted && state.currentPlayer === player2Id) {
           socket2.emit('spin_wheel');
         }
-        if (state.phase === 'opening' && firstAuctionCompleted) {
+        if (state.phase === 'opening' && firstAuctionCompleted && !bidsSent.second) {
           const history = state.bidHistory || [];
           expect(history).toHaveLength(0);
+          bidsSent.second = true;
           socket2.emit('place_bid', { amount: 2 });
         }
         if (state.phase === 'bidding' && firstAuctionCompleted) {
@@ -197,7 +204,7 @@ describe.skip('Bid History', () => {
         }
       });
     });
-  });
+  }, 30000);
 
   it('timestamps are monotonically increasing', async () => {
     socket1 = io(`http://localhost:${server.port}`);
@@ -207,6 +214,7 @@ describe.skip('Bid History', () => {
     await new Promise<void>((resolve) => {
       let roomCode: string;
       let player1Id: string;
+      let bidsSent = { opening: false, p2: false, p3: false };
 
       socket1.emit('create_room', { nickname: 'Player1' });
       socket1.on('state_update', (state) => {
@@ -224,14 +232,17 @@ describe.skip('Bid History', () => {
         if (state.phase === 'playing' && state.currentPlayer === player1Id) {
           socket1.emit('spin_wheel');
         }
-        if (state.phase === 'opening') {
+        if (state.phase === 'opening' && !bidsSent.opening) {
+          bidsSent.opening = true;
           socket1.emit('place_bid', { amount: 3 });
         }
         if (state.phase === 'bidding') {
           const history = state.bidHistory || [];
-          if (history.length === 1) {
+          if (history.length === 1 && !bidsSent.p2) {
+            bidsSent.p2 = true;
             socket2.emit('place_bid', { amount: 5 });
-          } else if (history.length === 2) {
+          } else if (history.length === 2 && !bidsSent.p3) {
+            bidsSent.p3 = true;
             socket3.emit('place_bid', { amount: 7 });
           } else if (history.length === 3) {
             // Verify timestamps are monotonically increasing
@@ -242,5 +253,5 @@ describe.skip('Bid History', () => {
         }
       });
     });
-  });
+  }, 30000);
 });
