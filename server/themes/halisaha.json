@@ -39,6 +39,8 @@
     { "id": "de-bruyne", "name": { "tr": "Kevin De Bruyne", "en": "", "de": "" }, "description": { "tr": "Orta saha – Asist kralı, vizyon oyuncusu", "en": "", "de": "" } },
     { "id": "busquets", "name": { "tr": "Sergio Busquets", "en": "", "de": "" }, "description": { "tr": "Orta saha – Sessiz lider, oyunu okur", "en": "", "de": "" } },
     { "id": "seedorf", "name": { "tr": "Clarence Seedorf", "en": "", "de": "" }, "description": { "tr": "Orta saha – 3 farklı kulüple UCL kazandı", "en": "", "de": "" } },
+    { "id": "scholes", "name": { "tr": "Paul Scholes", "en": "", "de": "" }, "description": { "tr": "Orta saha – Manchester United'ın beyni", "en": "", "de": "" } },
+    { "id": "lampard", "name": { "tr": "Frank Lampard", "en": "", "de": "" }, "description": { "tr": "Orta saha – Chelsea efsanesi, gol atan ortasaha", "en": "", "de": "" } },
     { "id": "messi", "name": { "tr": "Lionel Messi", "en": "", "de": "" }, "description": { "tr": "Forvet – 8 Altın Top, Dünya Kupası", "en": "", "de": "" } },
     { "id": "ronaldo", "name": { "tr": "Cristiano Ronaldo", "en": "", "de": "" }, "description": { "tr": "Forvet – 5 Altın Top, 5 Şampiyonlar Ligi", "en": "", "de": "" } },
     { "id": "r9", "name": { "tr": "Ronaldo Nazário", "en": "", "de": "" }, "description": { "tr": "Forvet – 2 Dünya Kupası, orijinal Fenomeno", "en": "", "de": "" } },
@@ -47,9 +49,6 @@
     { "id": "lewandowski", "name": { "tr": "Robert Lewandowski", "en": "", "de": "" }, "description": { "tr": "Forvet – Şampiyonlar Ligi gol makinesi", "en": "", "de": "" } },
     { "id": "benzema", "name": { "tr": "Karim Benzema", "en": "", "de": "" }, "description": { "tr": "Forvet – Altın Top, 5 Şampiyonlar Ligi", "en": "", "de": "" } },
     { "id": "suarez", "name": { "tr": "Luis Suárez", "en": "", "de": "" }, "description": { "tr": "Forvet – İnatçı golcü, MSN üçlüsünde", "en": "", "de": "" } },
-    { "id": "neymar", "name": { "tr": "Neymar Jr.", "en": "", "de": "" }, "description": { "tr": "Forvet – Samba futbolunun yıldızı", "en": "", "de": "" } },
-    { "id": "henry", "name": { "tr": "Thierry Henry", "en": "", "de": "" }, "description": { "tr": "Forvet – Arsenal efsanesi, hız ve finiş", "en": "", "de": "" } },
-    { "id": "van-basten", "name": { "tr": "Marco van Basten", "en": "", "de": "" }, "description": { "tr": "Forvet – 3 Altın Top, voley golü ustası", "en": "", "de": "" } },
     { "id": "romario", "name": { "tr": "Romário", "en": "", "de": "" }, "description": { "tr": "Forvet – Dünya Kupası 94, ceza sahasının kralı", "en": "", "de": "" } },
     { "id": "zlatan", "name": { "tr": "Zlatan Ibrahimović", "en": "", "de": "" }, "description": { "tr": "Forvet – 12 farklı ligde şampiyon", "en": "", "de": "" } },
     { "id": "salah", "name": { "tr": "Mohamed Salah", "en": "", "de": "" }, "description": { "tr": "Forvet – Premier League gol kralı, Mısır Kralı", "en": "", "de": "" } }
