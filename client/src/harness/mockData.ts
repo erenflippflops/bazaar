@@ -29,6 +29,8 @@ export interface MockGameState {
   auctionNumber?: number;
   passedPlayerIds?: string[];
   isAuctionSettled?: boolean;
+  ranking?: { player: string; rank: number; reason: string }[] | null;
+  commentary?: string | null;
   theme?: {
     id: string;
     name: { tr: string; en: string; de: string };
@@ -415,22 +417,81 @@ export const mockData: Record<string, MockGameState> = {
   results: {
     phase: 'results',
     hostId: 'player1',
-    players: mockPlayers.map((p, i) => ({
-      ...p,
-      slots: i === 0
-        ? [mockItems.isinlanma, mockItems.gorunmezlik, mockItems.ucma]
-        : i === 1
-        ? [mockItems.zihinOkuma, mockItems.superHiz, null]
-        : i === 2
-        ? [mockItems.isinlanma, null, null]
-        : [mockItems.gorunmezlik, null, null],
-    })),
+    players: [
+      {
+        id: 'player2',
+        nickname: 'Selin',
+        gold: 0,
+        slots: [
+          { name: 'Görünmezlik', description: 'Tamamen görünmez ol' },
+          { name: 'Uçma', description: 'Gökyüzünde süzül' },
+          { name: 'Zaman Durdurma', description: 'Zamanı durdur' },
+        ],
+        token: 'token2',
+      },
+      {
+        id: 'player3',
+        nickname: 'Mert',
+        gold: 0,
+        slots: [
+          { name: 'Süper Güç', description: 'İnanılmaz güç' },
+          { name: 'Elektrik', description: 'Elektrik kontrolü' },
+          { name: 'Zırh Derisi', description: 'Dayanıklı deri' },
+        ],
+        token: 'token3',
+      },
+      {
+        id: 'player1',
+        nickname: 'Eren',
+        gold: 0,
+        slots: [
+          { name: 'Işınlanma', description: 'Bir anda başka bir yere ışınlan' },
+          { name: 'Ateş Kontrolü', description: 'Ateşi kontrol et' },
+          { name: 'Klonlanma', description: 'Kendi klonunu yarat' },
+        ],
+        token: 'token1',
+      },
+      {
+        id: 'player4',
+        nickname: 'Deniz',
+        gold: 0,
+        slots: [
+          { name: 'Zihin Okuma', description: 'İnsanların düşüncelerini oku' },
+          { name: 'Süper Hız', description: 'Işık hızında koş' },
+          { name: 'Portal Açma', description: 'Portal aç' },
+        ],
+        token: 'token4',
+      },
+    ],
     wheel: 28,
     revealedItem: null,
     currentOpenerIndex: 0,
     currentHighestBid: 0,
     currentHighestBidderId: null,
     roomCode: 'K7M2',
+    ranking: [
+      {
+        player: 'Selin',
+        rank: 1,
+        reason: 'Görünmezlik ve zaman durdurma birlikte neredeyse yakalanamaz bir takım. Uçma da kaçışı garantiliyor.',
+      },
+      {
+        player: 'Mert',
+        rank: 2,
+        reason: 'Ham güç ve dayanıklılıkta en iyisi; ama hepsi aynı işi yapıyor, yaratıcılık az.',
+      },
+      {
+        player: 'Eren',
+        rank: 3,
+        reason: 'Klonlarla ateş kontrolü eğlenceli bir kombinasyon; ama savunması zayıf.',
+      },
+      {
+        player: 'Deniz',
+        rank: 4,
+        reason: 'Kaçmakta harika, kazanmakta değil. Portal açıp gitmek zafer sayılmıyor.',
+      },
+    ],
+    commentary: 'Görünmez ve zamanı durduran biriyle saklambaç oynamayın.',
     theme: {
       id: 'superpowers',
       name: { tr: 'Süper Güçler', en: 'Super Powers', de: 'Superkräfte' },
