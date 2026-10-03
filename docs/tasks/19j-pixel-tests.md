@@ -1,7 +1,8 @@
-# Task 19j – Pixel comparison tests with Playwright
+# Task 19j – Pixel comparison harness and tests (MOVED TO AFTER 19a)
 
 ## Goal
 Create a design harness and Playwright pixel tests to verify the UI matches mockups within 1.5% pixel difference.
+This infrastructure will be used by every subsequent builder to verify their screens before reporting.
 
 ## Files you may change
 - `client/src/harness/DesignHarness.tsx` (create new)
@@ -55,13 +56,13 @@ Create a design harness and Playwright pixel tests to verify the UI matches mock
 6. Fonts: ensure Bungee and Rubik fonts load before screenshots (use document.fonts.ready promise).
 
 ## Audit
-Run the pixel tests:
-1. `npx playwright test tests/e2e/pixel-comparison.spec.ts`
-2. Report results: how many screens pass (< 1.5% diff)
-3. For failures: commit diff images and note which screens/elements differ
-4. Acceptable differences: font rendering variations, animation timing artifacts
+Build the harness and test infrastructure:
+1. DesignHarness renders any screen via `/?mock=<screen-id>&stage=desktop|phone`
+2. Helper function `compareScreenToMockup(screenId, stage)` compares React render to HTML mockup
+3. Test one screen (e.g., 'connecting') to verify the infrastructure works
+4. Report: infrastructure ready, example comparison result
 
-Pass criteria: at least 18/21 screens < 1.5% diff. Font/antialiasing differences OK if layout matches.
+This harness will be used by all subsequent builders (19c-19h) to verify their screens.
 
 ## Commit messages
 ```

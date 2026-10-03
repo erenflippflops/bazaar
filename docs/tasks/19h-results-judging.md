@@ -39,12 +39,16 @@ Rebuild ResultsScreen and judging screens (judge thinking, judge error) using mo
 5. Ensure all text uses i18n keys (client/src/i18n/tr.ts) for Task 17.
 
 ## Audit
-Visual check:
-1. ResultsScreen matches mockup 18 (desktop + phone)
-2. Podium shows top 3 correctly
-3. Ranking cards display all player data
-4. Host vs guest buttons work
-5. Judge thinking/error states show correctly
+Visual check with pixel tests:
+1. Use pixel comparison harness from Task 19j
+2. Test screens: 'results', 'judge-thinking', 'judge-error'
+3. Test both desktop and phone layouts
+4. Run pixel comparison: must be < 1.5% diff for all screens
+5. Verify podium shows top 3 correctly
+6. Verify ranking cards display all player data
+7. Verify host vs guest buttons work
+
+Do not approve until pixel diff < 1.5%.
 
 ## Commit messages
 ```
@@ -60,5 +64,5 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
 ```
 
 ## Report
-1. Screenshots of ResultsScreen (desktop + phone)
-2. Screenshots of judge thinking and error states
+1. Pixel test results for results/judging screens (diff % for each)
+2. Screenshots showing matches to mockups

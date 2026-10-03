@@ -55,13 +55,15 @@ Copy StatusBox, BidHistory, Controls, MessageBox, SoldBanner, and other small co
 7. Delete old AuctionPanel.tsx and Timer.tsx.
 
 ## Audit
-Visual check:
-1. StatusBox countdown circle animates correctly
-2. BidHistory shows bids with correct time labels
-3. Controls buttons work and show correct states
-4. MessageBox types render with correct colors
-5. SoldBanner animates in correctly
-6. ArchCard matches mockup styling
+Visual check with pixel tests:
+1. Use pixel comparison harness from Task 19j
+2. Test screens: 'bidding', 'last-seconds', 'top-bidder', 'passed', 'out', 'sold'
+3. Verify StatusBox countdown circle animates correctly
+4. Verify BidHistory shows bids with correct time labels
+5. Verify Controls buttons show correct states
+6. Run pixel comparison: must be < 1.5% diff for all tested screens
+
+Do not approve until pixel diff < 1.5%.
 
 ## Commit messages
 ```
@@ -78,4 +80,5 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
 
 ## Report
 1. Confirmation old components deleted
-2. Screenshots of each new component
+2. Pixel test results (diff % for each screen)
+3. Screenshots showing components match mockups

@@ -66,12 +66,15 @@ Rebuild Login (02), Lobby (03/03b), and Briefing (04) screens using the new comp
 9. Delete HomeScreen.tsx.
 
 ## Audit
-Visual check:
-1. LoginScreen matches mockup 02 (desktop + phone)
-2. LobbyScreen matches mockup 03/03b (host vs guest)
-3. BriefingScreen matches mockup 04
-4. All interactive elements functional
-5. Scrolling works on phone layouts
+Visual check with pixel tests:
+1. Use pixel comparison harness from Task 19j
+2. Test screens: 'login', 'lobby-host', 'lobby-guest', 'briefing'
+3. Test both desktop and phone layouts
+4. Run pixel comparison: must be < 1.5% diff for all screens
+5. Verify scrolling works on phone layouts
+6. Verify all interactive elements functional
+
+Do not approve until pixel diff < 1.5%.
 
 ## Commit messages
 ```
@@ -87,5 +90,6 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
 ```
 
 ## Report
-1. Screenshots of Login, Lobby, Briefing (desktop + phone)
+1. Pixel test results for all 4 screens × 2 stages (8 tests, diff % for each)
 2. Confirmation HomeScreen deleted
+3. Screenshots showing matches

@@ -44,12 +44,15 @@ These are core game components used across multiple screens.
 5. Animation for spinning: use `spinKey` prop changing to trigger rotation. When `spinKey` changes, rotate the slices (not the pointer) to land on the white slice. Use CSS animation or requestAnimationFrame.
 
 ## Audit
-Visual check:
-1. Wheel renders with correct number of slices
-2. Wheel states (glow, dim, spin) work correctly
-3. PlayerCard shows all data correctly (name, gold, slots)
-4. Halisaha theme shows "kaleci" label
-5. Desktop vs phone cards render appropriately
+Visual check with pixel tests:
+1. Use pixel comparison harness from Task 19j
+2. Test screens: 'your-turn', 'not-your-turn', 'spinning'
+3. Verify wheel renders with correct number of slices
+4. Verify PlayerCard shows all data correctly
+5. Run pixel comparison: must be < 1.5% diff
+6. Check halisaha theme shows "kaleci" label
+
+Do not approve until pixel diff < 1.5%.
 
 ## Commit messages
 ```
@@ -66,5 +69,5 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
 
 ## Report
 1. Confirmation old components deleted
-2. Screenshot of wheel in different states
-3. Screenshot of player cards (desktop and phone)
+2. Pixel test results (diff % for each screen tested)
+3. Screenshot comparison showing wheel states and player cards match mockups

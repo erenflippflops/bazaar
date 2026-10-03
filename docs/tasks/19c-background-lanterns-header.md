@@ -37,11 +37,14 @@ These are shared across all screens.
 5. All styles inline (matching mockup exactly), no external CSS for these components.
 
 ## Audit
-Visual check:
-1. Background rays and stars visible on all screens
-2. Lantern string matches mockup (22 desktop, 8 phone)
-3. Header shows correct info in correct positions
-4. Colors, fonts, sizes match mockups exactly
+Visual check with pixel tests:
+1. Use the pixel comparison harness from Task 19j
+2. Test Background + Lanterns + Header on any mockup screen
+3. Run: `npm run harness` and compare screenshots
+4. Verify < 1.5% pixel difference for these components
+5. If > 1.5%: adjust styling until it matches
+
+Do not approve until pixel diff < 1.5%.
 
 ## Commit messages
 ```
@@ -57,4 +60,5 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
 
 ## Report
 1. Confirmation that old components deleted
-2. Screenshot showing new Background, Lanterns, Header
+2. Pixel test results for screens using these components (diff %)
+3. Screenshot comparison showing match

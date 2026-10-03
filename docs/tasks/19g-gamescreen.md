@@ -64,15 +64,15 @@ Handle all auction phases and states with the correct layouts and components.
 5. Delete old GameScreen.tsx content, start fresh with mockup structure.
 
 ## Audit
-Play through a full game and verify:
-1. Each auction phase shows correct mockup layout
-2. Desktop 3-column grid works
-3. Phone stacked layout works
-4. Wheel spins correctly
-5. Bid history updates
-6. StatusBox countdown works
-7. All player states show correctly (your turn, passed, out, disconnected)
-8. Halisaha theme shows kaleci slot
+Play through a full game and verify with pixel tests:
+1. Use pixel comparison harness from Task 19j
+2. Test all game state screens (05-20): your-turn, not-your-turn, spinning, opening-you, opening-other, bidding, last-seconds, top-bidder, passed, out, sold, judge-thinking, judge-error, disconnected, halisaha
+3. Test both desktop and phone layouts
+4. Run pixel comparison: must be < 1.5% diff for all screens
+5. Verify wheel spins correctly, bid history updates, StatusBox countdown works
+6. Verify all player states show correctly
+
+Do not approve until pixel diff < 1.5% for all tested screens.
 
 ## Commit messages
 ```
@@ -89,5 +89,6 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
 ```
 
 ## Report
-1. Screenshots of at least 5 different game states
-2. Confirmation all phases work
+1. Pixel test results for all game state screens (diff % for each)
+2. Confirmation all phases work correctly
+3. Screenshots showing key states match mockups
