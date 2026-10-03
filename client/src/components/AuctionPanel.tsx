@@ -7,6 +7,8 @@ interface Player {
   nickname: string;
   gold: number;
   slots: any[];
+  outReason?: string;
+  passedBadge?: boolean;
 }
 
 interface AuctionPanelProps {
@@ -239,6 +241,63 @@ export default function AuctionPanel({
       );
     }
 
+    // Show outReason if player is out of the auction
+    if (myPlayer?.outReason) {
+      return (
+        <div className="card">
+          <div style={{
+            padding: '16px 18px',
+            background: 'var(--dark)',
+            border: '2px solid rgba(46, 196, 182, 0.55)',
+            borderRadius: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: '14px',
+          }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <span style={{
+                fontSize: '12px',
+                fontWeight: 800,
+                letterSpacing: '0.1em',
+                color: 'var(--muted)'
+              }}>
+                EN YÜKSEK TEKLİF
+              </span>
+              <span style={{
+                fontFamily: 'var(--font-heading)',
+                fontSize: '44px',
+                lineHeight: 1,
+                color: 'var(--white)'
+              }}>
+                {currentHighestBid} ALTIN
+              </span>
+              <span style={{
+                fontSize: '15px',
+                fontWeight: 700,
+                color: 'var(--turquoise)'
+              }}>
+                {highestBidder?.nickname || 'Kimse'} önde
+              </span>
+            </div>
+            <Timer endsAt={auctionEndsAt} />
+          </div>
+
+          <div style={{
+            padding: '20px',
+            background: 'var(--dark)',
+            border: '2px solid var(--pomegranate)',
+            borderRadius: '14px',
+            textAlign: 'center',
+          }}>
+            <p style={{ fontSize: '16px', fontWeight: 700, color: 'var(--pomegranate)' }}>
+              {myPlayer.outReason}
+            </p>
+          </div>
+        </div>
+      );
+    }
+
     const showPassButton = !amIHighestBidder && !passedPlayerIds.includes(myPlayerId || '') && !hasPassed && hasEmptySlot;
 
     return (
@@ -291,18 +350,6 @@ export default function AuctionPanel({
           }}>
             <p style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)' }}>
               Slotların dolu, izliyorsun
-            </p>
-          </div>
-        ) : hasPassed ? (
-          <div style={{
-            padding: '20px',
-            background: 'var(--dark)',
-            border: '2px solid var(--pomegranate)',
-            borderRadius: '14px',
-            textAlign: 'center',
-          }}>
-            <p style={{ fontSize: '16px', fontWeight: 700, color: 'var(--pomegranate)' }}>
-              Pas dedin
             </p>
           </div>
         ) : amIHighestBidder ? (

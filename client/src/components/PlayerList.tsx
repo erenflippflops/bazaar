@@ -8,6 +8,7 @@ interface Player {
   nickname: string;
   gold: number;
   slots: (Item | null)[];
+  passedBadge?: boolean;
 }
 
 interface PlayerListProps {
@@ -25,7 +26,7 @@ export default function PlayerList({ players, currentPlayerId, phase, passedPlay
       {players.map((player) => {
         const isActive = player.id === currentPlayerId;
         const isMe = player.id === myPlayerId;
-        const hasPassed = passedPlayerIds.includes(player.id);
+        const showPassBadge = player.passedBadge && (phase === 'opening' || phase === 'bidding');
         return (
           <div
             key={player.id}
@@ -37,7 +38,7 @@ export default function PlayerList({ players, currentPlayerId, phase, passedPlay
                 <span>{player.nickname}</span>
                 {isMe && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: isActive ? 'var(--white)' : 'var(--muted)' }}>SEN</span>}
                 {isActive && !isMe && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--white)' }}>SIRA</span>}
-                {phase === 'bidding' && hasPassed && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--pomegranate)' }}>PAS</span>}
+                {showPassBadge && <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--pomegranate)' }}>PAS</span>}
               </div>
               <div style={{ fontSize: '13px', fontWeight: 700 }}>
                 {player.gold} <span style={{ fontWeight: 600, color: isActive ? 'var(--white)' : 'var(--muted)' }}>altın</span>
