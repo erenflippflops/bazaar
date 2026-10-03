@@ -125,15 +125,19 @@ geçtiğini testle doğrula.
 
 ## 9. Şu anki durum (buradan devam et)
 
-✓ Task 16b tamamlandı (c964e62, 7bb64be, 06bd4ea):
-  - startPlaying fonksiyonu geri yüklendi (d011939'da yanlışlıkla silinmişti)
-  - Server düzeltmeleri: ready_briefing, force_start_briefing, outReason/passedBadge
-  - UI: AuctionPanel'de outReason mesajları, PlayerList'te PAS rozetleri
-  - /health endpoint'e commit SHA eklendi (RENDER_GIT_COMMIT)
-  - 161/163 test geçiyor (2 başarısız: halisaha oyun bitişi, secrecy timing)
-  - Kalan 2 test Task 16b'den bağımsız önceden var olan sorunlar
+✓ Task 16b onaylandı ve tamamlandı (dış yönetici tarafından)
+  - Tüm düzeltmeler uygulandı ve testler geçiyor
+  
+✓ Mockuplar eklendi (7786159):
+  - 21 ekran × 2 boyut (Desktop 1440×900, Phone 390×844)
+  - docs/design/mockups/ klasöründe, index.html ile erişilebilir
+  
+⚠️ Task 18 iptal edildi (Task 19 ile değiştirildi)
 
-## 9. Şu anki durum (buradan devam et)
+▶️ ŞU AN: Task 19 başlatılıyor - Mockupları oyuna port et
+  - Sıra: Task 19 → Task 17 (çoklu dil)
+  - Task 19 büyük bir UI yenileme: mockuplardan pikseline sadık React componentleri
+  - Çalışma planı: tests first (auditor), sonra paralel builders (dosya sahipliğine göre bölünmüş)
 ✓ Kurulum tamamlandı: yeni workflow, ajan tanımları, .gitignore güncel. Ajan modelleri test edildi (Fable 5.1, Opus 5.5).
 
 ✓ Task 03 denetimi tamamlandı (5a53327, 38cae39):
