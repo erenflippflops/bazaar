@@ -52,9 +52,10 @@ export function getAllThemes(): Theme[] {
   return Array.from(themes.values());
 }
 
-export function themeItemsToEngineItems(themeItems: ThemeItem[], lang: 'tr' | 'en' | 'de' = 'tr'): { name: string; description: string }[] {
+export function themeItemsToEngineItems(themeItems: ThemeItem[], lang: 'tr' | 'en' | 'de' = 'tr'): { name: string; description: string; position?: string }[] {
   return themeItems.map(item => ({
     name: item.name[lang],
-    description: item.description[lang]
+    description: item.description[lang],
+    position: item.position  // Include position if present
   }));
 }
