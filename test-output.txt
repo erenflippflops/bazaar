@@ -1,0 +1,1780 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Users/lolse/Projects/BAZAAR[39m
+
+ [32m✓[39m tests/engine/briefing.test.ts [2m ([22m[2m10 tests[22m[2m)[22m[90m 6[2mms[22m[39m
+ [33m❯[39m tests/themes.test.ts [2m ([22m[2m3 tests[22m [2m|[22m [31m3 failed[39m[2m)[22m[90m 8[2mms[22m[39m
+[31m   [33m❯[31m tests/themes.test.ts[2m > [22mTask 16: Themes - 4-slot games[2m > [22m4-slot game with 2 players ends after 2 × 4 = 8 auctions[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/themes.test.ts[2m > [22mTask 16: Themes - 4-slot games[2m > [22m4-slot game with 6 players ends after 6 × 4 = 24 auctions[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/themes.test.ts[2m > [22mTask 16: Themes - 4-slot games[2m > [22mgold reserve works correctly with 4 slots[39m
+[31m     → startPlaying is not a function[39m
+ [33m❯[39m tests/sanitize.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 6[2mms[22m[39m
+[31m   [33m❯[31m tests/sanitize.test.ts[2m > [22mRule 3: Public state sanitization[2m > [22mpublic room state contains wheel COUNT but no hidden item names[39m
+[31m     → startPlaying is not a function[39m
+ [32m✓[39m tests/engine/pass.test.ts [2m ([22m[2m13 tests[22m[2m)[22m[90m 6[2mms[22m[39m
+ [33m❯[39m tests/opening.audit.test.ts [2m ([22m[2m7 tests[22m [2m|[22m [31m7 failed[39m[2m)[22m[90m 8[2mms[22m[39m
+[31m   [33m❯[31m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mafter opener spins, non-opener cannot bid before the opener places opening bid[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mbefore spinning, nobody can bid, including the opener[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mafter spin, opener bids 0 rejected; opener bids 1 accepted and becomes highest bidder[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mafter opening bid, other players can bid (current + 1); opener cannot raise own bid[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mopening bid respects gold reserve: 20 gold, 3 empty slots -> 19 rejected, 18 accepted[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mtimeout after opener spun but did not bid: places 1-gold opening bid for opener[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mtimeout when opener did not spin: spins and places 1-gold opening bid, wheel shrinks by 1[39m
+[31m     → startPlaying is not a function[39m
+ [32m✓[39m tests/data-check.test.ts [2m ([22m[2m22 tests[22m[2m)[22m[90m 26[2mms[22m[39m
+ [33m❯[39m tests/engine.test.ts [2m ([22m[2m15 tests[22m [2m|[22m [31m12 failed[39m[2m)[22m[90m 26[2mms[22m[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 3: Deck and Wheel[2m > [22mwheel starts with all items and shrinks without refilling[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 3: Deck and Wheel[2m > [22meach spin removes exactly the revealed item and nothing else[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 3: Deck and Wheel[2m > [22mfull 6-player game completes with 22 items remaining[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 4: Opening Order[2m > [22mskips players with 3 filled slots[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 4: Opening Order[2m > [22mauto-bids 1 gold after 20s timeout[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 5: Bidding[2m > [22menforces minimum bid of current highest + 1[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 5: Bidding[2m > [22mprevents highest bidder from raising their own bid[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 5: Bidding[2m > [22mawards item to highest bidder on timeout[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 6: Gold Reserve[2m > [22menforces gold reserve: cannot bid more than gold - (emptySlots - 1)[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 6: Gold Reserve[2m > [22mupdates max bid as slots fill[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 7: End of Auction[2m > [22mtransitions to judging when all players have 3 filled slots[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/engine.test.ts[2m > [22mRule 10: Reconnect[2m > [22mpreserves player state on reconnect[39m
+[31m     → startPlaying is not a function[39m
+ [33m❯[39m tests/rules.audit.test.ts [2m ([22m[2m16 tests[22m [2m|[22m [31m7 failed[39m[2m)[22m[90m 19[2mms[22m[39m
+[31m   [33m❯[31m tests/rules.audit.test.ts[2m > [22mRule 4: Opening Order[2m > [22mopening bid 0 rejected; 1 accepted[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/rules.audit.test.ts[2m > [22mRule 4: Opening Order[2m > [22m3 players, P3 has 3 full slots: after P2 turn the next opener is P1[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/rules.audit.test.ts[2m > [22mRule 4: Opening Order[2m > [22mnext opener follows the previous OPENER, not the auction winner[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/rules.audit.test.ts[2m > [22mRule 5: Bidding[2m > [22ma player with 3 full slots cannot bid[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/rules.audit.test.ts[2m > [22mRule 5: Bidding[2m > [22mnobody raises: the opener gets the item and pays exactly the opening bid[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/rules.audit.test.ts[2m > [22mRule 5: Bidding[2m > [22mwinner's gold drops by exactly the winning bid; others' gold unchanged[39m
+[31m     → startPlaying is not a function[39m
+[31m   [33m❯[31m tests/rules.audit.test.ts[2m > [22mRule 6: Gold Reserve[2m > [22mopening bid: 20 gold, 3 empty slots -> 18 accepted, 19 rejected[39m
+[31m     → startPlaying is not a function[39m
+ [32m✓[39m tests/engine/halisaha.test.ts [2m ([22m[2m15 tests[22m[2m)[22m[90m 54[2mms[22m[39m
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mdouble actions: two start_game -> one start; two spin_wheel -> shrinks by 1; same bid twice -> one accepted[22m[39m
+[Socket] Client connected: 4nO7SmLo3fHnK-j8AAAA
+
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mdouble actions: two start_game -> one start; two spin_wheel -> shrinks by 1; same bid twice -> one accepted[22m[39m
+[Socket] Client connected: Nk31WGjkHgUrps57AAAB
+
+[90mstdout[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mbid with 0.7s remaining adds 0.3s (not reset to 0.5s)[22m[39m
+[Socket] Client connected: cFdTikjxQhIqYZZqAAAA
+
+[90mstdout[2m | tests/integration/sabotage.test.ts[2m > [22m[2mSabotage Tests[2m > [22m[2mSABOTAGE: settle check removed - auction waits for timer instead of ending immediately[22m[39m
+[Socket] Client connected: 0mn5qqX3QUPhwtojAAAA
+
+[90mstdout[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mbid with 0.7s remaining adds 0.3s (not reset to 0.5s)[22m[39m
+[Socket] Client connected: -Dl_f0_s3OZ5Ihv5AAAB
+
+[90mstdout[2m | tests/integration/sabotage.test.ts[2m > [22m[2mSabotage Tests[2m > [22m[2mSABOTAGE: settle check removed - auction waits for timer instead of ending immediately[22m[39m
+[Socket] Client connected: 11cmXwIfXs4Ww-bMAAAB
+
+[90mstdout[2m | tests/integration/reconnect.test.ts[2m > [22m[2mReconnect[2m > [22m[2mplayer disconnects and rejoins with token: same gold, slots, turn position[22m[39m
+[Socket] Client connected: AuYks6OdU-Tq7kgzAAAA
+
+[90mstdout[2m | tests/integration/auctionTimer.test.ts[2m > [22m[2mAuction Timer[2m > [22m[2mno further bids: auction resolves ~1s after opening (not before 0.8s, by 1.6s)[22m[39m
+[Socket] Client connected: UBDVHaX73d5NBZ93AAAA
+
+[90mstdout[2m | tests/integration/reconnect.test.ts[2m > [22m[2mReconnect[2m > [22m[2mplayer disconnects and rejoins with token: same gold, slots, turn position[22m[39m
+[Socket] Client connected: xd_0YaMfAnyu0eeSAAAB
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mS1: P1 opens 1, P2-P4 all pass -> auction ends immediately, P1 pays 1[22m[39m
+[Socket] Client connected: KmIr2EuGQhPFsQErAAAA
+
+[90mstdout[2m | tests/integration/themes.test.ts[2m > [22m[2mTask 16: Themes - Integration[2m > [22m[2mcreate_room with superpowers theme[22m[39m
+[Socket] Client connected: X1Raj9Vfq1JFHJtKAAAA
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+[Socket] Client connected: rfa5kyd6D58j981RAAAA
+
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+[Socket] Client connected: kh8pNMvHlVn7aZdMAAAA
+
+[90mstdout[2m | tests/integration/auctionTimer.test.ts[2m > [22m[2mAuction Timer[2m > [22m[2mno further bids: auction resolves ~1s after opening (not before 0.8s, by 1.6s)[22m[39m
+[Socket] Client connected: ft9Af4tfwNCy0yX7AAAB
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mafter opener spins, non-opener bid is rejected[22m[39m
+[Socket] Client connected: pa1lqoTbvQdDtoYHAAAA
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+[Socket] Client connected: ohQ0Jk8ZGmFMEOKrAAAB
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mS1: P1 opens 1, P2-P4 all pass -> auction ends immediately, P1 pays 1[22m[39m
+[Socket] Client connected: 4lf0cUn09A-d4KFHAAAB
+[Socket] Client connected: sTbZq6wmR5Z7U0WoAAAC
+[Socket] Client connected: ZRTNPGrVPg1WvRa5AAAD
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mvalid JSON -> finished with ranking, reasons, commentary[22m[39m
+[Socket] Client connected: xQXR-ATBLoV019czAAAA
+
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+[Socket] Client connected: aC-AcYBrA4ucSBk0AAAB
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mgold reserve: over-limit bid rejected, state unchanged[22m[39m
+[Socket] Client connected: ohkmImkw3FXBxE7aAAAA
+
+[90mstdout[2m | tests/integration/themes.test.ts[2m > [22m[2mTask 16: Themes - Integration[2m > [22m[2mcreate_room with legendary-fighters theme[22m[39m
+[Socket] Client connected: pr83IhnoUy07KPPWAAAB
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mafter opener spins, non-opener bid is rejected[22m[39m
+[Socket] Client connected: t2w-Hfe7U8kFdVE-AAAB
+
+[90mstdout[2m | tests/integration/secrecy.test.ts[2m > [22m[2mSecrecy[2m > [22m[2mno item name appears before it becomes revealed; unrevealed items never appear[22m[39m
+[Socket] Client connected: x3YcUbRXj9UR70STAAAA
+
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: rfa5kyd6D58j981RAAAA
+[spin_wheel] Processing spin for player: rfa5kyd6D58j981RAAAA in room: 2TIKP9
+[spin_wheel] Success, revealed item: İyileştirme
+[place_bid] Received from socket: rfa5kyd6D58j981RAAAA amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mvalid JSON -> finished with ranking, reasons, commentary[22m[39m
+[Socket] Client connected: ZVAjESQwtMnKEQyOAAAB
+
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+[spin_wheel] Received from socket: kh8pNMvHlVn7aZdMAAAA
+[spin_wheel] Processing spin for player: kh8pNMvHlVn7aZdMAAAA in room: RXAGUV
+[spin_wheel] Success, revealed item: Uçma
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mgold reserve: over-limit bid rejected, state unchanged[22m[39m
+[Socket] Client connected: rFJgMkOIZzOgt73nAAAB
+
+[90mstdout[2m | tests/integration/secrecy.test.ts[2m > [22m[2mSecrecy[2m > [22m[2mno item name appears before it becomes revealed; unrevealed items never appear[22m[39m
+[Socket] Client connected: 8n99YVulkGEu0hZfAAAB
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2m6 players join; the 7th is rejected[22m[39m
+[Socket] Client connected: mmIhVPn_qat_3GxEAAAA
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+[place_bid] Received from socket: kh8pNMvHlVn7aZdMAAAA amount: [33m1[39m
+
+[90mstdout[2m | tests/integration/themes.test.ts[2m > [22m[2mTask 16: Themes - Integration[2m > [22m[2mcreate_room with halisaha theme[22m[39m
+[Socket] Client connected: yma0NGz0_egQoqZfAAAC
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2m6 players join; the 7th is rejected[22m[39m
+[Socket] Client connected: THb4u4VwHMcijbG7AAAB
+
+[90mstdout[2m | tests/integration/themes.test.ts[2m > [22m[2mTask 16: Themes - Integration[2m > [22m[2mcreate_room with mythical-creatures theme[22m[39m
+[Socket] Client connected: 75h-trgd3gAa2zBTAAAD
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2m6 players join; the 7th is rejected[22m[39m
+[Socket] Client connected: YKR7aUYS4wAobvvnAAAC
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2m6 players join; the 7th is rejected[22m[39m
+[Socket] Client connected: VwDDvJveUx8OotTjAAAD
+
+[90mstdout[2m | tests/integration/themes.test.ts[2m > [22m[2mTask 16: Themes - Integration[2m > [22m[2mcreate_room with invalid themeId is rejected[22m[39m
+[Socket] Client connected: -761NwJJIGPScZopAAAE
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2m6 players join; the 7th is rejected[22m[39m
+[Socket] Client connected: -_23lH5xdla6V5J_AAAE
+
+[90mstdout[2m | tests/integration/themes.test.ts[2m > [22m[2mTask 16: Themes - Integration[2m > [22m[2mjudge prompt contains theme criterion[22m[39m
+[Socket] Client connected: FYdlnVAE0SoR3ouNAAAF
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2m6 players join; the 7th is rejected[22m[39m
+[Socket] Client connected: wYvbaC-jozwb5fbQAAAF
+
+[90mstdout[2m | tests/integration/themes.test.ts[2m > [22m[2mTask 16: Themes - Integration[2m > [22m[2mjudge prompt contains theme criterion[22m[39m
+[Socket] Client connected: c8Ocp8K5UKHBJwodAAAG
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2m6 players join; the 7th is rejected[22m[39m
+[Socket] Client connected: R--MazIeTxiuk_V8AAAG
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2mjoin after start is rejected[22m[39m
+[Socket] Client connected: D4cIsCQ7Mw5qbl2vAAAH
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2mjoin after start is rejected[22m[39m
+[Socket] Client connected: Mks_kt-x91PJWgUBAAAI
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2mjoin after start is rejected[22m[39m
+[Socket] Client connected: wWOOOMoXQbTn7-d5AAAJ
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2monly the host can start; the host cannot start alone[22m[39m
+[Socket] Client connected: CLpdmX9bnGPzj-6hAAAK
+
+[90mstdout[2m | tests/integration/lobby.test.ts[2m > [22m[2mLobby[2m > [22m[2monly the host can start; the host cannot start alone[22m[39m
+[Socket] Client connected: swuApF-9XuJYS0ClAAAL
+
+ [32m✓[39m tests/integration/lobby.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[90m 185[2mms[22m[39m
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+[spin_wheel] Received from socket: aC-AcYBrA4ucSBk0AAAB
+[spin_wheel] Processing spin for player: aC-AcYBrA4ucSBk0AAAB in room: RXAGUV
+[spin_wheel] Success, revealed item: Işınlanma Işını
+[place_bid] Received from socket: aC-AcYBrA4ucSBk0AAAB amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: ohQ0Jk8ZGmFMEOKrAAAB
+[spin_wheel] Processing spin for player: ohQ0Jk8ZGmFMEOKrAAAB in room: 2TIKP9
+[spin_wheel] Success, revealed item: Hayvan Diliyle Konuşma
+[place_bid] Received from socket: ohQ0Jk8ZGmFMEOKrAAAB amount: [33m1[39m
+
+[90mstdout[2m | tests/integration/secrecy.test.ts[2m > [22m[2mSecrecy[2m > [22m[2mno item name appears before it becomes revealed; unrevealed items never appear[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/secrecy.test.ts[2m > [22m[2mSecrecy[2m > [22m[2mno item name appears before it becomes revealed; unrevealed items never appear[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mvalid JSON -> finished with ranking, reasons, commentary[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mvalid JSON -> finished with ranking, reasons, commentary[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/themes.test.ts[2m > [22m[2mTask 16: Themes - Integration[2m > [22m[2mjudge prompt contains theme criterion[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/themes.test.ts[2m > [22m[2mTask 16: Themes - Integration[2m > [22m[2mjudge prompt contains theme criterion[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: rfa5kyd6D58j981RAAAA
+[spin_wheel] Processing spin for player: rfa5kyd6D58j981RAAAA in room: 2TIKP9
+[spin_wheel] Success, revealed item: Geleceği Görme
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+[place_bid] Received from socket: rfa5kyd6D58j981RAAAA amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+[spin_wheel] Received from socket: kh8pNMvHlVn7aZdMAAAA
+[spin_wheel] Processing spin for player: kh8pNMvHlVn7aZdMAAAA in room: RXAGUV
+[spin_wheel] Success, revealed item: Doku Yapışma
+[place_bid] Received from socket: kh8pNMvHlVn7aZdMAAAA amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: ohQ0Jk8ZGmFMEOKrAAAB
+[spin_wheel] Processing spin for player: ohQ0Jk8ZGmFMEOKrAAAB in room: 2TIKP9
+[spin_wheel] Success, revealed item: Kütle Değiştirme
+[place_bid] Received from socket: ohQ0Jk8ZGmFMEOKrAAAB amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+[spin_wheel] Received from socket: aC-AcYBrA4ucSBk0AAAB
+[spin_wheel] Processing spin for player: aC-AcYBrA4ucSBk0AAAB in room: RXAGUV
+[spin_wheel] Success, revealed item: Geleceği Görme
+[place_bid] Received from socket: aC-AcYBrA4ucSBk0AAAB amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+[spin_wheel] Received from socket: kh8pNMvHlVn7aZdMAAAA
+[spin_wheel] Processing spin for player: kh8pNMvHlVn7aZdMAAAA in room: RXAGUV
+[spin_wheel] Success, revealed item: Hız
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: rfa5kyd6D58j981RAAAA
+[spin_wheel] Processing spin for player: rfa5kyd6D58j981RAAAA in room: 2TIKP9
+[spin_wheel] Success, revealed item: Süper Güç
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+[place_bid] Received from socket: rfa5kyd6D58j981RAAAA amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+[place_bid] Received from socket: kh8pNMvHlVn7aZdMAAAA amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2m2-player halisaha full game completes with 1 GK + 3 field players each[22m[39m
+[spin_wheel] Received from socket: aC-AcYBrA4ucSBk0AAAB
+[spin_wheel] Processing spin for player: aC-AcYBrA4ucSBk0AAAB in room: RXAGUV
+[spin_wheel] Success, revealed item: Zihin Okuma
+[place_bid] Received from socket: aC-AcYBrA4ucSBk0AAAB amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m2 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: ohQ0Jk8ZGmFMEOKrAAAB
+[spin_wheel] Processing spin for player: ohQ0Jk8ZGmFMEOKrAAAB in room: 2TIKP9
+[spin_wheel] Success, revealed item: Işık Patlaması
+[place_bid] Received from socket: ohQ0Jk8ZGmFMEOKrAAAB amount: [33m1[39m
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[Socket] Client connected: tpVYcSAskEvcvFIQAAAC
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[Socket] Client connected: _5jPbmW-emWRthw_AAAD
+
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+[Socket] Client connected: ka4BFnn4R0wWdN-_AAAC
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[Socket] Client connected: cMA0ZsN8HggIrzJoAAAE
+
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+[Socket] Client connected: bl9L8d_Bdl0aSO97AAAD
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[Socket] Client connected: 0T02IPeknmgKVAzgAAAF
+
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[Socket] Client connected: 57EjRaQ5GBjlM-cTAAAG
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+[spin_wheel] Received from socket: ka4BFnn4R0wWdN-_AAAC
+[spin_wheel] Processing spin for player: ka4BFnn4R0wWdN-_AAAC in room: QLW8ZX
+[spin_wheel] Success, revealed item: Hologram Yaratma
+[place_bid] Received from socket: ka4BFnn4R0wWdN-_AAAC amount: [33m1[39m
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[Socket] Client connected: TZy1ERWhobmG3g-kAAAH
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: tpVYcSAskEvcvFIQAAAC
+[spin_wheel] Processing spin for player: tpVYcSAskEvcvFIQAAAC in room: W6K6DP
+[spin_wheel] Success, revealed item: Hava Kontrolü
+[place_bid] Received from socket: tpVYcSAskEvcvFIQAAAC amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: _5jPbmW-emWRthw_AAAD
+[spin_wheel] Processing spin for player: _5jPbmW-emWRthw_AAAD in room: W6K6DP
+[spin_wheel] Success, revealed item: Düşünce İletimi
+[place_bid] Received from socket: _5jPbmW-emWRthw_AAAD amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: cMA0ZsN8HggIrzJoAAAE
+[spin_wheel] Processing spin for player: cMA0ZsN8HggIrzJoAAAE in room: W6K6DP
+[spin_wheel] Success, revealed item: Kemik Çıkarma
+[place_bid] Received from socket: cMA0ZsN8HggIrzJoAAAE amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: 0T02IPeknmgKVAzgAAAF
+[spin_wheel] Processing spin for player: 0T02IPeknmgKVAzgAAAF in room: W6K6DP
+[spin_wheel] Success, revealed item: Teleportasyon
+[place_bid] Received from socket: 0T02IPeknmgKVAzgAAAF amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: 57EjRaQ5GBjlM-cTAAAG
+[spin_wheel] Processing spin for player: 57EjRaQ5GBjlM-cTAAAG in room: W6K6DP
+[spin_wheel] Success, revealed item: Işık Patlaması
+[place_bid] Received from socket: 57EjRaQ5GBjlM-cTAAAG amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: TZy1ERWhobmG3g-kAAAH
+[spin_wheel] Processing spin for player: TZy1ERWhobmG3g-kAAAH in room: W6K6DP
+[spin_wheel] Success, revealed item: Güneş Enerjisi
+[place_bid] Received from socket: TZy1ERWhobmG3g-kAAAH amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: tpVYcSAskEvcvFIQAAAC
+[spin_wheel] Processing spin for player: tpVYcSAskEvcvFIQAAAC in room: W6K6DP
+[spin_wheel] Success, revealed item: Uçma
+[place_bid] Received from socket: tpVYcSAskEvcvFIQAAAC amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: _5jPbmW-emWRthw_AAAD
+[spin_wheel] Processing spin for player: _5jPbmW-emWRthw_AAAD in room: W6K6DP
+[spin_wheel] Success, revealed item: Bitki Büyütme
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[place_bid] Received from socket: _5jPbmW-emWRthw_AAAD amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: cMA0ZsN8HggIrzJoAAAE
+[spin_wheel] Processing spin for player: cMA0ZsN8HggIrzJoAAAE in room: W6K6DP
+[spin_wheel] Success, revealed item: Lazer Gözler
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[place_bid] Received from socket: cMA0ZsN8HggIrzJoAAAE amount: [33m1[39m
+
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mdouble actions: two start_game -> one start; two spin_wheel -> shrinks by 1; same bid twice -> one accepted[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mdouble actions: two start_game -> one start; two spin_wheel -> shrinks by 1; same bid twice -> one accepted[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mbid with 0.7s remaining adds 0.3s (not reset to 0.5s)[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mbid with 0.7s remaining adds 0.3s (not reset to 0.5s)[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/sabotage.test.ts[2m > [22m[2mSabotage Tests[2m > [22m[2mSABOTAGE: settle check removed - auction waits for timer instead of ending immediately[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/sabotage.test.ts[2m > [22m[2mSabotage Tests[2m > [22m[2mSABOTAGE: settle check removed - auction waits for timer instead of ending immediately[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/reconnect.test.ts[2m > [22m[2mReconnect[2m > [22m[2mplayer disconnects and rejoins with token: same gold, slots, turn position[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/reconnect.test.ts[2m > [22m[2mReconnect[2m > [22m[2mplayer disconnects and rejoins with token: same gold, slots, turn position[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/auctionTimer.test.ts[2m > [22m[2mAuction Timer[2m > [22m[2mno further bids: auction resolves ~1s after opening (not before 0.8s, by 1.6s)[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/auctionTimer.test.ts[2m > [22m[2mAuction Timer[2m > [22m[2mno further bids: auction resolves ~1s after opening (not before 0.8s, by 1.6s)[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mS1: P1 opens 1, P2-P4 all pass -> auction ends immediately, P1 pays 1[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mS1: P1 opens 1, P2-P4 all pass -> auction ends immediately, P1 pays 1[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mafter opener spins, non-opener bid is rejected[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mafter opener spins, non-opener bid is rejected[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mgold reserve: over-limit bid rejected, state unchanged[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mgold reserve: over-limit bid rejected, state unchanged[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: 0T02IPeknmgKVAzgAAAF
+[spin_wheel] Processing spin for player: 0T02IPeknmgKVAzgAAAF in room: W6K6DP
+[spin_wheel] Success, revealed item: Su Kontrolü
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[place_bid] Received from socket: 0T02IPeknmgKVAzgAAAF amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+[spin_wheel] Received from socket: bl9L8d_Bdl0aSO97AAAD
+[spin_wheel] Processing spin for player: bl9L8d_Bdl0aSO97AAAD in room: QLW8ZX
+[spin_wheel] Success, revealed item: Su Kontrolü
+[place_bid] Received from socket: bl9L8d_Bdl0aSO97AAAD amount: [33m1[39m
+[place_bid] Received from socket: ka4BFnn4R0wWdN-_AAAC amount: [33m2[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: 57EjRaQ5GBjlM-cTAAAG
+[spin_wheel] Processing spin for player: 57EjRaQ5GBjlM-cTAAAG in room: W6K6DP
+[spin_wheel] Success, revealed item: Doku Kontrolü
+[place_bid] Received from socket: 57EjRaQ5GBjlM-cTAAAG amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: TZy1ERWhobmG3g-kAAAH
+[spin_wheel] Processing spin for player: TZy1ERWhobmG3g-kAAAH in room: W6K6DP
+[spin_wheel] Success, revealed item: Duvar Geçme
+[place_bid] Received from socket: TZy1ERWhobmG3g-kAAAH amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: tpVYcSAskEvcvFIQAAAC
+[spin_wheel] Processing spin for player: tpVYcSAskEvcvFIQAAAC in room: W6K6DP
+[spin_wheel] Success, revealed item: Doku Yapışma
+[place_bid] Received from socket: tpVYcSAskEvcvFIQAAAC amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: _5jPbmW-emWRthw_AAAD
+[spin_wheel] Processing spin for player: _5jPbmW-emWRthw_AAAD in room: W6K6DP
+[spin_wheel] Success, revealed item: Dokunma ile Patlama
+[place_bid] Received from socket: _5jPbmW-emWRthw_AAAD amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: cMA0ZsN8HggIrzJoAAAE
+[spin_wheel] Processing spin for player: cMA0ZsN8HggIrzJoAAAE in room: W6K6DP
+[spin_wheel] Success, revealed item: Hayvan Diliyle Konuşma
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[place_bid] Received from socket: cMA0ZsN8HggIrzJoAAAE amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: 0T02IPeknmgKVAzgAAAF
+[spin_wheel] Processing spin for player: 0T02IPeknmgKVAzgAAAF in room: W6K6DP
+[spin_wheel] Success, revealed item: Işınlanma Işını
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[place_bid] Received from socket: 0T02IPeknmgKVAzgAAAF amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: 57EjRaQ5GBjlM-cTAAAG
+[spin_wheel] Processing spin for player: 57EjRaQ5GBjlM-cTAAAG in room: W6K6DP
+[spin_wheel] Success, revealed item: Metal Kontrolü
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[place_bid] Received from socket: 57EjRaQ5GBjlM-cTAAAG amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/fullGame.test.ts[2m > [22m[2mFull Game[2m > [22m[2m6 players play a whole game until finished[22m[39m
+[spin_wheel] Received from socket: TZy1ERWhobmG3g-kAAAH
+[spin_wheel] Processing spin for player: TZy1ERWhobmG3g-kAAAH in room: W6K6DP
+[spin_wheel] Success, revealed item: Ses Taklit
+[place_bid] Received from socket: TZy1ERWhobmG3g-kAAAH amount: [33m1[39m
+
+ [32m✓[39m tests/integration/fullGame.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 2552[2mms[22m[39m
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+[spin_wheel] Received from socket: ka4BFnn4R0wWdN-_AAAC
+[spin_wheel] Processing spin for player: ka4BFnn4R0wWdN-_AAAC in room: QLW8ZX
+[spin_wheel] Success, revealed item: Hız
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+[place_bid] Received from socket: ka4BFnn4R0wWdN-_AAAC amount: [33m1[39m
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mout-message state shows for player with full slots[22m[39m
+[spin_wheel] Received from socket: bl9L8d_Bdl0aSO97AAAD
+[spin_wheel] Processing spin for player: bl9L8d_Bdl0aSO97AAAD in room: QLW8ZX
+[spin_wheel] Success, revealed item: Portal Açma
+
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+[Socket] Client connected: aodwlj4okOa9AmRsAAAE
+
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+[Socket] Client connected: ptgs56edxVp3q4CeAAAF
+
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+Socket handler error: __vite_ssr_import_6__.allBriefingReady is not a function
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+[spin_wheel] Received from socket: aodwlj4okOa9AmRsAAAE
+[spin_wheel] Processing spin for player: aodwlj4okOa9AmRsAAAE in room: WA5X83
+[spin_wheel] Success, revealed item: Hız
+[place_bid] Received from socket: aodwlj4okOa9AmRsAAAE amount: [33m1[39m
+[place_bid] Received from socket: ptgs56edxVp3q4CeAAAF amount: [33m2[39m
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+[spin_wheel] Received from socket: ptgs56edxVp3q4CeAAAF
+[spin_wheel] Processing spin for player: ptgs56edxVp3q4CeAAAF in room: WA5X83
+[spin_wheel] Success, revealed item: Doku Yapışma
+[place_bid] Received from socket: ptgs56edxVp3q4CeAAAF amount: [33m1[39m
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mbid below current + 1 rejected; highest bidder cannot raise own bid[22m[39m
+[Socket] Client connected: Tmk1fWbRflPpY3jAAAAC
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mopener does nothing: server spins and opens with 1 gold after ~2s[22m[39m
+[Socket] Client connected: ADRlyOQdh2B7-L2TAAAC
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mopener does nothing: server spins and opens with 1 gold after ~2s[22m[39m
+[Socket] Client connected: aL1vNGDksGwOpUxXAAAD
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mbid below current + 1 rejected; highest bidder cannot raise own bid[22m[39m
+[Socket] Client connected: zh0lWkgouPin7vxuAAAD
+
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mmalformed input: no crash, /health ok, new room can play[22m[39m
+[Socket] Client connected: p-2-cWAjZF_ioXt8AAAC
+
+[90mstdout[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mbid with 0.2s remaining adds 0.3s, auction resolves at ~0.5s total[22m[39m
+[Socket] Client connected: GcgR_HINUAQv62bdAAAC
+
+[90mstdout[2m | tests/integration/sabotage.test.ts[2m > [22m[2mSabotage Tests[2m > [22m[2mSABOTAGE: timer extension changed from +3s to reset to 5s[22m[39m
+[Socket] Client connected: Bb5i9SkP6PwUlopWAAAC
+
+[90mstdout[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mbid with 0.2s remaining adds 0.3s, auction resolves at ~0.5s total[22m[39m
+[Socket] Client connected: 9GY1t-hgmVKr3xbkAAAD
+
+[90mstdout[2m | tests/integration/sabotage.test.ts[2m > [22m[2mSabotage Tests[2m > [22m[2mSABOTAGE: timer extension changed from +3s to reset to 5s[22m[39m
+[Socket] Client connected: -wdEsoxXfgJVRimQAAAD
+
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mmalformed input: no crash, /health ok, new room can play[22m[39m
+[place_bid] Received from socket: p-2-cWAjZF_ioXt8AAAC amount: [90mundefined[39m
+[place_bid] Invalid amount
+
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mmalformed input: no crash, /health ok, new room can play[22m[39m
+[Socket] Client connected: 5xlaB8elJoX5xC2RAAAD
+
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mmalformed input: no crash, /health ok, new room can play[22m[39m
+[Socket] Client connected: fCqgzdVqsllr5KEgAAAE
+
+[90mstdout[2m | tests/integration/auctionTimer.test.ts[2m > [22m[2mAuction Timer[2m > [22m[2mlate bid at ~0.7s: auction does not resolve before ~1.1s and resolves by ~1.7s[22m[39m
+[Socket] Client connected: dc-v-j4vCppsRlu0AAAC
+
+[90mstdout[2m | tests/integration/reconnect.test.ts[2m > [22m[2mReconnect[2m > [22m[2mwrong token does not take over any player[22m[39m
+[Socket] Client connected: GfmVZ2l4lRWBYF7CAAAC
+
+[90mstdout[2m | tests/integration/reconnect.test.ts[2m > [22m[2mReconnect[2m > [22m[2mwrong token does not take over any player[22m[39m
+[Socket] Client connected: 3dJBLZJZpHEClr5cAAAD
+
+[90mstdout[2m | tests/integration/auctionTimer.test.ts[2m > [22m[2mAuction Timer[2m > [22m[2mlate bid at ~0.7s: auction does not resolve before ~1.1s and resolves by ~1.7s[22m[39m
+[Socket] Client connected: p6ez6WP7AtMipU7PAAAD
+
+[90mstdout[2m | tests/integration/reconnect.test.ts[2m > [22m[2mReconnect[2m > [22m[2mtokens are secret: no message contains another player's token[22m[39m
+[Socket] Client connected: sX_cRzjCIjCKggdEAAAE
+
+[90mstdout[2m | tests/integration/reconnect.test.ts[2m > [22m[2mReconnect[2m > [22m[2mtokens are secret: no message contains another player's token[22m[39m
+[Socket] Client connected: BYlug6ekQWkNeUoAAAAF
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mS2: P1 opens 1, P3 bids 15, P1/P2/P4 pass -> ends at once, P3 pays 15[22m[39m
+[Socket] Client connected: ZwwpfArLLGFN907_AAAE
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mS2: P1 opens 1, P3 bids 15, P1/P2/P4 pass -> ends at once, P3 pays 15[22m[39m
+[Socket] Client connected: fUiLwO1IS4S6XOdwAAAF
+[Socket] Client connected: 9xYkJEV0RKkdi0n0AAAG
+[Socket] Client connected: zf4fn3kDpkcByPbnAAAH
+
+[90mstdout[2m | tests/integration/reconnect.test.ts[2m > [22m[2mReconnect[2m > [22m[2mtokens are secret: no message contains another player's token[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/reconnect.test.ts[2m > [22m[2mReconnect[2m > [22m[2mtokens are secret: no message contains another player's token[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+[spin_wheel] Received from socket: aodwlj4okOa9AmRsAAAE
+[spin_wheel] Processing spin for player: aodwlj4okOa9AmRsAAAE in room: WA5X83
+[spin_wheel] Success, revealed item: Hologram Yaratma
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+[place_bid] Received from socket: aodwlj4okOa9AmRsAAAE amount: [33m1[39m
+[place_bid] Received from socket: ptgs56edxVp3q4CeAAAF amount: [33m2[39m
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mopener does nothing: server spins and opens with 1 gold after ~2s[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mopener does nothing: server spins and opens with 1 gold after ~2s[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mbid below current + 1 rejected; highest bidder cannot raise own bid[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mbid below current + 1 rejected; highest bidder cannot raise own bid[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/sabotage.test.ts[2m > [22m[2mSabotage Tests[2m > [22m[2mSABOTAGE: timer extension changed from +3s to reset to 5s[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/sabotage.test.ts[2m > [22m[2mSabotage Tests[2m > [22m[2mSABOTAGE: timer extension changed from +3s to reset to 5s[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mbid with 0.2s remaining adds 0.3s, auction resolves at ~0.5s total[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mbid with 0.2s remaining adds 0.3s, auction resolves at ~0.5s total[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mmalformed input: no crash, /health ok, new room can play[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mmalformed input: no crash, /health ok, new room can play[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/auctionTimer.test.ts[2m > [22m[2mAuction Timer[2m > [22m[2mlate bid at ~0.7s: auction does not resolve before ~1.1s and resolves by ~1.7s[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/auctionTimer.test.ts[2m > [22m[2mAuction Timer[2m > [22m[2mlate bid at ~0.7s: auction does not resolve before ~1.1s and resolves by ~1.7s[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mS2: P1 opens 1, P3 bids 15, P1/P2/P4 pass -> ends at once, P3 pays 15[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mS2: P1 opens 1, P3 bids 15, P1/P2/P4 pass -> ends at once, P3 pays 15[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstderr[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+<empty line>
+[90mstdout[2m | tests/integration/halisaha.test.ts[2m > [22m[2mHalisaha Integration[2m > [22m[2mP1 opens while P2 is out -> auction ends at once[22m[39m
+[spin_wheel] Received from socket: aodwlj4okOa9AmRsAAAE
+[spin_wheel] Processing spin for player: aodwlj4okOa9AmRsAAAE in room: WA5X83
+[spin_wheel] Success, revealed item: Işınlanma Işını
+[place_bid] Received from socket: aodwlj4okOa9AmRsAAAE amount: [33m1[39m
+
+ [33m❯[39m tests/integration/halisaha.test.ts [2m ([22m[2m3 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[33m 6735[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/halisaha.test.ts[2m > [22mHalisaha Integration[2m > [22m2-player halisaha full game completes with 1 GK + 3 field players each[39m
+[31m     → expected 3 to be 4 // Object.is equality[39m
+[31m   [33m❯[31m tests/integration/halisaha.test.ts[2m > [22mHalisaha Integration[2m > [22mout-message state shows for player with full slots[39m
+[31m     → expected undefined not to be undefined[39m
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mopener spins but does not bid: server opens with 1 gold after ~2s, wheel shrinks by 1[22m[39m
+[Socket] Client connected: gOaJm1ELLRs19DeSAAAE
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnon-integer bid rejected[22m[39m
+[Socket] Client connected: I0Ejoq0BdFDa1sxQAAAE
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mopener spins but does not bid: server opens with 1 gold after ~2s, wheel shrinks by 1[22m[39m
+[Socket] Client connected: rRlmgiuoWQhYsSkmAAAF
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnon-integer bid rejected[22m[39m
+[Socket] Client connected: 0CQnM5Ij_x3dQbS8AAAF
+
+ [33m❯[39m tests/integration/sabotage.test.ts [2m ([22m[2m2 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[33m 10117[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/sabotage.test.ts[2m > [22mSabotage Tests[2m > [22mSABOTAGE: settle check removed - auction waits for timer instead of ending immediately[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/sabotage.test.ts[2m > [22mSabotage Tests[2m > [22mSABOTAGE: timer extension changed from +3s to reset to 5s[39m
+[31m     → Timeout waiting for state[39m
+[90mstdout[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mmultiple late bids: each adds 0.3s[22m[39m
+[Socket] Client connected: wOw7WDGkHesoFJlXAAAE
+
+[90mstdout[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mmultiple late bids: each adds 0.3s[22m[39m
+[Socket] Client connected: qkBK-U93Pq06FfJnAAAF
+[Socket] Client connected: 6T9jaJj8Yq8LjRViAAAG
+
+ [33m❯[39m tests/integration/auctionTimer.test.ts [2m ([22m[2m2 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[33m 10141[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/auctionTimer.test.ts[2m > [22mAuction Timer[2m > [22mno further bids: auction resolves ~1s after opening (not before 0.8s, by 1.6s)[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/auctionTimer.test.ts[2m > [22mAuction Timer[2m > [22mlate bid at ~0.7s: auction does not resolve before ~1.1s and resolves by ~1.7s[39m
+[31m     → Timeout waiting for state[39m
+ [33m❯[39m tests/integration/secrecy.test.ts [2m ([22m[2m1 test[22m [2m|[22m [31m1 failed[39m[2m)[22m[33m 10145[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/secrecy.test.ts[2m > [22mSecrecy[2m > [22mno item name appears before it becomes revealed; unrevealed items never appear[39m
+[31m     → Timeout waiting for state[39m
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mimpersonation: client sends place_bid with another playerId[22m[39m
+[Socket] Client connected: QBuHmTma7A5AaUdlAAAF
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge throws -> judge_failed[22m[39m
+[Socket] Client connected: BXAG4eeuxQcmOuZaAAAC
+
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mimpersonation: client sends place_bid with another playerId[22m[39m
+[Socket] Client connected: G0dVYdOZN0QS1qikAAAG
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge throws -> judge_failed[22m[39m
+[Socket] Client connected: TGJ-SYbCCcsgWo_XAAAD
+
+[90mstdout[2m | tests/integration/themes.test.ts[2m > [22m[2mTask 16: Themes - Integration[2m > [22m[2mcreate_room defaults to superpowers when themeId is omitted[22m[39m
+[Socket] Client connected: yLccbwPbOSzWwTL_AAAH
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpassed player cannot bid again[22m[39m
+[Socket] Client connected: 3-Ivql9JPzghsOkdAAAI
+
+ [33m❯[39m tests/integration/themes.test.ts [2m ([22m[2m7 tests[22m [2m|[22m [31m1 failed[39m[2m)[22m[33m 10188[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/themes.test.ts[2m > [22mTask 16: Themes - Integration[2m > [22mjudge prompt contains theme criterion[39m
+[31m     → Timeout waiting for state[39m
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpassed player cannot bid again[22m[39m
+[Socket] Client connected: 7UDym4ygzRk71aKQAAAJ
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge throws -> judge_failed[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge throws -> judge_failed[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mopener spins but does not bid: server opens with 1 gold after ~2s, wheel shrinks by 1[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mopener spins but does not bid: server opens with 1 gold after ~2s, wheel shrinks by 1[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnon-integer bid rejected[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnon-integer bid rejected[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mmultiple late bids: each adds 0.3s[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/timer.test.ts[2m > [22m[2mTimer +3s Extension[2m > [22m[2mmultiple late bids: each adds 0.3s[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mimpersonation: client sends place_bid with another playerId[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/robustness.test.ts[2m > [22m[2mRobustness[2m > [22m[2mimpersonation: client sends place_bid with another playerId[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpassed player cannot bid again[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpassed player cannot bid again[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnegative bid rejected[22m[39m
+[Socket] Client connected: D3s09e_8Tg70CUF5AAAG
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnegative bid rejected[22m[39m
+[Socket] Client connected: fNnozbvGBAALIEzYAAAH
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mstale timer: opener spins and opens immediately, next opener auto-opens ~2s after ITS turn[22m[39m
+[Socket] Client connected: 5s-rlBWMozph_7HzAAAG
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mstale timer: opener spins and opens immediately, next opener auto-opens ~2s after ITS turn[22m[39m
+[Socket] Client connected: mJPxX3oR1pc6QaGrAAAH
+
+ [33m❯[39m tests/integration/timer.test.ts [2m ([22m[2m3 tests[22m [2m|[22m [31m3 failed[39m[2m)[22m[33m 15150[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/timer.test.ts[2m > [22mTimer +3s Extension[2m > [22mbid with 0.7s remaining adds 0.3s (not reset to 0.5s)[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/timer.test.ts[2m > [22mTimer +3s Extension[2m > [22mbid with 0.2s remaining adds 0.3s, auction resolves at ~0.5s total[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/timer.test.ts[2m > [22mTimer +3s Extension[2m > [22mmultiple late bids: each adds 0.3s[39m
+[31m     → Timeout waiting for state[39m
+ [33m❯[39m tests/integration/reconnect.test.ts [2m ([22m[2m3 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[33m 15159[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/reconnect.test.ts[2m > [22mReconnect[2m > [22mplayer disconnects and rejoins with token: same gold, slots, turn position[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/reconnect.test.ts[2m > [22mReconnect[2m > [22mtokens are secret: no message contains another player's token[39m
+[31m     → SERVER BUG: Auction never resolved (manual bid timer issue)[39m
+ [33m❯[39m tests/integration/robustness.test.ts [2m ([22m[2m3 tests[22m [2m|[22m [31m3 failed[39m[2m)[22m[33m 15178[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/robustness.test.ts[2m > [22mRobustness[2m > [22mdouble actions: two start_game -> one start; two spin_wheel -> shrinks by 1; same bid twice -> one accepted[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/robustness.test.ts[2m > [22mRobustness[2m > [22mmalformed input: no crash, /health ok, new room can play[39m
+[31m     → SERVER BUG: Auction never resolved (manual bid timer issue)[39m
+[31m   [33m❯[31m tests/integration/robustness.test.ts[2m > [22mRobustness[2m > [22mimpersonation: client sends place_bid with another playerId[39m
+[31m     → Timeout waiting for state[39m
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mhighest bidder cannot pass[22m[39m
+[Socket] Client connected: GFhvk1Tys2fEoeFNAAAK
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mhighest bidder cannot pass[22m[39m
+[Socket] Client connected: Zt5fDxeUEkAGEb5NAAAL
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnegative bid rejected[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnegative bid rejected[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mstale timer: opener spins and opens immediately, next opener auto-opens ~2s after ITS turn[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/opening.test.ts[2m > [22m[2mOpening[2m > [22m[2mstale timer: opener spins and opens immediately, next opener auto-opens ~2s after ITS turn[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mhighest bidder cannot pass[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mhighest bidder cannot pass[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mzero bid after opening rejected[22m[39m
+[Socket] Client connected: V7-N992nA_JzIsfDAAAI
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mzero bid after opening rejected[22m[39m
+[Socket] Client connected: WF-tAtGUnsEmD7uaAAAJ
+
+ [33m❯[39m tests/integration/opening.test.ts [2m ([22m[2m4 tests[22m [2m|[22m [31m4 failed[39m[2m)[22m[33m 20099[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/opening.test.ts[2m > [22mOpening[2m > [22mafter opener spins, non-opener bid is rejected[39m
+[31m     → Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+[31m   [33m❯[31m tests/integration/opening.test.ts[2m > [22mOpening[2m > [22mopener does nothing: server spins and opens with 1 gold after ~2s[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/opening.test.ts[2m > [22mOpening[2m > [22mopener spins but does not bid: server opens with 1 gold after ~2s, wheel shrinks by 1[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/opening.test.ts[2m > [22mOpening[2m > [22mstale timer: opener spins and opens immediately, next opener auto-opens ~2s after ITS turn[39m
+[31m     → Timeout waiting for state[39m
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2minvalid JSON text -> judge_failed[22m[39m
+[Socket] Client connected: JIPmdmtWVT52b_PZAAAE
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2minvalid JSON text -> judge_failed[22m[39m
+[Socket] Client connected: 5QWhA2l3JD0Ees_QAAAF
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mplayer with full slots counts as passed (automatic out)[22m[39m
+[Socket] Client connected: IyTgMSFab-jIciY0AAAM
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mplayer with full slots counts as passed (automatic out)[22m[39m
+[Socket] Client connected: YpiRA9hJ1ZQmODCnAAAN
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2minvalid JSON text -> judge_failed[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2minvalid JSON text -> judge_failed[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mzero bid after opening rejected[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mzero bid after opening rejected[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mplayer with full slots counts as passed (automatic out)[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mplayer with full slots counts as passed (automatic out)[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mstring bid rejected[22m[39m
+[Socket] Client connected: mNQ6q1VoMEAl4FVuAAAK
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mstring bid rejected[22m[39m
+[Socket] Client connected: ADVQexRV4lAxN67XAAAL
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpass in opening phase is rejected[22m[39m
+[Socket] Client connected: 82zDCsfIhCXWllqNAAAO
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpass in opening phase is rejected[22m[39m
+[Socket] Client connected: ateHRvBjRW6Z1aucAAAP
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mstring bid rejected[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mstring bid rejected[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpass in opening phase is rejected[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpass in opening phase is rejected[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnull bid rejected[22m[39m
+[Socket] Client connected: wJ4MnGSNX0dRkMkJAAAM
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnull bid rejected[22m[39m
+[Socket] Client connected: -S_o9kvS4FVTB1KpAAAN
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge never settles -> judge_failed within ~3s + margin[22m[39m
+[Socket] Client connected: kSNMVA4uyjCp1_LqAAAG
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge never settles -> judge_failed within ~3s + margin[22m[39m
+[Socket] Client connected: gA2IaCNBTXPHyZb-AAAH
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpassedPlayerIds resets when auction ends[22m[39m
+[Socket] Client connected: Ma8GAo3iEGRFl0yyAAAQ
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpassedPlayerIds resets when auction ends[22m[39m
+[Socket] Client connected: 4AOae0whoeFAmmXYAAAR
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnull bid rejected[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mnull bid rejected[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge never settles -> judge_failed within ~3s + margin[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge never settles -> judge_failed within ~3s + margin[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpassedPlayerIds resets when auction ends[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/pass.test.ts[2m > [22m[2mPass Rule[2m > [22m[2mpassedPlayerIds resets when auction ends[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mplayer with 3 full slots cannot bid[22m[39m
+[Socket] Client connected: _KKzD_9hWJ5nyQJ1AAAO
+
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mplayer with 3 full slots cannot bid[22m[39m
+[Socket] Client connected: GWbKNF6yHmb-I_8fAAAP
+
+ [33m❯[39m tests/integration/pass.test.ts [2m ([22m[2m7 tests[22m [2m|[22m [31m7 failed[39m[2m)[22m[33m 35273[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mS1: P1 opens 1, P2-P4 all pass -> auction ends immediately, P1 pays 1[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mS2: P1 opens 1, P3 bids 15, P1/P2/P4 pass -> ends at once, P3 pays 15[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mpassed player cannot bid again[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mhighest bidder cannot pass[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mplayer with full slots counts as passed (automatic out)[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mpass in opening phase is rejected[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mpassedPlayerIds resets when auction ends[39m
+[31m     → Timeout waiting for state[39m
+[90mstdout[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mplayer with 3 full slots cannot bid[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/rules.test.ts[2m > [22m[2mRules[2m > [22m[2mplayer with 3 full slots cannot bid[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mplayer missing -> judge_failed[22m[39m
+[Socket] Client connected: e44IPNdgl8tcvwddAAAI
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mplayer missing -> judge_failed[22m[39m
+[Socket] Client connected: W0K2VjvwbdhcHnARAAAJ
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mplayer missing -> judge_failed[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mplayer missing -> judge_failed[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+ [33m❯[39m tests/integration/rules.test.ts [2m ([22m[2m9 tests[22m [2m|[22m [31m8 failed[39m[2m)[22m[33m 45153[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mgold reserve: over-limit bid rejected, state unchanged[39m
+[31m     → Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+[31m   [33m❯[31m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mbid below current + 1 rejected; highest bidder cannot raise own bid[39m
+[31m     → Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+[31m   [33m❯[31m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mnon-integer bid rejected[39m
+[31m     → Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+[31m   [33m❯[31m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mnegative bid rejected[39m
+[31m     → Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+[31m   [33m❯[31m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mzero bid after opening rejected[39m
+[31m     → Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+[31m   [33m❯[31m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mstring bid rejected[39m
+[31m     → Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+[31m   [33m❯[31m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mnull bid rejected[39m
+[31m     → Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+[31m   [33m❯[31m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mplayer with 3 full slots cannot bid[39m
+[31m     → Timeout waiting for state[39m
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mplayer twice -> judge_failed[22m[39m
+[Socket] Client connected: 1np_Sq3tIXd-tjRnAAAK
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mplayer twice -> judge_failed[22m[39m
+[Socket] Client connected: fHUcegAl2xbDcTAQAAAL
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mplayer twice -> judge_failed[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mplayer twice -> judge_failed[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mranks not 1..n -> judge_failed[22m[39m
+[Socket] Client connected: u_W-wtWBZBWTo5ZEAAAM
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mranks not 1..n -> judge_failed[22m[39m
+[Socket] Client connected: vqxSJIT5smrA5CJKAAAN
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mranks not 1..n -> judge_failed[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mranks not 1..n -> judge_failed[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mempty reason -> judge_failed[22m[39m
+[Socket] Client connected: IactFzydZwd7EAoLAAAO
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mempty reason -> judge_failed[22m[39m
+[Socket] Client connected: PY3nhYBUhXdiHlOzAAAP
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mempty reason -> judge_failed[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mempty reason -> judge_failed[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mempty commentary -> judge_failed[22m[39m
+[Socket] Client connected: Uq12aNCR3gnSCqJQAAAQ
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mempty commentary -> judge_failed[22m[39m
+[Socket] Client connected: 0ZswoaO1aDn2EsBRAAAR
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mempty commentary -> judge_failed[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mempty commentary -> judge_failed[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge_failed: only host can retry; retry with valid judge -> finished[22m[39m
+[Socket] Client connected: WVuhlYNqoEblYKnQAAAS
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge_failed: only host can retry; retry with valid judge -> finished[22m[39m
+[Socket] Client connected: QBnbgVRVLZLzpss0AAAT
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge_failed: only host can retry; retry with valid judge -> finished[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mjudge_failed: only host can retry; retry with valid judge -> finished[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mrematch: only host; afterwards same players, 20 gold, 3 empty slots, wheel 40[22m[39m
+[Socket] Client connected: -D0UAeJITS1b0GhnAAAU
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mrematch: only host; afterwards same players, 20 gold, 3 empty slots, wheel 40[22m[39m
+[Socket] Client connected: ES9s0L2r2Ykt7HmeAAAV
+
+[90mstdout[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mrematch: only host; afterwards same players, 20 gold, 3 empty slots, wheel 40[22m[39m
+<empty line>
+[90mstderr[2m | tests/integration/judge.test.ts[2m > [22m[2mJudge[2m > [22m[2mrematch: only host; afterwards same players, 20 gold, 3 empty slots, wheel 40[22m[39m
+Briefing timer error: TypeError: __vite_ssr_import_6__.startPlaying is not a function
+    at Timeout._onTimeout [90m(C:\Users\lolse\Projects\BAZAAR\[39mserver\index.ts:459:31[90m)[39m
+[90m    at listOnTimeout (node:internal/timers:605:17)[39m
+[90m    at processTimers (node:internal/timers:541:7)[39m
+
+ [33m❯[39m tests/integration/judge.test.ts [2m ([22m[2m11 tests[22m [2m|[22m [31m11 failed[39m[2m)[22m[33m 110312[2mms[22m[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mvalid JSON -> finished with ranking, reasons, commentary[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mjudge throws -> judge_failed[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22minvalid JSON text -> judge_failed[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mjudge never settles -> judge_failed within ~3s + margin[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mplayer missing -> judge_failed[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mplayer twice -> judge_failed[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mranks not 1..n -> judge_failed[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mempty reason -> judge_failed[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mempty commentary -> judge_failed[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mjudge_failed: only host can retry; retry with valid judge -> finished[39m
+[31m     → Timeout waiting for state[39m
+[31m   [33m❯[31m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mrematch: only host; afterwards same players, 20 gold, 3 empty slots, wheel 40[39m
+[31m     → Timeout waiting for state[39m
+
+[31m⎯⎯⎯⎯⎯⎯[1m[7m Failed Tests 76 [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 3: Deck and Wheel[2m > [22mwheel starts with all items and shrinks without refilling
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m38:21[22m[39m
+    [90m 36| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 37| [39m
+    [90m 38| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m 39| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 40| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 3: Deck and Wheel[2m > [22meach spin removes exactly the revealed item and nothing else
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m101:21[22m[39m
+    [90m 99| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m100| [39m
+    [90m101| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m102| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m103| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 3: Deck and Wheel[2m > [22mfull 6-player game completes with 22 items remaining
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m151:21[22m[39m
+    [90m149| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m150| [39m
+    [90m151| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m152| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m153| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 4: Opening Order[2m > [22mskips players with 3 filled slots
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m195:21[22m[39m
+    [90m193| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m194| [39m
+    [90m195| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m196| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m197| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 4: Opening Order[2m > [22mauto-bids 1 gold after 20s timeout
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m244:21[22m[39m
+    [90m242| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m243| [39m
+    [90m244| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m245| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m246| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 5: Bidding[2m > [22menforces minimum bid of current highest + 1
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m269:21[22m[39m
+    [90m267| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m268| [39m
+    [90m269| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m270| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m271| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 5: Bidding[2m > [22mprevents highest bidder from raising their own bid
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m302:21[22m[39m
+    [90m300| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m301| [39m
+    [90m302| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m303| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m304| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 5: Bidding[2m > [22mawards item to highest bidder on timeout
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m327:21[22m[39m
+    [90m325| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m326| [39m
+    [90m327| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m328| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m329| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 6: Gold Reserve[2m > [22menforces gold reserve: cannot bid more than gold - (emptySlots - 1)
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m364:21[22m[39m
+    [90m362| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m363| [39m
+    [90m364| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m365| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m366| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 6: Gold Reserve[2m > [22mupdates max bid as slots fill
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m394:21[22m[39m
+    [90m392| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m393| [39m
+    [90m394| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m395| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m396| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 7: End of Auction[2m > [22mtransitions to judging when all players have 3 filled slots
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m437:21[22m[39m
+    [90m435| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m436| [39m
+    [90m437| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m438| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m439| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/engine.test.ts[2m > [22mRule 10: Reconnect[2m > [22mpreserves player state on reconnect
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/engine.test.ts:[2m499:21[22m[39m
+    [90m497| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m498| [39m
+    [90m499| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m500| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m501| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mafter opener spins, non-opener cannot bid before the opener places opening bid
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/opening.audit.test.ts:[2m36:21[22m[39m
+    [90m 34| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 35| [39m
+    [90m 36| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m 37| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 38| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mbefore spinning, nobody can bid, including the opener
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/opening.audit.test.ts:[2m60:21[22m[39m
+    [90m 58| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 59| [39m
+    [90m 60| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m 61| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 62| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mafter spin, opener bids 0 rejected; opener bids 1 accepted and becomes highest bidder
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/opening.audit.test.ts:[2m83:21[22m[39m
+    [90m 81| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 82| [39m
+    [90m 83| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m 84| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 85| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mafter opening bid, other players can bid (current + 1); opener cannot raise own bid
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/opening.audit.test.ts:[2m112:21[22m[39m
+    [90m110| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m111| [39m
+    [90m112| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m113| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m114| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mopening bid respects gold reserve: 20 gold, 3 empty slots -> 19 rejected, 18 accepted
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/opening.audit.test.ts:[2m147:21[22m[39m
+    [90m145| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m146| [39m
+    [90m147| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m148| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m149| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mtimeout after opener spun but did not bid: places 1-gold opening bid for opener
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/opening.audit.test.ts:[2m173:21[22m[39m
+    [90m171| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m172| [39m
+    [90m173| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m174| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m175| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/opening.audit.test.ts[2m > [22mOpening Bid Turn Order (Rule 4 & 5)[2m > [22mtimeout when opener did not spin: spins and places 1-gold opening bid, wheel shrinks by 1
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/opening.audit.test.ts:[2m201:21[22m[39m
+    [90m199| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m200| [39m
+    [90m201| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m202| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m203| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/rules.audit.test.ts[2m > [22mRule 4: Opening Order[2m > [22mopening bid 0 rejected; 1 accepted
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/rules.audit.test.ts:[2m154:21[22m[39m
+    [90m152| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m153| [39m
+    [90m154| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m155| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m156| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/rules.audit.test.ts[2m > [22mRule 4: Opening Order[2m > [22m3 players, P3 has 3 full slots: after P2 turn the next opener is P1
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/rules.audit.test.ts:[2m182:21[22m[39m
+    [90m180| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m181| [39m
+    [90m182| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m183| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m184| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/rules.audit.test.ts[2m > [22mRule 4: Opening Order[2m > [22mnext opener follows the previous OPENER, not the auction winner
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/rules.audit.test.ts:[2m223:21[22m[39m
+    [90m221| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m222| [39m
+    [90m223| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m224| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m225| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/rules.audit.test.ts[2m > [22mRule 5: Bidding[2m > [22ma player with 3 full slots cannot bid
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/rules.audit.test.ts:[2m255:21[22m[39m
+    [90m253| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m254| [39m
+    [90m255| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m256| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m257| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/rules.audit.test.ts[2m > [22mRule 5: Bidding[2m > [22mnobody raises: the opener gets the item and pays exactly the opening bid
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/rules.audit.test.ts:[2m280:21[22m[39m
+    [90m278| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m279| [39m
+    [90m280| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m281| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m282| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[24/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/rules.audit.test.ts[2m > [22mRule 5: Bidding[2m > [22mwinner's gold drops by exactly the winning bid; others' gold unchanged
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/rules.audit.test.ts:[2m315:21[22m[39m
+    [90m313| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m314| [39m
+    [90m315| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m316| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m317| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[25/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/rules.audit.test.ts[2m > [22mRule 6: Gold Reserve[2m > [22mopening bid: 20 gold, 3 empty slots -> 18 accepted, 19 rejected
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/rules.audit.test.ts:[2m353:21[22m[39m
+    [90m351| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m352| [39m
+    [90m353| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m354| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m355| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[26/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/sanitize.test.ts[2m > [22mRule 3: Public state sanitization[2m > [22mpublic room state contains wheel COUNT but no hidden item names
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/sanitize.test.ts:[2m48:21[22m[39m
+    [90m 46| [39m
+    [90m 47| [39m    [90m// Transition from briefing to playing[39m
+    [90m 48| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m 49| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 50| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[27/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/themes.test.ts[2m > [22mTask 16: Themes - 4-slot games[2m > [22m4-slot game with 2 players ends after 2 × 4 = 8 auctions
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/themes.test.ts:[2m30:21[22m[39m
+    [90m 28| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 29| [39m
+    [90m 30| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m 31| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 32| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[28/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/themes.test.ts[2m > [22mTask 16: Themes - 4-slot games[2m > [22m4-slot game with 6 players ends after 6 × 4 = 24 auctions
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/themes.test.ts:[2m76:21[22m[39m
+    [90m 74| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 75| [39m
+    [90m 76| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m 77| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m 78| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[29/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/themes.test.ts[2m > [22mTask 16: Themes - 4-slot games[2m > [22mgold reserve works correctly with 4 slots
+[31m[1mTypeError[22m: startPlaying is not a function[39m
+[36m [2m❯[22m tests/themes.test.ts:[2m119:21[22m[39m
+    [90m117| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m118| [39m
+    [90m119| [39m    result [33m=[39m engine[33m.[39m[34mstartPlaying[39m(state)[33m;[39m
+    [90m   | [39m                    [31m^[39m
+    [90m120| [39m    state [33m=[39m result[33m.[39mstate[33m;[39m
+    [90m121| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[30/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/auctionTimer.test.ts[2m > [22mAuction Timer[2m > [22mno further bids: auction resolves ~1s after opening (not before 0.8s, by 1.6s)
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/auctionTimer.test.ts[2m > [22mAuction Timer[2m > [22mlate bid at ~0.7s: auction does not resolve before ~1.1s and resolves by ~1.7s
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mvalid JSON -> finished with ranking, reasons, commentary
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mjudge throws -> judge_failed
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22minvalid JSON text -> judge_failed
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mjudge never settles -> judge_failed within ~3s + margin
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mplayer missing -> judge_failed
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mplayer twice -> judge_failed
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mranks not 1..n -> judge_failed
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mempty reason -> judge_failed
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mempty commentary -> judge_failed
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mjudge_failed: only host can retry; retry with valid judge -> finished
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/judge.test.ts[2m > [22mJudge[2m > [22mrematch: only host; afterwards same players, 20 gold, 3 empty slots, wheel 40
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/opening.test.ts[2m > [22mOpening[2m > [22mopener does nothing: server spins and opens with 1 gold after ~2s
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/opening.test.ts[2m > [22mOpening[2m > [22mopener spins but does not bid: server opens with 1 gold after ~2s, wheel shrinks by 1
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/opening.test.ts[2m > [22mOpening[2m > [22mstale timer: opener spins and opens immediately, next opener auto-opens ~2s after ITS turn
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mS1: P1 opens 1, P2-P4 all pass -> auction ends immediately, P1 pays 1
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mS2: P1 opens 1, P3 bids 15, P1/P2/P4 pass -> ends at once, P3 pays 15
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mpassed player cannot bid again
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mhighest bidder cannot pass
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mplayer with full slots counts as passed (automatic out)
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mpass in opening phase is rejected
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/pass.test.ts[2m > [22mPass Rule[2m > [22mpassedPlayerIds resets when auction ends
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/reconnect.test.ts[2m > [22mReconnect[2m > [22mplayer disconnects and rejoins with token: same gold, slots, turn position
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/robustness.test.ts[2m > [22mRobustness[2m > [22mdouble actions: two start_game -> one start; two spin_wheel -> shrinks by 1; same bid twice -> one accepted
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/robustness.test.ts[2m > [22mRobustness[2m > [22mimpersonation: client sends place_bid with another playerId
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mplayer with 3 full slots cannot bid
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/sabotage.test.ts[2m > [22mSabotage Tests[2m > [22mSABOTAGE: settle check removed - auction waits for timer instead of ending immediately
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/sabotage.test.ts[2m > [22mSabotage Tests[2m > [22mSABOTAGE: timer extension changed from +3s to reset to 5s
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/secrecy.test.ts[2m > [22mSecrecy[2m > [22mno item name appears before it becomes revealed; unrevealed items never appear
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/themes.test.ts[2m > [22mTask 16: Themes - Integration[2m > [22mjudge prompt contains theme criterion
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/timer.test.ts[2m > [22mTimer +3s Extension[2m > [22mbid with 0.7s remaining adds 0.3s (not reset to 0.5s)
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/timer.test.ts[2m > [22mTimer +3s Extension[2m > [22mbid with 0.2s remaining adds 0.3s, auction resolves at ~0.5s total
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/timer.test.ts[2m > [22mTimer +3s Extension[2m > [22mmultiple late bids: each adds 0.3s
+[31m[1mError[22m: Timeout waiting for state[39m
+[36m [2m❯[22m Timeout._onTimeout tests/integration/helpers.ts:[2m61:16[22m[39m
+    [90m 59| [39m    [35mreturn[39m [35mnew[39m [33mPromise[39m((resolve[33m,[39m reject) [33m=>[39m {
+    [90m 60| [39m      [35mconst[39m timer [33m=[39m [34msetTimeout[39m(() [33m=>[39m {
+    [90m 61| [39m        [34mreject[39m([35mnew[39m [33mError[39m([32m'Timeout waiting for state'[39m))[33m;[39m
+    [90m   | [39m               [31m^[39m
+    [90m 62| [39m      }[33m,[39m timeoutMs)[33m;[39m
+    [90m 63| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[31/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/halisaha.test.ts[2m > [22mHalisaha Integration[2m > [22m2-player halisaha full game completes with 1 GK + 3 field players each
+[31m[1mAssertionError[22m: expected 3 to be 4 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 4[39m
+[31m+ 3[39m
+
+[36m [2m❯[22m tests/integration/halisaha.test.ts:[2m93:28[22m[39m
+    [90m 91| [39m    [35mfor[39m ([35mconst[39m player [35mof[39m finalState[33m.[39mplayers) {
+    [90m 92| [39m      [35mconst[39m slots [33m=[39m player[33m.[39mslots[33m.[39m[34mfilter[39m((s[33m:[39m any) [33m=>[39m s [33m!==[39m [35mnull[39m)[33m;[39m
+    [90m 93| [39m      [34mexpect[39m(slots[33m.[39mlength)[33m.[39m[34mtoBe[39m([34m4[39m)[33m;[39m
+    [90m   | [39m                           [31m^[39m
+    [90m 94| [39m
+    [90m 95| [39m      [35mconst[39m gkCount [33m=[39m slots[33m.[39m[34mfilter[39m((s[33m:[39m any) [33m=>[39m s[33m.[39mposition [33m===[39m [32m'GK'[39m)[33m.[39mle…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[32/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/halisaha.test.ts[2m > [22mHalisaha Integration[2m > [22mout-message state shows for player with full slots
+[31m[1mAssertionError[22m: expected undefined not to be undefined[39m
+[36m [2m❯[22m tests/integration/halisaha.test.ts:[2m176:26[22m[39m
+    [90m174| [39m
+    [90m175| [39m    [90m// P1 should have outReason set[39m
+    [90m176| [39m    [34mexpect[39m(p1[33m.[39moutReason)[33m.[39m[34mtoBeDefined[39m()[33m;[39m
+    [90m   | [39m                         [31m^[39m
+    [90m177| [39m    [34mexpect[39m(p1[33m.[39moutReason)[33m.[39m[34mtoMatch[39m([36m/slot/i[39m)[33m;[39m
+    [90m178| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[33/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/opening.test.ts[2m > [22mOpening[2m > [22mafter opener spins, non-opener bid is rejected
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mgold reserve: over-limit bid rejected, state unchanged
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mbid below current + 1 rejected; highest bidder cannot raise own bid
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mnon-integer bid rejected
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mnegative bid rejected
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mzero bid after opening rejected
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mstring bid rejected
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/rules.test.ts[2m > [22mRules[2m > [22mnull bid rejected
+[31m[1mError[22m: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[34/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/reconnect.test.ts[2m > [22mReconnect[2m > [22mtokens are secret: no message contains another player's token
+[31m[1mError[22m: SERVER BUG: Auction never resolved (manual bid timer issue)[39m
+[36m [2m❯[22m tests/integration/reconnect.test.ts:[2m119:13[22m[39m
+    [90m117| [39m      }
+    [90m118| [39m    } [35mcatch[39m (e) {
+    [90m119| [39m      [35mthrow[39m [35mnew[39m [33mError[39m([32m'SERVER BUG: Auction never resolved (manual bid [39m…
+    [90m   | [39m            [31m^[39m
+    [90m120| [39m    }
+    [90m121| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[35/76]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m tests/integration/robustness.test.ts[2m > [22mRobustness[2m > [22mmalformed input: no crash, /health ok, new room can play
+[31m[1mError[22m: SERVER BUG: Auction never resolved (manual bid timer issue)[39m
+[36m [2m❯[22m tests/integration/robustness.test.ts:[2m119:13[22m[39m
+    [90m117| [39m      [34mexpect[39m(state[33m.[39mplayers[33m.[39m[34mfind[39m((p[33m:[39m any) [33m=>[39m p[33m.[39mnickname [33m===[39m [32m'NewP1'[39m)[33m.[39msl…
+    [90m118| [39m    } [35mcatch[39m (e) {
+    [90m119| [39m      [35mthrow[39m [35mnew[39m [33mError[39m([32m'SERVER BUG: Auction never resolved (manual bid [39m…
+    [90m   | [39m            [31m^[39m
+    [90m120| [39m    }
+    [90m121| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[36/76]⎯[22m[39m
+
+[2m Test Files [22m [1m[31m17 failed[39m[22m[2m | [22m[1m[32m6 passed[39m[22m[90m (23)[39m
+[2m      Tests [22m [1m[31m76 failed[39m[22m[2m | [22m[1m[32m87 passed[39m[22m[90m (163)[39m
+[2m   Start at [22m 13:13:43
+[2m   Duration [22m 111.53s[2m (transform 2.16s, setup 3ms, collect 10.65s, tests 306.55s, environment 7ms, prepare 6.53s)[22m
+

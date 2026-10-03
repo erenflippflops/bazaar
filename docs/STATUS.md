@@ -527,3 +527,47 @@ V2'ye ertelendi: karakterler/avatarlar, jokerler, yeni temalar
 **Durum:** Başlamadı
 
 **Hedef:** Süper güçler dışında yeni temalar ekle
+
+---
+
+## 9. Şu anki durum (3 Ekim 2026)
+
+### Task 19j: Pixel Comparison Tests - Baseline Results
+
+**Infrastructure Complete:**
+- DesignHarness.tsx: Renders any screen with mock data
+- mockData.ts: Mock data matching mockup values (Eren, Selin, Mert, Deniz)
+- pixel-comparison.spec.ts: 42 tests (21 screens × 2 stages)
+- Pixel comparison: pixelmatch with < 1.5% difference threshold
+- Diff images: Saved to docs/screenshots/diff/ on failure
+
+**Baseline Test Results (3 Ekim 2026, 14:30):**
+All 42 tests FAILED as expected (screens not built yet). Diff percentages:
+
+| Screen | Desktop | Phone |
+|--------|---------|-------|
+| connecting | 88.31% | 86.22% |
+| login | 89.11% | 86.60% |
+| lobby-host | 88.70% | 86.07% |
+| lobby-guest | 88.71% | 86.11% |
+| briefing | 89.28% | 86.82% |
+| your-turn | 88.19% | 85.37% |
+| not-your-turn | 88.30% | 85.43% |
+| spinning | 88.75% | 85.58% |
+| opening-you | 88.29% | 85.44% |
+| opening-other | 88.29% | 85.46% |
+| bidding | 88.28% | 85.42% |
+| last-seconds | 88.30% | 85.48% |
+| top-bidder | 88.29% | 85.45% |
+| passed | 88.31% | 85.48% |
+| out | 88.37% | 85.51% |
+| sold | 88.40% | 85.40% |
+| judge-thinking | 89.35% | 87.56% |
+| judge-error | 89.21% | 87.39% |
+| results | 89.08% | 87.21% |
+| disconnected | 88.84% | 86.50% |
+| halisaha | 89.44% | 87.67% |
+
+**Average diff:** ~87.5% (desktop), ~86.0% (phone)
+
+**Next:** Task 19a-i builders will implement screens. Rerun pixel tests after each builder to track progress toward < 1.5% threshold.

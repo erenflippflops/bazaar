@@ -1,0 +1,932 @@
+[2m[WebServer] [22m(node:18228) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[2m[WebServer] [22m(Use `node --trace-deprecation ...` to show where the warning was created)
+
+[2mRunning [22m42[2m tests using [22m1[2m worker[22m
+
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\connecting-desktop.png
+connecting (desktop): FAIL - 88.31% different
+  [31mx[39m  [2m 1 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › connecting - desktop[39m[2m (7.0s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\connecting-phone.png
+connecting (phone): FAIL - 86.22% different
+  [31mx[39m  [2m 2 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › connecting - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\login-desktop.png
+login (desktop): FAIL - 92.03% different
+  [31mx[39m  [2m 3 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › login - desktop[39m[2m (4.0s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\login-phone.png
+login (phone): FAIL - 92.73% different
+  [31mx[39m  [2m 4 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › login - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\lobby-host-desktop.png
+lobby-host (desktop): FAIL - 90.82% different
+  [31mx[39m  [2m 5 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-host - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\lobby-host-phone.png
+lobby-host (phone): FAIL - 92.57% different
+  [31mx[39m  [2m 6 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-host - phone[39m[2m (3.8s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\lobby-guest-desktop.png
+lobby-guest (desktop): FAIL - 90.60% different
+  [31mx[39m  [2m 7 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-guest - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\lobby-guest-phone.png
+lobby-guest (phone): FAIL - 92.58% different
+  [31mx[39m  [2m 8 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-guest - phone[39m[2m (3.6s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\briefing-desktop.png
+briefing (desktop): FAIL - 90.61% different
+  [31mx[39m  [2m 9 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › briefing - desktop[39m[2m (4.0s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\briefing-phone.png
+briefing (phone): FAIL - 90.55% different
+  [31mx[39m  [2m10 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › briefing - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\your-turn-desktop.png
+your-turn (desktop): FAIL - 88.53% different
+  [31mx[39m  [2m11 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › your-turn - desktop[39m[2m (4.0s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\your-turn-phone.png
+your-turn (phone): FAIL - 86.29% different
+  [31mx[39m  [2m12 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › your-turn - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\not-your-turn-desktop.png
+not-your-turn (desktop): FAIL - 89.31% different
+  [31mx[39m  [2m13 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › not-your-turn - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\not-your-turn-phone.png
+not-your-turn (phone): FAIL - 87.12% different
+  [31mx[39m  [2m14 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › not-your-turn - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\spinning-desktop.png
+spinning (desktop): FAIL - 88.37% different
+  [31mx[39m  [2m15 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › spinning - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\spinning-phone.png
+spinning (phone): FAIL - 86.18% different
+  [31mx[39m  [2m16 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › spinning - phone[39m[2m (3.8s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\opening-you-desktop.png
+opening-you (desktop): FAIL - 88.66% different
+  [31mx[39m  [2m17 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-you - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\opening-you-phone.png
+opening-you (phone): FAIL - 86.22% different
+  [31mx[39m  [2m18 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-you - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\opening-other-desktop.png
+opening-other (desktop): FAIL - 88.40% different
+  [31mx[39m  [2m19 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-other - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\opening-other-phone.png
+opening-other (phone): FAIL - 85.40% different
+  [31mx[39m  [2m20 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-other - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\bidding-desktop.png
+bidding (desktop): FAIL - 88.61% different
+  [31mx[39m  [2m21 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › bidding - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\bidding-phone.png
+bidding (phone): FAIL - 86.13% different
+  [31mx[39m  [2m22 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › bidding - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\last-seconds-desktop.png
+last-seconds (desktop): FAIL - 88.57% different
+  [31mx[39m  [2m23 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › last-seconds - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\last-seconds-phone.png
+last-seconds (phone): FAIL - 86.21% different
+  [31mx[39m  [2m24 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › last-seconds - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\top-bidder-desktop.png
+top-bidder (desktop): FAIL - 88.52% different
+  [31mx[39m  [2m25 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › top-bidder - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\top-bidder-phone.png
+top-bidder (phone): FAIL - 86.12% different
+  [31mx[39m  [2m26 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › top-bidder - phone[39m[2m (3.8s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\passed-desktop.png
+passed (desktop): FAIL - 88.43% different
+  [31mx[39m  [2m27 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › passed - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\passed-phone.png
+passed (phone): FAIL - 85.70% different
+  [31mx[39m  [2m28 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › passed - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\out-desktop.png
+out (desktop): FAIL - 88.37% different
+  [31mx[39m  [2m29 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › out - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\out-phone.png
+out (phone): FAIL - 85.51% different
+  [31mx[39m  [2m30 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › out - phone[39m[2m (4.1s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\sold-desktop.png
+sold (desktop): FAIL - 88.40% different
+  [31mx[39m  [2m31 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › sold - desktop[39m[2m (4.1s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\sold-phone.png
+sold (phone): FAIL - 85.40% different
+  [31mx[39m  [2m32 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › sold - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\judge-thinking-desktop.png
+judge-thinking (desktop): FAIL - 89.35% different
+  [31mx[39m  [2m33 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-thinking - desktop[39m[2m (4.0s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\judge-thinking-phone.png
+judge-thinking (phone): FAIL - 87.56% different
+  [31mx[39m  [2m34 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-thinking - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\judge-error-desktop.png
+judge-error (desktop): FAIL - 89.21% different
+  [31mx[39m  [2m35 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-error - desktop[39m[2m (4.0s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\judge-error-phone.png
+judge-error (phone): FAIL - 87.36% different
+  [31mx[39m  [2m36 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-error - phone[39m[2m (3.7s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\results-desktop.png
+results (desktop): FAIL - 90.87% different
+  [31mx[39m  [2m37 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › results - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\results-phone.png
+results (phone): FAIL - 90.03% different
+  [31mx[39m  [2m38 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › results - phone[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\disconnected-desktop.png
+disconnected (desktop): FAIL - 93.39% different
+  [31mx[39m  [2m39 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › disconnected - desktop[39m[2m (4.1s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\disconnected-phone.png
+disconnected (phone): FAIL - 90.85% different
+  [31mx[39m  [2m40 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › disconnected - phone[39m[2m (3.8s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\halisaha-desktop.png
+halisaha (desktop): FAIL - 88.37% different
+  [31mx[39m  [2m41 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › halisaha - desktop[39m[2m (3.9s)[22m
+Diff image saved to: C:\Users\lolse\Projects\BAZAAR\docs\screenshots\diff\halisaha-phone.png
+halisaha (phone): FAIL - 85.46% different
+  [31mx[39m  [2m42 [22m[31m[chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › halisaha - phone[39m[2m (3.6s)[22m
+
+
+[31m  1) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › connecting - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8830509259259259[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-connecting---desktop-chromium\error-context.md[22m
+
+[31m  2) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › connecting - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8621977153967675[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-connecting---phone-chromium\error-context.md[22m
+
+[31m  3) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › login - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.9202824074074074[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-login---desktop-chromium\error-context.md[22m
+
+[31m  4) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › login - phone [2m─[22m[39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.927311945558391[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-login---phone-chromium\error-context.md[22m
+
+[31m  5) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-host - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.9081782407407407[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-lobby-host---desktop-chromium\error-context.md[22m
+
+[31m  6) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-host - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.9257048244015069[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-lobby-host---phone-chromium\error-context.md[22m
+
+[31m  7) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-guest - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.9059598765432099[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-8ec50-Tests-lobby-guest---desktop-chromium\error-context.md[22m
+
+[31m  8) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-guest - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.925783813343055[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-lobby-guest---phone-chromium\error-context.md[22m
+
+[31m  9) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › briefing - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.9060802469135802[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-briefing---desktop-chromium\error-context.md[22m
+
+[31m  10) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › briefing - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.9054563130392514[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-briefing---phone-chromium\error-context.md[22m
+
+[31m  11) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › your-turn - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8852947530864198[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-your-turn---desktop-chromium\error-context.md[22m
+
+[31m  12) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › your-turn - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8628903876534209[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-your-turn---phone-chromium\error-context.md[22m
+
+[31m  13) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › not-your-turn - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8931157407407407[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-9a22c-sts-not-your-turn---desktop-chromium\error-context.md[22m
+
+[31m  14) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › not-your-turn - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8711963786608337[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-f693a-Tests-not-your-turn---phone-chromium\error-context.md[22m
+
+[31m  15) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › spinning - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.883684413580247[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-spinning---desktop-chromium\error-context.md[22m
+
+[31m  16) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › spinning - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8617663142544659[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-spinning---phone-chromium\error-context.md[22m
+
+[31m  17) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-you - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8865887345679012[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-16b11-Tests-opening-you---desktop-chromium\error-context.md[22m
+
+[31m  18) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-you - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8621734111070604[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-opening-you---phone-chromium\error-context.md[22m
+
+[31m  19) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-other - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.884011574074074[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-92d5d-sts-opening-other---desktop-chromium\error-context.md[22m
+
+[31m  20) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-other - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8539737513671163[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-5509a-Tests-opening-other---phone-chromium\error-context.md[22m
+
+[31m  21) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › bidding - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8860563271604939[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-bidding---desktop-chromium\error-context.md[22m
+
+[31m  22) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › bidding - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8613470652570179[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-bidding---phone-chromium\error-context.md[22m
+
+[31m  23) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › last-seconds - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.885695987654321[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-74af0-ests-last-seconds---desktop-chromium\error-context.md[22m
+
+[31m  24) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › last-seconds - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.862085308056872[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-last-seconds---phone-chromium\error-context.md[22m
+
+[31m  25) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › top-bidder - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8852145061728395[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-top-bidder---desktop-chromium\error-context.md[22m
+
+[31m  26) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › top-bidder - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8611982014825617[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-top-bidder---phone-chromium\error-context.md[22m
+
+[31m  27) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › passed - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8843047839506173[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-passed---desktop-chromium\error-context.md[22m
+
+[31m  28) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › passed - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.857011787580508[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-passed---phone-chromium\error-context.md[22m
+
+[31m  29) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › out - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.883670524691358[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-out---desktop-chromium\error-context.md[22m
+
+[31m  30) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › out - phone [2m──[22m[39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8550856726212176[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-out---phone-chromium\error-context.md[22m
+
+[31m  31) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › sold - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8839706790123457[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-sold---desktop-chromium\error-context.md[22m
+
+[31m  32) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › sold - phone [2m─[22m[39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8539646372584762[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-sold---phone-chromium\error-context.md[22m
+
+[31m  33) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-thinking - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.893479938271605[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-8bcce-ts-judge-thinking---desktop-chromium\error-context.md[22m
+
+[31m  34) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-thinking - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8756076072426784[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-3cc68-ests-judge-thinking---phone-chromium\error-context.md[22m
+
+[31m  35) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-error - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8920501543209877[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-75a3e-Tests-judge-error---desktop-chromium\error-context.md[22m
+
+[31m  36) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-error - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8736328837039737[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-judge-error---phone-chromium\error-context.md[22m
+
+[31m  37) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › results - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.9087492283950618[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-results---desktop-chromium\error-context.md[22m
+
+[31m  38) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › results - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.9002551950419249[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-results---phone-chromium\error-context.md[22m
+
+[31m  39) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › disconnected - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.9339251543209877[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Com-93575-ests-disconnected---desktop-chromium\error-context.md[22m
+
+[31m  40) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › disconnected - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.9085277676509904[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-disconnected---phone-chromium\error-context.md[22m
+
+[31m  41) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › halisaha - desktop [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8836836419753087[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-halisaha---desktop-chromium\error-context.md[22m
+
+[31m  42) [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › halisaha - phone [39m
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.015[39m
+    Received:   [31m0.8545965487908616[39m
+
+    [0m [90m 119 |[39m
+     [90m 120 |[39m         [90m// Assert that the difference is within threshold[39m
+    [31m[1m>[22m[39m[90m 121 |[39m         expect(result[33m.[39mdiffPercent)[33m.[39mtoBeLessThan([35m0.015[39m)[33m;[39m
+     [90m     |[39m                                    [31m[1m^[22m[39m
+     [90m 122 |[39m       })[33m;[39m
+     [90m 123 |[39m     }
+     [90m 124 |[39m   }[0m
+    [2m    at C:\Users\lolse\Projects\BAZAAR\tests\e2e\pixel-comparison.spec.ts:121:36[22m
+
+[2m    Error Context: test-results\pixel-comparison-Pixel-Comparison-Tests-halisaha---phone-chromium\error-context.md[22m
+
+[31m  42 failed[39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › connecting - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › connecting - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › login - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › login - phone [2m──[22m[39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-host - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-host - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-guest - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › lobby-guest - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › briefing - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › briefing - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › your-turn - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › your-turn - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › not-your-turn - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › not-your-turn - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › spinning - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › spinning - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-you - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-you - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-other - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › opening-other - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › bidding - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › bidding - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › last-seconds - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › last-seconds - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › top-bidder - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › top-bidder - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › passed - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › passed - phone [2m─[22m[39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › out - desktop [2m──[22m[39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › out - phone [2m────[22m[39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › sold - desktop [2m─[22m[39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › sold - phone [2m───[22m[39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-thinking - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-thinking - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-error - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › judge-error - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › results - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › results - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › disconnected - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › disconnected - phone [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › halisaha - desktop [39m
+[31m    [chromium] › tests\e2e\pixel-comparison.spec.ts:68:7 › Pixel Comparison Tests › halisaha - phone [39m
