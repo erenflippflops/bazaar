@@ -681,13 +681,62 @@ export async function createServer(options: ServerOptions): Promise<ServerInstan
         judgeCriterion: room.theme.judgeCriterion
       },
       wheel: state.wheel.length,
-      players: state.players.map(p => ({
-        id: p.id,
-        nickname: p.nickname,
-        gold: p.gold,
-        slots: p.slots,
-        maxBid: p.maxBid
-      })),
+      players: state.players.map(p => {
+        let outReason: string | undefined = undefined;
+        let passedBadge = false;
+
+        // Calculate outReason only during opening/bidding phases
+        if (state.phase === 'opening' || state.phase === 'bidding') {
+          // Check if player explicitly passed
+          if (state.passedPlayerIds.includes(p.id)) {
+            outReason = 'Pas dedin';
+            passedBadge = true;
+          } else if (engine.isOutOfAuction(state, p)) {
+            passedBadge = true;
+
+            // Check for all slots full
+            const emptySlots = p.slots.filter(s => s === null).length;
+            if (emptySlots === 0) {
+              outReason = 'Slotların dolu – bu mezatta pas sayılıyorsun';
+            }
+            // Check for no fitting slot (halisaha)
+            else if (state.revealedItem && state.slotTypes) {
+              const slotTypes = state.slotTypes;
+              const itemSlotType = state.revealedItem.slotType;
+
+              let hasEmptyFittingSlot = false;
+              for (let i = 0; i < p.slots.length; i++) {
+                if (p.slots[i] === null && slotTypes[i] === itemSlotType) {
+                  hasEmptyFittingSlot = true;
+                  break;
+                }
+              }
+
+              if (!hasEmptyFittingSlot) {
+                if (itemSlotType === 'goalkeeper') {
+                  outReason = 'Bu oyuncu için boş slotun yok (kaleci slotun dolu)';
+                } else {
+                  outReason = 'Bu oyuncu için boş slotun yok (oyuncu slotların dolu)';
+                }
+              }
+            }
+            // Check for insufficient gold
+            else if (p.maxBid < state.currentHighestBid + 1) {
+              outReason = `Paran yetmiyor (en fazla ${p.maxBid} altın) – pas sayılıyorsun`;
+            }
+          }
+        }
+
+        return {
+          id: p.id,
+          nickname: p.nickname,
+          gold: p.gold,
+          slots: p.slots,
+          maxBid: p.maxBid,
+          outReason,
+          passedBadge
+        };
+      }),
       auctionEndsAt: room.timers.auctionEndTime,
       openingEndsAt: room.timers.openingEndTime
     };
